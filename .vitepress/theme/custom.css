@@ -5,6 +5,18 @@
    ========================================================================== */
 
 :root {
+  --vp-button-brand-bg: #3451b2;
+  --vp-button-brand-hover-bg: #294196;
+  --vp-button-brand-active-bg: #1e3678;
+  --vp-button-alt-border: #c6d3ef;
+  --vp-button-alt-text: #294196;
+  --vp-button-alt-bg: #f7f9ff;
+  --vp-button-alt-hover-border: #a7b9e3;
+  --vp-button-alt-hover-text: #1e3678;
+  --vp-button-alt-hover-bg: #eaf0ff;
+  --vp-button-alt-active-border: #91a7d8;
+  --vp-button-alt-active-text: #1e3678;
+  --vp-button-alt-active-bg: #dce6ff;
   /* Light Mode - Book Cover Aesthetics */
   --book-cover-shadow:
     0 10px 30px -4px rgba(15, 23, 42, 0.12),
@@ -29,6 +41,18 @@
 }
 
 .dark {
+  --vp-button-brand-bg: #3e63dd;
+  --vp-button-brand-hover-bg: #3456ca;
+  --vp-button-brand-active-bg: #2746a8;
+  --vp-button-alt-border: #546483;
+  --vp-button-alt-text: #e8eeff;
+  --vp-button-alt-bg: #232c42;
+  --vp-button-alt-hover-border: #7182a7;
+  --vp-button-alt-hover-text: #fff;
+  --vp-button-alt-hover-bg: #303d5a;
+  --vp-button-alt-active-border: #8293b8;
+  --vp-button-alt-active-text: #fff;
+  --vp-button-alt-active-bg: #3b4b6d;
   /* Dark Mode - Book Cover Aesthetics */
   --book-cover-shadow:
     0 16px 40px -8px rgba(0, 0, 0, 0.65),
@@ -104,6 +128,12 @@
 .VPHero .actions .VPButton {
   font-weight: 600;
   letter-spacing: 0.02em;
+  min-height: 44px;
+}
+
+.VPButton:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
 }
 
 /* Code styling */
