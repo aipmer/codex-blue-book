@@ -1,22 +1,22 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.03) ](./ch03_sandbox.md) | [ ➡️ Next (Ch.05) ](./ch05_agents_protocol.md) | [ 🌐 中文版 ](../chapters/ch04_goal_driven.md)
 
-# Ch.04 Goal-Driven Engineering: Taming Reasoning Agents with Boundaries and Assertions
+# Ch.04 Guide Agents with Goals and Acceptance Checks
 
-> 🎯 **The Real Problem**: Overly verbose prompts micromanage models like dictating every cut to a chef, while vague prompts invite hallucinations and regression bugs.  
-> 💡 **Tangible Output & Takeaway**: Standard goal-driven specification template (Goal + Preconditions + Output Assertions + Prohibited Actions) and real benchmark comparisons.  
-> ⚡ **Viral Screenshot Quote**: *"Micromanaging a chef burns the dinner. Define strict input-output assertions and let the agent engineer the solution."*
+> **Problem**: Vague requests invite wrong assumptions; overly detailed steps constrain implementation.
+>
+> **Practice**: Write a task with a goal, scope, constraints, and runnable acceptance checks.
 
-In the era of Codex, powered by deep reasoning models like **GPT-5.6 Terra**, traditional step-by-step prompt engineering has become counterproductive. Reasoning models possess immense internal planning space; over-specifying execution steps only handcuffs their ability to self-correct.
+Regardless of model, a task that only lists steps is hard to evaluate without acceptance checks. When several implementations are valid, specify the goal, constraints, and verification before choosing the implementation.
 
 This chapter shares how to guide Codex using a professional "Product Specs" approach in actual development.
 
 ---
 
-## 🎯 Intuitive Metaphor: Michelin Chef and the Order Ticket
+## A Way to Think About It: Michelin Chef and the Order Ticket
 
 Many people dispatch tasks to AI like an unruly customer barging into a Michelin kitchen:
 
-```Plaintext
+```text
 【Babysitting Commands (Process-Driven)】 ──> ❌ "Chef, take the knife in your left hand, chop potatoes into 2mm strips, heat the oil to 180°C, stir for 3 minutes, then add 3g salt."
                                               (The chef feels insulted, and if stove pressure shifts slightly, the dish burns.)
 【Architect Spec Order (Goal-Driven)】   ──> ✅ "Chef, I need pan-seared crispy potatoes as a steak side dish:
@@ -29,7 +29,7 @@ Codex is an algorithmic master chef. Your role is defining what to make, what ca
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Practice: Start with Three Steps
 
 Draft your first Goal-Driven Spec in 3 steps:
 
@@ -91,7 +91,7 @@ Implement an Express API proxy route that forwards all incoming requests safely 
 
 When presented with this spec, Codex breaks down the solution chain:
 
-```Plaintext
+```text
 [Parse Specs Goal] ──> Analyze Constraints (Redis rate-limit / 3s timeout / Secret isolation)
                             │
                             ▼

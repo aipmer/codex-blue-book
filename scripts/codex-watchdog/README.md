@@ -35,11 +35,11 @@ codex-watchdog install
 > ⚠️ `watchdog.config.json` 可能包含 VPS 地址等敏感信息，已加入根目录 `.gitignore`，请勿提交公共仓库。
 
 ### 1. 启动移动审批中转网关 (Sentinel Webhook Gateway)
-用于接收手机 ChatGPT App 或第三方 Webhook（如 Keepa/Make）转发来的控制卡片回复，控制 Codex 部署或中止：
+本机中转网关只记录“批准 / 拒绝”决策，不直接部署、终止任务或回滚文件。默认仅监听 `127.0.0.1`；接入外部消息前需另配经过鉴权的转发层和独立的部署检查：
 
 ```bash
-# 启动网关，指定端口为 8080，授权用户为 hunkwu
-codex-watchdog gateway --port 8080 --user hunkwu
+export CODEX_WATCHDOG_TOKEN="$(openssl rand -hex 32)"
+codex-watchdog gateway --port 8080
 ```
 
 ### 2. 建立本地反向穿透隧道 (Reverse Tunneling Helper)
@@ -60,7 +60,7 @@ codex-watchdog tunnel --type ssh --port 5432 --vps user@your-public-vps.com --vp
 ---
 
 ## 🔒 安全建议
-* 强烈建议在公网使用代理工具（如 Cloudflare / Nginx）为 `gateway` 服务配上 HTTPS 证书与强鉴权逻辑。
+* 网关只监听本机。外部消息须先经过 HTTPS、身份验证、任务绑定和有效期检查，再转发到本机。
 * 严禁将含有敏感中转 Token 或账户秘钥的命令或配置文件上传到公共版本控制系统。
 
 ---
@@ -104,11 +104,11 @@ codex-watchdog install
 > ⚠️ `watchdog.config.json` may contain sensitive values like your VPS address. It is listed in the root `.gitignore` — never commit it to a public repository.
 
 ### 1. Launch Mobile Watchdog Webhook Gateway
-Starts the Express server which listens for incoming approval payloads (forwarded from WeChat, Slack, or Keepa) to authorize or abort Codex sandbox runs:
+The local relay only records approve or deny decisions; it does not deploy, stop an agent, or roll back files. It binds to `127.0.0.1`. External messages need a separately authenticated forwarding layer and deployment checks:
 
 ```bash
-# Starts the gateway on port 8080, authenticating commands from user 'hunkwu'
-codex-watchdog gateway --port 8080 --user hunkwu
+export CODEX_WATCHDOG_TOKEN="$(openssl rand -hex 32)"
+codex-watchdog gateway --port 8080
 ```
 
 ### 2. Launch Reverse Tunneling Helper
@@ -129,5 +129,5 @@ codex-watchdog tunnel --type ssh --port 5432 --vps user@your-public-vps.com --vp
 ---
 
 ## 🔒 Security Practices
-* It is highly recommended to front the `gateway` with a reverse proxy (like Cloudflare or Nginx) configured with TLS/HTTPS certificates and authorization keys.
+* The relay listens locally. External messages require HTTPS, authentication, task binding, and expiration checks before forwarding.
 * Never commit raw access tokens, API credentials, or private keys to public version control.

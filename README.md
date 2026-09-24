@@ -1,21 +1,19 @@
-# 📘 《Codex 蓝皮书：从入门到架构大师》
+# Codex 蓝皮书：从项目规则到交付验证
 
 ![Codex 实战蓝皮书](./images/cover.jpg)
 
 [ 🌐 在线沉浸阅读站 (VitePress) ](https://book.pmer.cn) | [ 📥 下载中文版 PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ 🌐 English Version ](#english-version)
 
-> 💡 **AI 原生时代的产品研发与多端编排实战指南 (v1.3.0 · 2026年9月最新版)**
-> 
-> “做产品，最忌讳的是自嗨；用 AI 写代码，最忌讳的是人被 AI 牵着走。本书不讲花哨的学术理论，只聊怎么帮独立开发者和产品经理，用最新的 Codex 客户端以最快速度搓出能赚钱、能跑通商业闭环的产品。这是实战产品说一贯风格。” —— 主理人 [aipmer](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
+> **v1.3.1 · 资料核对至 2026 年 9 月 24 日。** 本书通过 13 章中英双语实践，介绍如何写清项目规则、验证智能体改动、排查环境问题，以及用配套工程测试支付与移动端流程。示例需按自己的项目和当前官方文档核对。作者：[aipmer](https://pmer.cn)（[X](https://x.com/ai_pmer)）。
 
 ---
 
-### 🌟 v1.3.0 重磅更新亮点 (2026年9月)
+### 🌟 v1.3.1 内容校订 (2026年9月24日)
 
-*   **全面对齐 2026 最新模型生态与官方退役排期**：深度引入 2026 年 9 月前沿旗舰 **GPT-6 Astra**（原生计算机操作员、1.05M 超大上下文窗口、128k 输出 Token）与 **GPT-5.6 阶梯矩阵**（Sol 顶级架构 / Terra 日常主力 / Luna 轻量极速），并系统梳理 2026 官方模型退役下架路线图（规避生产意外停服事故）。
-*   **打通 GPT-6 Astra 驱动的跨界 3D 空间计算实操**：追踪 OpenAI 官方 BenchCAD 95.9% 空间推理基准，打通「**Tripo3D** 几何材质生成 → **Blender** (`bpy`/MCP) 自动化重拓扑与贴图烘焙 → **WebGL/Three.js** 交互分发」全流程。
-*   **收录官方推荐开源利器：[Codex Switch](https://github.com/aipmer/codex-switch)**：macOS 平台 1 秒秒切 OpenAI / DeepSeek / Kimi Code，首创跨供应商会话无缝续聊，彻底攻克单一供应商用量上限与限流困扰。
-*   **全书 13 章通俗化与新手友好度升级**：标配生活化通俗比喻、3 步开箱即用实操清单与常见避坑速查表，零门槛落地工程实践。
+*   **核对 GPT-6 三款模型与 Codex CLI**：按 [OpenAI 更新日志](https://learn.chatgpt.com/docs/changelog)记录 CLI 0.156.1（2026 年 9 月 23 日发布），说明 Astra、Sol、Luna 的任务分工、可用范围和模型选择命令。第 13 章区分 API 定价与 Codex 订阅用量，并校对官方退役日期。
+*   **保留可检查的 3D 实践示例**：以 Astra 整理资产要求，使用 Tripo3D 生成 GLB，再用 Blender `bpy` 渲染并通过 Three.js 展示；移除缺乏官方一手依据的评测数字和集成声明。
+*   **注明第三方工具边界**：[Codex Switch](https://github.com/aipmer/codex-switch) 是本仓库作者的独立开源项目，切换供应商前应检查其配置与会话兼容性。
+*   **双语内容校订**：13 对章节统一说明问题、动手步骤和验收方式；修正不准确的能力承诺和固定完成时间。
 
 <!--
 ## 🗺️ 多端发布与传播矩阵
@@ -33,27 +31,27 @@
 ## 🧭 全书目录与导航
 
 ### 第一部分：AI-Native 时代的产品生存法则
-*   [Ch.01 告别手写代码：Vibe Coding 时代的产品心智](./chapters/ch01_mindset.md) - 重新思考人机协作边界
-*   [Ch.02 跨端掌控：Codex 多端生产力矩阵搭建](./chapters/ch02_setup.md) - CLI、桌面端与移动端联调
-*   [Ch.03 破局云端孤岛：沙盒调试与本地环境深度穿透](./chapters/ch03_sandbox.md) - 网络、文件挂载与端口映射
+*   [Ch.01 从代码生成到结果验收](./chapters/ch01_mindset.md)
+*   [Ch.02 安装 Codex 并核对运行环境](./chapters/ch02_setup.md)
+*   [Ch.03 排查沙盒与本地服务的连接](./chapters/ch03_sandbox.md)
 
 ### 第二部分：架构工程与智能体约束
-*   [Ch.04 目标驱动：用“边界与断言”驾驭推理型智能体](./chapters/ch04_goal_driven.md) - 为什么不该教大厨切菜？
-*   [Ch.05 制定 CAP 协议：构建项目专属的 AGENTS.md 规则层](./chapters/ch05_agents_protocol.md) - 制定上下文记忆与代码防腐层
-*   [Ch.06 思维纠偏：如何像技术总监一样透视 CoT 推理链](./chapters/ch06_reasoning_steer.md) - 解读思考日志与动态干预
+*   [Ch.04 用目标和验收条件指导智能体](./chapters/ch04_goal_driven.md)
+*   [Ch.05 用 AGENTS.md 记录项目规则](./chapters/ch05_agents_protocol.md)
+*   [Ch.06 检查执行过程并及时纠偏](./chapters/ch06_reasoning_steer.md)
 
 ### 第三部分：高级多端编排与巡检
-*   [Ch.07 视觉闭环：Desktop Computer Use 自动巡检与设计还原](./chapters/ch07_desktop_computer_use.md) - 模拟用户行为，打通视觉端到端测试
-*   [Ch.08 移动看护工作流：全天候离线编排实战](./chapters/ch08_mobile_workflow.md) - 随时随地，使用手机微信或飞书监控项目构建
-*   [Ch.09 架构复苏：混乱遗留系统的全景解析与渐进式解耦](./chapters/ch09_legacy_code.md) - 让 AI 读懂并优化百万行混乱代码
+*   [Ch.07 用真实界面验证前端](./chapters/ch07_desktop_computer_use.md)
+*   [Ch.08 把构建告警和审批接到手机](./chapters/ch08_mobile_workflow.md)
+*   [Ch.09 先建立基线，再逐步改造旧系统](./chapters/ch09_legacy_code.md)
 
 ### 第四部分：一人公司的商业闭环
-*   [Ch.10 商业实战：2小时跑通 Next.js + Stripe 商业级 MVP](./chapters/ch10_saas_mvp.md) - Next.js 15 + Supabase + Stripe 实战
-*   [Ch.11 触角延伸：Expo 跨端原生 App 开发与云端打包](./chapters/ch11_expo_mobile.md) - 从本地模拟器联调到云端一键打包
-*   [Ch.12 终局思考：独立开发者如何打造自动化商业飞轮](./chapters/ch12_commercialization.md) - 一人公司（One-Person SaaS）的流量与变现路径
+*   [Ch.10 验证订阅制 SaaS 的支付闭环](./chapters/ch10_saas_mvp.md)
+*   [Ch.11 用 Expo 构建并检查移动应用](./chapters/ch11_expo_mobile.md)
+*   [Ch.12 从产品使用数据到获客实验](./chapters/ch12_commercialization.md)
 
 ### 第五部分：前沿瞭望与版本迁移
-*   [Ch.13 前沿瞭望：2026 Codex 生态全景升级](./chapters/ch13_2026_frontier.md) - 桌面端合并、GPT-5.6 换代、插件生态与安全能力迁移指南
+*   [Ch.13 核对 2026 年的模型与工具变更](./chapters/ch13_2026_frontier.md)
 
 ---
 
@@ -77,7 +75,7 @@
 
 [scripts/codex-watchdog](./scripts/codex-watchdog/README.md) 是一个极简的命令行工具包，用于辅助开发者完成：
 1. **本地环境反向穿透**：打通本地数据库/服务与云端沙盒（Ch.03）。
-2. **移动端审批中转网关**：实现户外使用手机审批智能体高危操作（Ch.08）。
+2. **移动端决策中转网关**：在本机记录批准或拒绝信号；实际审批与部署仍需独立鉴权和人工确认（Ch.08）。
 
 ---
 
@@ -100,8 +98,8 @@ Codex 自主完成 Ch.07 视觉巡检任务（审查并修复 landing 页可访�
 
 ## 🔌 关联开源项目
 
-*   **[飞书助理 (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**：蓝皮书 Ch.08 官方参考工程。专为 Codex 开发者打造的飞书助理，支持日报自动汇总推送、CI 熔断移动端警报与手机端一键审批。
-*   **[Codex Switch (多供应商无缝切换)](https://github.com/aipmer/codex-switch)**：macOS Codex 多供应商一键切换利器。支持 OpenAI 官方 / DeepSeek / Kimi Code 秒级平滑切换，历史会话跨供应商无缝续聊，彻底解决单模型配额耗尽与 Rate Limit 限流难题。
+*   **[飞书助理 (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**：Ch.08 的关联参考工程，可用于了解通知与人工审批流程；部署前请核对项目当前支持的功能和权限配置。
+*   **[Codex Switch](https://github.com/aipmer/codex-switch)**：本仓库作者维护的第三方 macOS 供应商切换工具；使用前请核对当前支持范围和备份会话数据。
 
 ---
 
@@ -141,49 +139,47 @@ Codex 自主完成 Ch.07 视觉巡检任务（审查并修复 landing 页可访�
 
 [ 🌐 Online Reader (VitePress) ](https://book.pmer.cn) | [ 📥 Download Chinese PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ 🌐 中文版 ](#)
 
-# 📘 *Codex Practical Blue Book: From Beginner to Architect*
+# Codex Blue Book: From Project Rules to Verified Delivery
 
 ![Codex Practical Blue Book](./images/cover_en.jpg)
 
-> 💡 **AI-Native Product Development & Multi-Surface Orchestration (v1.3.0 · September 2026 Edition)**
->
-> "Product development is never about self-gratification; and in AI coding, the biggest trap is letting the AI lead the human. This book cuts out the fluff. We focus on helping indie hackers and product managers leverage OpenAI Codex to ship monetizable products. This is the hard-boiled style we practice at pmer.cn" —— Main Author [aipmer](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
+> **v1.3.1 · Sources checked through September 24, 2026.** Across 13 bilingual chapters, this book shows how to write project rules, verify agent changes, diagnose environments, and test payment and mobile flows with companion projects. Check examples against your project and current official documentation. Author: [aipmer](https://pmer.cn) ([X](https://x.com/ai_pmer)).
 
 ---
 
-### 🌟 v1.3.0 Major Release Highlights (September 2026)
+### 🌟 v1.3.1 Content Revision (September 24, 2026)
 
-*   **Full Alignment with 2026 Model Ecosystem & Deprecation Roadmap**: Deep integration with **GPT-6 Astra** (Native Computer Operator, 1.05M context window, 128k output tokens) and the **GPT-5.6 Tiered Matrix** (Sol Architecture / Terra Daily Workhorse / Luna Fast Triage), accompanied by the definitive 2026 OpenAI deprecation & sunset roadmap.
-*   **Cross-Domain 3D Spatial Intelligence with Blender & Tripo3D**: Grounded in OpenAI's official BenchCAD (95.9% mean voxel IoU), delivering runnable end-to-end pipelines: "Tripo3D Geometry Generation -> Blender (`bpy`/MCP) Topology & PBR Baking -> WebGL/Three.js Deployment".
-*   **Featured Open-Source Companion: [Codex Switch](https://github.com/aipmer/codex-switch)**: 1-second provider switching (OpenAI / DeepSeek / Kimi Code) on macOS with continuous cross-provider chat history resume, completely resolving quota exhaustion and rate limit bottlenecks.
-*   **Universal Beginner Accessibility**: Standardized intuitive metaphors, 3-action immediate checklists, and actionable troubleshooting cheat sheets across all 13 bilingual chapters.
+*   **Verified GPT-6 Family and Codex CLI**: Records CLI 0.156.1, released September 23, 2026, from the [OpenAI changelog](https://learn.chatgpt.com/docs/changelog). Ch.13 explains the roles, availability, and selection commands for Astra, Sol, and Luna; it separates API prices from Codex subscription usage and checks retirement dates against official sources.
+*   **Inspectable 3D Workflow Example**: Use Astra to structure requirements, a service such as Tripo3D to generate a GLB, Blender `bpy` to render it, and Three.js to display it. Unverified benchmark figures and integration claims have been removed.
+*   **Third-party tool boundary**: [Codex Switch](https://github.com/aipmer/codex-switch) is a separate open-source project by this repository's author. Check its configuration and session compatibility before switching providers.
+*   **Bilingual editorial revision**: All 13 chapter pairs now state the problem, practical steps, and verification method; unsupported capability and fixed-time promises were corrected.
 
 ---
 
 ## 🧭 Directory and Navigation
 
 ### Part 1: Product Survival in the AI-Native Era
-*   [Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding](./en/ch01_mindset.md)
-*   [Ch.02 Cross-Device Control: Building Your Codex Multi-Surface Productivity Matrix](./en/ch02_setup.md)
-*   [Ch.03 Breaking the Cloud Island: Sandbox Debugging and Deep Local Environment Tunneling](./en/ch03_sandbox.md)
+*   [Ch.01 From Code Generation to Verified Results](./en/ch01_mindset.md)
+*   [Ch.02 Install Codex and Check Your Environment](./en/ch02_setup.md)
+*   [Ch.03 Diagnose Sandbox Access to Local Services](./en/ch03_sandbox.md)
 
 ### Part 2: Architecture & Constraints
-*   [Ch.04 Taming Reasoning Agents with Boundaries and Assertions](./en/ch04_goal_driven.md)
-*   [Ch.05 Defining the CAP Protocol: Building Your Project's AGENTS.md Rule Compliance Layer](./en/ch05_agents_protocol.md)
-*   [Ch.06 Correcting Course: Supervising the CoT Reasoning Chain Like a Tech Lead](./en/ch06_reasoning_steer.md)
+*   [Ch.04 Guide Agents with Goals and Acceptance Checks](./en/ch04_goal_driven.md)
+*   [Ch.05 Record Project Rules in AGENTS.md](./en/ch05_agents_protocol.md)
+*   [Ch.06 Inspect Progress and Correct Course](./en/ch06_reasoning_steer.md)
 
 ### Part 3: Advanced Multi-Surface Telemetry
-*   [Ch.07 Closing the Visual Loop: Automated Auditing and Design Verification with Desktop Computer Use](./en/ch07_desktop_computer_use.md)
-*   [Ch.08 Mobile Sentinel Workflows: 24/7 Remote Development and Orchestration](./en/ch08_mobile_workflow.md)
-*   [Ch.09 Codebase Revitalization: Reverse Engineering and Progressive Decoupling of Legacy Systems](./en/ch09_legacy_code.md)
+*   [Ch.07 Validate Frontends in a Real UI](./en/ch07_desktop_computer_use.md)
+*   [Ch.08 Route Build Alerts and Approvals to Mobile](./en/ch08_mobile_workflow.md)
+*   [Ch.09 Baseline and Refactor Legacy Code Incrementally](./en/ch09_legacy_code.md)
 
 ### Part 4: One-Person SaaS Commercialization
-*   [Ch.10 Monetization in Practice: Shipping a Commercial SaaS MVP in 2 Hours](./en/ch10_saas_mvp.md)
-*   [Ch.11 Mobile Extension: Expo Cross-Platform App Development and Cloud Packaging](./en/ch11_expo_mobile.md)
-*   [Ch.12 The Final Frontier: Building an Automated Growth Flywheel for a One-Person SaaS](./en/ch12_commercialization.md)
+*   [Ch.10 Validate a Subscription SaaS Payment Flow](./en/ch10_saas_mvp.md)
+*   [Ch.11 Build and Check a Mobile App with Expo](./en/ch11_expo_mobile.md)
+*   [Ch.12 From Product Usage to Acquisition Experiments](./en/ch12_commercialization.md)
 
 ### Part 5: Frontier Watch & Version Migration
-*   [Ch.13 Frontier Watch: The 2026 Codex Ecosystem Overhaul](./en/ch13_2026_frontier.md) - Desktop merger, GPT-5.6 transition, plugin economy, and the security migration guide
+*   [Ch.13 Check 2026 Model and Tool Changes](./en/ch13_2026_frontier.md)
 
 ---
 
@@ -231,7 +227,7 @@ A real terminal recording of Codex autonomously completing the Ch.07 visual audi
 ## 🔌 Related Projects
 
 *   **[Feishu Assistant (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**: The official companion repository for Ch.08. An intelligent duty assistant in Feishu for Codex developers, featuring automated daily git digest pushes, CI mobile alarms, and one-tap remote approvals.
-*   **[Codex Switch (Multi-Provider Switcher)](https://github.com/aipmer/codex-switch)**: One-click provider switcher for macOS Codex CLI. Seamlessly switch between official OpenAI, DeepSeek, and Kimi Code in seconds with cross-provider chat history continuation, bypassing quota caps and rate limits.
+*   **[Codex Switch](https://github.com/aipmer/codex-switch)**: A separate macOS provider-switching tool maintained by this repository's author. Check current support and back up session data before using it.
 
 ---
 

@@ -86,7 +86,7 @@
     box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  max-width: 380px;
+  max-width: 520px;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -101,6 +101,31 @@
   box-shadow: var(--book-cover-shadow-hover);
   border-color: var(--book-cover-border-hover);
   filter: var(--book-cover-filter-hover);
+}
+
+@media (min-width: 960px) and (max-width: 1279px) {
+  .VPHero.has-image .container .main {
+    width: 55%;
+    max-width: 55%;
+    flex-grow: 0;
+  }
+
+  .VPHero .name,
+  .VPHero .text {
+    max-width: 100%;
+    font-size: 42px;
+    line-height: 50px;
+  }
+
+  .VPHero .tagline {
+    max-width: 100%;
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .VPHero .image-container {
+    transform: none;
+  }
 }
 
 
@@ -124,6 +149,45 @@
   stroke-width: 2;
 }
 
+.VPFeature.link {
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .VPFeature.link:hover {
+    background-color: var(--vp-c-bg);
+    box-shadow: 0 14px 32px -16px rgba(30, 54, 120, 0.32);
+    transform: translateY(-4px);
+  }
+
+  .VPFeature.link:hover .icon {
+    background-color: var(--vp-c-brand-soft);
+  }
+}
+
+.VPFeature.link:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+  border-color: var(--vp-c-brand-1);
+  background-color: var(--vp-c-bg);
+}
+
+.VPFeature.link:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -12px rgba(30, 54, 120, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPFeature.link {
+    transition: none;
+  }
+}
+
 /* Hero Actions refinement */
 .VPHero .actions .VPButton {
   font-weight: 600;
@@ -134,6 +198,26 @@
 .VPButton:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 3px;
+}
+
+.VPFooter .footer-x-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  margin-left: 0.8em;
+  white-space: nowrap;
+}
+
+.VPFooter .footer-x-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.VPFooter a:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* Code styling */

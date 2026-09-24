@@ -6,6 +6,16 @@ async function compile() {
   // Resolve the workspace root dynamically relative to this script's directory (__dirname is /scripts)
   const scriptDir = __dirname;
   const workspace = path.dirname(scriptDir);
+  const downloads = path.join(workspace, 'public', 'downloads');
+  fs.mkdirSync(downloads, { recursive: true });
+
+  function writeBoth(filename, content) {
+    if (!content || content.length === 0) {
+      throw new Error(`PDF compiler returned no content for ${filename}`);
+    }
+    fs.writeFileSync(path.join(workspace, filename), content);
+    fs.writeFileSync(path.join(downloads, filename), content);
+  }
   
   console.log('Converting Chinese Book to PDF...');
   const pdfZh = await mdToPdf(
@@ -21,8 +31,8 @@ async function compile() {
       }
     }
   );
-  fs.writeFileSync(path.join(workspace, 'codex_blue_book_zh.pdf'), pdfZh.content);
-  console.log('Created codex_blue_book_zh.pdf');
+  writeBoth('codex_blue_book_zh.pdf', pdfZh.content);
+  console.log('Created both copies of codex_blue_book_zh.pdf');
 
   console.log('Converting English Book to PDF...');
   const pdfEn = await mdToPdf(
@@ -38,8 +48,11 @@ async function compile() {
       }
     }
   );
-  fs.writeFileSync(path.join(workspace, 'codex_blue_book_en.pdf'), pdfEn.content);
-  console.log('Created codex_blue_book_en.pdf');
+  writeBoth('codex_blue_book_en.pdf', pdfEn.content);
+  console.log('Created both copies of codex_blue_book_en.pdf');
 }
 
-compile().catch(console.error);
+compile().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});

@@ -110,34 +110,17 @@ async function runStressTest() {
     }
   }
 
-  // 4. Reading Guide Callout Check (🎯, 💡, ⚡)
-  console.log('\n--- 4. Checking Reading Guide Callouts (🎯, 💡, ⚡) ---');
+  // 4. Concise problem and practice callouts, matching the current editorial format.
+  console.log('\n--- 4. Checking Problem and Practice Callouts ---');
   for (const name of CHAPTER_FILES) {
     for (const [lang, dir] of [['ZH', ZH_DIR], ['EN', EN_DIR]]) {
       const filePath = path.join(dir, name);
       if (!fs.existsSync(filePath)) continue;
       const content = fs.readFileSync(filePath, 'utf8');
-      
-      const hasTarget = content.includes('🎯');
-      const hasBulb = content.includes('💡');
-      const hasZap = content.includes('⚡');
-
-      const lines = content.split('\n');
-      const guideLines = lines.filter(l => l.startsWith('>') && (l.includes('🎯') || l.includes('💡') || l.includes('⚡')));
-
-      const allPresent = hasTarget && hasBulb && hasZap;
-      const isBlockquote = guideLines.length >= 3;
-      const pass = allPresent && isBlockquote;
-
-      let detail = '';
-      if (!allPresent) {
-        detail += `Missing emoji(s): ${!hasTarget ? '🎯 ' : ''}${!hasBulb ? '💡 ' : ''}${!hasZap ? '⚡ ' : ''}; `;
-      }
-      if (!isBlockquote) {
-        detail += `Expected >= 3 blockquote lines with emojis, found ${guideLines.length}`;
-      }
-
-      record(pass, `Standardized callout in ${lang} ${path.basename(dir)}/${name}`, detail);
+      const labels = lang === 'ZH' ? ['问题', '本章实践'] : ['Problem', 'Practice'];
+      const present = labels.every(label => content.includes(`> **${label}**`));
+      record(present, `Problem/practice callout in ${lang} ${path.basename(dir)}/${name}`,
+        `Expected both callouts: ${labels.join(', ')}`);
     }
   }
 

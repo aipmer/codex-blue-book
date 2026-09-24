@@ -1,6 +1,6 @@
 ---
 title: AGENTS.md Interactive Generator
-description: Generate tailored AI defense rules for your project in 30 seconds
+description: Draft editable AGENTS.md rules for your project stack
 ---
 
 <script setup lang="ts">
@@ -9,6 +9,6 @@ import SpecGenerator from '../.vitepress/theme/components/SpecGenerator.vue'
 
 # AGENTS.md Interactive Generator
 
-> Prevent AI from breaking established architectures, installing unvetted packages, hallucinating fake code, or spinning in infinite error loops. Generate custom AGENTS.md defense rules tailored to your tech stack in 30 seconds.
+> Choose a stack and project boundaries to draft an editable `AGENTS.md`. Before copying it to the project root, check the commands, paths, and permission requirements. Written rules work alongside sandbox controls, code review, and tests.
 
 <SpecGenerator locale="en" />

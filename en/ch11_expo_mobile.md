@@ -1,24 +1,24 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.10) ](./ch10_saas_mvp.md) | [ ➡️ Next (Ch.12) ](./ch12_commercialization.md) | [ 🌐 中文版 ](../chapters/ch11_expo_mobile.md)
 
-# Ch.11 Mobile Extension: Expo Cross-Platform App Development and Cloud Packaging
+# Ch.11 Build and Check a Mobile App with Expo
 
-> 🎯 **The Real Problem**: Web developers stuck in Xcode certificate signing, Android Gradle builds, and CocoaPods dependency hell when trying to ship mobile apps.  
-> 💡 **Tangible Output & Takeaway**: Complete companion project `examples/ch11-expo-mobile` (Expo SDK 57 + Expo Router + NativeWind); zero-local-setup `eas build` cloud packaging pipelines.  
-> ⚡ **Viral Screenshot Quote**: *"Skip local Xcode and Android Studio configuration hell. Build and publish dual-platform native apps autonomously with cloud pipelines and AI error self-healing."*
+> **Problem**: Mobile dependencies, device testing, and signed builds can differ by environment.
+>
+> **Practice**: Run the Expo example, check the UI on a device, and configure EAS builds for each platform.
 
 After shipping a web SaaS, many independent developers want to extend their reach to mobile. However, in traditional mobile development (React Native or Flutter), the most grueling friction is local environment setup: iOS certificates, Android Gradle build failures, and CocoaPods version conflicts.
 
-I firmly believe that **"cloud compilation and packaging (EAS) is the only viable path for independent developers to build native apps."** Combined with Codex's automated diagnostic assistance, you can bypass local Xcode/Android Studio configuration entirely and ship production-ready native apps directly to app stores.
+EAS Build reduces local build setup, but iOS signing, developer accounts, and store review still require configuration. Test on a device before creating development and production builds. [Expo build setup](https://docs.expo.dev/build/setup/)
 
 > 📦 **Companion Source Code**: [examples/ch11-expo-mobile](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch11-expo-mobile) — a fully runnable Expo SDK 57 project (Expo Router `src/app` routing + NativeWind + three-tier EAS build profiles) with its own CAP `AGENTS.md`. Verified with `npx expo lint` (zero errors) and `npx expo-doctor` (20/20 checks passed).
 
 ---
 
-## 🎯 Intuitive Metaphor: Writing the Script and Letting the "Cloud Atelier" Tailor the Costumes
+## A Way to Think About It: Writing the Script and Letting the "Cloud Atelier" Tailor the Costumes
 
 Cross-platform development shouldn't require turning your personal laptop into a heavy manufacturing plant:
 
-```Plaintext
+```text
 [Traditional Native Dev] ──> Buying your own smelting furnace (installing 50GB+ Xcode and Android Studio),
                              configuring loom machinery (fiddling with Gradle and CocoaPods runtimes),
                              frequently tripping circuit breakers and stalling for days without a working build.
@@ -32,7 +32,7 @@ Codex serves as your script editor in the atelier, automatically aligning versio
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Practice: Start with Three Steps
 
 See your cross-platform app running on a physical phone in 3 simple steps:
 
@@ -45,7 +45,7 @@ See your cross-platform app running on a physical phone in 3 simple steps:
    # The terminal will display a large QR code matrix
    ```
 3. **Step 3: Scan the QR Code with Your Phone Camera**  
-   Scan the code to load the app immediately. Whenever you or Codex modify page code, the phone screen hot-reloads instantly!
+   Scan with an Expo Go or development build compatible with this SDK. JavaScript changes usually refresh; native module changes may require a rebuild.
 
 ---
 
@@ -73,7 +73,7 @@ Initialize a React Native Expo project using TypeScript.
 
 Directory structure layout:
 
-```Plaintext
+```text
 src/
 ├── app/
 │   ├── index.tsx         # App Home Page
@@ -98,7 +98,7 @@ If dependency versions drift, type this correction directly in the TUI:
 Please use `npx expo install react-native-reanimated` to reinstall this dependency instead. It will automatically adapt to the current Expo SDK version. In this project, using standard `npm install` to install any native package is strictly prohibited. Please append this rule to AGENTS.md.
 ```
 
-> 💡 **Founder's Mantra**: `npx expo install` is the official certified version lock. Whenever native modules fail, force reinstalling with this command automatically wipes out 90% of dependency issues.
+> 💡 **Founder's Mantra**: `npx expo install` selects versions compatible with the current Expo SDK. If a native module fails, run `npx expo-doctor` and inspect dependencies, build logs, and platform limits.
 
 ---
 

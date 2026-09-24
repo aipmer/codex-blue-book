@@ -1,50 +1,46 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ Next (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 中文版 ](../chapters/ch08_mobile_workflow.md)
 
-# Ch.08 Mobile Sentinel Workflows: 24/7 Remote Development and Orchestration
+# Ch.08 Route Build Alerts and Approvals to Mobile
 
-> 🎯 **The Real Problem**: Engineers tied to desks watching terminal build logs; unattended CI failures or blocked deployments halting team momentum.  
-> 💡 **Tangible Output & Takeaway**: Guardian auto-approval (`--approve-for-me`) & mobile gateway two-tier dispatch; Feishu webhook alert cards; one-tap mobile remote approval pipelines.  
-> ⚡ **Viral Screenshot Quote**: *"Step away from your desk while tasks run. AI resolves routine risks automatically, while high-risk releases wait for a one-tap phone approval."*
+> **Problem**: Build failures or pending approvals can go unnoticed away from the desk.
+>
+> **Practice**: Set up an alert and human approval flow, then verify delivery, identity, and outcomes.
 
-For indie developers and product leaders, the core pursuit alongside extreme productivity is high-dimensional time freedom. Sitting in front of a terminal watching thousands of lines of rolling compile logs is not what Vibe Coding was meant to be.
+Build outcomes and pending approvals still need attention when you leave your computer. This chapter connects alerts and separates automatic review from human decisions.
 
-In this chapter, we will build a **24/7 Mobile Sentinel Workflow**: combining **Guardian intelligent auto-approval** with a **mobile sentinel gateway** in 2026. Routine low-risk tasks proceed automatically, while high-risk production deployments push notification cards to your mobile Feishu or chat group, letting you review and approve anywhere, anytime with a single tap.
+The example sends GitHub Actions failures to Feishu and demonstrates a local decision relay. `--approve-for-me` reviews eligible permission requests; production releases still require separate checks of project, version, and deployment result.
 
 ---
 
-## 🎯 Intuitive Metaphor: Smart Patrol and Central Pager in a Modern Autonomous Farm
+## A Way to Think About It: Alerts and Approvals Are Separate Flows
 
-Think of offline orchestration as running a modern unmanned farm:
+Automatic checks find failures, notifications bring results to your phone, and an authorized system must handle approvals:
 
-```Plaintext
-[Manual Guarding]      ──> Sitting on a stool inside the greenhouse 24 hours a day,
-                           staring at irrigation pipes wondering if one might leak (tedious and confining).
-[Guardian + Gateway]   ──> The farm deploys an autonomous robotic watchdog (Guardian powered by GPT-5.6 Luna):
-                           - Minor pipe leak? The robot tightens the valve and moves on (Guardian policy auto-pass);
-                           - Main water gate switch or high-voltage grid changes? The robot halts,
-                             instantly sending a high-res photo and confirmation card to the owner's phone;
-                           - You tap "Approve" while sipping coffee on the train, and the farm resumes autonomous operation.
+```text
+GitHub Actions check fails ──> Feishu alert ──> Review the run log on mobile
+Codex permission request ──> Current sandbox and approval policy ──> Human review if required
+Production deploy request ──> Verify project, version and approver ──> Separate deploy and result check
 ```
 
-This dual mechanism—"digesting routine risks automatically while holding humans at core checkpoints"—is the ultimate form of a modern company of one.
+Configure and verify each flow separately. Receiving an alert or recording approval does not mean a deployment succeeded.
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Practice: Start with Three Steps
 
 Set up your mobile alert notification channel in 3 simple steps:
 
-1. **Step 1: Create a Feishu / Slack / WeCom Custom Bot**  
+1. **Step 1: Create a Feishu Custom Bot**
    Add a bot in your group chat settings and copy its incoming Webhook URL.
 2. **Step 2: Send a Test Alert Card from Terminal**  
-   Run curl to verify your phone receives notifications:
+   Set `FEISHU_WEBHOOK_URL` in your terminal, then use curl to test notification delivery:
    ```bash
    curl -X POST -H "Content-Type: application/json" \
-     -d '{"msg_type":"text","content":{"text":"🔔 Codex Mobile Sentinel Online: Terminal task running safely!"}}' \
-     https://open.feishu.cn/open-apis/bot/v2/hook/YOUR-WEBHOOK-TOKEN
+     -d '{"msg_type":"text","content":{"text":"Codex test alert: please confirm this message reaches your phone."}}' \
+     "$FEISHU_WEBHOOK_URL"
    ```
-3. **Step 3: Launch Your Offline Task with Guardian + Sandbox**  
-   Before stepping away from your desk, run this command with peace of mind:
+3. **Step 3: Run a Check in the Sandbox**
+   After confirming the tests do not modify production data, run the task in a workspace sandbox:
    ```bash
    codex exec --sandbox workspace-write --approve-for-me "Run full regression suite and refactor legacy types"
    ```
@@ -53,27 +49,23 @@ Set up your mobile alert notification channel in 3 simple steps:
 
 ## 8.1 Two-Tier Sentinel Dispatch Architecture
 
-In the 2026 architecture, your mobile phone is protected from notification bombardment:
+The diagram shows a suggested routing pattern. Automatic review depends on the actual permission policy; a phone notification does not itself grant deployment permission:
 
-```Plaintext
-[Codex Long Task] ──> Triggers sensitive action (dependency changes / file writes / network calls)
-                             │
-                             ▼
-                 [Tier 1: Guardian Policy Review] ──(Low Risk)──> Auto-approved to proceed
-                             │ (High Risk / Production Deploy)
-                             ▼
-                 [Tier 2: Mobile Sentinel Gateway] ──> [Mobile Feishu/Slack Card] ──> [Reply 1 to Approve]
+```text
+[Project checks] ──(failure)──> [Feishu alert] ──> [Review logs on mobile]
+[Codex permission request] ──> [Current sandbox and approval policy] ──> [Human handles pending requests]
+[Deployment request] ──> [Identity and task checks] ──> [Human approval] ──> [Separate deployment verification]
 ```
 
 Companion open-source references:
-- Blue Book Official Feishu Assistant: [plugins-codex-feishu](https://github.com/aipmer/plugins-codex-feishu.git)
+- Related reference project: [plugins-codex-feishu](https://github.com/aipmer/plugins-codex-feishu)
 - Minimal Local Tunnel Gateway: [scripts/codex-watchdog](../scripts/codex-watchdog/README.md)
 
 ---
 
 ## 8.2 Practice: GitHub Actions Build Failures and Webhook Setup
 
-Create `.github/workflows/codex-watchdog.yml` in your project root. When a remote build fails, it summarizes the critical failure points and pushes an alert directly to your phone:
+In a Node.js project with an `npm test` script, create `.github/workflows/codex-watchdog.yml`. Save the Feishu bot URL as a repository secret named `FEISHU_WEBHOOK_URL`. This sends a short alert when checks fail and keeps the run marked as failed; inspect Actions logs for details:
 
 ```yaml
 name: Codex Agent Watchdog
@@ -95,25 +87,25 @@ jobs:
         with:
           node-version: 20
 
-      - name: Run Codex Validation (exec mode)
-        id: run_agent
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - name: Run Project Checks
+        id: check
+        continue-on-error: true
         run: |
           npm ci
-          npm run test || echo "STATUS=failed" >> $GITHUB_ENV
+          npm test
 
       - name: Push Fail Notice to Mobile
-        if: env.STATUS == 'failed'
+        if: steps.check.outcome == 'failure'
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
         run: |
-          curl -X POST -H "Content-Type: application/json" \
-            -d '{
-              "event": "build_failed",
-              "repo": "${{ github.repository }}",
-              "commit": "${{ github.sha }}",
-              "message": "Codex sandbox testing failed. Attention required on phone."
-            }' \
-            ${{ secrets.MOBILE_WEBHOOK_URL }}
+          curl -fsS -X POST -H 'Content-Type: application/json' \
+            -d '{"msg_type":"text","content":{"text":"Project checks failed: open GitHub Actions to review this run."}}' \
+            "$FEISHU_WEBHOOK_URL"
+
+      - name: Keep Check Failure Visible
+        if: steps.check.outcome == 'failure'
+        run: exit 1
 ```
 
 ---
@@ -122,69 +114,56 @@ jobs:
 
 ### 1. Scenario: Production Deployment Approval Gate
 
-When Codex passes all tests and is ready to deploy code to Vercel, it pauses and sends an approval card to Feishu:
+This illustrates a notification that would require a separate approval system. The preceding Actions alert and local relay do not send this card automatically:
 
-```Plaintext
+```text
 🚨 [Codex Auth Requested]
 Project: pmer-cn-saas
 Action: Deploy to production (Vercel)
 Change summary: Implemented Stripe subscription webhook in /api/stripe.
 Tests: 12 passed, 0 failed.
-[Directive Command]: Reply "1" to approve deployment, "0" to abort and roll back.
+[Directive Command]: Reply "1" to approve deployment, "0" to record a denial; review any further action manually.
 ```
 
-### 2. Server-Side Minimal Relay Script (Node.js)
+### 2. Check the Local Decision Relay
 
-The gateway parses incoming replies and communicates with Codex via signal files or sockets:
+The companion `scripts/codex-watchdog/lib/gateway.js` only records a decision in a temporary signal file. **It does not deploy, terminate Codex, or roll back Git.** It binds to `127.0.0.1` and requires a random token. A Feishu integration needs an authenticated forwarding layer; the deployment controller must also validate project, task, and decision age.
 
-```javascript
-// File: gateway.js
-const express = require('express');
-const { exec } = require('child_process');
-const app = express();
-app.use(express.json());
+```bash
+cd scripts/codex-watchdog
+npm ci
+export CODEX_WATCHDOG_TOKEN="$(openssl rand -hex 32)"
+node bin/cli.js gateway --port 8080 &
+gateway_pid=$!
+```
 
-app.post('/api/mobile-reply', (req, res) => {
-  const { userMessage, user } = req.body;
-  if (user !== 'hunkwu') {
-    return res.status(403).json({ error: 'Unauthorized' });
-  }
+In the same terminal, send a local test request. A `denied` response means the decision was recorded; no files are deleted. Stop the relay after the check:
 
-  if (userMessage === '1') {
-    exec('echo "approved" > /tmp/codex_deploy_signal', (err) => {
-      if (err) return res.status(500).send('Error');
-      res.json({ reply: '🚀 Deployment approved, production environment is going live!' });
-    });
-  } else if (userMessage === '0') {
-    exec('pkill -f codex && git checkout -- .', (err) => {
-      res.json({ reply: '🛑 Deployment aborted, code safely rolled back to HEAD!' });
-    });
-  } else {
-    res.json({ reply: '⚠️ Invalid instruction. Reply 1 (approve) or 0 (abort).' });
-  }
-});
-
-app.listen(8080, () => console.log('Mobile gateway listening on port 8080'));
+```bash
+curl -fsS http://127.0.0.1:8080/api/mobile-reply \
+  -H "Authorization: Bearer $CODEX_WATCHDOG_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"userMessage":"0"}'
+kill "$gateway_pid"
 ```
 
 ---
 
-## 8.4 Official Reference Implementation: Codex Feishu Sentinel
+## 8.4 Related Reference Project: Codex Feishu Sentinel
 
-To eliminate the need for developers to manually build webhook gateways and polling logic, this book provides an out-of-the-box companion repository: **[plugins-codex-feishu (Feishu Assistant)](https://github.com/aipmer/plugins-codex-feishu)**.
+The author-maintained **[plugins-codex-feishu (Feishu Assistant)](https://github.com/aipmer/plugins-codex-feishu)** repository offers a reference for Feishu notifications and approvals. Check its current README, required permissions, and test results before use.
 
-It productizes this entire workflow into three primary capabilities:
+Check these capabilities separately when relevant:
 
 1. **Daily Inspection & Sentinel Reports (Quick Start)**:
-   - Automatically summarizes local Git commits and workspace status into rich notification cards sent directly to your personal Feishu chat.
-   - Takes less than 3 minutes to verify with zero cognitive overhead.
+   - Check the report's data source, recipient, and schedule, then send it to a test chat.
 2. **Mobile Alerts & Two-Way Approval (Offline Orchestration)**:
-   - Vibrates your phone immediately whenever cloud/local Codex runs into testing failures or requests high-risk deployment authorization.
-   - Reply directly on mobile to "Approve" or "Abort & Rollback".
+   - Check what triggers alerts, whether they arrive, and how mobile replies are received.
+   - Submit a decision on mobile; the deployment controller must check identity, project, task, and expiration. Denial does not automatically roll back code.
 3. **Knowledge Base Persistence (Team Collaboration)**:
-   - Write project status into Feishu Docx documents and sync project metadata with Bitable multidimensional tables.
+   - If you need Feishu documents or Bitable, verify app scopes and actual writes first.
 
-> 💡 **3-Minute Quick Setup**: The project provides `feishu_app_manifest.json`, allowing you to create the complete Feishu app with pre-configured scopes and websocket events via a single JSON import in the Feishu Open Platform.
+> **Before setup**: If the companion project provides a Feishu app manifest, still check its scopes, event subscriptions, and connection settings in the Feishu Open Platform, then test the alert in a non-production chat.
 
 ---
 
@@ -193,18 +172,15 @@ It productizes this entire workflow into three primary capabilities:
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | **Phone does not receive Webhook messages** | Bot security settings require keyword or IP whitelist | In bot settings under "Security", add matching keyword (e.g., `Codex`) or configure request signature |
-| **Replied "1" on phone but nothing happened locally** | Relay gateway lost tunnel connectivity or signal file is unmonitored | Run `node scripts/codex-watchdog` to verify tunnel connectivity and inspect signal file status |
-| **Phone flooded with approval cards every minute** | Minor edits routed directly to mobile without filtering | Enable `--approve-for-me` to delegate non-destructive routine actions to Guardian |
+| **Replied "1" but nothing deployed** | Local relay only records a decision | Check the authenticated forwarding layer, task validation, and separate deployment controller |
+| **Phone receives repeated approval messages** | The same request is sent again | Give requests unique IDs, deduplicate them, and set an expiration time |
 
 ---
 
-## 8.5 Founder's Mantra: Reclaiming Your Freedom
+## 8.5 Keep Notifications and Confirmation Human
 
-Many tech practitioners using AI tools end up behaving like "manual testing monkeys" and "human git commit triggers." AI edits code, the human refreshes the tab; AI returns an error, the human copies the trace and pastes it back to the chat.
-
-By delegating validation assertions to GitHub Actions, forwarding exceptions via mobile webhooks, and holding the deployment approval key on your mobile device, you can achieve the dream: **"enjoying your coffee while the product automatically evolves."**
+Running repeatable checks in CI and sending failures to a phone can reduce time spent waiting at a desk. Production releases and data changes still need an authorized person to review the specific request and verify the outcome.
 
 ---
 
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ Next (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 中文版 ](../chapters/ch08_mobile_workflow.md)
-

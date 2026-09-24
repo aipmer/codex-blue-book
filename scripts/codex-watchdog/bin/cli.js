@@ -19,7 +19,6 @@ Commands:
 
 Options:
   --port     Specify port (default: 8080 for gateway, 5432 for tunnel)
-  --user     Specify authorized user (default: hunkwu)
   --type     Specify tunnel provider [ngrok | ssh] (default: ngrok)
   --vps      VPS address for SSH (e.g. user@vps.com)
   --vps-port Exposed port on VPS (default: 54320)
@@ -65,10 +64,7 @@ if (command === 'install') {
 } else if (command === 'gateway') {
   const saved = savedConfig && savedConfig.gateway ? savedConfig.gateway : {};
   const port = params.port || String(saved.port || '8080');
-  const user = params.user || saved.user || 'hunkwu';
-  
   process.env.PORT = port;
-  process.env.CODEX_USER = user;
   
   // Require the gateway module
   console.log(`[CLI] Launching Watchdog Gateway...`);
