@@ -1,9 +1,12 @@
 import { defineConfig } from 'vitepress'
 
+const base = (process.env.VITEPRESS_BASE || '/').replace(/\/?$/, '/')
+
 export default defineConfig({
   title: 'Codex 蓝皮书',
   description: '基于 OpenAI Codex 智能体的高效自动化开发、沙盒穿透与工程实战指南',
-  base: (process.env.VITEPRESS_BASE || '/').replace(/\/?$/, '/'),
+  head: [['link', { rel: 'icon', type: 'image/png', sizes: '128x128', href: `${base}brand/favicon.png` }]],
+  base,
   cleanUrls: true,
   ignoreDeadLinks: true,
   srcExclude: [
@@ -206,6 +209,11 @@ export default defineConfig({
   },
 
   themeConfig: {
+    logo: {
+      light: '/brand/logo-light.png',
+      dark: '/brand/logo-dark.png',
+      alt: 'Codex 蓝皮书'
+    },
     search: {
       provider: 'local',
       options: {
