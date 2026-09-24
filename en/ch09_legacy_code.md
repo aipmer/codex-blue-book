@@ -1,22 +1,22 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.08) ](./ch08_mobile_workflow.md) | [ ➡️ Next (Ch.10) ](./ch10_saas_mvp.md) | [ 🌐 中文版 ](../chapters/ch09_legacy_code.md)
 
-# Ch.09 Architecture Revitalization: Panoramic Analysis and Progressive Decoupling of Legacy Systems
+# Ch.09 Baseline and Refactor Legacy Code Incrementally
 
-> 🎯 **The Real Problem**: Inheriting tens of thousands of lines of undocumented legacy spaghetti code with zero tests, where editing one line breaks three unexpected modules.  
-> 💡 **Tangible Output & Takeaway**: GPT-5.6 Terra long-context panoramic topology prompts; interface behavioral snapshot baseline tests; and 3-step minimally invasive decoupling.  
-> ⚡ **Viral Screenshot Quote**: *"Facing hundreds of thousands of lines of undocumented legacy code? Don't impulsively rewrite from scratch. Let AI map the topology, lock down regression tests, then perform microsurgery."*
+> **Problem**: Without tests, it is hard to tell whether a change broke legacy behavior.
+>
+> **Practice**: Map dependencies and test critical paths before refactoring in small commits.
 
 When working on solo projects or inheriting legacy codebases, the biggest source of anxiety is taking over undocumented, test-free "spaghetti code" left behind by previous teams. Any minor code change can detonate hidden mines buried deep in the system.
 
-When facing these systems, resist the urge to discard everything and rebuild from scratch. Powered by **GPT-5.6 Terra's ultra-long context reasoning** and sandboxed isolation testing in 2026, we can carry out textbook-grade "progressive minimally invasive surgery."
+First map entry points, dependencies, and critical behavior. Repeatable tests protect existing functionality; a large model context does not replace incremental verification.
 
 ---
 
-## 🎯 Intuitive Metaphor: Changing Tires on a Speeding Truck on the Highway
+## A Way to Think About It: Changing Tires on a Speeding Truck on the Highway
 
 Refactoring an active legacy system is like this high-wire operation:
 
-```Plaintext
+```text
 [Reckless Full Rewrite] ──> ❌ "This old truck is too beat-up; I'll build a brand-new truck on the shoulder!"
                              (The new build stalls for 6 months, while the business starves to death.)
 [Progressive Decoupling] ──> ✅ The old truck continues hauling freight on the highway (zero business interruption):
@@ -29,7 +29,7 @@ Codex acts as a millimeter-precision robotic surgical arm: as long as you wrap i
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Practice: Start with Three Steps
 
 When taking over an unfamiliar, messy repository on Day 1, take these 3 safe steps:
 
@@ -105,11 +105,11 @@ Extract "discount calculation logic" from src/pages/api/checkout.ts into a stand
 
 ### 2. Local Validation and Safe Rollback
 
-Protected by `--sandbox workspace-write`, Codex executes verification assertions immediately after code edits. The moment behavior breaks, revert instantly via Git:
+Ask Codex to run checks after each small edit. If a test fails, inspect the diff and confirm that there are no human changes to keep before restoring the file:
 
 ```bash
-# Instantly restore file on refactoring discrepancy
-git checkout -- src/pages/api/checkout.ts
+git diff -- src/pages/api/checkout.ts
+git restore -- src/pages/api/checkout.ts
 ```
 
 ---

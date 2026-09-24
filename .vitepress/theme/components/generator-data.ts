@@ -113,13 +113,13 @@ export const stackConfigs: Record<GeneratorLocale, Record<StackKey, StackConfig>
 
 export const sandboxText = {
   zh: {
-    standard: '- 标准开发防御：允许在项目内执行依赖安装、测试与代码构建。严禁任何生产部署、外部密钥读写等越权高危行为。',
-    strict: '- 严格只读保护：智能体仅具备文件阅读与方案输出权限，禁止私自执行终端命令。所有变更必须由人类在终端显式审查后走 PR 合并。',
-    tunnel: '- 本地联调模式：允许打通本地端口访问 Docker 数据库与外部 API，配合飞书助理移动端随时接收告警与审批高危操作。'
+    standard: '- 标准开发：先核对依赖安装、测试与构建命令；生产操作和凭据访问遵守实际权限配置。',
+    strict: '- 只读审阅：只提出修改建议；请在工具的沙盒或权限设置中落实只读范围。',
+    tunnel: '- 本地联调：仅开放任务需要的端口和服务；敏感操作由独立审批机制决定。'
   },
   en: {
-    standard: '- Standard Development Defense: Package installation, testing, and building are allowed. Production writes and credential leakage are strictly forbidden.',
-    strict: '- Strict Read-Only Protection: Agent operates read-only. Terminal commands are forbidden and all changes require human review via Pull Requests.',
-    tunnel: '- Local Debugging Mode: Allow port bridging to local Docker databases and APIs, paired with Feishu Assistant for mobile alerts and remote approvals.'
+    standard: '- Standard development: verify install, test, and build commands; use actual permission settings for production and credential access.',
+    strict: '- Read-only review: request proposed changes only; enforce read-only access in tool sandbox or permission settings.',
+    tunnel: '- Local debugging: expose only required ports and services; review sensitive actions through a separate approval mechanism.'
   }
 }

@@ -24,13 +24,13 @@ watch([selectedStack, projectName, sandboxLevel, rules], () => { copied.value = 
 
 const labels = {
   zh: {
-    stack: '1. 选择你的项目技术栈（对号入座，锁定技术规范）：',
+    stack: '1. 选择项目技术栈：',
     project: '2. 项目名称：',
     placeholder: '例如: my-awesome-saas',
-    sandbox: '3. 运行环境与权限边界（防危险操作与数据泄漏）：',
-    guardrails: '4. 激活核心安全护栏（防御常见工程失控事故）：',
+    sandbox: '3. 写入运行环境建议：',
+    guardrails: '4. 选择项目规则：',
     preview: '生成的 AGENTS.md 实时预览：',
-    copy: '一键复制规约', copied: '已复制到剪贴板', copyError: '复制失败，请手动选中预览内容复制。',
+    copy: '复制规则草稿', copied: '已复制到剪贴板', copyError: '复制失败，请手动选中预览内容复制。',
     stackOptions: {
       nextjs: 'Next.js 14/15 (React 全栈)', vue3: 'Vue 3 + Vite + TypeScript',
       fastapi: 'FastAPI (Python 现代微服务)', django: 'Django (Python 经典后端)',
@@ -39,15 +39,15 @@ const labels = {
       svelte: 'SvelteKit (Svelte 5)', chrome: 'Chrome 扩展 (Manifest V3)'
     },
     sandboxOptions: {
-      standard: '标准开发防御（允许安装依赖、跑测试与编译构建；禁止越权访问生产凭证与外网密钥）',
-      strict: '严格只读保护（AI 仅分析代码与输出修改方案，禁止私自执行终端命令，全部变更必须走人工 PR 审查）',
-      tunnel: '本地联调模式（允许打通本地端口访问 Docker 数据库与外部 API，配合飞书助理远程审批高危操作）'
+      standard: '标准开发：要求先确认依赖、测试命令和生产操作权限',
+      strict: '只读审阅：要求仅输出建议，实际权限需由沙盒配置落实',
+      tunnel: '本地联调：记录端口和数据库访问边界，敏感操作另行审批'
     },
     guardrailLabels: {
-      antiLoop: '防自旋死循环：同一编译或测试报错连续修复 2 次不通过立即暂停，输出排错思考链，严禁无脑烧 Token 乱试',
-      noPlaceholder: '防虚假伪造：严禁提交含有 // TODO、假 mock 数据或未实现的空函数，所有交付代码必须真实可编译',
-      noExternalDeps: '防滥装依赖：常规逻辑优先使用原生标准库与内置 API，严禁未经确认私自安装体积庞大的非必要外部包',
-      enforceValidation: '交付必带测试：阶段性修改完成后必须由智能体自动跑通测试与生产构建，退出码为 0 才算完成交付'
+      antiLoop: '重复错误：同一失败重试 2 次后停止修改，报告错误与已尝试方法',
+      noPlaceholder: '未完成代码：提交前检查 TODO、空函数和测试替身是否符合任务要求',
+      noExternalDeps: '新增依赖：先说明用途、替代方案和影响，再修改依赖清单',
+      enforceValidation: '交付验证：运行项目实际存在的测试与构建命令，记录结果'
     }
   },
   en: {
@@ -57,7 +57,7 @@ const labels = {
     sandbox: '3. Execution Environment & Permissions (Defense Boundaries):',
     guardrails: '4. Core Safety Guardrails (Defense Scenarios):',
     preview: 'Real-time AGENTS.md Preview:',
-    copy: 'Copy Protocol', copied: 'Copied to Clipboard', copyError: 'Copy failed. Select and copy the preview manually.',
+    copy: 'Copy Rules', copied: 'Copied to Clipboard', copyError: 'Copy failed. Select and copy the preview manually.',
     stackOptions: {
       nextjs: 'Next.js 14/15 (Full-stack React)', vue3: 'Vue 3 + Vite + TypeScript',
       fastapi: 'FastAPI (Python Microservices)', django: 'Django (Python Backend)',
@@ -66,15 +66,15 @@ const labels = {
       svelte: 'SvelteKit (Svelte 5)', chrome: 'Chrome Extension (Manifest V3)'
     },
     sandboxOptions: {
-      standard: 'Standard Development Defense (Install, test, build allowed; no credential leakage)',
-      strict: 'Strict Read-Only Protection (AI only proposes diffs, terminal execution banned, changes via PR)',
-      tunnel: 'Local Debugging Mode (Bridge local Docker DB and APIs, with Feishu Assistant remote approvals)'
+      standard: 'Standard development: check dependencies, test commands, and production permissions',
+      strict: 'Read-only review: request suggestions only; enforce permissions in sandbox settings',
+      tunnel: 'Local debugging: document port and database access; review sensitive operations separately'
     },
     guardrailLabels: {
-      antiLoop: 'Stop Infinite Loops (Prevent Loop): Abort on 2 consecutive test/build failures and emit CoT logs, preventing endless spinning',
-      noPlaceholder: 'Ban Fake Stubs (No Placeholders): Strictly forbid TODOs, mock stubs, or empty functions; all delivered code must be runnable',
-      noExternalDeps: 'Dependency Guard: Prefer standard libraries and built-in APIs; forbid unapproved heavy third-party packages',
-      enforceValidation: 'Deliver with Tests (Verification Specs): Must run automated test suites and production build checks with exit code 0 before delivery'
+      antiLoop: 'Stop Infinite Loops (Prevent Loop): Stop after 2 repeats of the same failure and report the error and attempted fixes',
+      noPlaceholder: 'Ban Fake Stubs (No Placeholders): Check TODOs, empty functions, and test doubles before delivery',
+      noExternalDeps: 'Dependency Guard: Prefer standard libraries and built-in APIs; explain the purpose and impact before adding a dependency',
+      enforceValidation: 'Deliver with Tests (Verification Specs): Run the test and build commands that exist in the project and record results'
     }
   }
 }
@@ -92,29 +92,29 @@ const generatedContent = computed(() => {
   const name = projectName.value.trim() || 'my-project'
   const lines = props.locale === 'zh'
     ? [
-        '# 🤖 项目专属 AI 协作防御规约 (AGENTS.md)', '',
+        '# 项目协作规则 (AGENTS.md)', '',
         '## 📌 项目指纹',
         `- **项目名称**：${name}`,
         `- **目标架构**：${stack.name}`,
-        '- **协作模式**：遵循生产级防自旋死循环、防虚假代码与自动化测试防线', '',
-        '## 🛑 运行环境与权限边界',
+        '- **使用前核对**：以下命令、路径和权限要求须按当前项目修改；文字规则不能代替沙盒与人工审查。', '',
+        '## 运行环境与权限建议',
         sandboxText.zh[sandboxLevel.value], '',
-        '## 🛡️ 核心工程防御护栏 (Anti-Loop)'
+        '## 工程协作规则'
       ]
     : [
         '# 🤖 Codex Collaboration Protocol (CAP)', '',
         '## 📌 Project Signature',
         `- **Project Name**: ${name}`,
         `- **Target Architecture**: ${stack.name}`,
-        '- **Collaboration Framework**: Codex Blue Book CAP Protocol', '',
-        '## 🛑 Defense Scenarios & Sandbox Boundaries',
+        '- **Before use**: Adapt commands, paths, and permissions to this repository. Written rules do not enforce sandbox access or replace review.', '',
+        '## Environment and Permission Guidance',
         sandboxText.en[sandboxLevel.value], '',
-        '## 🛡️ Core Engineering Guardrails (Anti-Loop)'
+        '## Engineering Rules'
       ]
 
   const selectedRules: string[] = []
   if (props.locale === 'zh') {
-    if (rules.value.antiLoop) selectedRules.push('**🛑 防自旋死循环 (Anti-Loop)**：如果同一编译或测试错误在修改后重试 2 次仍未解决，必须立即强制暂停，向开发者输出排错思考链 (CoT)，严禁陷入自旋死循环。')
+    if (rules.value.antiLoop) selectedRules.push('**🛑 防自旋死循环 (Anti-Loop)**：如果同一编译或测试错误在修改后重试 2 次仍未解决，停止修改并向开发者报告错误、尝试过的方法和下一步排查建议。')
     if (rules.value.noPlaceholder) selectedRules.push('**🚫 防虚假伪造 (严禁占位符)**：严禁提交含有 `// TODO: 实现此逻辑`、`pass`、或虚构假数据的未完成函数，所有代码必须真实可编译。')
     if (rules.value.noExternalDeps) selectedRules.push('**📦 防滥装依赖 (依赖守卫)**：常规逻辑优先使用原生标准库与内置 API，严禁未经确认私自安装体积庞大的未知第三方包。')
   } else {
@@ -127,10 +127,10 @@ const generatedContent = computed(() => {
 
   if (rules.value.enforceValidation) {
     if (props.locale === 'zh') {
-      lines.push('## 🧪 验证标准 (Validation Specs)', '智能体在每次阶段性修改完成后，必须按顺序执行以下命令进行自检，确认退出码为 0 后方可交付：', '',
+      lines.push('## 🧪 验证标准 (Validation Specs)', '智能体在每次阶段性修改完成后，先核对项目中是否存在下列命令，再执行适用的检查并记录退出状态：', '',
         '```bash', '# 1. 运行静态检查与单元测试', stack.testCmd, '', '# 2. 验证生产构建', stack.buildCmd, '```')
     } else {
-      lines.push('## 🧪 Deliver with Tests (Verification Specs)', 'Before marking any task as complete, execute the following commands to ensure a zero exit code:', '',
+      lines.push('## 🧪 Deliver with Tests (Verification Specs)', 'Before marking any task as complete, verify that the following commands exist in the project, run the applicable checks, and record their exit status:', '',
         '```bash', '# 1. Lint & Unit Tests', stack.testCmd, '', '# 2. Production Build Verification', stack.buildCmd, '```')
     }
   }

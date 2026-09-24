@@ -23,59 +23,35 @@ chapter_files = [
     "ch13_2026_frontier.md"
 ]
 
-toc_zh = """
-## 🧭 目录 (Table of Contents)
+toc_groups = {
+    "zh": [
+        "第一部分：入门与环境",
+        "第二部分：任务与项目规则",
+        "第三部分：界面与移动工作流",
+        "第四部分：重构与产品交付",
+        "第五部分：增长与版本迁移",
+    ],
+    "en": [
+        "Part 1: Getting Started",
+        "Part 2: Tasks and Project Rules",
+        "Part 3: UI and Mobile Workflows",
+        "Part 4: Refactoring and Delivery",
+        "Part 5: Growth and Version Changes",
+    ],
+}
 
-### 第一部分：AI-Native 时代的产品心智与搭建
-- [Ch.01 告别手写代码：Vibe Coding 时代的产品心智](#ch01-告别手写代码vibe-coding-时代的产品心智)
-- [Ch.02 跨端掌控：Codex 多端生产力矩阵搭建](#ch02-跨端掌控codex-多端生产力矩阵搭建)
-- [Ch.03 破局云端孤岛：沙盒调试与本地环境深度穿透](#ch03-破局云端孤岛沙盒调试与本地环境深度穿透)
 
-### 第二部分：架构工程与智能体约束
-- [Ch.04 目标驱动：用“边界与断言”驾驭推理型智能体](#ch04-目标驱动用边界与断言驾驭推理型智能体)
-- [Ch.05 制定 CAP 协议：构建项目专属的 AGENTS.md 规则层](#ch05-制定-cap-协议构建项目专属的-agentsmd-规则层)
-- [Ch.06 思维纠偏：如何像技术总监一样透视 CoT 推理链](#ch06-思维纠偏如何像技术总监一样透视-cot-推理链)
+def build_toc(directory, language):
+    lines = ["## 目录" if language == "zh" else "## Table of Contents", ""]
+    for index, filename in enumerate(chapter_files):
+        if index in (0, 3, 6, 9, 12):
+            lines.extend(["### " + toc_groups[language][(0, 3, 6, 9, 12).index(index)], ""])
+        path = os.path.join(directory, filename)
+        with open(path, "r", encoding="utf-8") as chapter:
+            title = next(line[2:] for line in chapter if line.startswith("# Ch."))
+        lines.append("- " + title)
+    return "\n".join(lines)
 
-### 第三部分：高级多端编排与巡检
-- [Ch.07 视觉闭环：Desktop Computer Use 自动巡检与设计还原](#ch07-视觉闭环desktop-computer-use-自动巡检与设计还原)
-- [Ch.08 移动看护工作流：全天候离线编排实战](#ch08-移动看护工作流全天候离线编排实战)
-- [Ch.09 架构复苏：混乱遗留系统的全景解析与渐进式解耦](#ch09-架构复苏混乱遗留系统的全景解析与渐进式解耦)
-
-### 第四部分：一人公司的商业闭环
-- [Ch.10 商业实战：2小时跑通 Next.js + Stripe 商业级 MVP](#ch10-商业实战2小时跑通-nextjs--stripe-商业级-mvp)
-- [Ch.11 触角延伸：Expo 跨端原生 App 开发与云端打包](#ch11-触角延伸expo-跨端原生-app-开发与云端打包)
-- [Ch.12 终局思考：独立开发者如何打造自动化商业飞轮](#ch12-终局思考独立开发者如何打造自动化商业飞轮)
-
-### 第五部分：前沿瞭望与版本迁移
-- [Ch.13 前沿瞭望：2026 Codex 生态全景升级](#ch13-前沿瞭望2026-codex-生态全景升级)
-"""
-
-toc_en = """
-## 🧭 Table of Contents
-
-### Part 1: Product Survival in the AI-Native Era
-- [Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding](#ch01-saying-goodbye-to-handwritten-code-product-mindset-in-the-era-of-vibe-coding)
-- [Ch.02 Cross-Device Control: Building Your Codex Multi-Surface Productivity Matrix](#ch02-cross-device-control-building-your-codex-multi-surface-productivity-matrix)
-- [Ch.03 Breaking the Cloud Island: Sandbox Debugging and Deep Local Environment Tunneling](#ch03-breaking-the-cloud-island-sandbox-debugging-and-deep-local-environment-tunneling)
-
-### Part 2: Architecture & Constraints
-- [Ch.04 Goal-Driven Engineering: Taming Reasoning Agents with Boundaries and Assertions](#ch04-goal-driven-engineering-taming-reasoning-agents-with-boundaries-and-assertions)
-- [Ch.05 Defining the CAP Protocol: Building Your Project's AGENTS.md Rule Compliance Layer](#ch05-defining-the-cap-protocol-building-your-projects-agentsmd-rule-compliance-layer)
-- [Ch.06 Correcting Course: Supervising the CoT Reasoning Chain Like a Tech Lead](#ch06-correcting-course-supervising-the-cot-reasoning-chain-like-a-tech-lead)
-
-### Part 3: Advanced Multi-Surface Telemetry
-- [Ch.07 Closing the Visual Loop: Automated Auditing and Design Verification with Desktop Computer Use](#ch07-closing-the-visual-loop-automated-auditing-and-design-verification-with-desktop-computer-use)
-- [Ch.08 Mobile Sentinel Workflows: 24/7 Remote Development and Orchestration](#ch08-mobile-sentinel-workflows-247-remote-development-and-orchestration)
-- [Ch.09 Codebase Revitalization: Reverse Engineering and Progressive Decoupling of Legacy Systems](#ch09-codebase-revitalization-reverse-engineering-and-progressive-decoupling-of-legacy-systems)
-
-### Part 4: One-Person SaaS Commercialization
-- [Ch.10 Monetization in Practice: Shipping a Commercial SaaS MVP in 2 Hours](#ch10-monetization-in-practice-shipping-a-commercial-saas-mvp-in-2-hours)
-- [Ch.11 Mobile Extension: Expo Cross-Platform App Development and Cloud Packaging](#ch11-mobile-extension-expo-cross-platform-app-development-and-cloud-packaging)
-- [Ch.12 The Final Frontier: Building an Automated Growth Flywheel for a One-Person SaaS](#ch12-the-final-frontier-building-an-automated-growth-flywheel-for-a-one-person-saas)
-
-### Part 5: Frontier Watch & Version Migration
-- [Ch.13 Frontier Watch: The 2026 Codex Ecosystem Overhaul](#ch13-frontier-watch-the-2026-codex-ecosystem-overhaul)
-"""
 
 def clean_and_process_file(filepath, is_en=False):
     with open(filepath, "r", encoding="utf-8") as f:
@@ -86,42 +62,43 @@ def clean_and_process_file(filepath, is_en=False):
     cleaned_lines = []
     
     for line in lines:
-        # Skip navigation bars (lines starting with '[' containing nav links)
-        stripped = line.strip()
-        if stripped.startswith("[") and (
-            "Index" in stripped or "Next" in stripped or "Prev" in stripped or
-            "主目录" in stripped or "下一章" in stripped or "上一章" in stripped or "返回首页" in stripped
-        ):
+        # Only remove the site's repeated chapter navigation bars, not examples or diagrams.
+        if line.lstrip().startswith("[ 🏠"):
             continue
         cleaned_lines.append(line)
         
     processed_content = "\n".join(cleaned_lines).strip()
     
-    # Adjust relative paths for root level collection file
-    # Replace [AGENTS.md](../AGENTS.md) with [AGENTS.md](./AGENTS.md)
-    processed_content = processed_content.replace("../AGENTS.md", "./AGENTS.md")
-    processed_content = processed_content.replace("../README.md", "./README.md")
-    processed_content = processed_content.replace("../README_EN.md", "./README_EN.md")
-    
-    # Replace relative chapter links: (./chXX_xxx.md) -> (./chapters/chXX_xxx.md) or (./en/chXX_xxx.md)
-    if is_en:
-        processed_content = re.sub(r'\(\./(ch\d+_[^)]+\.md)\)', r'(./en/\1)', processed_content)
-    else:
-        processed_content = re.sub(r'\(\./(ch\d+_[^)]+\.md)\)', r'(./chapters/\1)', processed_content)
+    # PDF viewers cannot reach the temporary localhost server used by md-to-pdf.
+    # Convert chapter and repository references to permanent public URLs.
+    def public_link(match):
+        target = match.group(1)
+        path, separator, fragment = target.partition("#")
+        resolved = os.path.normpath(os.path.join(os.path.dirname(filepath), path))
+        relative = os.path.relpath(resolved, workspace).replace(os.sep, "/")
+        suffix = ("#" + fragment) if separator else ""
+        if relative.startswith("chapters/") and relative.endswith(".md"):
+            url = "https://book.pmer.cn/" + relative[:-3]
+        elif relative.startswith("en/") and relative.endswith(".md"):
+            url = "https://book.pmer.cn/" + relative[:-3]
+        elif relative.startswith("public/"):
+            url = "https://book.pmer.cn/" + relative[len("public/"):]
+        else:
+            url = "https://github.com/aipmer/codex-blue-book/blob/main/" + relative
+        return "](" + url + suffix + ")"
+
+    processed_content = re.sub(r'(?<!!)\]\((\.\.?/[^)]+)\)', public_link, processed_content)
         
     return processed_content
 
 def build_zh():
     combined = []
-    combined.append("# 《Codex 蓝皮书：从入门到架构大师》\n")
+    combined.append("# Codex 蓝皮书：从项目规则到交付验证\n")
+    combined.append("**v1.3.1 · 资料核对至 2026 年 9 月 24 日**\n")
     combined.append("![Codex 实战蓝皮书](./images/cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 English PDF Version ](./codex_blue_book_en.pdf) | [ 🌐 English Online Version ](./en/ch01_mindset.md)\n")
-    combined.append(toc_zh.strip() + "\n\n---\n")
-    combined.append("## 🔌 关联开源项目\n")
-    combined.append("*   **[飞书助理 (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**：蓝皮书 Ch.08 官方参考工程。专为 Codex 开发者打造的飞书助理，支持日报自动汇总推送、CI 熔断移动端警报与手机端一键审批。\n")
-    combined.append("*   **[Codex Switch (多供应商无缝切换)](https://github.com/aipmer/codex-switch)**：macOS Codex 多供应商一键切换利器。支持 OpenAI 官方 / DeepSeek / Kimi Code 秒级平滑切换，历史会话跨供应商无缝续聊，彻底解决单模型配额耗尽与 Rate Limit 限流难题。\n\n---\n")
-    
+    combined.append("[English PDF](https://book.pmer.cn/downloads/codex_blue_book_en.pdf) | [English online](https://book.pmer.cn/en/ch01_mindset)\n")
+    combined.append(build_toc(chapters_dir, "zh") + "\n\n---\n")
     for filename in chapter_files:
         zh_path = os.path.join(chapters_dir, filename)
         if os.path.exists(zh_path):
@@ -136,15 +113,12 @@ def build_zh():
 
 def build_en():
     combined = []
-    combined.append("# Codex Practical Blue Book: From Beginner to Architect\n")
+    combined.append("# Codex Blue Book: From Project Rules to Verified Delivery\n")
+    combined.append("**v1.3.1 · Sources checked September 24, 2026**\n")
     combined.append("![Codex Practical Blue Book](./images/cover_en.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 中文 PDF 版 ](./codex_blue_book_zh.pdf) | [ 🌐 中文在线版 ](./chapters/ch01_mindset.md)\n")
-    combined.append(toc_en.strip() + "\n\n---\n")
-    combined.append("## 🔌 Related Projects\n")
-    combined.append("*   **[Feishu Assistant (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**: The official companion repository for Ch.08. An intelligent duty assistant in Feishu for Codex developers, featuring automated daily git digest pushes, CI mobile alarms, and one-tap remote approvals.\n")
-    combined.append("*   **[Codex Switch (Multi-Provider Switcher)](https://github.com/aipmer/codex-switch)**: One-click provider switcher for macOS Codex CLI. Seamlessly switch between official OpenAI, DeepSeek, and Kimi Code in seconds with cross-provider chat history continuation, bypassing quota caps and rate limits.\n\n---\n")
-    
+    combined.append("[中文 PDF](https://book.pmer.cn/downloads/codex_blue_book_zh.pdf) | [中文在线阅读](https://book.pmer.cn/chapters/ch01_mindset)\n")
+    combined.append(build_toc(en_dir, "en") + "\n\n---\n")
     for filename in chapter_files:
         en_path = os.path.join(en_dir, filename)
         if os.path.exists(en_path):

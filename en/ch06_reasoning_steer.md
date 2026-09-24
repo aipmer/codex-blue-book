@@ -1,24 +1,24 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.05) ](./ch05_agents_protocol.md) | [ ➡️ Next (Ch.07) ](./ch07_desktop_computer_use.md) | [ 🌐 中文版 ](../chapters/ch06_reasoning_steer.md)
 
-# Ch.06 Steering Reasoning: Supervising the CoT Process Like a Tech Lead
+# Ch.06 Inspect Progress and Correct Course
 
-> 🎯 **The Real Problem**: Waiting passively for heavy reasoning models while an incorrect initial assumption snowballs into deep codebase corruption.  
-> 💡 **Tangible Output & Takeaway**: Real-time TUI Reasoning Summary inspection, 2 infinite-loop heuristics, and companion Chrome extension project (`examples/ch06-chrome-extension`).  
-> ⚡ **Viral Screenshot Quote**: *"Don't let AI run blind for 20 minutes before discovering it derailed. Catch flawed assumptions on step one."*
+> **Problem**: An incorrect assumption can expand the scope of a running task.
+>
+> **Practice**: Inspect visible plans, commands, and diffs; interrupt and restate a concrete constraint when needed.
 
 In traditional software development, when managing a junior engineer, your biggest fear is having them work in isolation for a week, only to deliver code that completely deviates from business goals or breaks the main branch.
 
-When working with Codex powered by the **GPT-5.6 Terra** deep-reasoning model, the AI's coding power is immense. However, if its initial premise is wrong, it will construct elaborate arguments around that flawed assumption, sprinting down the wrong path or getting stuck in infinite self-correction loops.
+With any model, an incorrect assumption or task boundary can lead to unnecessary edits. Check visible plans, tool calls, and diffs during long tasks.
 
-This chapter teaches you how to look directly into Codex's **reasoning process**, intervening like a seasoned tech lead to pull the agent back on course the moment it wanders.
+This chapter uses observable execution records to spot drift and restate concrete constraints.
 
 ---
 
-## 🎯 Intuitive Metaphor: An "Exam Proctor Window" into AI's Mind
+## A Way to Think About It: An "Exam Proctor Window" into AI's Mind
 
 Never treat AI reasoning as a black box:
 
-```Plaintext
+```text
 [Passive Blind Waiting] ──> Like waiting outside an exam hall for 2 hours, only to discover the student misremembered the fundamental formula on Question 1, failing the entire exam.
 [Proctor Supervision]   ──> Like standing right behind the student, observing their draft scratchpad (Reasoning Summary):
                             - The student drafts: "Assume we need to rewrite the entire database schema..."
@@ -30,7 +30,7 @@ Reading the Reasoning Summary gives you real-time visibility into that draft scr
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Practice: Start with Three Steps
 
 Learn to supervise and correct the AI like a tech lead in 3 simple steps:
 
@@ -39,7 +39,7 @@ Learn to supervise and correct the AI like a tech lead in 3 simple steps:
 2. **Step 2: Press `Ctrl + C` the Instant an Assumption Derails**  
    The moment you see the AI planning to pull in unfamiliar external packages or refactor core untouched files, hit `Ctrl + C` immediately.
 3. **Step 3: Correct with One Precise Sentence and Resume**  
-   Type your constraint directly: *"Do not rewrite existing tables; solve this with in-memory caching."* The AI will flush the invalid assumption and replan.
+   Type your constraint directly: *"Do not rewrite existing tables; solve this with in-memory caching."* Ask the agent to restate the new constraint before it continues editing.
 
 ---
 
@@ -47,7 +47,7 @@ Learn to supervise and correct the AI like a tech lead in 3 simple steps:
 
 The biggest difference between deep-reasoning models (such as GPT-5.6 Terra) and traditional models is that before producing final code, the reasoning model conducts in-depth internal hypothesis testing and simulation. The Codex TUI displays this process in real time as a **Reasoning Summary**.
 
-```Plaintext
+```text
 [User Request] ──> 1. Parse Goals & Constraints ──> 2. Plan Steps ──> 3. Run Tests ──> 4. Self-Correct ──> [Final Output]
                      └──────(Displayed in TUI as Reasoning Summary: Your Proctor Viewport)──────┘
 ```
@@ -82,7 +82,7 @@ codex exec --json "Refactor auth middleware" > task.jsonl
 
 When Codex receives the task *"Fix connection timeout in the Redis rate limiter,"* a healthy reasoning stream looks like this:
 
-```Plaintext
+```text
 [Reasoning Summary - Normal Flow]
 - User wants to fix Redis rate limiter connection timeout.
 - Checking existing implementation in src/lib/redis.ts...
@@ -117,14 +117,15 @@ Press `Ctrl + C` to stop the current run immediately and avoid token waste.
 
 ### Step 2: Point-to-Point Correction (Direct Dialogue)
 Directly point out the blind spot:
-```Plaintext
+```text
 You were trying to install axios-retry, but this project strictly forbids external HTTP retry libraries. Use native AbortController for timeout handling and replan.
 ```
 
 ### Step 3: Human Takeover and Git Rollback
-If files were already corrupted, revert with Git and enforce the rule:
+If the edit is wrong, inspect the diff and confirm there are no human changes to keep before restoring only the target file:
 ```bash
-git checkout -- src/lib/redis.ts
+git diff -- src/lib/redis.ts
+git restore -- src/lib/redis.ts
 ```
 Append a guardrail into [AGENTS.md](../AGENTS.md): *"Strictly prohibit external retry libraries."*
 
@@ -149,9 +150,8 @@ To experience how to steer reasoning chains and enforce anti-loop guardrails dur
 | :--- | :--- | :--- |
 | **AI stuck in an endless loop of self-edits** | Prompt lacks an explicit retry cap | Hit `Ctrl + C` immediately, then instruct: *"Retry threshold reached. Stop spinning and output your diagnostic findings."* |
 | **Interrupting and re-prompting loses previous context** | Session context was dropped | Use `codex resume` to restore the original session thread and preserve reasoning context |
-| **AI broke multiple legacy core files** | Lack of Git clean-branch isolation before modifications | Run `git checkout .` to restore, then use `--sandbox workspace-write` to restrict scope |
+| **AI broke multiple legacy core files** | Changes were not isolated | Inspect `git status` and `git diff`, preserve any human edits, then restore only confirmed unwanted changes; use a separate branch or worktree next time |
 
 ---
 
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.05) ](./ch05_agents_protocol.md) | [ ➡️ Next (Ch.07) ](./ch07_desktop_computer_use.md) | [ 🌐 中文版 ](../chapters/ch06_reasoning_steer.md)
-

@@ -1,24 +1,24 @@
 [ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.10) ](./ch10_saas_mvp.md) | [ ➡️ 下一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch11_expo_mobile.md)
 
-# Ch.11 触角延伸：Expo 跨端原生 App 开发与云端打包
+# Ch.11 用 Expo 构建并检查移动应用
 
-> 🎯 **具体工程麻烦**：做完 Web 想做 App，但 Xcode 证书、Android Gradle、Cocoapods 依赖地狱让人崩溃，环境配三天打不出包。  
-> 💡 **可运行实战代码与落地收益**：完整可运行代码库 `examples/ch11-expo-mobile`（Expo SDK 57 + Expo Router + NativeWind）；零本地配置云端打包 `eas build`。  
-> ⚡ **社交传播 / 截图金句**：“不用配本地 Xcode 和 Android Studio，借助云端打包与 AI 报错自愈，一个人也能轻松交付双端原生应用。”
+> **问题**：移动端依赖、设备调试和签名构建容易出现环境差异。
+>
+> **本章实践**：运行配套 Expo 工程，在真机检查界面，并按平台要求配置 EAS 构建。
 
 做完网页版 SaaS 后，很多独立开发者希望能将触角延伸到移动端。但在传统的原生开发（React Native / Flutter）中，最耗费时间的往往是复杂的本地开发环境配置：iOS 证书管理、Android Gradle 报错、Cocoapods 冲突，这些环境地狱常常让人望而却步。
 
-我坚信 **“云端开发与打包（EAS）是独立开发者做原生 App 的唯一解”**。结合 Codex 的智能编译报错排查，你可以完全跳过本地 Xcode/Android Studio 的繁琐配置，直接打包出可以上架的原生 App。
+EAS Build 可以减少本地构建环境的要求，但 iOS 签名、开发者账号和上架审核仍需配置。先在设备上验证功能，再分别生成开发和生产构建。[Expo 构建准备](https://docs.expo.dev/build/setup/)
 
 > 📦 **配套实战源码**：[examples/ch11-expo-mobile](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch11-expo-mobile) —— 完整可运行的 Expo SDK 57 工程（Expo Router `src/app` 路由 + NativeWind + EAS 三档打包配置），自带 CAP 协议 `AGENTS.md`，已通过 `npx expo lint`（零错误）与 `npx expo-doctor`（20/20）验证。
 
 ---
 
-## 🎯 生活化直觉隐喻：写好剧本，让“云端工坊”为你定制戏服
+## 理解方式：写好剧本，让“云端工坊”为你定制戏服
 
 跨端开发不需要把你的电脑变成重型加工厂：
 
-```Plaintext
+```text
 【传统原生开发】 ──> 你在家里自己买炼钢炉（装几十 G 的 Xcode 和 Android Studio）、
                      买织布机（配各种 Gradle/Cocoapods 运行环境），动不动断电报错，三天造不出一只鞋。
 【Expo + EAS 模式】──> ✅ 你只负责写剧本（写 React Native / TypeScript 核心代码）：
@@ -31,7 +31,7 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 动手实践：先完成这 3 步
 
 用 3 步在手机真机上看到你的第一个跨端 App：
 
@@ -44,7 +44,7 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
    # 终端将打出巨大的二维码矩阵
    ```
 3. **步骤三：用手机相机扫码即可秒开实时热更新**  
-   手机扫码后，App 瞬间加载完成。无论你在本地或让 Codex 调整任何页面代码，手机屏幕都会瞬间热重载呈现！
+   使用与当前 SDK 兼容的 Expo Go 或开发构建扫码打开项目。代码变更通常会触发刷新；原生模块变更可能需要重新构建。
 
 ---
 
@@ -72,7 +72,7 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
 
 目录结构规范：
 
-```Plaintext
+```text
 src/
 ├── app/
 │   ├── index.tsx         # APP 首页
@@ -97,7 +97,7 @@ React Native 开发最忌讳使用普通 `npm install` 安装带底层原生代�
 请改用 `npx expo install react-native-reanimated` 重新安装该依赖，它会自动适配当前的 Expo SDK 版本。在本项目中，严禁使用普通的 `npm install` 安装任何原生依赖包。请将该铁律写入 AGENTS.md。
 ```
 
-> 💡 **主理人心法**：`npx expo install` 是官方认证的版本锁。任何时候只要原生模块报错，强制使用该命令覆盖安装，90% 的依赖地狱都会被自动抹平。
+> 💡 **主理人心法**：`npx expo install` 会选择与当前 Expo SDK 兼容的依赖版本。原生模块报错时先运行 `npx expo-doctor`，再核对依赖、构建日志和平台限制。
 
 ---
 
@@ -148,7 +148,7 @@ codex exec --sandbox read-only "分析 eas-build.log，定位失败原因并给�
 
 ## 🛡️ 翻车自救与避坑速查表
 
-| 常见踩坑现象 | 致命原因 | 极速排查与自救指南 |
+| 常见踩坑现象 | 致命原因 | 排查与处理 |
 | :--- | :--- | :--- |
 | **手机扫码显示“Could not connect to development server”** | 手机与电脑不在同一个 Wi-Fi 局域网，或电脑开启了路由器防火墙 | 运行 `npx expo start --tunnel`，强制使用公网穿透隧道模式，零网络门槛 |
 | `Invariant Violation: "main" has not been registered` | 入口路由文件丢失或 `app.json` 中配置的 entry 路径错误 | 检查 `package.json` 中的 `"main": "expo-router/entry"` 是否被意外篡改 |

@@ -1,22 +1,22 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_mindset.md) | [ ➡️ Next (Ch.03) ](./ch03_sandbox.md) | [ 🌐 中文版 ](../chapters/ch02_setup.md)
 
-# Ch.02 Cross-Device Control: Building Your Codex Multi-Surface Productivity Matrix
+# Ch.02 Install Codex and Check Your Environment
 
-> 🎯 **The Real Problem**: Beginners rush to prompt AI while local Node dependencies, outdated clients, and OS permissions fail, causing endless terminal errors and burning tokens.  
-> 💡 **Tangible Output & Takeaway**: 0.14x CLI quickstart, ChatGPT Desktop Code Mode & Computer Use permissions setup, and cross-device debugging checklist.  
-> ⚡ **Viral Screenshot Quote**: *"First stabilize your cockpit before asking AI to code. Don't let local setup errors burn your precious token budget."*
+> **Problem**: CLI, dependencies, or permissions can fail before a task starts.
+>
+> **Practice**: Install the CLI, verify its version and sign-in, then check desktop and mobile availability.
 
 To do a good job, one must first sharpen one's tools. In "Real-World Product Talk", I often emphasize a core principle: **The first step of AI-Native development is configuring your "cockpit" to be sufficiently stable.** Many beginners rush into prompting or writing code with AI, only to end up with AI screaming errors in the terminal and wasting tokens because of local environment mismatches or incorrect permission settings.
 
-This chapter will guide you step-by-step through configuring Codex's multi-device productivity matrix, including the 0.14x CLI, the unified ChatGPT Desktop App (Code Mode), and 24/7 mobile monitoring.
+This chapter will guide you step-by-step through configuring Codex's multi-device productivity matrix, including the Codex CLI, the unified ChatGPT Desktop App (Code Mode), and mobile alerts when a notification workflow is configured.
 
 ---
 
-## 🎯 Intuitive Metaphor: Your Three-Surface Mission Cockpit
+## A Way to Think About It: Your Three-Surface Mission Cockpit
 
 Do not think of these surfaces as disconnected programs. Imagine commanding a space exploration ship:
 
-```Plaintext
+```text
 【Codex CLI】                ──> Main Engine Room: Mounted in your terminal, handling high-throughput batching, tests, and CI builds.
 【ChatGPT Desktop Code Mode】──> Bridge Tactical Screen: Multi-repo diff reviews, Sites in-place preview, and visual audits.
 【ChatGPT Mobile App】       ──> Commander's Pager: Monitoring build statuses away from your desk, approving actions via Guardian.
@@ -26,32 +26,27 @@ Each surface handles its specialized duty, freeing you from being chained to a k
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Practice: Start with Three Steps
 
 You do not need complex network tunneling on day one. Follow these 3 steps to run your first task in 5 minutes:
 
 1. **Step 1: Install the CLI and Authenticate**  
-   Ensure Node.js 20+ is installed, then run in your terminal:
+   Check that Node.js and npm are installed, then run:
    ```bash
    npm install -g @openai/codex@latest
    codex
    ```
    A browser window will open automatically. Sign in with your ChatGPT account to bind.
-2. **Step 2: Create a Minimal Anti-Explosion Config**  
-   Run the following snippet to create `~/.codex/config.toml`, binding the GPT-5.6 Terra primary model:
+2. **Step 2: Check the Version and Choose a Current Model**
+   Run `codex --version` first. At this edition's September 24, 2026 cutoff, the official changelog lists CLI `0.156.1`; your local version may differ. [Changelog](https://learn.chatgpt.com/docs/changelog)
+   If your account has access, start with GPT-6 Sol without overwriting an existing `~/.codex/config.toml`:
    ```bash
-   mkdir -p ~/.codex
-   cat << 'EOF' > ~/.codex/config.toml
-   model = "gpt-5.6-terra"
-   tool_output_token_limit = 12000
-   model_auto_compact_token_limit = 64000
-
-   # Optional: Switch to frontier flagship for complex architecture or visual audits
-   # model = "gpt-6-astra"
-
-   [profiles.guardian]
-   model = "gpt-5.6-luna"
-   EOF
+   codex --version
+   codex --model gpt-6-sol
+   ```
+   To make it the local default, set this key in your existing `~/.codex/config.toml`:
+   ```toml
+   model = "gpt-6-sol"
    ```
 3. **Step 3: Run Your First Safe Sandbox Task**  
    Navigate to your project directory and execute:
@@ -61,19 +56,20 @@ You do not need complex network tunneling on day one. Follow these 3 steps to ru
 
 ---
 
-## 2.1 CLI Client (0.14x Era) Setup & Best Practices
+## 2.1 CLI Setup & Version Checks
 
-The core of Codex CLI is written in Rust (`codex-rs`), but OpenAI distributes it via npm. **As a user, you do NOT need a Rust compiler**, only Node.js 20+.
+The core of Codex CLI is written in Rust (`codex-rs`), but OpenAI distributes it via npm. **As a user, you do NOT need a Rust compiler**, check the current package requirement with `npm view @openai/codex@latest engines`.
 
 ### 1. Installation & Environment Check
 
 Run in your terminal:
 
 ```bash
-# 1. Verify Node.js (20+ required)
+# 1. Check Node.js and the current npm package requirement
 node --version
+npm view @openai/codex@latest engines
 
-# 2. Globally install latest stable CLI (0.147.0+)
+# 2. Install the current stable CLI; check the official changelog for its version
 npm install -g @openai/codex@latest
 
 # Or use the official install script (macOS / Linux)
@@ -99,36 +95,25 @@ Codex CLI offers two authentication paths:
 - **Option A (Recommended / Default)**: Run `codex` directly to log in via browser. **ChatGPT Plus ($20/mo), Pro, Team, Business, Edu, and Enterprise plans all include Codex quotas**, offering the highest ROI for solo developers.
 - **Option B (Pay-as-you-go / CI)**: Use an OpenAI API Key for CI/CD pipelines or headless servers.
 
-```bash
-export OPENAI_API_KEY="sk-proj-xxxxxx..."
-```
+For API-key login, follow the [Codex CLI documentation](https://learn.chatgpt.com/docs/codex/cli) and load the secret from secure storage. Do not put a real key in the repository or a tutorial.
 
 ### 3. Billing Guardrails & Overrun Protection
 
 1. **OpenAI Platform Hard Limit (Crucial)**: Set a monthly Usage Limit (e.g., $50 for beginners) in your OpenAI dashboard. Even in an infinite loop, your budget is safeguarded.
-2. **Token Controls in `config.toml`**: Restrict output sizes and compaction thresholds as configured above.
-3. **Sandbox & Guardian Approval**: Deprecate `--full-auto`, and use `--sandbox workspace-write` along with `--approve-for-me` (delegated to GPT-5.6 Luna).
+2. **Match model to task**: Select a model available in Codex; start complex daily coding with `gpt-6-sol` when available. Check API bills separately from Codex subscription usage.
+3. **Sandbox and automatic review**: Use `--sandbox workspace-write` for new non-interactive calls. `--approve-for-me` is a separate review mode; it does not guarantee approval or have a documented fixed Luna reviewer. [Permissions](https://learn.chatgpt.com/docs/permission-modes)
 
-### 4. Seamless Multi-Provider Switching: Overcoming Rate Limits & Quota Caps (Recommended Tool: Codex Switch)
+### 4. Optional: Evaluate a Third-Party Provider Switcher
 
-During intensive coding sessions, solo developers frequently encounter OpenAI 3-hour usage caps or API rate-limit errors. Manually editing configurations breaks your development flow, and worse, **often causes you to lose the active multi-turn conversation context**.
+Before switching model providers, check the target API compatibility and how local data is handled. **[Codex Switch](https://github.com/aipmer/codex-switch)** is a separate open-source tool maintained by this book's author, not an official OpenAI CLI feature. Its README documents supported versions, setup, and changes to local session files. Cross-provider resume is not guaranteed for future versions.
 
-To solve this dilemma, we recommend the companion open-source utility **[Codex Switch](https://github.com/aipmer/codex-switch)** (created by the author of this book):
+The current repository uses `codex-switch.sh`; it does not provide the `install.sh` or `codex-switch --to` commands previously shown here. Read the README and back up local sessions and configuration before setting up a provider. This command only checks the entry script after cloning; it does not switch providers:
 
-*   **One-Click Multi-Provider Switching**: Effortlessly toggle between official OpenAI, DeepSeek, and Kimi Code within seconds on macOS, bypassing single-provider rate limits.
-*   **Seamless Cross-Provider Session Resume**: Solves provider message schema discrepancies, local cryptographic validation, and `thread_history.sqlite` byte-offset alignments. You can **continue existing conversations across different providers** without explaining your context from scratch.
-*   **Quickstart**:
-    ```bash
-    # Clone and install Codex Switch
-    git clone https://github.com/aipmer/codex-switch.git
-    cd codex-switch && ./install.sh
-
-    # Switch active provider to DeepSeek in 1 second
-    codex-switch --to deepseek
-
-    # Check current provider status
-    codex-switch --status
-    ```
+```bash
+git clone https://github.com/aipmer/codex-switch.git
+cd codex-switch
+test -f codex-switch.sh && sed -n '1,35p' README.md
+```
 
 ---
 
@@ -155,7 +140,7 @@ Log in and click the **Codex** tab in the left sidebar to enter "Codex Code Mode
 
 To allow the agent to visually inspect your screen, grant two permissions under macOS "System Settings -> Privacy & Security":
 
-```Plaintext
+```text
 [macOS System Settings] -> [Privacy & Security]
   ├─ Accessibility  ────> Check [ChatGPT] (Allows simulating clicks/keystrokes)
   └─ Screen Recording ──> Check [ChatGPT] (Allows screenshot capture & Vision analysis)
@@ -178,10 +163,10 @@ To allow the agent to visually inspect your screen, grant two permissions under 
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
-| `error: unknown option '--full-auto'` | Deprecated in CLI 0.14x | Replace with the new sandbox flag: `--sandbox workspace-write` |
+| `--full-auto` prints a deprecation warning | The old call remains a compatibility path | Use `--sandbox workspace-write` for new non-interactive runs |
 | `SyntaxError: Unexpected token ...` (Node error) | Node.js version is older than 20 | Run `node -v`; upgrade using `nvm use 20` or `nvm install 20` |
 | `Permission denied: Screen Recording` | Missing macOS screen permissions | Toggle ChatGPT under "System Settings -> Privacy & Security -> Screen Recording" and restart |
-| `Model not found: gpt-5.4` | Older models retired | Update `~/.codex/config.toml` to specify `model = "gpt-5.6-terra"` |
+| `gpt-5.4` is unavailable with Codex sign-in | It retired from Codex with ChatGPT sign-in on August 31, 2026 | Select `gpt-6-sol` when your account has access |
 
 ---
 

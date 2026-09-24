@@ -133,14 +133,11 @@ async function runM3StressTest() {
   // -------------------------------------------------------------
   console.log('\n--- 3. Positive Adoption Verification for "飞书助理" ---');
   const requiredAdoptions = [
-    { file: 'index.md', desc: 'Homepage Hero Action 3' },
     { file: '.vitepress/config.mts', desc: 'Navigation Bar and Chapter 08 Sidebar' },
     { file: 'chapters/ch08_mobile_workflow.md', desc: 'Ch.08 Section 8.4 & text' },
-    { file: 'generator.md', desc: 'Defense option and tunnel description' },
     { file: 'README.md', desc: 'Companion ecosystem section' },
     { file: 'case-studies/case_study_mobile_sentinel.md', desc: 'Case Study 02 Title & body' },
     { file: 'case-studies/README.md', desc: 'Case Study 02 Table row' },
-    { file: 'scripts/compile_collection.py', desc: 'Collection build companion section' },
   ];
 
   for (const item of requiredAdoptions) {
@@ -160,7 +157,6 @@ async function runM3StressTest() {
   // -------------------------------------------------------------
   console.log('\n--- 4. Positive Adoption Verification for English Parity ---');
   const enRequiredAdoptions = [
-    { file: 'en/index.md', desc: 'EN Homepage' },
     { file: 'en/ch08_mobile_workflow.md', desc: 'EN Ch.08' },
     { file: '.vitepress/config.mts', desc: 'EN Nav/Sidebar in config' },
   ];

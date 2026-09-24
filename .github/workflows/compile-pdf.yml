@@ -42,13 +42,18 @@ jobs:
           sudo apt-get install -y fonts-noto-cjk fonts-wqy-zenhei
 
       - name: Install PDF compiler dependency
-        run: npm install md-to-pdf
+        run: npm install --no-save --package-lock=false md-to-pdf@5.2.5
 
       - name: Compile PDF Documents
         run: node scripts/compile_pdf.js
+
+      - name: Check both download copies
+        run: |
+          cmp codex_blue_book_zh.pdf public/downloads/codex_blue_book_zh.pdf
+          cmp codex_blue_book_en.pdf public/downloads/codex_blue_book_en.pdf
 
       - name: Commit and Push Updated PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "build: auto-compile updated PDFs [skip ci]"
-          file_pattern: "*.pdf"
+          file_pattern: "codex_blue_book_zh.pdf codex_blue_book_en.pdf public/downloads/codex_blue_book_zh.pdf public/downloads/codex_blue_book_en.pdf"

@@ -1,52 +1,49 @@
-// Express Server Gateway for Codex Mobile Watchdog (Ch.08)
+// Local decision relay for the Ch.08 mobile workflow. This service never deploys or rolls back code.
+const crypto = require('crypto');
 const express = require('express');
-const { exec } = require('child_process');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
+
+const token = process.env.CODEX_WATCHDOG_TOKEN || '';
+if (token.length < 32) {
+  console.error('Set CODEX_WATCHDOG_TOKEN to a random value of at least 32 characters.');
+  process.exit(1);
+}
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '1kb' }));
+const port = Number(process.env.PORT || 8080);
+const signalDir = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-watchdog-'));
+const signalFile = path.join(signalDir, 'decision.json');
 
-const PORT = process.env.PORT || 8080;
-const VALID_USER = process.env.CODEX_USER || 'hunkwu';
-
-// Webhook endpoint to receive remote commands from WeChat, Slack, or Keepa
 app.post('/api/mobile-reply', (req, res) => {
-  const { userMessage, user } = req.body;
-  
-  console.log(`[Watchdog] Received signal: "${userMessage}" from user: "${user}"`);
-  
-  // Authenticate user
-  if (user !== VALID_USER) {
-    console.warn(`[Watchdog] Unauthorized access attempt by user: "${user}"`);
-    return res.status(403).json({ error: 'Unauthorized user credentials.' });
+  const authorization = req.get('authorization') || '';
+  const expected = Buffer.from(`Bearer ${token}`);
+  const actual = Buffer.from(authorization);
+  if (actual.length !== expected.length || !crypto.timingSafeEqual(actual, expected)) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (userMessage === '1') {
-    // Write approval signal to temporary directory
-    exec('echo "approved" > /tmp/codex_deploy_signal', (err) => {
-      if (err) {
-        console.error('[Watchdog] Failed to write deploy signal:', err);
-        return res.status(500).json({ error: 'Failed to write authorization signal.' });
-      }
-      console.log('[Watchdog] Deployment approved and signal written.');
-      res.json({ reply: '🚀 Deployment approved, production build is launching!' });
+  const decision = req.body && req.body.userMessage === '1' ? 'approved'
+    : req.body && req.body.userMessage === '0' ? 'denied' : null;
+  if (!decision) {
+    return res.status(400).json({ error: 'Reply with 1 (approve) or 0 (deny).' });
+  }
+
+  try {
+    fs.writeFileSync(signalFile, JSON.stringify({ decision, at: new Date().toISOString() }), {
+      encoding: 'utf8',
+      mode: 0o600
     });
-  } else if (userMessage === '0') {
-    // Terminate running codex process and revert local edits
-    exec('pkill -f codex && git checkout -- .', (err) => {
-      if (err) {
-        console.warn('[Watchdog] Process termination returned status:', err.message);
-      }
-      console.log('[Watchdog] Codex process terminated. Code rolled back.');
-      res.json({ reply: '🛑 Deployment aborted, active agent terminated and workspace rolled back.' });
-    });
-  } else {
-    res.json({ reply: '⚠️ Invalid instruction. Reply with 1 (approve) or 0 (abort).' });
+    return res.json({ decision, message: 'Decision recorded; no command was executed.' });
+  } catch (error) {
+    console.error('[Watchdog] Failed to record decision:', error);
+    return res.status(500).json({ error: 'Failed to record decision.' });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`=============================================`);
-  console.log(`📡 Codex Mobile Gateway listening on port ${PORT}`);
-  console.log(`🛡️  Configured Authorized User: "${VALID_USER}"`);
-  console.log(`=============================================`);
+app.listen(port, '127.0.0.1', () => {
+  console.log(`[Watchdog] Listening on http://127.0.0.1:${port}`);
+  console.log(`[Watchdog] Decision file: ${signalFile}`);
 });

@@ -6,6 +6,18 @@
 
 ---
 
+## 📅 2026年9月24日 (v1.3.1 内容校订)
+
+- 依据 [Codex 更新日志](https://learn.chatgpt.com/docs/changelog)将本书 CLI 核对点更新为 2026 年 9 月 23 日发布的 `0.156.1`；书中安装命令仍提示读者核对当前版本。
+- 根据 [GPT-6 官方指南](https://developers.openai.com/api/docs/guides/latest-model)与 [Codex 模型说明](https://learn.chatgpt.com/docs/models)，补齐 Astra、Sol、Luna 的定位、模型 ID、推理档位和 Codex 可用性；当前选型示例以 `gpt-6-sol` 为默认值，API 价格与 Codex 订阅用量分开说明。
+- 修正 `--full-auto` 的状态为“已弃用但保留兼容入口”，更新 Hooks 数组结构与插件命令；删除缺少一手依据的 BenchCAD 95.9%、网络安全评级及第三方深度集成断言，保留可检查的 3D 工作流示例。
+- 依据 [API 退役公告](https://developers.openai.com/api/docs/deprecations)逐项校对生命周期表；13 对章节统一采用具体问题、实践步骤和验收条件，修正固定完成时间、文字规则等于权限控制等表述，并同步首页、生成器、导航与 README。
+- 更正第 2 章第三方切换工具的实际入口命令；第 8 章移动中转网关改为本机令牌鉴权与决策记录，不再从网页请求执行部署、结束进程或回滚 Git。
+- 从校订后章节重编中英文合订本与 PDF；固定 PDF 编译依赖，编译失败返回非零状态，根目录与站点下载目录中的对应 PDF 保持字节一致。
+- **对 v1.3.0 的勘误**：下方原始发布记录保留为历史记录。其中关于 `--full-auto` 已移除、BenchCAD 数字、2026 年 10 月 23 日与 12 月 1 日的批量退役安排等表述，均以本次校订和第 13 章的官方来源为准。
+
+---
+
 ## 📅 2026年9月18日 (v1.3.0 正式发布)
 ### 🚀 项目更新
 - **正式发布 v1.3.0 版本**：版本号升级至 `v1.3.0`，全量更新中英文全书大合集、双语 PDF 电子书与在线阅读站，全面拥抱 2026 最新模型生态与跨界工作流。
@@ -206,6 +218,18 @@
 ## <a name="english-version"></a> 📝 English Version
 
 This document records the recent updates, technical issues, and solutions for the *Codex Blue Book* project.
+
+---
+
+## 📅 September 24, 2026 (v1.3.1 Content Revision)
+
+- Updated the CLI research cutoff to `0.156.1`, released September 23, 2026, using the [Codex changelog](https://learn.chatgpt.com/docs/changelog). Installation examples still tell readers to verify the current version.
+- Added the roles, model IDs, reasoning levels, and Codex rollout boundaries for Astra, Sol, and Luna using the [official GPT-6 guide](https://developers.openai.com/api/docs/guides/latest-model) and [Codex models](https://learn.chatgpt.com/docs/models). Current examples default to `gpt-6-sol` and distinguish API prices from Codex subscription usage.
+- Corrected `--full-auto` to a deprecated compatibility path, updated Hooks arrays and plugin commands, and removed unsupported BenchCAD, cybersecurity-rating, and third-party integration claims while retaining an inspectable 3D workflow example.
+- Checked lifecycle dates against [API deprecations](https://developers.openai.com/api/docs/deprecations). All 13 chapter pairs now state concrete problems, practice steps, and acceptance checks; fixed-time promises and claims that written rules enforce permissions were corrected across the site and README.
+- Corrected the third-party switcher's actual entry command in Ch.02. The Ch.08 mobile relay now requires a local bearer token and records decisions without deploying, terminating processes, or rolling back Git.
+- Rebuilt the bilingual collected manuscripts and PDFs from the revised chapters. The PDF dependency is pinned, compiler failures return nonzero, and the root and site-download PDF copies match byte for byte.
+- **Errata for v1.3.0**: The original release notes below remain as historical records. Their statements that `--full-auto` was removed, the BenchCAD figure, and the October 23 and December 1 bulk retirement dates are superseded by this revision and the sourced Ch.13.
 
 ---
 

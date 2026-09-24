@@ -1,24 +1,24 @@
 [ 🏠 Index ](/en/) | [ ➡️ Next (Ch.02) ](./ch02_setup.md) | [ 🌐 中文版 ](../chapters/ch01_mindset.md)
 
-# Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding
+# Ch.01 From Code Generation to Verified Results
 
-> 🎯 **The Real Problem**: Developers treat AI as just a fancy auto-complete, grinding through repetitive boilerplate, or letting agents run wild without architecture guardrails.  
-> 💡 **Tangible Output & Takeaway**: A 3-stage mental model for AI-native orchestration and a runnable PRD boundary assertion template to eliminate boilerplate typing.  
-> ⚡ **Viral Screenshot Quote**: *"Humans should no longer manually write boilerplate code. Your hands belong on the steering wheel, not the pushcart."*
+> **Problem**: Treating AI as autocomplete or accepting edits without review can miss requirements and regressions.
+>
+> **Practice**: Write one development task with a goal, boundaries, and verifiable acceptance checks.
 
 When chatting with readers of "实战产品说" (Real-World Product Talk), I often notice a common pitfall: developers pushing themselves to memorize AI coding commands and shortcuts as if they were cramming for an API manual.
 
-Wake up! In the modern AI agent era (marked by OpenAI Codex and the GPT-5.6 generation), the barrier to code writing itself has dropped to zero. This is called **"Vibe Coding"**—where you focus on core business logic, commercial closed-loops, and real user experience, while leaving the engineering grunts to autonomous agents.
+Coding agents such as Codex can help draft boilerplate, tests, and documentation. Developers still own requirements, key design decisions, and verification. A clear goal, edit scope, and acceptance checks matter more than memorizing prompts.
 
-This chapter will help you shift your mindset from a "code typist" to an "AI orchestrator."
+This chapter turns a product need into a development task that can be executed and checked.
 
 ---
 
-## 🎯 Intuitive Metaphor: Stop Being a Bricklayer, Become the Chief Architect
+## A Way to Think About It: Stop Being a Bricklayer, Become the Chief Architect
 
 If you are new to AI-native development, do not view AI as a cold code generator:
 
-```Plaintext
+```text
 【Traditional Handwritten Code】 ──> You act as a manual bricklayer, stacking bricks one by one. If one corner is misaligned, the whole building collapses.
 【Traditional AI Completion】    ──> You lay bricks while AI hands you mortar (you type a line, it guesses half; your hands never rest).
 【Codex Orchestration Era】     ──> You are the "Chief Construction Architect", and Codex is your "elite engineering crew":
@@ -56,7 +56,7 @@ When your focus changes from "how do I type this loop" to "how do I dispatch a f
 
 Codex has pushed us into Stage 3:
 *   **Multi-Surface Productivity Matrix**: Automated execution via CLI, complex reviews and Sites in-place preview on ChatGPT Desktop (Code Mode), 24/7 mobile monitoring with Guardian approvals, and visual browser audits via Desktop Computer Use.
-*   **Frontier Reasoning & Agentic Core**: From the latest frontier flagship **GPT-6 Astra** (launched September 2026 with a 1.05M context window and native Computer Use system operator capabilities) to the mature **GPT-5.6 family (Sol / Terra / Luna)**, agents now possess long-horizon reasoning, cross-application autonomy, and visual self-healing, moving far beyond mere boilerplate generation.
+*   **Frontier Reasoning & Agentic Core**: From **GPT-6 Astra** for the hardest cross-tool work to **GPT-6 Sol** for everyday complex coding and **GPT-6 Luna** for focused tasks, agents now possess long-horizon reasoning, cross-application autonomy, and visual self-healing, moving far beyond mere boilerplate generation.
 
 ---
 
@@ -75,7 +75,7 @@ With Codex, the same rule applies. Stop micromanaging how AI writes logic. As an
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Practice: Start with Three Steps
 
 For first-time users, avoid dumping thousands of words of vague thoughts. Follow this 3-step loop:
 

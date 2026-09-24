@@ -1,22 +1,22 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.11) ](./ch11_expo_mobile.md) | [ ➡️ Next (Ch.13) ](./ch13_2026_frontier.md) | [ 🌐 中文版 ](../chapters/ch12_commercialization.md)
 
-# Ch.12 The Final Frontier: Building an Automated Growth Flywheel for a One-Person SaaS
+# Ch.12 From Product Usage to Acquisition Experiments
 
-> 🎯 **The Real Problem**: Spending 99% of effort writing code and 1% acquiring users, launching to crickets because a solo creator cannot balance engineering and growth.  
-> 💡 **Tangible Output & Takeaway**: Automated marketing scripts (event-triggered telemetry digests, social distribution); core analytics dashboards; one-person SaaS growth pipelines.  
-> ⚡ **Viral Screenshot Quote**: *"Flawless code with zero users is useless. Let AI not only build your product, but also drive your automated distribution flywheel."*
+> **Problem**: Shipping features does not show whether users complete key flows or where they drop off.
+>
+> **Practice**: Define a few business metrics, build a digest, and test acquisition channels in small reversible experiments.
 
-On my WeChat public account "Real-World Product Talk" and [pmer.cn](https://pmer.cn), I have written numerous articles about "independent development and side hustles." The most common trap developers fall into is: **spending 99% of their energy polishing code syntax, but only 1% of their energy finding real users and actual pain points.**
+On my WeChat public account "Real-World Product Talk" and [pmer.cn](https://pmer.cn), I have written numerous articles about "independent development and side hustles." The most common trap developers fall into is: **optimizing implementation details without checking whether real users need the feature.**
 
 No matter how elegant your code is or how perfect your architecture config is, as long as nobody uses it, it is just a pretty ornament. In the AI-native era, we must not only let Codex help us "manufacture products," but also let it help us "spin the commercial flywheel."
 
 ---
 
-## 🎯 Intuitive Metaphor: Building a Day-and-Night Self-Spinning "Hydraulic Irrigation Waterwheel"
+## A Way to Think About It: Building a Day-and-Night Self-Spinning "Hydraulic Irrigation Waterwheel"
 
 A commercial flywheel shouldn't depend on hauling water buckets by hand every day:
 
-```Plaintext
+```text
 [Manual Bucket Hauling] ──> Writing code until midnight, then handing out flyers manually the next morning.
                             If you get sick for a single day, product updates stall and traffic drops to zero (fragile).
 [Hydraulic Waterwheel]  ──> ✅ You assemble this self-spinning waterwheel by the river:
@@ -30,7 +30,7 @@ Once this pipeline is assembled, whether you are sleeping, eating, or traveling,
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Practice: Start with Three Steps
 
 Take your first step toward commercialization in 3 simple steps:
 
@@ -121,13 +121,13 @@ sendReport();
 
 ---
 
-## 12.3 The Final Moat: The Only Barrier in the AI-Native Era
+## 12.3 What Still Matters When Code Is Easier to Produce
 
-When anyone can generate thousands of lines of code in two hours, build a native mobile app, and hook up automated payment pipelines, **pure code-writing becomes completely commoditized**. In this new era of "infinite code," the ultimate moat for independent developers and product managers lies in:
+As code generation becomes faster, understanding needs, reaching users, and delivering reliable service still determine whether people keep using a product. For independent developers and product managers, useful strengths include:
 
-1. **Your deep empathy for user pain points (User Empathy)**.
-2. **Your domain expertise accumulated over years in a specific industry (Domain Knowledge)**.
-3. **Your execution speed in orchestrating AI agents to rapidly validate commercial loops.**
+1. **Understanding the user's actual problem**.
+2. **Knowledge of the domain and its constraints**.
+3. **The ability to test a product and business assumption with evidence**.
 
 ---
 

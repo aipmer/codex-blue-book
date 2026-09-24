@@ -1,24 +1,24 @@
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.04) ](./ch04_goal_driven.md) | [ ➡️ Next (Ch.06) ](./ch06_reasoning_steer.md) | [ 🌐 中文版 ](../chapters/ch05_agents_protocol.md)
 
-# Ch.05 Defining the CAP Protocol: Building Your Project's AGENTS.md Rule Compliance Layer
+# Ch.05 Record Project Rules in AGENTS.md
 
-> 🎯 **The Real Problem**: Fixing 1 bug creates 3 new bugs, infinite 10-retry loop spins that drain budgets, unwanted heavy npm packages, and lazy fake `TODO` stubs.  
-> 💡 **Tangible Output & Takeaway**: Production-grade `AGENTS.md` project rules template, 2-retry hard circuit breaker, and zero-placeholder engineering boundaries.  
-> ⚡ **Viral Screenshot Quote**: *"An unconstrained AI is a runaway horse. An AGENTS.md rulebook forces models to respect architecture like a principal engineer."*
+> **Problem**: Without project guidance, an agent may edit unrelated files or retry failed commands.
+>
+> **Practice**: Create a maintainable AGENTS.md and distinguish written guidance from actual permissions and sandbox controls.
 
 In the product development process, one of the most frustrating scenarios is fixing one bug only to introduce three new ones, or coding a new feature while completely disregarding the team's established coding standards.
 
-In human-machine collaborative development, if Codex is left without boundary constraints, it too can become an overly eager and "destructive" employee. To place a tight rein on it, we need to establish an **`AGENTS.md`** file in the project root.
+In human-machine collaborative development, place an **`AGENTS.md`** file in the project root to share the stack, commands, and collaboration rules. Use permissions, review, and tests to control consequential operations.
 
-This is our **"agent collaboration constitution" (Codex Collaboration Protocol, CAP)**.
+This book calls the format **Codex Collaboration Protocol (CAP)**. It is project guidance, not an enforced Codex security mechanism.
 
 ---
 
-## 🎯 Intuitive Metaphor: The New Employee Onboarding Handbook & Safety Code
+## A Way to Think About It: The New Employee Onboarding Handbook & Safety Code
 
 Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
-```Plaintext
+```text
 【Without AGENTS.md】 ──> The intern arrives with no rulebook. To fix a minor frontend alignment bug,
                           they casually rewrite your 3-year-old core authentication module into an esoteric syntax,
                           crashing production upon release.
@@ -33,9 +33,9 @@ Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Practice: Start with Three Steps
 
-Create your project's first compliance rulebook in 3 minutes:
+Start your first project rules file with these three steps:
 
 1. **Step 1: Create the File in Your Project Root**  
    Run in your terminal:
@@ -82,7 +82,7 @@ Its core value lies in:
 
 ## 5.2 The Four Core Sections of `AGENTS.md`
 
-```Plaintext
+```text
 # Project Fingerprint
 - Tells the AI what kind of project this is and its core tech stack.
 
@@ -138,25 +138,28 @@ Its core value lies in:
 
 ---
 
-## 5.4 Dual Defense: Soft Constraints vs. Hard Enforcements
+## 5.4 Rules, Sandboxes, and Hooks Have Different Jobs
 
-Rules in `AGENTS.md` are natural language directives—models like GPT-5.6 Terra respect them with high fidelity, but they are "soft constraints."
+`AGENTS.md` supplies project context and behavioral instructions; it does not replace file-system permissions. Use the Codex sandbox to restrict writable paths. Use human approval or `--approve-for-me` to review eligible escalation requests. Hooks can run checks at supported events, but review their source and trust status first. [Permissions](https://learn.chatgpt.com/docs/permission-modes) · [Hooks docs](https://learn.chatgpt.com/docs/hooks)
 
-To guarantee physical guardrails that cannot be breached, combine with Codex 0.14x runtime controls:
+```bash
+codex --sandbox workspace-write "Review the current changes and report issues"
+```
 
-1. **Sandbox Mode**: Enforce `--sandbox workspace-write` to confine edits within the project workspace at the OS container level.
-2. **Guardian Approvals**: Pass `--approve-for-me` to let Guardian evaluate policy violations automatically.
-3. **Hooks Engine**: Configure `[hooks]` in `~/.codex/config.toml` to execute pre/post test scripts on file writes.
+This configuration selects GPT-6 Sol and checks the current repository for whitespace errors at the end of a turn. Both the `Stop` event and its handler use array syntax. Verify trust with `/hooks` after enabling:
 
 ```toml
 # ~/.codex/config.toml
-model = "gpt-5.6-terra"
+model = "gpt-6-sol"
 
-[hooks]
-stop = "npm run lint --silent"
+[[hooks.Stop]]
+
+[[hooks.Stop.hooks]]
+type = "command"
+command = "git diff --check"
 ```
 
-**"AGENTS.md Soft Specs + Sandboxes & Hooks Hard Fences"** creates the ultimate anti-corruption moat.
+Model selection, sandbox permissions, and Hook checks are independent settings. A Hook check does not replace builds or tests.
 
 ---
 
