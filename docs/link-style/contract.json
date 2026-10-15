@@ -1,0 +1,22 @@
+{
+  "standard": "Web UI Quality 1.1.0 / link-style 1.0.0",
+  "sha256": {
+    "STANDARD.md": "a099fbf826f43c4b92cfe64aa407d3f8f617d8fdd0eac3885a19c4a32d957bcf",
+    "browser-core.mjs": "26ea09f23a88231d9da3ef6fe6ef756f726bf62010461e0197b950ab17396f69"
+  },
+  "publicOrigin": "https://book.pmer.cn",
+  "rules": [
+    {
+      "selector": ".vp-doc a:not(.header-anchor):not(:has(img))",
+      "required": true,
+      "color": "var(--vp-c-brand-1)",
+      "externalIcon": true
+    }
+  ],
+  "sampleRoutes": [
+    "/chapters/ch02_setup",
+    "/en/ch02_setup"
+  ],
+  "executor": "Ego Lite for local acceptance; use the project configured executor in CI",
+  "adoption": "Link styles only. Existing typography quality-core version is retained."
+}

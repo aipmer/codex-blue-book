@@ -225,3 +225,41 @@
   font-size: 0.875em;
   font-family: var(--vp-font-family-mono);
 }
+
+/* One boxed external indicator on VitePress's existing pseudo-element. */
+.vp-doc a { text-underline-offset: .2em; overflow-wrap: anywhere; }
+.vp-doc a:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+:is(.vp-external-link-icon, .vp-doc a[href*='://'], .vp-doc a[target='_blank']):not(:is(.no-icon, svg a, :has(img, svg)))::after {
+  content: "";
+  --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3h7v7M21 3 10 14M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5'/%3E%3C/svg%3E");
+  width: .875em;
+  height: .875em;
+  min-width: 14px;
+  min-height: 14px;
+  color: inherit;
+}
+
+@media (forced-colors: active) {
+  :is(.vp-external-link-icon, .vp-doc a[href*='://'], .vp-doc a[target='_blank'])::after { forced-color-adjust: none; background-color: LinkText; }
+}
+
+/* Same-origin absolute URLs and explicit downloads are not external webpages. */
+.vp-doc a:is([href^="https://book.pmer.cn/"], [href="https://book.pmer.cn"], [download])::after { content: none; }
+
+/* Reserve icon space on the final text fragment without preventing link wrapping. */
+.vp-doc a:is([href*='://'], [target='_blank']):not(:is(.no-icon, :has(img, svg), [href^="https://book.pmer.cn/"], [href="https://book.pmer.cn"], [download])) {
+  position: relative;
+  padding-inline-end: 1.175em;
+}
+.vp-doc a:is([href*='://'], [target='_blank']):not(:is(.no-icon, :has(img, svg), [href^="https://book.pmer.cn/"], [href="https://book.pmer.cn"], [download]))::after {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: .1em;
+  margin: 0;
+}
+/* The long bilingual navigation needs the existing compact menu through tablet widths. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .VPNavBar .VPNavBarMenu.menu { display: none; }
+  .VPNavBar .VPNavBarHamburger.hamburger { display: flex; }
+  .VPNav .VPNavScreen { display: block; }
+}
