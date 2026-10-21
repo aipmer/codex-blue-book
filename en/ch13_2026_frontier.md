@@ -6,7 +6,7 @@
 >
 > **Practice**: Check official changes as of this edition and run compatibility checks before migrating.
 
-The first twelve chapters built a version-independent orchestration methodology. But methodology must land on real tooling. In 2026, the Codex ecosystem went through four structural shifts: **the desktop merger, the model transition, the maturing plugin economy, and security becoming its own product line**. This chapter breaks down each shift with concrete migration commands and configurations.
+The first twelve chapters built a version-independent orchestration methodology. But methodology must land on real tooling. This edition checks changes since September 24: model selection, CLI settings, desktop collaboration, and usage controls. Each migration step identifies its account or client boundary.
 
 ---
 
@@ -19,10 +19,10 @@ Do not panic over frequent tool upgrades. View this transition through the eyes 
                       and strict boundary constraints (flight corridors & safe altitudes).
 [Engines]         ──> Propulsion overhauled to next-generation powerplants:
                       - Frontier Flagship Core: "GPT-6 Astra" (beyond-visual-range radar & autonomous computer operator);
-                      - Daily Primary Thrust Engine: "GPT-6 Sol" (complex coding);
+                      - Daily Primary Thrust Engine: "GPT-6.1 Sol" (complex coding);
                       - Auxiliary Cruise Engine: "GPT-6 Luna" (focused, frequent work).
-[Cockpit Screen]  ──> The former standalone secondary monitor (separate Codex App) is officially integrated
-                      into the main instrument panel (ChatGPT Desktop Code Mode), adding Sites radar & Annotations.
+[Cockpit Screen]  ──> Worktree terminals, review navigation, and mobile approvals improve collaboration.
+                      Check feature access in the installed client and workspace.
 [Autopilot]       ──> The old --full-auto compatibility path is deprecated; new calls specify sandbox and approval modes.
 ```
 
@@ -54,55 +54,58 @@ Complete your 2026 toolchain health check and migration in 3 simple steps:
 
 ---
 
-## 13.1 The Desktop Merger: Codex App Folds into the ChatGPT Client
+## 13.1 Desktop and Mobile: Changes That Affect Daily Work
 
-In July 2026, the standalone Codex desktop app was retired. All of its capabilities moved into the **ChatGPT desktop client** as a dedicated "Codex Code Mode," available to Free, Plus, and Enterprise users.
+Use the Codex entry in your current desktop client and check account and workspace access. The previous blanket claim that a July merger guaranteed every feature to every account has been removed; client packaging and model access need separate checks.
 
-**Migration steps:**
+- **Worktrees and steering**: app 26.928 (September 29) improves terminal startup in attached worktrees and keeps earlier answers visible during steering. Later releases improve multi-select chat moves, review navigation, and Windows/WSL recovery. [Official changelog](https://learn.chatgpt.com/docs/changelog)
+- **Composer predictions**: the October 9 beta suggests a next message in eligible local and SSH threads. Tab accepts an editable draft; sending it is a separate action. Personal Pro, age 18+, supported regions, Astra or GPT-6.1 Sol are required. Toggle it in Settings → General → Composer. [Predictions](https://learn.chatgpt.com/docs/features/composer-predictions)
+- **Mobile handoff**: recent iOS releases improve approval presentation, plugin access from the plus menu, and queued-task recovery. Confirm the selected computer and task before approving an operation. [Mobile changelog](https://learn.chatgpt.com/docs/changelog)
 
 ```bash
-# macOS: download ChatGPT.dmg and drag it into Applications
-# Windows: install via winget
-winget install OpenAI.ChatGPT
+# Check the repository before attaching or handing off a thread.
+git status --short
+git worktree list
+codex --version
 ```
 
-After signing in, click the **Codex** tab in the left sidebar to enter Code Mode. Two caveats:
-
-1. **Account vs. API Key**: Signing in with a ChatGPT account unlocks the full feature set (cloud tasks, cross-device sync, Sites hosting, Computer Use); an API key grants only basic local coding.
-2. **Standalone components are unaffected**: the Codex CLI, the VS Code extension, and Codex Cloud continue to evolve independently. The multi-surface matrix from Ch.02 still holds — the "desktop app" cell is simply replaced by the ChatGPT client.
-
-**New capabilities at a glance:**
-- Upgraded built-in browser: search browsing history from the address bar; the Chrome extension can reference open tabs.
-- **Multi-repo Review**: multi-folder projects show changed lines across all repositories in one review view — no more tab-hopping between diffs.
-- **Sites**: create, deploy, and manage hosted web projects directly in the client, with Annotations for in-place "point and edit" workflows.
+Check supported sign-in methods and feature access for each client; an API key and a ChatGPT subscription have separate access and billing rules. [Codex models](https://learn.chatgpt.com/docs/models)
 
 ---
 
 ## 13.2 The GPT-6 Family: Choose by Task
 
-As of **September 24, 2026**, the GPT-6 family consists of Astra, released September 3, and Sol and Luna, released September 22. Sol and Luna are rolling out in Codex; availability depends on the plan, client, and workspace settings. GPT-5.6 Sol, Terra, and Luna remain available during the rollout. A new release is not a blanket retirement of earlier models. [Official GPT-6 guide](https://developers.openai.com/api/docs/guides/latest-model) · [Codex models](https://learn.chatgpt.com/docs/models)
+As of **October 21, 2026**, GPT-6.1 Sol, launched September 29, is the recommended starting point for complex Codex work when available. Astra remains the choice for the hardest tasks, and Luna for focused work. GPT-6 Sol and GPT-5.6 Sol/Terra/Luna remain available during the rollout. GPT-6.1 Sol launches on Plus, Pro, Business, Enterprise and Edu; administrators must enable it for Enterprise/Edu. Free and Go are excluded at launch. [Codex models](https://learn.chatgpt.com/docs/models)
 
 | Model ID | Best fit | `reasoning.effort` | Boundary |
 | :--- | :--- | :--- | :--- |
 | `gpt-6-astra` | The hardest workflows across code, browsers, and desktop tools | `low`, `medium`, `high`, `xhigh`, `max` | No `none`; the client and tools still execute computer actions |
-| `gpt-6-sol` | Everyday complex coding, code review, and multi-step agent work | `none`, `low`, `medium`, `high`, `xhigh`, `max` | This book's current default when the account has access |
+| `gpt-6.1-sol` | Repeated complex coding and long tasks across apps and documents | `low`, `medium`, `high`, `xhigh`, `max` | Current example default; no `none` or `minimal` |
+| `gpt-6-sol` | Everyday complex coding, code review, and multi-step agent work | `none`, `low`, `medium`, `high`, `xhigh`, `max` | Previous Sol generation; retained for migration comparison |
 | `gpt-6-luna` | Focused edits, extraction, summaries, and high-volume tasks | `none`, `low`, `medium`, `high`, `xhigh`, `max` | Move to Sol or Astra when the task needs more capability |
 
-All three accept text and image input and produce text. The API model catalog lists a **1,050,000-token context window** and **128,000 maximum output tokens**. Prefer the Responses API for tools; Astra requires Responses for tool calling. [API model catalog](https://developers.openai.com/api/docs/models) · [GPT-6 migration guidance](https://developers.openai.com/api/docs/guides/latest-model)
+These models accept text and image input and produce text. The API model catalog lists a **1,050,000-token context window** and **128,000 maximum output tokens**. Prefer the Responses API for tools; Astra requires Responses for tool calling. [API model catalog](https://developers.openai.com/api/docs/models) · [GPT-6 migration guidance](https://developers.openai.com/api/docs/guides/latest-model)
+
+**GPT-6.1 Sol migration:** the API defaults to `medium`; use Responses for tool calling. Chat Completions supports this model without tool calling. Codex UI efforts can include Max/Ultra depending on settings: Ultra coordinates subagents and is not an API `reasoning.effort` value. [API model](https://developers.openai.com/api/docs/models/gpt-6.1-sol) · [Codex effort controls](https://learn.chatgpt.com/docs/models)
 
 **Keep API prices separate from Codex usage.** These are standard API text-token prices per million tokens for requests with up to 272K input tokens, as checked for this edition. They are neither ChatGPT subscription prices nor Codex credit conversions. Longer prompts, caching, and other processing tiers have separate [official prices](https://developers.openai.com/api/docs/pricing).
 
 | API model | Input | Cached input | Output |
 | :--- | ---: | ---: | ---: |
 | `gpt-6-astra` | $10 | $1 | $50 |
+| `gpt-6.1-sol` | $2 | $0.10 | $10 |
 | `gpt-6-sol` | $2 | $0.20 | $10 |
 | `gpt-6-luna` | $0.10 | $0.01 | $0.50 |
+
+GPT-6.1 Sol cache writes cost $2.50 per million tokens at Standard rates for inputs up to 272K. Longer prompts and speed tiers change these prices. [Model pricing](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
+
+**Speed is a separate control.** Since October 8, GPT-6.1 Sol Ultrafast is available on Pro $500 and eligible Enterprise/Edu plans, with Enterprise access off until enabled. Included subscription usage consumes 8× Standard limits; purchased credits and Enterprise pay-as-you-go consume 6× Standard. API-key billing uses API prices instead. Sol Ultrafast supports US and EEA + Switzerland inference residency. Start with Standard and compare a familiar task before enabling it. [Speed and billing](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 **Choose a model:**
 
 ```bash
 codex --version
-codex --model gpt-6-sol
+codex --model gpt-6.1-sol
 codex exec -m gpt-6-luna "Review the current changes"
 ```
 
@@ -112,7 +115,7 @@ Use `/model` in an interactive session. If a new model is missing from the picke
 
 ```toml
 # ~/.codex/config.toml
-model = "gpt-6-sol"
+model = "gpt-6.1-sol"
 ```
 
 This only selects the local default model. The `--approve-for-me` permission mode is not documented as using Luna.
@@ -127,15 +130,18 @@ This only selects the local default model. The `--approve-for-me` permission mod
 | August 31, 2026 | Codex with ChatGPT sign-in | `gpt-5.4` and `gpt-5.4-mini` retired |
 | September 3, 2026 | API | GPT-6 Astra released |
 | September 22, 2026 | API / Codex | GPT-6 Sol and Luna released and began rolling out in Codex |
-| October 14, 2026 (scheduled) | ChatGPT / Work / Codex | GPT-5.5 retirement; the API is not affected |
+| September 29, 2026 | API / Codex / Work | GPT-6.1 Sol launch |
+| October 14, 2026 | Codex with ChatGPT sign-in | GPT-5.5 retired; API and API-key sessions unaffected |
 
 Check [API deprecations](https://developers.openai.com/api/docs/deprecations) for API shutdown dates and official replacements. Check [Codex models](https://learn.chatgpt.com/docs/models) and the [changelog](https://learn.chatgpt.com/docs/changelog) for Codex sign-in scope. A retirement in one interface does not mean the API model is gone.
 
 ---
 
-## 13.3 Codex CLI: 0.156.1 at This Edition's Cutoff
+## 13.3 Codex CLI: 0.163.0 at This Edition's Cutoff
 
-OpenAI released Codex CLI `0.156.1` on **September 23, 2026**, adding GPT-6 Sol and Luna to the model picker. This edition's research cutoff is September 24, 2026; check the [current changelog](https://learn.chatgpt.com/docs/changelog) before installing.
+The official changelog lists **CLI 0.163.0, released October 15**, at this edition's **October 21, 2026** cutoff. This is a dated verification, not a permanent latest-version claim. Your installed version can differ. [Changelog](https://learn.chatgpt.com/docs/changelog)
+
+The 0.159.1 catalog added GPT-6.1 Sol. In 0.163.0, `/config` searches settings and shows restart requirements, `/keymap` configures a leader key, and `/daemon` manages background-server restarts. Steering responds immediately, and resumed threads restore saved permissions subject to current policy. Review potential interruption before restarting a server.
 
 ```bash
 codex --version
@@ -358,7 +364,7 @@ export function VendingMachineViewer() {
 
 ## 13.7 Cost and Task-Based Routing
 
-Start everyday complex coding with `gpt-6-sol`, use `gpt-6-luna` for focused extraction and small edits, and evaluate `gpt-6-astra` for the hardest cross-app work. Check what your account and client can select, then compare quality, latency, and cost on your own tasks. [Codex models](https://learn.chatgpt.com/docs/models)
+Start everyday complex coding with `gpt-6.1-sol`, use `gpt-6-luna` for focused extraction and small edits, and evaluate `gpt-6-astra` for the hardest cross-app work. Check what your account and client can select, then compare quality, latency, and cost on your own tasks. [Codex models](https://learn.chatgpt.com/docs/models)
 
 If a project uses other providers, verify session formats and tool support independently. The companion [Codex Switch](https://github.com/aipmer/codex-switch) is a third-party tool; rely on its current documentation and your own compatibility tests.
 
@@ -370,7 +376,7 @@ If a project uses other providers, verify session formats and tool support indep
 codex --version
 npm install -g @openai/codex@latest
 codex --version
-codex --model gpt-6-sol
+codex --model gpt-6.1-sol
 codex exec --sandbox workspace-write "Review the current changes and report issues"
 codex plugin list
 ```
@@ -385,7 +391,7 @@ codex plugin list
 
 | Symptom | Check |
 | :--- | :--- |
-| GPT-6 Sol or Luna is absent from the picker | Check CLI version, plan, rollout, and workspace administrator settings |
+| GPT-6.1 Sol or Luna is absent from the picker | Check CLI version, plan, rollout, and workspace administrator settings |
 | `--full-auto` prints a deprecation warning | Use `--sandbox workspace-write` for new non-interactive calls; the old path remains compatible |
 | A configured model is unavailable | Distinguish Codex sign-in from API access and select an available model with `/model` |
 | Hooks do not run | Check the event-array structure and review hook trust with `/hooks` |
@@ -399,3 +405,7 @@ Keep changing model IDs and CLI options in one place. Check official documentati
 ---
 
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.12) ](./ch12_commercialization.md) | [ 🌐 中文版 ](../chapters/ch13_2026_frontier.md)
+
+## Related tool channel
+
+For concise updates and setup reminders, visit the [PMER Codex tool channel](https://pmer.cn/en/ai/tools/codex/#updates). It uses the same October 21, 2026 baseline; use this chapter for configuration details.

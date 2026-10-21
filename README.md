@@ -2,15 +2,16 @@
 
 ![Codex 实战蓝皮书](./images/cover.jpg)
 
-[ 🌐 在线沉浸阅读站 (VitePress) ](https://book.pmer.cn) | [ 📥 下载中文版 PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ 🌐 English Version ](#english-version)
+[ 🌐 在线沉浸阅读站 (VitePress) ](https://book.pmer.cn) | [ 📥 下载中文版 PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ Codex 工具频道 ](https://pmer.cn/ai/tools/codex/) | [ 🌐 English Version ](#english-version)
 
-> **v1.3.1 · 资料核对至 2026 年 9 月 24 日。** 本书通过 13 章中英双语实践，介绍如何写清项目规则、验证智能体改动、排查环境问题，以及用配套工程测试支付与移动端流程。示例需按自己的项目和当前官方文档核对。作者：[aipmer](https://pmer.cn)（[X](https://x.com/ai_pmer)）。
+> **v1.4.0 · 资料核对至 2026 年 10 月 21 日。** 本书通过 13 章中英双语实践，介绍如何写清项目规则、验证智能体改动、排查环境问题，以及用配套工程测试支付与移动端流程。示例需按自己的项目和当前官方文档核对。作者：[aipmer](https://pmer.cn)（[X](https://x.com/ai_pmer)）。
 
 ---
 
-### 🌟 v1.3.1 内容校订 (2026年9月24日)
+### 🌟 v1.4.0 内容校订 (2026年10月21日)
 
-*   **核对 GPT-6 三款模型与 Codex CLI**：按 [OpenAI 更新日志](https://learn.chatgpt.com/docs/changelog)记录 CLI 0.156.1（2026 年 9 月 23 日发布），说明 Astra、Sol、Luna 的任务分工、可用范围和模型选择命令。第 13 章区分 API 定价与 Codex 订阅用量，并校对官方退役日期。
+*   **核对 GPT-6 系列与 GPT-6.1 Sol与 Codex CLI**：按 [OpenAI 更新日志](https://learn.chatgpt.com/docs/changelog)记录 CLI 0.163.0（2026 年 10 月 15 日发布），说明 Astra、GPT-6.1 Sol、Luna 的任务分工、可用范围和模型选择命令。第 13 章区分 API 定价与 Codex 订阅用量，并校对官方退役日期。
+*   **近期协作与用量变化**：补充 Ultrafast、输入建议 beta、worktree 和手机审批；区分 GPT-5.5 登录态退役与 API Key 访问。与 [Codex 工具频道](https://pmer.cn/ai/tools/codex/#updates)双向互链。
 *   **保留可检查的 3D 实践示例**：以 Astra 整理资产要求，使用 Tripo3D 生成 GLB，再用 Blender `bpy` 渲染并通过 Three.js 展示；移除缺乏官方一手依据的评测数字和集成声明。
 *   **注明第三方工具边界**：[Codex Switch](https://github.com/aipmer/codex-switch) 是本仓库作者的独立开源项目，切换供应商前应检查其配置与会话兼容性。
 *   **双语内容校订**：13 对章节统一说明问题、动手步骤和验收方式；修正不准确的能力承诺和固定完成时间。
@@ -137,19 +138,20 @@ Codex 自主完成 Ch.07 视觉巡检任务（审查并修复 landing 页可访�
 
 ## 🌐 English Version
 
-[ 🌐 Online Reader (VitePress) ](https://book.pmer.cn) | [ 📥 Download Chinese PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ 🌐 中文版 ](#)
+[ 🌐 Online Reader (VitePress) ](https://book.pmer.cn) | [ 📥 Download Chinese PDF ](./codex_blue_book_zh.pdf) | [ 📥 Download English PDF ](./codex_blue_book_en.pdf) | [ Codex Tool Hub ](https://pmer.cn/en/ai/tools/codex/) | [ 🌐 中文版 ](#)
 
 # Codex Blue Book: From Project Rules to Verified Delivery
 
 ![Codex Practical Blue Book](./images/cover_en.jpg)
 
-> **v1.3.1 · Sources checked through September 24, 2026.** Across 13 bilingual chapters, this book shows how to write project rules, verify agent changes, diagnose environments, and test payment and mobile flows with companion projects. Check examples against your project and current official documentation. Author: [aipmer](https://pmer.cn) ([X](https://x.com/ai_pmer)).
+> **v1.4.0 · Sources checked through October 21, 2026.** Across 13 bilingual chapters, this book shows how to write project rules, verify agent changes, diagnose environments, and test payment and mobile flows with companion projects. Check examples against your project and current official documentation. Author: [aipmer](https://pmer.cn) ([X](https://x.com/ai_pmer)).
 
 ---
 
-### 🌟 v1.3.1 Content Revision (September 24, 2026)
+### 🌟 v1.4.0 Content Revision (October 21, 2026)
 
-*   **Verified GPT-6 Family and Codex CLI**: Records CLI 0.156.1, released September 23, 2026, from the [OpenAI changelog](https://learn.chatgpt.com/docs/changelog). Ch.13 explains the roles, availability, and selection commands for Astra, Sol, and Luna; it separates API prices from Codex subscription usage and checks retirement dates against official sources.
+*   **Verified GPT-6 Family and Codex CLI**: Records CLI 0.163.0, released October 15, 2026, from the [OpenAI changelog](https://learn.chatgpt.com/docs/changelog). Ch.13 explains the roles, availability, and selection commands for Astra, GPT-6.1 Sol, and Luna; it separates API prices from Codex subscription usage and checks retirement dates against official sources.
+*   **Collaboration and usage updates**: Covers Ultrafast, composer predictions beta, worktrees and mobile approvals. Distinguishes GPT-5.5 retirement with ChatGPT sign-in from API-key access; links to the [Codex channel](https://pmer.cn/en/ai/tools/codex/#updates).
 *   **Inspectable 3D Workflow Example**: Use Astra to structure requirements, a service such as Tripo3D to generate a GLB, Blender `bpy` to render it, and Three.js to display it. Unverified benchmark figures and integration claims have been removed.
 *   **Third-party tool boundary**: [Codex Switch](https://github.com/aipmer/codex-switch) is a separate open-source project by this repository's author. Check its configuration and session compatibility before switching providers.
 *   **Bilingual editorial revision**: All 13 chapter pairs now state the problem, practical steps, and verification method; unsupported capability and fixed-time promises were corrected.

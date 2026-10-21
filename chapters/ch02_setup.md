@@ -38,15 +38,15 @@
    ```
    浏览器将自动弹出 ChatGPT 登录窗口，登录你的账号完成快速绑定。
 2. **步骤二：确认版本并选择当前模型**
-   先运行 `codex --version`。截至 2026 年 9 月 24 日，官方更新日志列出的 CLI 版本是 `0.156.1`；本机版本可能不同。[更新日志](https://learn.chatgpt.com/docs/changelog)
-   在账号可用时，用以下命令启动 GPT-6 Sol；现有 `~/.codex/config.toml` 不会被覆盖：
+   先运行 `codex --version`。截至 2026 年 10 月 21 日，官方更新日志列出的 CLI 版本是 `0.163.0`；本机版本可能不同。[更新日志](https://learn.chatgpt.com/docs/changelog)
+   在账号可用时，用以下命令启动 GPT-6.1 Sol；现有 `~/.codex/config.toml` 不会被覆盖：
    ```bash
    codex --version
-   codex --model gpt-6-sol
+   codex --model gpt-6.1-sol
    ```
    若希望设为本地默认模型，在现有 `~/.codex/config.toml` 中设置：
    ```toml
-   model = "gpt-6-sol"
+   model = "gpt-6.1-sol"
    ```
 3. **步骤三：用安全沙盒模式跑通第一个任务**  
    进入你的项目根目录，运行：
@@ -102,7 +102,7 @@ Codex CLI 提供两种认证方式，**官方默认推荐 ChatGPT 账号登录**
 很多新手最担心的就是 AI 暴走刷爆信用卡。Codex 提供多道用量与权限控制：
 
 1. **OpenAI 后台硬上限（最关键）**：在 OpenAI 开发者后台为该 API Key 设置月度 Usage Limit 硬限制（新手建议设为 $50）。即使 AI 陷入异常死循环，也能确保你的资金万无一失。
-2. **模型与任务匹配**：在 Codex 中选择实际可用的模型，日常复杂编码可从 `gpt-6-sol` 开始；API 账单与 Codex 订阅用量分别核对。
+2. **模型与任务匹配**：在 Codex 中选择实际可用的模型，日常复杂编码可从 `gpt-6.1-sol` 开始；API 账单与 Codex 订阅用量分别核对。
 3. **沙盒与自动审批**：新的非交互调用使用 `--sandbox workspace-write`；`--approve-for-me` 是独立的自动审批模式，不能保证所有请求获准，也没有官方固定的 Luna 后台模型。[权限说明](https://learn.chatgpt.com/docs/permission-modes)
 
 ### 4. 可选：评估第三方供应商切换工具
@@ -170,8 +170,10 @@ winget install OpenAI.ChatGPT
 | `--full-auto` 显示弃用警告 | 旧调用仍走兼容入口 | 新的非交互调用使用 `--sandbox workspace-write` |
 | `SyntaxError: Unexpected token ...` (Node 报错) | 本地 Node.js 版本低于 20 | 运行 `node -v` 检查，使用 `nvm use 20` 或 `nvm install 20` 升级 Node |
 | `Permission denied: Screen Recording` | macOS 未开启屏幕录制权限 | 打开「系统设置 → 隐私与安全性 → 屏幕录制」，将 ChatGPT / Terminal 勾选开启并重启客户端 |
-| `gpt-5.4` 在 Codex 登录态不可用 | 该模型于 2026-08-31 从 Codex 的 ChatGPT 登录态退役 | 检查 `~/.codex/config.toml`，在账号可用时选择 `gpt-6-sol` |
+| `gpt-5.4` 在 Codex 登录态不可用 | 该模型于 2026-08-31 从 Codex 的 ChatGPT 登录态退役 | 检查 `~/.codex/config.toml`，在账号可用时选择 `gpt-6.1-sol` |
 
 ---
 
 [ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.01) ](./ch01_mindset.md) | [ ➡️ 下一章 (Ch.03) ](./ch03_sandbox.md) | [ 🌐 English ](../en/ch02_setup.md)
+
+[当前模型与迁移详解](./ch13_2026_frontier.md) · [Codex 工具频道上手指南](https://pmer.cn/ai/tools/codex/#guide)

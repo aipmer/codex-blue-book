@@ -38,15 +38,15 @@ You do not need complex network tunneling on day one. Follow these 3 steps to ru
    ```
    A browser window will open automatically. Sign in with your ChatGPT account to bind.
 2. **Step 2: Check the Version and Choose a Current Model**
-   Run `codex --version` first. At this edition's September 24, 2026 cutoff, the official changelog lists CLI `0.156.1`; your local version may differ. [Changelog](https://learn.chatgpt.com/docs/changelog)
-   If your account has access, start with GPT-6 Sol without overwriting an existing `~/.codex/config.toml`:
+   Run `codex --version` first. At this edition's October 21, 2026 cutoff, the official changelog lists CLI `0.163.0`; your local version may differ. [Changelog](https://learn.chatgpt.com/docs/changelog)
+   If your account has access, start with GPT-6.1 Sol without overwriting an existing `~/.codex/config.toml`:
    ```bash
    codex --version
-   codex --model gpt-6-sol
+   codex --model gpt-6.1-sol
    ```
    To make it the local default, set this key in your existing `~/.codex/config.toml`:
    ```toml
-   model = "gpt-6-sol"
+   model = "gpt-6.1-sol"
    ```
 3. **Step 3: Run Your First Safe Sandbox Task**  
    Navigate to your project directory and execute:
@@ -100,7 +100,7 @@ For API-key login, follow the [Codex CLI documentation](https://learn.chatgpt.co
 ### 3. Billing Guardrails & Overrun Protection
 
 1. **OpenAI Platform Hard Limit (Crucial)**: Set a monthly Usage Limit (e.g., $50 for beginners) in your OpenAI dashboard. Even in an infinite loop, your budget is safeguarded.
-2. **Match model to task**: Select a model available in Codex; start complex daily coding with `gpt-6-sol` when available. Check API bills separately from Codex subscription usage.
+2. **Match model to task**: Select a model available in Codex; start complex daily coding with `gpt-6.1-sol` when available. Check API bills separately from Codex subscription usage.
 3. **Sandbox and automatic review**: Use `--sandbox workspace-write` for new non-interactive calls. `--approve-for-me` is a separate review mode; it does not guarantee approval or have a documented fixed Luna reviewer. [Permissions](https://learn.chatgpt.com/docs/permission-modes)
 
 ### 4. Optional: Evaluate a Third-Party Provider Switcher
@@ -166,8 +166,10 @@ To allow the agent to visually inspect your screen, grant two permissions under 
 | `--full-auto` prints a deprecation warning | The old call remains a compatibility path | Use `--sandbox workspace-write` for new non-interactive runs |
 | `SyntaxError: Unexpected token ...` (Node error) | Node.js version is older than 20 | Run `node -v`; upgrade using `nvm use 20` or `nvm install 20` |
 | `Permission denied: Screen Recording` | Missing macOS screen permissions | Toggle ChatGPT under "System Settings -> Privacy & Security -> Screen Recording" and restart |
-| `gpt-5.4` is unavailable with Codex sign-in | It retired from Codex with ChatGPT sign-in on August 31, 2026 | Select `gpt-6-sol` when your account has access |
+| `gpt-5.4` is unavailable with Codex sign-in | It retired from Codex with ChatGPT sign-in on August 31, 2026 | Select `gpt-6.1-sol` when your account has access |
 
 ---
 
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_mindset.md) | [ ➡️ Next (Ch.03) ](./ch03_sandbox.md) | [ 🌐 中文版 ](../chapters/ch02_setup.md)
+
+[Current model and migration details](./ch13_2026_frontier.md) · [Codex tool guide](https://pmer.cn/en/ai/tools/codex/#guide)

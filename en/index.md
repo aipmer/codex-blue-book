@@ -36,3 +36,7 @@ features:
     link: /en/ch10_saas_mvp
     linkText: Explore SaaS MVP
 ---
+
+## October 2026 update
+
+v1.4.0 · Sources checked October 21, 2026. [Ch.13](/en/ch13_2026_frontier) covers CLI 0.163.0, GPT-6.1 Sol, Ultrafast and retirement scope. See the [Codex tool channel](https://pmer.cn/en/ai/tools/codex/#updates) for concise updates.
