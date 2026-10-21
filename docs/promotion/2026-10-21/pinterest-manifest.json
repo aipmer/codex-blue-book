@@ -1,0 +1,52 @@
+[
+  {
+    "site": "book",
+    "locale": "en",
+    "original": "docs/promotion/2026-10-21/originals/pinterest-en.png",
+    "title": "Put Codex to work: practical workflows and example projects",
+    "description": "Learn project rules, engineering workflows and product delivery with Codex Blue Book. Read 13 chapters in English or Chinese, explore example projects and download both PDF editions. An independent guide, not an official OpenAI publication.",
+    "alt": "Codex Blue Book: Put Codex to work. A blue book, open notebook and connected glass coding workflow cards.",
+    "destination": "https://book.pmer.cn/en/?utm_source=pinterest&utm_medium=organic_social&utm_campaign=book_brand_20261021&utm_content=book_en",
+    "width": 1000,
+    "height": 1500,
+    "profile": "sRGB IEC61966-2.1",
+    "bytes": 319456,
+    "sha256": "a8010bdea46fe60d391cb5b6904e6612b2f6b7a51ed9f1d81ea98b825bac2c17",
+    "originalMetadata": {
+      "width": 1024,
+      "height": 1536,
+      "profile": "<nil>",
+      "bytes": 1765649,
+      "sha256": "56b1012b71cb64ace7e33a1cdf2d51b7eca54af697d60d32fd79c1129bac1574"
+    },
+    "publicationStatus": "prepared_not_published",
+    "checked_at": "2026-10-21",
+    "image": "docs/promotion/2026-10-21/pinterest/book-en-1000x1500.jpg",
+    "board": ""
+  },
+  {
+    "site": "book",
+    "locale": "zh",
+    "original": "docs/promotion/2026-10-21/originals/pinterest-zh.png",
+    "title": "让 Codex 真正干活：项目规约、工作流与工程示例",
+    "description": "用 Codex 蓝皮书学习项目规约、工程工作流与产品交付。阅读 13 章中英文指南，使用规约生成器、查看工程示例，并下载双语 PDF。独立维护，并非 OpenAI 官方出版物。",
+    "alt": "Codex 蓝皮书：让 Codex 真正干活。蓝色书籍、笔记本与相连的编程工作流卡片。",
+    "destination": "https://book.pmer.cn/?utm_source=pinterest&utm_medium=organic_social&utm_campaign=book_brand_20261021&utm_content=book_zh",
+    "width": 1000,
+    "height": 1500,
+    "profile": "sRGB IEC61966-2.1",
+    "bytes": 319678,
+    "sha256": "b0ef3842c1e5c525570a57edc0ca71748a216f0866b9139f51b7c3b5f9087abd",
+    "originalMetadata": {
+      "width": 1024,
+      "height": 1536,
+      "profile": "<nil>",
+      "bytes": 1731040,
+      "sha256": "ca9b30e34c1d393f35b23aeafc1b860904fde3722c501013ed56a270684fc0ff"
+    },
+    "publicationStatus": "prepared_not_published",
+    "checked_at": "2026-10-21",
+    "image": "docs/promotion/2026-10-21/pinterest/book-zh-1000x1500.jpg",
+    "board": ""
+  }
+]

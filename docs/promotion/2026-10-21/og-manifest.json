@@ -1,0 +1,54 @@
+[
+  {
+    "site": "book",
+    "locale": "en",
+    "original": "docs/promotion/2026-10-21/originals/og-en.png",
+    "title": "Put Codex to work: practical workflows and example projects",
+    "description": "Learn project rules, engineering workflows and product delivery with Codex Blue Book. Read 13 chapters in English or Chinese, explore example projects and download both PDF editions. An independent guide, not an official OpenAI publication.",
+    "alt": "Codex Blue Book: Put Codex to work. A blue book, open notebook and connected glass coding workflow cards.",
+    "destination": "https://book.pmer.cn/en/",
+    "width": 1200,
+    "height": 630,
+    "profile": "sRGB IEC61966-2.1",
+    "bytes": 180243,
+    "sha256": "7947be5ff1a6fbf529931e00fe0822eb987dda97bff237365fd7d11a45de5b11",
+    "originalMetadata": {
+      "width": 1730,
+      "height": 909,
+      "profile": "<nil>",
+      "bytes": 1758598,
+      "sha256": "d8514f4e78122dae7032591b172971b2988949f5ea6339d894842c57db74ff1b"
+    },
+    "publicationStatus": "prepared_not_published",
+    "checked_at": "2026-10-21",
+    "runtime": "public/social/brand-en-20261021.jpg",
+    "public_url": "https://book.pmer.cn/social/brand-en-20261021.jpg",
+    "deployment_status": "production_release_candidate"
+  },
+  {
+    "site": "book",
+    "locale": "zh",
+    "original": "docs/promotion/2026-10-21/originals/og-zh.png",
+    "title": "让 Codex 真正干活：项目规约、工作流与工程示例",
+    "description": "用 Codex 蓝皮书学习项目规约、工程工作流与产品交付。阅读 13 章中英文指南，使用规约生成器、查看工程示例，并下载双语 PDF。独立维护，并非 OpenAI 官方出版物。",
+    "alt": "Codex 蓝皮书：让 Codex 真正干活。蓝色书籍、笔记本与相连的编程工作流卡片。",
+    "destination": "https://book.pmer.cn/",
+    "width": 1200,
+    "height": 630,
+    "profile": "sRGB IEC61966-2.1",
+    "bytes": 183826,
+    "sha256": "ae6fa4f47f9f4fa50cceb0bf417606f033d7eed1e2e2f54503a565e71f9b2506",
+    "originalMetadata": {
+      "width": 1730,
+      "height": 909,
+      "profile": "<nil>",
+      "bytes": 1731780,
+      "sha256": "e4a834c16935e6246eced02aa2eff575d609780dc8bdb7544b50282e71a492dd"
+    },
+    "publicationStatus": "prepared_not_published",
+    "checked_at": "2026-10-21",
+    "runtime": "public/social/brand-zh-20261021.jpg",
+    "public_url": "https://book.pmer.cn/social/brand-zh-20261021.jpg",
+    "deployment_status": "production_release_candidate"
+  }
+]

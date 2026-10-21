@@ -1,0 +1,29 @@
+{
+  "tool": "Codex native imagegen",
+  "date": "2026-10-21",
+  "prompts": [
+    {
+      "kind": "bookOgPrompt",
+      "prompt": "Use case: ads-marketing. Create one finished premium landscape social sharing cover, 1200:630 composition, full bleed. Product Codex Blue Book, an independent bilingual practical guide to working with the OpenAI Codex coding agent, with project rules, engineering workflows and runnable examples. Visual family must match the approved Hands-On reference: pale icy-blue and ivory background, tactile soft 3D illustration, translucent glass mixed with matte paper, soft daylight shadows, dark navy editorial typography, generous whitespace. Composition left 47% type, right 53% illustration. Illustrate a beautiful cobalt-blue book with a minimal blank cover and a small code-bracket symbol, a cream open notebook, and three connected frosted glass cards with code-bracket, checkmark and modular cube symbols, suggesting read, build, verify. Small warm amber accent. Keep book/product distinct from Hands-On; do not copy its brand. NO neon dark scenes, robot, fake code, interface words, statistics, OpenAI logo or official endorsement. Readable text only and exactly: brand 'Codex Blue Book'; large headline 'Put Codex to work.'; smaller subline 'Practical workflows. Real code. Better results.'; footer 'book.pmer.cn'. Keep all text at least 72px from edges on target canvas. Crisp flat type, natural line breaks, high contrast and legible thumbnail. Reference image is style reference only."
+    },
+    {
+      "kind": "bookZhPrompt",
+      "prompt": "Use case: text-localization. Edit this approved English Codex Blue Book social cover into its Simplified Chinese counterpart. Preserve every illustration object, blue books, notebook, glass workflow cards, colors, lighting, materials, composition and layout. Replace ONLY the visible text: brand 'Codex 蓝皮书'; headline '让 Codex 真正干活'; subline '实用工作流 · 可运行示例 · 工程交付'; retain footer 'book.pmer.cn'. Exact Chinese characters, crisp large navy type, natural professional typesetting with headline across two lines if needed, safe margins 72px relative to 1200x630 canvas, landscape 1200:630. No additional slogans, no leftover English headline/subline, no new objects. Do not alter existing book symbol or small brand mark."
+    },
+    {
+      "kind": "bookPinPrompt",
+      "prompt": "Use case: ads-marketing. Create ONE finished Pinterest portrait Pin in 2:3 aspect (1000x1500 composition). Attached image is the approved Codex Blue Book style and brand reference. Recompose the blue book, open ivory notebook and three connected frosted glass cards with code-bracket, cube and checkmark symbols into an elegant vertical scene, not a crop or stretched landscape. Same pale blue/ivory, soft daylight 3D materials, restrained amber accent, crisp flat navy typography. Top 38% readable type, lower 50% beautiful product illustration, quiet domain footer. At least 70px safe margin. Exact only text: brand 'Codex Blue Book'; headline 'Put Codex to work.'; subline 'Practical workflows. Real code. Better results.'; footer 'book.pmer.cn'. English only. Keep title legible in mobile feed, natural line breaks. No extra slogans, false promises, fake UI code, OpenAI logo or official endorsement, platform logos, watermark, outer mockup frame. Independent educational guide, not the OpenAI product itself. Preserve reference brand mark and illustration motifs."
+    },
+    {
+      "kind": "bookPinZhPrompt",
+      "prompt": "Use case: text-localization. Edit this finished English Pinterest Pin into the matching Simplified Chinese edition. Preserve ALL blue book and notebook illustration, three glass workflow cards, plants, objects, palette, lighting, framing, composition, blue book mark and quality. Change ONLY text: brand 'Codex 蓝皮书'; large headline '让 Codex 真正干活'; subline '实用工作流 · 可运行示例 · 工程交付'; retain footer 'book.pmer.cn'. Exact simplified Chinese text, crisp navy lettering, large natural line breaks in top area, same safe margins and portrait 2:3 1000x1500 composition. Remove superseded English words. No other words, badges, official logos or additions."
+    }
+  ],
+  "style_reference": "/Users/hunkwu/Desktop/ai/reports/social-covers-2026-10-20/runtime/pmer-en.jpg",
+  "native_sources": {
+    "og-en": "/Users/hunkwu/.codex/generated_images/01a15c10-18ae-7a23-8766-f257d2fce7d4/exec-a8a1e6c1-13f1-4d29-b974-3ed2e4b911cd.png",
+    "og-zh": "/Users/hunkwu/.codex/generated_images/01a15c10-18ae-7a23-8766-f257d2fce7d4/exec-2e1911bb-9aa2-4c2a-80b9-b86378ab5e69.png",
+    "pinterest-en": "/Users/hunkwu/.codex/generated_images/01a15c10-18ae-7a23-8766-f257d2fce7d4/exec-82f7e256-7d7b-49c4-aaa7-4574925a7adb.png",
+    "pinterest-zh": "/Users/hunkwu/.codex/generated_images/01a15c10-18ae-7a23-8766-f257d2fce7d4/exec-c5b35a69-346b-4184-a681-1bb8c731d5e5.png"
+  }
+}
