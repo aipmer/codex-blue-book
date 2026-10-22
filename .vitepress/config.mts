@@ -57,6 +57,7 @@ export default defineConfig({
     '**/templates/**',
     '**/docs/**',
     'AGENTS.md',
+    'CLAUDE.md',
     'README.md',
     'CONTRIBUTING.md',
     'dev_task.md',
@@ -78,6 +79,7 @@ export default defineConfig({
           { text: '首页', link: '/' },
           { text: '章节阅读', link: '/chapters/ch01_mindset' },
           { text: '规则生成器', link: '/generator' },
+          { text: 'Codex 频道', link: 'https://pmer.cn/ai/tools/codex/' },
           {
             text: '资源',
             items: [
@@ -170,6 +172,7 @@ export default defineConfig({
           { text: 'Home', link: '/en/' },
           { text: 'Chapters', link: '/en/ch01_mindset' },
           { text: 'Rules Generator', link: '/en/generator' },
+          { text: 'Codex Hub', link: 'https://pmer.cn/en/ai/tools/codex/' },
           {
             text: 'Tools',
             items: [

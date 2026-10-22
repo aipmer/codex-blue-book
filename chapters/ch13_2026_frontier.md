@@ -6,7 +6,7 @@
 >
 > **本章实践**：按本书资料截止日核对官方变更，运行兼容性检查后再迁移。
 
-前面十二章建立的，是一套不依赖具体版本的编排方法论。但方法论要落地，就必须踩在真实的工具地面上。2026 年的 Codex 生态发生了四次结构性地震：**桌面端大合并、模型大换代、插件生态成型、安全能力独立成军**。本章逐条拆解这些变化，并给出具体的迁移命令与配置。
+前面十二章建立的，是一套不依赖具体版本的编排方法论。但方法论要落地，就必须踩在真实的工具地面上。本次核对覆盖 9 月 24 日之后的模型选型、CLI 设置、桌面协作与用量控制变化，并给出具体迁移命令及适用范围。
 
 ---
 
@@ -17,9 +17,9 @@
 ```text
 【驾驶心智】 ──> 你的飞行手册没有变：依然是目标驱动（起飞与降落目标）、边界约束（航线与安全高度）。
 【动力引擎】 ──> 动力系统换装为前沿旗舰「GPT-6 Astra」（具备超视距雷达与全自主航电控制的顶级核心）、
-                 日常复杂编码发动机「GPT-6 Sol」以及明确小任务的巡航发动机「GPT-6 Luna」。
-【驾驶舱屏】 ──> 原先外挂的副屏（独立 Codex App）正式集成到主驾驶台（ChatGPT 桌面端代码模式），
-                 并新增 Sites 原位实景雷达与 Annotations 触控批注。
+                 日常复杂编码发动机「GPT-6.1 Sol」以及明确小任务的巡航发动机「GPT-6 Luna」。
+【驾驶舱屏】 ──> Worktree 终端、审查导航与手机审批继续改善协作体验；
+                 能力是否开放，仍需核对已安装客户端与工作区设置。
 【自动副驾】 ──> 旧的 --full-auto 兼容入口已弃用；新调用显式设置沙盒与审批模式。
 ```
 
@@ -51,55 +51,58 @@
 
 ---
 
-## 13.1 桌面端大合并：Codex App 并入 ChatGPT 客户端
+## 13.1 桌面端与移动端：影响日常协作的变化
 
-2026 年 7 月，独立的 Codex 桌面应用正式退役，全部能力并入 **ChatGPT 桌面客户端**，以「Codex 代码模式（Code Mode）」的形态存在。免费、Plus 与企业版用户均可使用。
+在当前桌面客户端进入 Codex，并分别核对账号与工作区权限。旧版把“7 月合并”推导成所有账号都能获得全部能力，依据不足，已改为按实际入口与权限核对。
 
-**迁移动作：**
+- **Worktree 与任务引导**：9 月 29 日的 App 26.928 改善已挂载 worktree 的终端启动，并在追加指令时保留此前回答。后续版本改进批量移动聊天、审查导航和 Windows／WSL 恢复。[官方更新日志](https://learn.chatgpt.com/docs/changelog)
+- **输入建议（Composer predictions）**：10 月 9 日起提供 beta。Tab 接受的是可编辑草稿，发送仍是另一个动作；适用于受支持地区、18 岁以上的个人 Pro 用户，在 Astra 或 GPT‑6.1 Sol 的本地与 SSH 聊天中使用。开关位于 Settings → General → Composer。[输入建议说明](https://learn.chatgpt.com/docs/features/composer-predictions)
+- **手机接续**：近期 iOS 更新改进审批展示、加号菜单中的插件入口与排队任务恢复。手机审批前仍需确认目标电脑、任务及操作内容。[移动端更新日志](https://learn.chatgpt.com/docs/changelog)
 
 ```bash
-# macOS：直接下载 ChatGPT.dmg，拖入 Applications
-# Windows：使用 winget 安装
-winget install OpenAI.ChatGPT
+# 挂载或交接聊天前，检查实际仓库与 worktree。
+git status --short
+git worktree list
+codex --version
 ```
 
-登录后点击左侧边栏的 **Codex** 标签页即可进入代码模式。需要特别注意的两点：
-
-1. **账号 vs API Key**：使用 ChatGPT 账号登录可获得完整能力（云端任务、跨端同步、Sites 托管、Computer Use）；使用 API Key 登录仅有本地基础编码能力。
-2. **独立组件不受影响**：Codex CLI、VS Code 插件、Codex Cloud 均为独立产品，继续正常演进。本书 Ch.02 的多端矩阵依然成立，只是「桌面 App」这一格换成了 ChatGPT 客户端。
-
-**新增能力速览：**
-- 内置浏览器升级：地址栏直接搜索浏览历史，Chrome 扩展可引用当前打开的标签页。
-- **多仓库审查（Multi-repo Review）**：多文件夹项目可在一个视图中查看所有仓库的变更行数并逐一审查 Diff，不再需要来回切换。
-- **Sites**：在客户端内直接创建、部署、管理托管 Web 项目，配合 Annotations 实现「指哪改哪」的原位编辑。
+各客户端支持的登录方式与功能范围分别核对；API Key 与 ChatGPT 订阅的访问、计费规则不同。[Codex 模型说明](https://learn.chatgpt.com/docs/models)
 
 ---
 
-## 13.2 GPT-6 三款模型：按任务选型
+## 13.2 GPT-6 系列：加入 GPT‑6.1 Sol 后如何选型
 
-截至 **2026 年 9 月 24 日**，GPT-6 家族包括 9 月 3 日发布的 Astra，以及 9 月 22 日发布的 Sol 和 Luna。Codex 中 Sol、Luna 正在分批开放；能否选择取决于账号套餐、客户端和工作区设置。GPT-5.6 Sol、Terra、Luna 在推出期间仍可用，不能把“推出新模型”写成“旧模型已退役”。[GPT-6 官方指南](https://developers.openai.com/api/docs/guides/latest-model) · [Codex 模型说明](https://learn.chatgpt.com/docs/models)
+截至 **2026 年 10 月 21 日**，9 月 29 日推出的 **GPT‑6.1 Sol** 是复杂 Codex 工作的当前起点；最难的任务继续评估 Astra，明确小任务使用 Luna。GPT‑6 Sol 和 GPT‑5.6 Sol／Terra／Luna 在推出期间仍可用。GPT‑6.1 Sol 首发覆盖 Plus、Pro、Business、Enterprise、Edu，后两者需管理员启用；Free、Go 不在首发范围。[Codex 模型说明](https://learn.chatgpt.com/docs/models)
 
 | 模型 ID | 适合的工作 | `reasoning.effort` | 边界 |
 | :--- | :--- | :--- | :--- |
 | `gpt-6-astra` | 最复杂的跨代码、浏览器和桌面工具任务 | `low`、`medium`、`high`、`xhigh`、`max` | 不支持 `none`；Computer Use 仍由客户端和工具执行操作 |
-| `gpt-6-sol` | 日常复杂编码、代码审查和多步智能体工作 | `none`、`low`、`medium`、`high`、`xhigh`、`max` | 作为本书当前的默认选型，先确认账号可用 |
+| `gpt-6.1-sol` | 日常复杂编码、跨应用和文档的持续任务 | `low`、`medium`、`high`、`xhigh`、`max` | 当前示例默认值；不支持 `none`、`minimal` |
+| `gpt-6-sol` | 日常复杂编码、代码审查和多步智能体工作 | `none`、`low`、`medium`、`high`、`xhigh`、`max` | 上一代 Sol；保留用于配置迁移对照 |
 | `gpt-6-luna` | 范围明确的修订、提取、摘要和高频任务 | `none`、`low`、`medium`、`high`、`xhigh`、`max` | 任务复杂度超出能力时改用 Sol 或 Astra |
 
-三款模型均支持文本和图片输入、文本输出；API 模型目录列出 **1,050,000 token 上下文窗口**和 **128,000 token 最大输出**。工具调用优先使用 Responses API，尤其 Astra 带工具调用时必须使用 Responses。[API 模型目录](https://developers.openai.com/api/docs/models) · [GPT-6 迁移指南](https://developers.openai.com/api/docs/guides/latest-model)
+这些模型支持文本和图片输入、文本输出；API 模型目录列出 **1,050,000 token 上下文窗口**和 **128,000 token 最大输出**。工具调用优先使用 Responses API，尤其 Astra 带工具调用时必须使用 Responses。[API 模型目录](https://developers.openai.com/api/docs/models) · [GPT-6 迁移指南](https://developers.openai.com/api/docs/guides/latest-model)
+
+**GPT‑6.1 Sol 迁移重点**：API 默认推理档位为 `medium`；工具调用使用 Responses，Chat Completions 支持该模型但不支持其工具调用。Codex 界面中的 Max／Ultra 依设置开放；Ultra 通过子智能体并行工作，不是 API 的 `reasoning.effort` 值。[API 模型说明](https://developers.openai.com/api/docs/models/gpt-6.1-sol) · [Codex 推理设置](https://learn.chatgpt.com/docs/models)
 
 **API 计费与 Codex 用量分开看。** 下表是截至本次核对时，标准处理、输入不超过 272K token 时每百万文本 token 的 API 标价；它不是 ChatGPT 订阅价，也不是 Codex 额度换算。长上下文、缓存及其他处理档位另按[官方定价页](https://developers.openai.com/api/docs/pricing)核算。
 
 | API 模型 | 输入 | 缓存输入 | 输出 |
 | :--- | ---: | ---: | ---: |
 | `gpt-6-astra` | $10 | $1 | $50 |
+| `gpt-6.1-sol` | $2 | $0.10 | $10 |
 | `gpt-6-sol` | $2 | $0.20 | $10 |
 | `gpt-6-luna` | $0.10 | $0.01 | $0.50 |
+
+GPT‑6.1 Sol 在标准处理、输入不超过 272K 时，缓存写入另计 $2.50／百万 token；长输入与速度档位会改变价格。[模型价格](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
+
+**速度单独设置。** 10 月 8 日起，GPT‑6.1 Sol Ultrafast 向 Pro $500 与符合条件的 Enterprise／Edu 开放，Enterprise 默认关闭，需管理员启用。订阅内用量按 Standard 的 8 倍消耗，购买的积分及企业按量用量按 6 倍计；API Key 使用 API 价格。Sol Ultrafast 支持美国及 EEA＋瑞士的推理数据驻留。先用 Standard，在熟悉任务上比较时延、质量与用量，再决定是否开启。[速度与计费说明](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 **选择模型：**
 
 ```bash
 codex --version
-codex --model gpt-6-sol
+codex --model gpt-6.1-sol
 codex exec -m gpt-6-luna "Review the current changes"
 ```
 
@@ -109,7 +112,7 @@ codex exec -m gpt-6-luna "Review the current changes"
 
 ```toml
 # ~/.codex/config.toml
-model = "gpt-6-sol"
+model = "gpt-6.1-sol"
 ```
 
 此示例只设置本地默认模型。自动审批 `--approve-for-me` 是权限模式，不应声称固定由 Luna 执行。
@@ -124,15 +127,18 @@ model = "gpt-6-sol"
 | 2026-08-31 | Codex 的 ChatGPT 登录态 | `gpt-5.4`、`gpt-5.4-mini` 退役 |
 | 2026-09-03 | API | GPT-6 Astra 发布 |
 | 2026-09-22 | API / Codex | GPT-6 Sol、Luna 发布并开始向 Codex 用户推出 |
-| 2026-10-14（计划） | ChatGPT / Work / Codex | GPT-5.5 计划退役；不适用于 API |
+| 2026-09-29 | API / Codex / Work | GPT‑6.1 Sol 推出 |
+| 2026-10-14 | Codex 的 ChatGPT 登录态 | GPT‑5.5 已退役；API 与 API Key 会话不受影响 |
 
 API 退役日期与官方建议替代模型见 [API 退役公告](https://developers.openai.com/api/docs/deprecations)；Codex 登录态的日期与适用范围见 [Codex 模型说明](https://learn.chatgpt.com/docs/models)和[更新日志](https://learn.chatgpt.com/docs/changelog)。不要把某个界面的退役扩大描述成 API 全面下线。
 
 ---
 
-## 13.3 Codex CLI：以 0.156.1 为本次核对点
+## 13.3 Codex CLI：以 0.163.0 为本次核对点
 
-OpenAI 于 **2026 年 9 月 23 日**发布 Codex CLI `0.156.1`，加入 GPT-6 Sol、Luna 的模型选择器条目。本书以 2026 年 9 月 24 日为资料截止日；安装前仍应查看[最新更新日志](https://learn.chatgpt.com/docs/changelog)。
+截至本书 **2026 年 10 月 21 日**核对时，官方更新日志列出的 CLI 为 10 月 15 日发布的 `0.163.0`。这是有日期的核对结果，本机安装版本可能不同。[更新日志](https://learn.chatgpt.com/docs/changelog)
+
+`0.159.1` 已将 GPT‑6.1 Sol 加入内置目录。`0.163.0` 提供 `/config` 设置搜索与重启提示、`/keymap` 前缀快捷键配置、`/daemon` 后台服务器管理；追加消息可即时引导任务，恢复聊天时按当前策略恢复已保存权限。重启服务器前看清可能中断的工作。
 
 ```bash
 codex --version
@@ -356,7 +362,7 @@ export function VendingMachineViewer() {
 
 ## 13.7 成本优化与弹性分流
 
-日常复杂编码从 `gpt-6-sol` 开始；范围明确的提取或小改动选 `gpt-6-luna`；跨应用、需要更高判断能力的任务评估 `gpt-6-astra`。先在自己的账号和客户端核对可用模型，再根据实际质量、时延和成本调整。[Codex 模型说明](https://learn.chatgpt.com/docs/models)
+日常复杂编码从 `gpt-6.1-sol` 开始；范围明确的提取或小改动选 `gpt-6-luna`；跨应用、需要更高判断能力的任务评估 `gpt-6-astra`。先在自己的账号和客户端核对可用模型，再根据实际质量、时延和成本调整。[Codex 模型说明](https://learn.chatgpt.com/docs/models)
 
 若项目使用不同供应商，先独立验证其会话格式与工具能力。配套的 [Codex Switch](https://github.com/aipmer/codex-switch) 属于第三方工具，其兼容性以该项目当前文档和实测为准。
 
@@ -368,7 +374,7 @@ export function VendingMachineViewer() {
 codex --version
 npm install -g @openai/codex@latest
 codex --version
-codex --model gpt-6-sol
+codex --model gpt-6.1-sol
 codex exec --sandbox workspace-write "Review the current changes and report issues"
 codex plugin list
 ```
@@ -383,7 +389,7 @@ codex plugin list
 
 | 现象 | 检查动作 |
 | :--- | :--- |
-| 模型选择器没有 GPT-6 Sol 或 Luna | 核对 CLI 版本、账号套餐、推出进度和工作区管理员设置 |
+| 模型选择器没有 GPT-6.1 Sol 或 Luna | 核对 CLI 版本、账号套餐、推出进度和工作区管理员设置 |
 | `--full-auto` 显示弃用警告 | 新的非交互调用改用 `--sandbox workspace-write`；旧入口仍保留兼容 |
 | 配置的模型无法使用 | 区分 Codex 登录态与 API 权限，在 `/model` 选择当前可用模型 |
 | Hooks 未执行 | 检查事件数组结构，并在 `/hooks` 查看是否需要信任 |
@@ -397,3 +403,7 @@ codex plugin list
 ---
 
 [ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch13_2026_frontier.md)
+
+## 关联工具频道
+
+查看 [PMER Codex 工具频道的版本演进](https://pmer.cn/ai/tools/codex/#updates)，快速了解近期变化与上手提醒；本章提供详细配置。两边资料均核对至 2026 年 10 月 21 日。

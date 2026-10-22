@@ -36,3 +36,7 @@ features:
     link: /chapters/ch10_saas_mvp
     linkText: 阅读商业实战
 ---
+
+## 2026 年 10 月内容更新
+
+v1.4.0 · 资料核对至 2026 年 10 月 21 日。[第 13 章](/chapters/ch13_2026_frontier)更新 CLI 0.163.0、GPT‑6.1 Sol、Ultrafast 与退役范围；[Codex 工具频道](https://pmer.cn/ai/tools/codex/#updates)提供简明动态与上手提醒。

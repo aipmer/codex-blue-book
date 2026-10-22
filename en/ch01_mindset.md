@@ -56,7 +56,7 @@ When your focus changes from "how do I type this loop" to "how do I dispatch a f
 
 Codex has pushed us into Stage 3:
 *   **Multi-Surface Productivity Matrix**: Automated execution via CLI, complex reviews and Sites in-place preview on ChatGPT Desktop (Code Mode), 24/7 mobile monitoring with Guardian approvals, and visual browser audits via Desktop Computer Use.
-*   **Frontier Reasoning & Agentic Core**: From **GPT-6 Astra** for the hardest cross-tool work to **GPT-6 Sol** for everyday complex coding and **GPT-6 Luna** for focused tasks, agents now possess long-horizon reasoning, cross-application autonomy, and visual self-healing, moving far beyond mere boilerplate generation.
+*   **Frontier Reasoning & Agentic Core**: From **GPT-6 Astra** for the hardest cross-tool work to **GPT-6.1 Sol** for everyday complex coding and **GPT-6 Luna** for focused tasks, choose a model by task and verify tools, permissions, and results in your own environment. [Current model guidance](https://learn.chatgpt.com/docs/models)
 
 ---
 

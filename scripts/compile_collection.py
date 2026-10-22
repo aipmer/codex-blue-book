@@ -94,7 +94,7 @@ def clean_and_process_file(filepath, is_en=False):
 def build_zh():
     combined = []
     combined.append("# Codex 蓝皮书：从项目规则到交付验证\n")
-    combined.append("**v1.3.1 · 资料核对至 2026 年 9 月 24 日**\n")
+    combined.append("**v1.4.0 · 资料核对至 2026 年 10 月 21 日**\n")
     combined.append("![Codex 实战蓝皮书](./images/cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
     combined.append("[English PDF](https://book.pmer.cn/downloads/codex_blue_book_en.pdf) | [English online](https://book.pmer.cn/en/ch01_mindset)\n")
@@ -114,7 +114,7 @@ def build_zh():
 def build_en():
     combined = []
     combined.append("# Codex Blue Book: From Project Rules to Verified Delivery\n")
-    combined.append("**v1.3.1 · Sources checked September 24, 2026**\n")
+    combined.append("**v1.4.0 · Sources checked October 21, 2026**\n")
     combined.append("![Codex Practical Blue Book](./images/cover_en.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
     combined.append("[中文 PDF](https://book.pmer.cn/downloads/codex_blue_book_zh.pdf) | [中文在线阅读](https://book.pmer.cn/chapters/ch01_mindset)\n")

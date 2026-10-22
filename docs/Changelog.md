@@ -6,6 +6,27 @@
 
 ---
 
+## 2026年10月22日（内容同步 PR 收尾）
+
+- 合入主线已有双语分享封面与产品资料，保留 v1.4.0 内容更新；更新日志冲突保留双方记录。
+- 将新增的 CLAUDE.md 协作入口与 AGENTS.md 一同排除出读者站构建，避免生成内部规则页面及不存在的英文跳转。
+- 中英第 2／13 章与 PMER 对应语言频道联动发布，保留原有 PDF 与下载路径。
+- 验证：构建、章节 312/312、链接 99/99、术语 16/16 通过；Ego 抽查中英第 2／13 章及频道回链。现有 E2E 仍为 73/96，和最新 main 的 23 项失败 ID 完全一致，没有新增失败；保留该测试债务。
+- 按用户授权推进 PR 修订、合并与生产发布；验收状态分别记录，不把 Preview 成功视为线上已生效。
+
+---
+
+## 2026年10月21日 (v1.4.0 官方更新与频道同步)
+
+- 将资料截止日从 9 月 24 日推进至 10 月 21 日，CLI 核对点为 10 月 15 日发布的 0.163.0；没有升级本机 CLI。
+- 当前配置示例使用 `gpt-6.1-sol`；保留上一代 Sol 对照及历史案例，说明 API 推理档位、Responses 工具调用、缓存价格和 Codex 订阅用量的区别。
+- 增补 Ultrafast、输入建议 beta、桌面 worktree 与手机审批变化，将 GPT-5.5 退役改为已生效并限定登录范围。第 13 章旧版关于桌面合并后全账号获得全部能力的表述改为按当前文档核对。
+- 中英首页、导航、README、第 2／13 章与 PMER Codex 频道双向互链，频道同步日期与选型要点；保留历史更新日志与现有 GitHub Release。
+- 同步双语合订本、根目录与下载目录 PDF。本轮内容随后按授权同步 GitHub 专用分支及 PR，生产部署另行处理。
+
+---
+
+
 ## 2026年10月21日（双语分享素材与产品资料库接入）
 
 - 补充英文优先的中英文 OG/Twitter 品牌封面与 Pinterest 竖版素材。原 Logo、书封、章节及 PDF 更新保持原样。
@@ -230,6 +251,17 @@
 This document records the recent updates, technical issues, and solutions for the *Codex Blue Book* project.
 
 ---
+
+## October 21, 2026 (v1.4.0 Official Updates and Channel Sync)
+
+- Advance the source cutoff from September 24 to October 21; CLI checkpoint 0.163.0 was released October 15. No local CLI upgrade was performed.
+- Current configuration examples use `gpt-6.1-sol`. Retain previous Sol comparisons and historical examples; distinguish API reasoning controls, Responses tool calling, cache pricing and Codex subscription usage.
+- Cover Ultrafast, composer predictions beta, worktree collaboration and mobile approvals. Record GPT-5.5 retirement as effective for Codex with ChatGPT sign-in; API and API-key sessions remain outside that notice.
+- Link the bilingual reader, setup and frontier chapters with the PMER Codex channel. Rebuild both collections and the four PDF copies; preserve historical changelog entries and the existing GitHub release.
+- The scoped GitHub branch and PR carry this update; production deployment is handled separately.
+
+---
+
 
 ## 📅 September 24, 2026 (v1.3.1 Content Revision)
 
