@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type HeadConfig } from 'vitepress'
 
 const base = (process.env.VITEPRESS_BASE || '/').replace(/\/?$/, '/')
 const xIcon = '<svg class="footer-x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg>'
@@ -7,6 +7,45 @@ export default defineConfig({
   title: 'Codex 蓝皮书',
   description: '用 Codex 完成项目规则、验证与交付的双语实践指南',
   head: [['link', { rel: 'icon', type: 'image/png', sizes: '128x128', href: `${base}brand/favicon.png` }]],
+  transformHead({ pageData, title, description, head }) {
+    const english = pageData.relativePath.startsWith('en/')
+    // The unprefixed homepage uses the English brand cover; Chinese chapters use Chinese.
+    const coverLanguage = english || pageData.relativePath === 'index.md' ? 'en' : 'zh'
+    const origin = 'https://book.pmer.cn'
+    const route = pageData.relativePath.replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, '')
+    const image = `${origin}/social/brand-${coverLanguage}-20261021.jpg`
+    const alt = coverLanguage === 'en'
+      ? 'Codex Blue Book: Put Codex to work. A blue book, notebook and connected coding workflow cards.'
+      : 'Codex 蓝皮书：让 Codex 真正干活。蓝色书籍、笔记本与相连的编程工作流卡片。'
+    // Page-specific metadata takes precedence over brand defaults.
+    const defaults: Record<string, string> = {
+      'og:type': 'website',
+      'og:site_name': english ? 'Codex Blue Book' : 'Codex 蓝皮书',
+      'og:title': title,
+      'og:description': description,
+      'og:url': new URL(route, `${origin}/`).href,
+      'og:locale': english ? 'en_US' : 'zh_CN',
+      'twitter:card': 'summary_large_image',
+      'twitter:title': title,
+      'twitter:description': description
+    }
+    const existing = new Set(head.map(([, attrs]) => attrs?.property || attrs?.name))
+    // Do not attach brand dimensions or alternate images to a future custom cover.
+    if (!existing.has('og:image') && !existing.has('twitter:image')) {
+      Object.assign(defaults, {
+        'og:image': image,
+        'og:image:width': '1200',
+        'og:image:height': '630',
+        'og:image:type': 'image/jpeg',
+        'og:image:alt': alt,
+        'twitter:image': image,
+        'twitter:image:alt': alt
+      })
+    }
+    return Object.entries(defaults)
+      .filter(([key]) => !existing.has(key))
+      .map(([key, content]): HeadConfig => ['meta', { [key.startsWith('og:') ? 'property' : 'name']: key, content }])
+  },
   base,
   cleanUrls: true,
   ignoreDeadLinks: true,

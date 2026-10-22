@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0",
+  "profile_version": "1.0.0",
+  "product_canonical_id": "book-pmer-cn",
+  "identity": {
+    "public_brand": "Codex Blue Book",
+    "official_product_name": "Codex 蓝皮书",
+    "canonical_url": "https://book.pmer.cn/",
+    "english_homepage_url": "https://book.pmer.cn/en/",
+    "product_type": "Independent bilingual programming guide",
+    "availability": "Public reading website; this profile is based on current local source.",
+    "primary_language": "zh",
+    "supported_locales": [
+      "zh",
+      "en"
+    ],
+    "brand_aliases": {
+      "en": "Codex Blue Book",
+      "zh": "Codex 蓝皮书"
+    }
+  },
+  "positioning": {
+    "tagline_en": "Put Codex to work.",
+    "one_liner_en": "A practical, independent guide to building with Codex.",
+    "primary_audience_en": "Developers and independent product builders working with coding agents.",
+    "primary_use_cases": [
+      "Learn project rules and agent workflows",
+      "Explore engineering examples",
+      "Read Chinese or English chapters and PDF editions"
+    ],
+    "slogan_zh": "让 Codex 真正干活"
+  },
+  "descriptions": {
+    "short_en": "A practical, independent guide to building with Codex.",
+    "medium_en": "Learn to work with Codex through bilingual chapters, project rules, engineering workflows and example projects. Read online or download the Chinese and English PDF editions.",
+    "long_en": "Codex Blue Book is an independent guide for developers and product builders working with coding agents. Explore 13 chapters on setup, project rules, goal-driven development, testing, refactoring and product delivery. Read in Chinese or English, use the AGENTS.md protocol generator, browse the example projects and download both PDF editions. It is not an official OpenAI publication.",
+    "short_zh": "面向开发者与独立产品构建者的 Codex 双语工程实践指南。",
+    "long_zh": "通过 13 章中英文内容学习 Codex 配置、项目规约、目标驱动开发、测试、重构与产品交付，提供规约生成器、工程示例及双语 PDF。由独立作者维护，并非 OpenAI 官方出版物。",
+    "character_counts": {
+      "short_en": 54,
+      "medium_en": 173,
+      "long_en": 384
+    }
+  },
+  "categories": {
+    "primary": "Developer education",
+    "secondary": [
+      "Programming guides",
+      "AI development workflows"
+    ]
+  },
+  "features": [
+    "13 chapters in Chinese and English",
+    "Online reading and bilingual PDF downloads",
+    "AGENTS.md protocol generator",
+    "Example projects for web, browser extensions and mobile development"
+  ],
+  "keywords": [
+    "Codex Blue Book",
+    "Codex 蓝皮书",
+    "Codex workflows",
+    "AGENTS.md",
+    "coding agents"
+  ],
+  "pricing": {
+    "model": null,
+    "free_tier": null,
+    "public_paid_plans": {},
+    "pricing_url": null,
+    "submission_safe_summary_en": ""
+  },
+  "assets": {
+    "logo_512": {
+      "local_reference": "public/brand/logo-light.png",
+      "public_url": "https://book.pmer.cn/brand/logo-light.png"
+    },
+    "product_screenshots": [],
+    "product_demo_video": null
+  },
+  "links": {
+    "homepage": "https://book.pmer.cn/",
+    "pricing": null,
+    "demo_video": null,
+    "repository": "https://github.com/aipmer/codex-blue-book",
+    "english_homepage": "https://book.pmer.cn/en/",
+    "pdf_en": "https://book.pmer.cn/downloads/codex_blue_book_en.pdf",
+    "pdf_zh": "https://book.pmer.cn/downloads/codex_blue_book_zh.pdf"
+  },
+  "contact": {
+    "approved_contact_alias": null,
+    "raw_email_stored": false
+  },
+  "unknown_or_unapproved": {
+    "legal_company_name": null,
+    "founder_names": null,
+    "founding_year": null,
+    "launch_date": null
+  },
+  "submission_defaults": {
+    "website_url": "https://book.pmer.cn/en/",
+    "anchor_preference": "Codex Blue Book",
+    "newsletter_opt_in": false,
+    "promotional_upgrade": false
+  },
+  "verification": {
+    "status": "local_source_verified_not_platform_ready",
+    "verified_at": "2026-10-21",
+    "review_after": null,
+    "sources": [
+      "AGENTS.md",
+      ".vitepress/config.mts",
+      "index.md",
+      "en/index.md",
+      "generator.md",
+      "en/generator.md",
+      "package.json",
+      "examples/",
+      "public/downloads/"
+    ]
+  },
+  "custom_fields": {
+    "independent_publication": true,
+    "engineering_project": "book",
+    "promotion_key": "book",
+    "scope_note": "Source-verified product facts; no platform submission, production release or identity approval is implied."
+  }
+}

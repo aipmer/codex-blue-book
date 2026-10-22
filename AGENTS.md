@@ -48,3 +48,9 @@
 ## 🧪 Verification Specs
 - All markdown files must be syntactically valid and link to actual target paths.
 - Code blocks must have language tags (e.g. ` ```bash `, ` ```markdown `, ` ```json `).
+
+## 产品资料与推广素材
+- 工程键与产品键均为 `book`，canonical ID 为 `book-pmer-cn`；按精确域名 `book.pmer.cn` 匹配，不归入 `pmer.cn` 的 PMER 产品资料。
+- 当前产品事实源：`docs/backlink/product-profile/book.json`；分享素材与来源：`docs/promotion/2026-10-21/README.md`。共享使用和接入说明：`/Users/hunkwu/Desktop/ai/docs/product-library/README.md`。
+- 更新先维护本项目事实与 manifest，再刷新资料库；英文展示优先，未知价格、主体和账号留空。登记素材不授权发布或提交。
+- 分享元数据由 `.vitepress/config.mts` 的 `transformHead` 在构建时生成；根首页及英文页使用英文品牌图，中文章节使用中文图，页面自定义图优先。变更后运行 `npm run docs:build` 并检查生成 HTML 的 head。
