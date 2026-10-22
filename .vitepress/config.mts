@@ -57,6 +57,7 @@ export default defineConfig({
     '**/templates/**',
     '**/docs/**',
     'AGENTS.md',
+    'CLAUDE.md',
     'README.md',
     'CONTRIBUTING.md',
     'dev_task.md',
