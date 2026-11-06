@@ -127,7 +127,7 @@ If the edit is wrong, inspect the diff and confirm there are no human changes to
 git diff -- src/lib/redis.ts
 git restore -- src/lib/redis.ts
 ```
-Append a guardrail into [AGENTS.md](../AGENTS.md): *"Strictly prohibit external retry libraries."*
+Append a guardrail into [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md): *"Strictly prohibit external retry libraries."*
 
 ---
 

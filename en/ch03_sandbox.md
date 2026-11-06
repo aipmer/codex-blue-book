@@ -101,7 +101,7 @@ Inject the printed `tcp://0.tcp.ngrok.io:12345` into Codex session.
 
 ### 1. Security Isolation for Secrets
 
-Never allow AI to commit raw `.env` files. Enforce in `.gitignore` and [AGENTS.md](../AGENTS.md):
+Never allow AI to commit raw `.env` files. Enforce in `.gitignore` and [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md):
 
 ```markdown
 ## 🛑 Hard Constraints
@@ -111,7 +111,7 @@ Never allow AI to commit raw `.env` files. Enforce in `.gitignore` and [AGENTS.m
 
 ### 2. Sandbox Cache Clearing
 
-To avoid ghost build bugs, define clean run commands in [AGENTS.md](../AGENTS.md):
+To avoid ghost build bugs, define clean run commands in [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md):
 
 ```markdown
 ## 💻 Developer Commands

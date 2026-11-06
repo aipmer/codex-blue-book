@@ -105,7 +105,7 @@ ngrok tcp 5432
 
 ### 1. 密钥安全硬隔离
 
-严禁让 AI 自动把包含真实生产密钥的 `.env` 提交到仓库或云端。在 `.gitignore` 与项目 [AGENTS.md](../AGENTS.md) 中添加硬约束：
+严禁让 AI 自动把包含真实生产密钥的 `.env` 提交到仓库或云端。在 `.gitignore` 与项目 [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md) 中添加硬约束：
 
 ```markdown
 ## 🛑 Hard Constraints
@@ -115,7 +115,7 @@ ngrok tcp 5432
 
 ### 2. 沙盒临时缓存清理
 
-为防止 node_modules 缓存或 build 缓存导致的幽灵构建故障，在 [AGENTS.md](../AGENTS.md) 中写入标准化清理脚本：
+为防止 node_modules 缓存或 build 缓存导致的幽灵构建故障，在 [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md) 中写入标准化清理脚本：
 
 ```markdown
 ## 💻 Developer Commands

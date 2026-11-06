@@ -59,7 +59,7 @@ The diagram shows a suggested routing pattern. Automatic review depends on the a
 
 Companion open-source references:
 - Related reference project: [plugins-codex-feishu](https://github.com/aipmer/plugins-codex-feishu)
-- Minimal Local Tunnel Gateway: [scripts/codex-watchdog](../scripts/codex-watchdog/README.md)
+- Minimal Local Tunnel Gateway: [scripts/codex-watchdog](https://github.com/aipmer/codex-blue-book/blob/main/scripts/codex-watchdog/README.md)
 
 ---
 

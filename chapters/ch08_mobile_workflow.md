@@ -59,7 +59,7 @@ Codex 权限请求       ──> 按当前策略审查 ──> 需要时由人�
 
 配套参考开源工程：
 - 关联参考工程：[plugins-codex-feishu](https://github.com/aipmer/plugins-codex-feishu)
-- 本机极简穿透网关：[scripts/codex-watchdog](../scripts/codex-watchdog/README.md)
+- 本机极简穿透网关：[scripts/codex-watchdog](https://github.com/aipmer/codex-blue-book/blob/main/scripts/codex-watchdog/README.md)
 
 ---
 

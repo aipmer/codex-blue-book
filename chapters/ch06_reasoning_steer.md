@@ -127,7 +127,7 @@ codex exec --json "重构认证中间件" > task.jsonl
 git diff -- src/lib/redis.ts
 git restore -- src/lib/redis.ts
 ```
-在 [AGENTS.md](../AGENTS.md) 中追加一条红线：“严禁引入外部重试依赖”。
+在 [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md) 中追加一条红线：“严禁引入外部重试依赖”。
 
 ---
 
