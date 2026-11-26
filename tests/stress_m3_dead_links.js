@@ -420,8 +420,13 @@ function checkMarkdownDeadLinks() {
   const mdFiles = [
     ...getAllFiles(path.join(ROOT_DIR, 'chapters'), ['.md']),
     ...getAllFiles(path.join(ROOT_DIR, 'en'), ['.md']),
+    ...getAllFiles(path.join(ROOT_DIR, 'codex'), ['.md']),
+    ...getAllFiles(path.join(ROOT_DIR, 'claude'), ['.md']),
+    ...getAllFiles(path.join(ROOT_DIR, 'gemini'), ['.md']),
+    ...getAllFiles(path.join(ROOT_DIR, 'kimi'), ['.md']),
     ...getAllFiles(path.join(ROOT_DIR, 'case-studies'), ['.md']),
     path.join(ROOT_DIR, 'index.md'),
+    path.join(ROOT_DIR, 'compare.md'),
     path.join(ROOT_DIR, 'README.md'),
     path.join(ROOT_DIR, 'generator.md'),
   ].filter(f => fs.existsSync(f));
@@ -451,6 +456,12 @@ function checkMarkdownDeadLinks() {
         resolved = path.resolve(ROOT_DIR, pathPart.slice(1));
         if (fs.existsSync(resolved) && fs.statSync(resolved).isDirectory()) {
           resolved = path.join(resolved, 'index.md');
+        }
+        if (!fs.existsSync(resolved)) {
+          const publicResolved = path.resolve(ROOT_DIR, 'public', pathPart.slice(1));
+          if (fs.existsSync(publicResolved)) {
+            resolved = publicResolved;
+          }
         }
       } else {
         resolved = path.resolve(fileDir, pathPart);

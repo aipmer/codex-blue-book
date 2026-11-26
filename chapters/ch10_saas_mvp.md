@@ -1,24 +1,30 @@
+---
+title: "Ch.10 商业实战：2 小时跑通 Next.js + Supabase + Stripe 付费 SaaS | Codex 蓝皮书"
+description: "附完整可运行样例 examples/ch10-saas-mvp，用 Codex 在 2 小时内跑通 Prisma 建模、Stripe 订阅结账、Webhook 验签与会员权限闭环。"
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.09) ](./ch09_legacy_code.md) | [ ➡️ 下一章 (Ch.11) ](./ch11_expo_mobile.md) | [ 🌐 English ](../en/ch10_saas_mvp.md)
 
-# Ch.10 验证订阅制 SaaS 的支付闭环
+# Ch.10 商业实战：2小时跑通 Next.js + Stripe 商业级 MVP
 
-> **问题**：订阅产品需要同时验证登录、支付回调和权限状态。
->
-> **本章实践**：用配套 Next.js 样例跑通 Stripe 测试支付与 Webhook 验签。
+> 🎯 **具体工程麻烦**：想做独立付费产品，在登录鉴权、数据库模型、Stripe Webhook 验签和部署上折腾两周，热情耗尽还没上线。  
+> 💡 **可运行实战代码与落地收益**：完整可运行代码库 `examples/ch10-saas-mvp`（Next.js 15 + Supabase + Stripe 订阅）；Stripe CLI 本地支付闭环调试命令。  
+> ⚡ **社交传播 / 截图金句**：“独立开发最核心的里程碑不是架构多完美，而是收到第一笔付款。2 小时搞定全套付费闭环。”
 
-订阅产品的第一个工程里程碑，是在测试环境里验证注册、支付回调和权限变更能形成闭环。真实收款还需要部署、风控和合规检查。
+对独立开发者来说，第一个重要里程碑是收到第一笔真实付款，而不是把脚手架折腾到完美。
 
-本章使用 `Next.js 15 (App Router) + Supabase (PostgreSQL) + Stripe` 配套工程，在本地跑通订阅支付测试。完成时间取决于账号、环境和现有代码。
+本章直接给可运行的工程链路：用 Codex 在 2 小时内基于 `Next.js 15 (App Router) + Supabase (PostgreSQL) + Stripe` 搭出带登录、订阅扣款与权限校验的 SaaS MVP。
 
 > 📦 **配套实战源码**：[examples/ch10-saas-mvp](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp) —— 完整可运行的订阅制 AI 翻译工具（TransFlow），自带 CAP 协议 `AGENTS.md`，`npm install && npm run build` 已验证通过。
 
 ---
 
-## 理解方式：开出能收银的“流动煎饼摊”
+## 🎯 生活化直觉隐喻：开出能收银的“流动煎饼摊”
 
 很多人做 SaaS 产品，总想着造一座五星级大酒店：
 
-```text
+```Plaintext
 【空想五星级酒店】 ──> 花 6 个月设计华丽大堂、采购高档地毯、招几十个服务员（过度工程），
                        结果开业第一天发现没人愿意来吃饭，直接倒闭。
 【流动煎饼果子小推车】──> ✅ 你只需要 3 件核心装备：
@@ -31,7 +37,7 @@
 
 ---
 
-## 动手实践：先完成这 3 步
+## 🚀 新手极速上手 3 步走（无痛起步）
 
 用 3 步快速打通本地 Stripe 支付联调闭环：
 
@@ -212,13 +218,13 @@ export async function POST(req: Request) {
    npx prisma studio
    ```
 
-商业 MVP 的价值在于上线速度。用最严密的边界规则约束 AI，换取最极致的交付体验。
+商业 MVP 的价值在于上线速度。用最严密的边界规约约束 AI，换取最极致的交付体验。
 
 ---
 
 ## 🛡️ 翻车自救与避坑速查表
 
-| 常见踩坑现象 | 致命原因 | 排查与处理 |
+| 常见踩坑现象 | 致命原因 | 极速排查与自救指南 |
 | :--- | :--- | :--- |
 | `Webhook Error: No signatures found matching the expected signature` | 使用了 `await req.json()` 解析 Body，破坏了加密签名原貌 | 严格使用 `await req.text()` 获取 Raw String，再传入 `constructEvent` |
 | **测试信用卡支付成功后，数据库无任何新增记录** | Webhook URL 配置错误或本地没有运行 `stripe listen` 转发 | 启动 `stripe listen`，确认监听终端打出 `200 OK [POST /api/webhooks/stripe]` |

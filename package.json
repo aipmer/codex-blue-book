@@ -1,16 +1,14 @@
 {
   "name": "codex-blue-book",
-  "version": "1.4.0",
-  "description": "Codex 蓝皮书：项目规则、开发验证与交付的中英双语实践指南，含 GPT-6.1 Sol 与 CLI 0.163.0 迁移说明。",
+  "version": "1.5.0",
+  "description": "AI 编程实战蓝皮书系列（Codex · Claude · Gemini · Kimi）在线阅读站与工程实践指南",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "verify:seo": "node scripts/verify_seo_geo.mjs"
   },
   "devDependencies": {
     "vitepress": "^1.6.3"
-  },
-  "dependencies": {
-    "@lucide/vue": "^1.47.0"
   }
 }

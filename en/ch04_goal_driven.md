@@ -1,22 +1,28 @@
+---
+title: "Ch.04 Goal-Driven Engineering: Boundaries & Assertions for GPT-6.2 | Codex Blue Book"
+description: "Replace procedural step-by-step prompts with Goal, Constraints, and Validation Specs so GPT-6.2 Sol plans architecture and passes automated tests."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.03) ](./ch03_sandbox.md) | [ ➡️ Next (Ch.05) ](./ch05_agents_protocol.md) | [ 🌐 中文版 ](../chapters/ch04_goal_driven.md)
 
-# Ch.04 Guide Agents with Goals and Acceptance Checks
+# Ch.04 Goal-Driven Engineering: Taming Reasoning Agents with Boundaries and Assertions
 
-> **Problem**: Vague requests invite wrong assumptions; overly detailed steps constrain implementation.
->
-> **Practice**: Write a task with a goal, scope, constraints, and runnable acceptance checks.
+> 🎯 **The Real Problem**: Overly verbose prompts micromanage models like dictating every cut to a chef, while vague prompts invite hallucinations and regression bugs.  
+> 💡 **Tangible Output & Takeaway**: Standard goal-driven specification template (Goal + Preconditions + Output Assertions + Prohibited Actions) and real benchmark comparisons.  
+> ⚡ **Viral Screenshot Quote**: *"Micromanaging a chef burns the dinner. Define strict input-output assertions and let the agent engineer the solution."*
 
-Regardless of model, a task that only lists steps is hard to evaluate without acceptance checks. When several implementations are valid, specify the goal, constraints, and verification before choosing the implementation.
+With reasoning models like **GPT-6.2 Sol and Astra** powering Codex, step-by-step procedural prompts get in the way. Reasoning models already plan internally; micromanaging every line removes their room to recover from errors.
 
-This chapter shares how to guide Codex using a professional "Product Specs" approach in actual development.
+This chapter shows how to steer Codex using concise product specs.
 
 ---
 
-## A Way to Think About It: Michelin Chef and the Order Ticket
+## 🎯 Intuitive Metaphor: Michelin Chef and the Order Ticket
 
 Many people dispatch tasks to AI like an unruly customer barging into a Michelin kitchen:
 
-```text
+```Plaintext
 【Babysitting Commands (Process-Driven)】 ──> ❌ "Chef, take the knife in your left hand, chop potatoes into 2mm strips, heat the oil to 180°C, stir for 3 minutes, then add 3g salt."
                                               (The chef feels insulted, and if stove pressure shifts slightly, the dish burns.)
 【Architect Spec Order (Goal-Driven)】   ──> ✅ "Chef, I need pan-seared crispy potatoes as a steak side dish:
@@ -29,7 +35,7 @@ Codex is an algorithmic master chef. Your role is defining what to make, what ca
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart: 3 Steps to Launch
 
 Draft your first Goal-Driven Spec in 3 steps:
 
@@ -87,11 +93,11 @@ Implement an Express API proxy route that forwards all incoming requests safely 
 
 ---
 
-## 4.3 GPT-5.6 Terra Reasoning Architecture for Specs
+## 4.3 GPT-6.2 Sol Reasoning Architecture for Specs
 
 When presented with this spec, Codex breaks down the solution chain:
 
-```text
+```Plaintext
 [Parse Specs Goal] ──> Analyze Constraints (Redis rate-limit / 3s timeout / Secret isolation)
                             │
                             ▼
@@ -112,7 +118,7 @@ When presented with this spec, Codex breaks down the solution chain:
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
-| **Overly fragmented steps cause agent to freeze on errors** | Procedural commands stripped GPT-5.6 of self-healing planning space | Strip out implementation steps; retain only Goal, Constraints, and Validation |
+| **Overly fragmented steps cause agent to freeze on errors** | Procedural commands stripped the reasoning model of self-healing planning space | Strip out implementation steps; retain only Goal, Constraints, and Validation |
 | **Agent modified unrelated files, breaking other features** | Lacked directory scope constraints | Declare strict boundaries: "Edits restricted to `src/modules/auth/`; never touch other directories" |
 | **Agent claimed completion, but logic has fatal flaws** | Missing automated validation assertions | Add explicit requirement: "Must run `npm test` and produce green unit test assertions" |
 

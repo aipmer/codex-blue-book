@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - 'chapters/**'
+      - 'claude/**'
+      - 'gemini/**'
+      - 'kimi/**'
       - 'en/**'
       - 'README.md'
       - 'scripts/**'
@@ -47,13 +50,15 @@ jobs:
       - name: Compile PDF Documents
         run: node scripts/compile_pdf.js
 
-      - name: Check both download copies
+      - name: Check all download copies
         run: |
-          cmp codex_blue_book_zh.pdf public/downloads/codex_blue_book_zh.pdf
-          cmp codex_blue_book_en.pdf public/downloads/codex_blue_book_en.pdf
+          for book in codex claude gemini kimi; do
+            cmp "${book}_blue_book_zh.pdf" "public/downloads/${book}_blue_book_zh.pdf"
+            cmp "${book}_blue_book_en.pdf" "public/downloads/${book}_blue_book_en.pdf"
+          done
 
       - name: Commit and Push Updated PDFs
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "build: auto-compile updated PDFs [skip ci]"
-          file_pattern: "codex_blue_book_zh.pdf codex_blue_book_en.pdf public/downloads/codex_blue_book_zh.pdf public/downloads/codex_blue_book_en.pdf"
+          file_pattern: "*_blue_book_zh.pdf *_blue_book_en.pdf public/downloads/*_blue_book_zh.pdf public/downloads/*_blue_book_en.pdf"

@@ -1,24 +1,30 @@
+---
+title: "Ch.01 Saying Goodbye to Handwritten Code: AI-Native Mindset | Codex Blue Book"
+description: "Shift from manual coding to AI agent orchestration with OpenAI Codex and GPT-6.2 using the Goal + Constraints + Validation framework."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ➡️ Next (Ch.02) ](./ch02_setup.md) | [ 🌐 中文版 ](../chapters/ch01_mindset.md)
 
-# Ch.01 From Code Generation to Verified Results
+# Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding
 
-> **Problem**: Treating AI as autocomplete or accepting edits without review can miss requirements and regressions.
->
-> **Practice**: Write one development task with a goal, boundaries, and verifiable acceptance checks.
+> 🎯 **The Real Problem**: Developers treat AI as fancy auto-complete, grinding through repetitive boilerplate, or let agents run without architecture guardrails.  
+> 💡 **Tangible Output & Takeaway**: A 3-stage mental model for AI-native orchestration and a runnable PRD boundary assertion template to cut boilerplate work.  
+> ⚡ **Viral Screenshot Quote**: *"Humans should no longer manually write boilerplate code. Your hands belong on the steering wheel, not the pushcart."*
 
-When chatting with readers of "实战产品说" (Real-World Product Talk), I often notice a common pitfall: developers pushing themselves to memorize AI coding commands and shortcuts as if they were cramming for an API manual.
+When talking with readers of "实战产品说" (Real-World Product Talk), one pattern shows up often: developers try to memorize AI coding shortcuts and flags as if cramming for an API manual.
 
-Coding agents such as Codex can help draft boilerplate, tests, and documentation. Developers still own requirements, key design decisions, and verification. A clear goal, edit scope, and acceptance checks matter more than memorizing prompts.
+With autonomous agents like OpenAI Codex and the GPT-6.2 family, typing boilerplate is no longer the bottleneck. In **Vibe Coding**, your leverage sits in product boundaries, business logic, and real user experience—while repetitive implementation goes to the agent.
 
-This chapter turns a product need into a development task that can be executed and checked.
+This chapter walks through the shift from code typist to AI orchestrator.
 
 ---
 
-## A Way to Think About It: Stop Being a Bricklayer, Become the Chief Architect
+## 🎯 Intuitive Metaphor: Stop Being a Bricklayer, Become the Chief Architect
 
 If you are new to AI-native development, do not view AI as a cold code generator:
 
-```text
+```Plaintext
 【Traditional Handwritten Code】 ──> You act as a manual bricklayer, stacking bricks one by one. If one corner is misaligned, the whole building collapses.
 【Traditional AI Completion】    ──> You lay bricks while AI hands you mortar (you type a line, it guesses half; your hands never rest).
 【Codex Orchestration Era】     ──> You are the "Chief Construction Architect", and Codex is your "elite engineering crew":
@@ -56,7 +62,7 @@ When your focus changes from "how do I type this loop" to "how do I dispatch a f
 
 Codex has pushed us into Stage 3:
 *   **Multi-Surface Productivity Matrix**: Automated execution via CLI, complex reviews and Sites in-place preview on ChatGPT Desktop (Code Mode), 24/7 mobile monitoring with Guardian approvals, and visual browser audits via Desktop Computer Use.
-*   **Frontier Reasoning & Agentic Core**: From **GPT-6 Astra** for the hardest cross-tool work to **GPT-6.1 Sol** for everyday complex coding and **GPT-6 Luna** for focused tasks, choose a model by task and verify tools, permissions, and results in your own environment. [Current model guidance](https://learn.chatgpt.com/docs/models)
+*   **Frontier Reasoning & Agentic Core**: From **GPT-6.2 Astra** for the hardest cross-tool work and **GPT-6.2 Sol** for everyday complex coding to **GPT-6.1 Terra** for visual computer use and **GPT-6 Luna** for focused tasks, choose a model by task and verify tools, permissions, and results in your own environment. [Current model guidance](https://learn.chatgpt.com/docs/models)
 
 ---
 
@@ -75,7 +81,7 @@ With Codex, the same rule applies. Stop micromanaging how AI writes logic. As an
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart: 3 Steps to Launch
 
 For first-time users, avoid dumping thousands of words of vague thoughts. Follow this 3-step loop:
 

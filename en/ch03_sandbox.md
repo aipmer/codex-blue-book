@@ -1,22 +1,28 @@
+---
+title: "Ch.03 Sandbox Debugging & Local Environment Tunneling | Codex Blue Book"
+description: "Fix Connection refused errors when Codex sandboxes access local Docker PostgreSQL or Redis using workspace-write, SSH reverse tunnels, and Ngrok."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.02) ](./ch02_setup.md) | [ ➡️ Next (Ch.04) ](./ch04_goal_driven.md) | [ 🌐 中文版 ](../chapters/ch03_sandbox.md)
 
-# Ch.03 Diagnose Sandbox Access to Local Services
+# Ch.03 Breaking the Cloud Island: Sandbox Debugging and Deep Local Environment Tunneling
 
-> **Problem**: localhost inside an isolated environment may not refer to the host database.
->
-> **Practice**: Locate the network boundary with a connection test, then configure a controlled tunnel if needed.
+> 🎯 **The Real Problem**: Agent running in an isolated sandbox cannot reach local Docker databases (PostgreSQL/Redis), repeatedly failing with `Connection refused`.  
+> 💡 **Tangible Output & Takeaway**: Current CLI sandbox tier analysis, SSH / Ngrok reverse tunneling scripts, and a 3-step connectivity diagnostic checklist.
+> ⚡ **Viral Screenshot Quote**: *"Can't connect to localhost from sandbox? It's not a code bug—you simply forgot to bridge the network tunnel."*
 
-When running database tests with Codex, the most frequent surprise for beginners is: while PostgreSQL runs perfectly in local Docker, the AI shouts `Connection refused to localhost:5432` in the terminal.
+When running database tests with Codex, one error trips up almost every newcomer: PostgreSQL is healthy inside local Docker, yet the agent repeatedly reports `Connection refused to localhost:5432`.
 
-First identify whether the command runs on your host, in a container, or on a remote machine: `localhost` refers to a different machine in each case. This chapter tests the connection and adds controlled access only when needed.
+That block comes from **Sandbox Isolation**. This chapter shows how to bridge your local services safely into the sandbox.
 
 ---
 
-## A Way to Think About It: The Cleanroom Containment and Umbilical Pipeline
+## 🎯 Intuitive Metaphor: The Cleanroom Containment and Umbilical Pipeline
 
 Think of Codex's runtime environment as a "high-level sterile containment cleanroom":
 
-```text
+```Plaintext
 【Host Mac/PC】       ──> The Outside World: Holding your actual local database, secret keys, personal tools, and files.
 【Codex Sandbox】     ──> The Sterile Cleanroom: Where the AI builds code and runs tests. Even if the code crashes, your host system is untouched.
 【Reverse Tunneling】 ──> Umbilical Feed Pipeline: When the AI in the cleanroom needs to talk to the local host DB, you must bridge a dedicated pipe.
@@ -26,7 +32,7 @@ Without this pipe, the AI calling `localhost` inside the cleanroom reaches only 
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart: 3 Steps to Launch
 
 Follow these 3 steps to connect the sandbox with your local database:
 

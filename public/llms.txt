@@ -1,0 +1,87 @@
+# AI Coding Blue Books Series (book.pmer.cn)
+
+> Independent bilingual (Chinese & English) engineering handbooks for AI coding agents by Hunk Wu (aipmer / pmer.cn). Verified November 26, 2026. All 4 books live: OpenAI Codex (v1.5.0), Claude Code (v1.0.0), Google Antigravity / Gemini 4 (v1.0.0), and Kimi Code / K3.1 Pro (v1.0.0).
+
+## Core Hubs & Tools
+
+- [Chinese Series Portal (首页)](https://book.pmer.cn/): Overview of all four Blue Books (Codex, Claude, Gemini, Kimi).
+- [English Series Portal](https://book.pmer.cn/en/): English overview of the four-book series.
+- [2026 Four-Agent Comparison Matrix (中文)](https://book.pmer.cn/compare): Side-by-side comparison of GPT-6.2 Codex, Claude 5.5 Claude Code, Gemini 4 Antigravity, and Kimi K3.1 Pro pricing, context windows, primitives, and FAQs.
+- [2026 Four-Agent Comparison Matrix (English)](https://book.pmer.cn/en/compare): English side-by-side comparison of all four AI coding agents.
+- [Multi-Agent Rules Generator (中文)](https://book.pmer.cn/generator): Interactive generator exporting AGENTS.md (Codex), CLAUDE.md + Hooks (Claude Code), .agents/rules (Gemini Antigravity), and config.toml (Kimi Code).
+- [Multi-Agent Rules Generator (English)](https://book.pmer.cn/en/generator): English interactive multi-agent rules generator.
+
+## Codex Blue Book (v1.5.0 · Live · Verified 2026-11-26)
+
+- [Codex Book Hub (中文)](https://book.pmer.cn/codex/) | [English](https://book.pmer.cn/en/codex/)
+- [Ch.01 AI-Native Mindset (中文)](https://book.pmer.cn/chapters/ch01_mindset) | [English](https://book.pmer.cn/en/ch01_mindset)
+- [Ch.02 Multi-Surface Setup & CLI 0.172 (中文)](https://book.pmer.cn/chapters/ch02_setup) | [English](https://book.pmer.cn/en/ch02_setup)
+- [Ch.03 Sandbox Tunneling (中文)](https://book.pmer.cn/chapters/ch03_sandbox) | [English](https://book.pmer.cn/en/ch03_sandbox)
+- [Ch.04 Goal-Driven Specs (中文)](https://book.pmer.cn/chapters/ch04_goal_driven) | [English](https://book.pmer.cn/en/ch04_goal_driven)
+- [Ch.05 AGENTS.md & Hooks Protocol (中文)](https://book.pmer.cn/chapters/ch05_agents_protocol) | [English](https://book.pmer.cn/en/ch05_agents_protocol)
+- [Ch.06 Steering Reasoning & Stopping Loops (中文)](https://book.pmer.cn/chapters/ch06_reasoning_steer) | [English](https://book.pmer.cn/en/ch06_reasoning_steer)
+- [Ch.07 Desktop Computer Use & GPT-6.1 Terra (中文)](https://book.pmer.cn/chapters/ch07_desktop_computer_use) | [English](https://book.pmer.cn/en/ch07_desktop_computer_use)
+- [Ch.08 Feishu Assistant Mobile Sentinel (中文)](https://book.pmer.cn/chapters/ch08_mobile_workflow) | [English](https://book.pmer.cn/en/ch08_mobile_workflow)
+- [Ch.09 Legacy Refactoring (中文)](https://book.pmer.cn/chapters/ch09_legacy_code) | [English](https://book.pmer.cn/en/ch09_legacy_code)
+- [Ch.10 Next.js 15 + Stripe SaaS MVP (中文)](https://book.pmer.cn/chapters/ch10_saas_mvp) | [English](https://book.pmer.cn/en/ch10_saas_mvp)
+- [Ch.11 Expo SDK 57 Cross-Platform App (中文)](https://book.pmer.cn/chapters/ch11_expo_mobile) | [English](https://book.pmer.cn/en/ch11_expo_mobile)
+- [Ch.12 One-Person SaaS Growth Flywheel (中文)](https://book.pmer.cn/chapters/ch12_commercialization) | [English](https://book.pmer.cn/en/ch12_commercialization)
+- [Ch.13 2026 Codex Battle Map: GPT-6.2, Terra & CLI 0.172 (中文)](https://book.pmer.cn/chapters/ch13_2026_frontier) | [English](https://book.pmer.cn/en/ch13_2026_frontier)
+
+## Claude Practical Blue Book (v1.0.0 · Live · Verified 2026-11-26)
+
+- [Claude Book Hub (中文)](https://book.pmer.cn/claude/) | [English](https://book.pmer.cn/en/claude/)
+- [Ch.01 Programmable Engineering & Claude 5.5 (中文)](https://book.pmer.cn/claude/ch01_programmable_platform) | [English](https://book.pmer.cn/en/claude/ch01_programmable_platform)
+- [Ch.02 Context Economics: CLAUDE.md, Skills & MCP (中文)](https://book.pmer.cn/claude/ch02_context_economics) | [English](https://book.pmer.cn/en/claude/ch02_context_economics)
+- [Ch.03 Deterministic Guardrails: Hooks & Code Mode (中文)](https://book.pmer.cn/claude/ch03_hooks_code_mode) | [English](https://book.pmer.cn/en/claude/ch03_hooks_code_mode)
+- [Ch.04 Claude Whiteboards & Docs/Sheets/Data (中文)](https://book.pmer.cn/claude/ch04_whiteboards_docs) | [English](https://book.pmer.cn/en/claude/ch04_whiteboards_docs)
+- [Ch.05 Terminal-to-Canvas: /design Artboards & Code Handoff (中文)](https://book.pmer.cn/claude/ch05_design_canvas) | [English](https://book.pmer.cn/en/claude/ch05_design_canvas)
+- [Ch.06 Legacy Monolith Reverse Engineering & Debt Cleanup (中文)](https://book.pmer.cn/claude/ch06_legacy_governance) | [English](https://book.pmer.cn/en/claude/ch06_legacy_governance)
+- [Ch.07 Isolated Subagents & Long-Horizon Refactoring (中文)](https://book.pmer.cn/claude/ch07_subagents_refactoring) | [English](https://book.pmer.cn/en/claude/ch07_subagents_refactoring)
+- [Ch.08 /ship, PR Steward & Team Governance (中文)](https://book.pmer.cn/claude/ch08_ship_pr_steward) | [English](https://book.pmer.cn/en/claude/ch08_ship_pr_steward)
+- [Ch.09 Commercial ToB SaaS: Prompt-Cached Auditing & Agent SDK (中文)](https://book.pmer.cn/claude/ch09_enterprise_saas) | [English](https://book.pmer.cn/en/claude/ch09_enterprise_saas)
+- [Ch.10 2026 Frontier & Honest Critique: Claude Cowork & Async Memory (中文)](https://book.pmer.cn/claude/ch10_frontier_cowork_critique) | [English](https://book.pmer.cn/en/claude/ch10_frontier_cowork_critique)
+
+## Gemini Practical Blue Book (v1.0.0 · Live · Verified 2026-11-26)
+
+- [Gemini Book Hub (中文)](https://book.pmer.cn/gemini/) | [English](https://book.pmer.cn/en/gemini/)
+- [Ch.01 Google Antigravity & Gemini 4 Model Matrix (中文)](https://book.pmer.cn/gemini/ch01_antigravity_gemini4) | [English](https://book.pmer.cn/en/gemini/ch01_antigravity_gemini4)
+- [Ch.02 Multimodal Rules: AGENTS.md, .agents/rules & Skills (中文)](https://book.pmer.cn/gemini/ch02_multimodal_rules_skills) | [English](https://book.pmer.cn/en/gemini/ch02_multimodal_rules_skills)
+- [Ch.03 AI Studio Build Mode Context-Preserving Handoff (中文)](https://book.pmer.cn/gemini/ch03_ai_studio_handoff) | [English](https://book.pmer.cn/en/gemini/ch03_ai_studio_handoff)
+- [Ch.04 Video Understanding & Gemini Live API (中文)](https://book.pmer.cn/gemini/ch04_video_live_api) | [English](https://book.pmer.cn/en/gemini/ch04_video_live_api)
+- [Ch.05 Google Workspace MCP & Commercial Add-ons (中文)](https://book.pmer.cn/gemini/ch05_workspace_mcp) | [English](https://book.pmer.cn/en/gemini/ch05_workspace_mcp)
+- [Ch.06 Google Colab %%agy & Cloud Compute Pipelines (中文)](https://book.pmer.cn/gemini/ch06_colab_agy_pipelines) | [English](https://book.pmer.cn/en/gemini/ch06_colab_agy_pipelines)
+- [Ch.07 /swarm Orchestration & Official Alpine Peak Case Study (中文)](https://book.pmer.cn/gemini/ch07_swarm_alpine_peak) | [English](https://book.pmer.cn/en/gemini/ch07_swarm_alpine_peak)
+- [Ch.08 Browser Visual QA, Chrome MV3 & Firebase / Cloud Run (中文)](https://book.pmer.cn/gemini/ch08_browser_qa_cross_platform) | [English](https://book.pmer.cn/en/gemini/ch08_browser_qa_cross_platform)
+- [Ch.09 Commercial Multimodal SaaS & Credit Metering (中文)](https://book.pmer.cn/gemini/ch09_multimodal_commercial_saas) | [English](https://book.pmer.cn/en/gemini/ch09_multimodal_commercial_saas)
+- [Ch.10 2026 Frontier Watch: Quota Economics & Web 3D (中文)](https://book.pmer.cn/gemini/ch10_frontier_quota_spatial) | [English](https://book.pmer.cn/en/gemini/ch10_frontier_quota_spatial)
+
+## Kimi Practical Blue Book (v1.0.0 · Live · Verified 2026-11-26)
+
+- [Kimi Book Hub (中文)](https://book.pmer.cn/kimi/) | [English](https://book.pmer.cn/en/kimi/)
+- [Ch.01 Kimi K3.1 Pro Open Weights & Kimi Code CLI (中文)](https://book.pmer.cn/kimi/ch01_k31_architecture_cli) | [English](https://book.pmer.cn/en/kimi/ch01_k31_architecture_cli)
+- [Ch.02 config.toml, kimi acp & Multi-Provider Failover (中文)](https://book.pmer.cn/kimi/ch02_acp_config_failover) | [English](https://book.pmer.cn/en/kimi/ch02_acp_config_failover)
+- [Ch.03 Tiered Subagents & /swarm Parallel Refactors (中文)](https://book.pmer.cn/kimi/ch03_subagents_swarm) | [English](https://book.pmer.cn/en/kimi/ch03_subagents_swarm)
+- [Ch.04 MoonViT-V2 Video-to-Fix & Figma MCP Fidelity (中文)](https://book.pmer.cn/kimi/ch04_moonvit_video_figma) | [English](https://book.pmer.cn/en/kimi/ch04_moonvit_video_figma)
+- [Ch.05 Financial 1M-Context Audits & Formula Spreadsheets (中文)](https://book.pmer.cn/kimi/ch05_finance_audit_modeling) | [English](https://book.pmer.cn/en/kimi/ch05_finance_audit_modeling)
+- [Ch.06 Legal & Biomedical Zero-Hallucination Citation Gates (中文)](https://book.pmer.cn/kimi/ch06_legal_medical_citations) | [English](https://book.pmer.cn/en/kimi/ch06_legal_medical_citations)
+- [Ch.07 Kimi Slides: Structured Data to Editable .pptx (中文)](https://book.pmer.cn/kimi/ch07_kimi_slides_decks) | [English](https://book.pmer.cn/en/kimi/ch07_kimi_slides_decks)
+- [Ch.08 Spatial Coding & 3D Make: Three.js, Blender & FreeCAD (中文)](https://book.pmer.cn/kimi/ch08_3d_make_blender_freecad) | [English](https://book.pmer.cn/en/kimi/ch08_3d_make_blender_freecad)
+- [Ch.09 vLLM / SGLang Enterprise Self-Hosting & Vertical SaaS (中文)](https://book.pmer.cn/kimi/ch09_vllm_self_hosting_saas) | [English](https://book.pmer.cn/en/kimi/ch09_vllm_self_hosting_saas)
+- [Ch.10 Four-Agent Hybrid Strategy & Official Tracking (中文)](https://book.pmer.cn/kimi/ch10_four_agent_hybrid_frontier) | [English](https://book.pmer.cn/en/kimi/ch10_four_agent_hybrid_frontier)
+
+## Full-Text Markdown Corpora & PDF Downloads
+
+- [Codex Blue Book Plain Markdown Corpus](https://book.pmer.cn/llms-codex.txt)
+- [Claude Blue Book Plain Markdown Corpus](https://book.pmer.cn/llms-claude.txt)
+- [Gemini Blue Book Plain Markdown Corpus](https://book.pmer.cn/llms-gemini.txt)
+- [Kimi Blue Book Plain Markdown Corpus](https://book.pmer.cn/llms-kimi.txt)
+- [Full Site Plain Markdown Corpus](https://book.pmer.cn/llms-full.txt)
+- [Codex Blue Book Chinese PDF](https://book.pmer.cn/downloads/codex_blue_book_zh.pdf)
+- [Codex Blue Book English PDF](https://book.pmer.cn/downloads/codex_blue_book_en.pdf)
+- [Claude Blue Book Chinese PDF](https://book.pmer.cn/downloads/claude_blue_book_zh.pdf)
+- [Claude Blue Book English PDF](https://book.pmer.cn/downloads/claude_blue_book_en.pdf)
+- [Gemini Blue Book Chinese PDF](https://book.pmer.cn/downloads/gemini_blue_book_zh.pdf)
+- [Gemini Blue Book English PDF](https://book.pmer.cn/downloads/gemini_blue_book_en.pdf)
+- [Kimi Blue Book Chinese PDF](https://book.pmer.cn/downloads/kimi_blue_book_zh.pdf)
+- [Kimi Blue Book English PDF](https://book.pmer.cn/downloads/kimi_blue_book_en.pdf)

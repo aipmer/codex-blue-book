@@ -1,27 +1,30 @@
+---
+title: "Ch.07 Desktop Computer Use & GPT-6.1 Terra Visual UI Auditing | Codex Blue Book"
+description: "Use ChatGPT Desktop Code Mode with GPT-6.1 Terra and GPT-6.2 Astra to inspect live Chrome UIs, fix Figma spacing gaps, and automate Blender viewport checks."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.06) ](./ch06_reasoning_steer.md) | [ ➡️ Next (Ch.08) ](./ch08_mobile_workflow.md) | [ 🌐 中文版 ](../chapters/ch07_desktop_computer_use.md)
 
-# Ch.07 Validate Frontends in a Real UI
+# Ch.07 Closing the Visual Loop: Automated Inspection and Design Fidelity with Desktop Computer Use
 
-> **Problem**: Builds and unit tests cannot catch every overlap, overflow, or click failure.
->
-> **Practice**: With the required tools and permissions, check viewport sizes, interactions, and screenshots.
+> 🎯 **The Real Problem**: Manual pixel-peeping for UI styling, responsive layouts missing hidden modals, and headless CLI tests incapable of verifying real browser rendering and clicks.  
+> 💡 **Tangible Output & Takeaway**: ChatGPT Desktop Code Mode setup; automated Figma-to-DOM screenshot visual diff workflows; and UI visual telemetry reproductions.  
+> ⚡ **Viral Screenshot Quote**: *"Still squinting at pixels to verify responsive UI? Let AI open the browser, measure dimensions, click buttons, and annotate visual discrepancies."*
 
-In traditional UI fidelity reviews, the most time-consuming task for product managers and frontend developers is "pixel-eye" alignment verification:
+Manual UI QA drains hours: a button sits 4 pixels off, a modal hides behind the mobile keyboard, and every CSS tweak forces another browser reload.
 
-“This button seems shifted 4 pixels to the left.”  
-“This popup gets obscured by the virtual keyboard on mobile dimensions.”
+In the November 2026 Codex stack, pairing **ChatGPT Desktop (Code Mode)** with **GPT-6.1 Terra** for visual reasoning or **GPT-6.2 Astra** lets the agent open Chrome on macOS, switch viewports, inspect screenshots, and patch Tailwind styles directly.
 
-In the 2026 Codex ecosystem, combining **ChatGPT Desktop (Codex Code Mode)** with OpenAI's latest frontier flagship **GPT-6 Astra** (which supports Computer Use workflows through tools), the agent can not only write code but also "use eyes and hands" to directly operate your macOS desktop: launching browsers, adjusting developer tool resolutions, and performing high-fidelity visual audits.
-
-This chapter teaches you how to orchestrate Computer Use to automate design-fidelity inspection for frontend UI.
+This chapter covers safe Computer Use permissions and automated design-fidelity checks.
 
 ---
 
-## A Way to Think About It: A 24/7 Tireless "Pixel Quality Inspector"
+## 🎯 Intuitive Metaphor: A 24/7 Tireless "Pixel Quality Inspector"
 
 Think of Computer Use as hiring a dedicated UI QA inspector sitting right beside your desk:
 
-```text
+```Plaintext
 [Manual UI Inspection] ──> Holding Figma mockups in one hand, switching Chrome tabs with the other,
                            squinting to verify font sizes, resizing windows manually for breakpoints,
                            and manually refreshing pages after every CSS tweak (slow and exhausting).
@@ -32,11 +35,11 @@ Think of Computer Use as hiring a dedicated UI QA inspector sitting right beside
                            and captures a clean screenshot to report completion.
 ```
 
-Automated checks help locate UI problems; people still judge interaction quality and the final design.
+You never need to act as a human pixel-comparison machine again, freeing your energy for interaction design and core business logic.
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart (3 Easy Steps)
 
 Run your first AI visual inspection in 3 simple steps:
 
@@ -72,8 +75,8 @@ In the ChatGPT Desktop client:
 
 Computer Use operates via a robust perceptual feedback loop:
 
-```text
-[Viewport Screenshot] ──> [GPT-5.6 Vision Analysis] ──> [Compute Pixel Coordinates (x:450, y:230)] ──> [Execute Mouse Click/Drag]
+```Plaintext
+[Viewport Screenshot] ──> [GPT-6.1 Terra / Astra Vision Analysis] ──> [Compute Pixel Coordinates (x:450, y:230)] ──> [Execute Mouse Click/Drag]
 ```
 
 Combined with the 2026 **Appshots** feature (double-tap shortcut), visual snapshots and text contexts of the focused foreground window can be instantly injected into the conversation without manual screenshot uploads.
@@ -144,7 +147,7 @@ Leveraging the 2026 ChatGPT Desktop **Sites** feature alongside mobile breakpoin
 4. If obscured, reduce hero section padding to keep the CTA button immediately clickable.
 ```
 
-Check pages at several viewport sizes and through real interactions. Record layout and usability issues, then adjust the styles based on what you observed.
+Solo developers no longer need to resize browser windows back and forth, letting the AI handle 90% of visual inspection heavy lifting.
 
 ---
 
@@ -155,7 +158,7 @@ GPT-6 Astra can participate in desktop workflows when the client and tools suppo
 In a desktop environment, agents can autonomously interact with professional 3D creative suites like **Blender**:
 - **Viewport Operations & Shading Checks**: The agent uses Computer Use to toggle viewports between Shading material preview and Rendered modes;
 - **Inspecting Geometry & Shader Artifacts**: The agent takes viewport screenshots to identify inverted surface normals, missing UV maps, or washed-out lighting;
-- **Spatial Pipeline Synergy**: Can be combined with the **Tripo3D + Blender + Astra** example workflow detailed in Ch.13, linking prompts, geometry generation, and render checks in an inspectable workflow.
+- **Spatial Pipeline Synergy**: Pairs seamlessly with the **Tripo3D + Blender + Astra** 3D automation pipeline detailed in Ch.13, linking prompts, geometry generation, and render checks in an inspectable workflow.
 
 ---
 

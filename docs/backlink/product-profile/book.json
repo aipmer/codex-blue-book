@@ -1,45 +1,45 @@
 {
   "schema_version": "1.0",
-  "profile_version": "1.0.0",
+  "profile_version": "2.0.0",
   "product_canonical_id": "book-pmer-cn",
   "identity": {
-    "public_brand": "Codex Blue Book",
-    "official_product_name": "Codex 蓝皮书",
+    "public_brand": "AI Coding Blue Books",
+    "official_product_name": "AI 编程实战蓝皮书系列（Codex · Claude · Gemini · Kimi）",
     "canonical_url": "https://book.pmer.cn/",
     "english_homepage_url": "https://book.pmer.cn/en/",
-    "product_type": "Independent bilingual programming guide",
-    "availability": "Public reading website; this profile is based on current local source.",
+    "product_type": "Independent bilingual AI coding handbook series",
+    "availability": "Public reading website; complete 4-book bilingual series (Codex v1.5.0, Claude v1.0.0, Gemini v1.0.0, Kimi v1.0.0) live with 86 chapters and 8 PDF editions.",
     "primary_language": "zh",
     "supported_locales": [
       "zh",
       "en"
     ],
     "brand_aliases": {
-      "en": "Codex Blue Book",
-      "zh": "Codex 蓝皮书"
+      "en": "AI Coding Blue Books / Codex Blue Book",
+      "zh": "AI 编程实战蓝皮书 / Codex 蓝皮书"
     }
   },
   "positioning": {
-    "tagline_en": "Put Codex to work.",
-    "one_liner_en": "A practical, independent guide to building with Codex.",
-    "primary_audience_en": "Developers and independent product builders working with coding agents.",
+    "tagline_en": "Put AI coding agents to work.",
+    "one_liner_en": "Independent bilingual handbooks for building production software with Codex, Claude Code, Gemini Antigravity, and Kimi Code.",
+    "primary_audience_en": "Developers, technical product managers, and independent builders working with coding agents.",
     "primary_use_cases": [
-      "Learn project rules and agent workflows",
-      "Explore engineering examples",
-      "Read Chinese or English chapters and PDF editions"
+      "Compare Codex, Claude Code, Gemini Antigravity, and Kimi Code workflows",
+      "Generate project guardrails for AGENTS.md, CLAUDE.md, .agents/rules, and config.toml",
+      "Read bilingual chapters and download PDF editions"
     ],
-    "slogan_zh": "让 Codex 真正干活"
+    "slogan_zh": "让 AI 编程智能体真正干活"
   },
   "descriptions": {
-    "short_en": "A practical, independent guide to building with Codex.",
-    "medium_en": "Learn to work with Codex through bilingual chapters, project rules, engineering workflows and example projects. Read online or download the Chinese and English PDF editions.",
-    "long_en": "Codex Blue Book is an independent guide for developers and product builders working with coding agents. Explore 13 chapters on setup, project rules, goal-driven development, testing, refactoring and product delivery. Read in Chinese or English, use the AGENTS.md protocol generator, browse the example projects and download both PDF editions. It is not an official OpenAI publication.",
-    "short_zh": "面向开发者与独立产品构建者的 Codex 双语工程实践指南。",
-    "long_zh": "通过 13 章中英文内容学习 Codex 配置、项目规约、目标驱动开发、测试、重构与产品交付，提供规约生成器、工程示例及双语 PDF。由独立作者维护，并非 OpenAI 官方出版物。",
+    "short_en": "Independent bilingual handbooks for Codex, Claude Code, Gemini Antigravity, and Kimi Code.",
+    "medium_en": "Master AI coding agents through bilingual handbooks, a 2026 comparison matrix, a multi-agent rules generator, runnable example repos, and free PDF editions.",
+    "long_en": "AI Coding Blue Books (book.pmer.cn) is a complete four-book bilingual engineering series for developers building with Codex (v1.5.0), Claude Code (v1.0.0), Google Antigravity / Gemini 4 (v1.0.0), and Kimi Code / K3.1 Pro (v1.0.0). Read 86 bilingual chapters, compare all four agents side by side, generate project guardrails, inspect runnable starter kits, and download 8 offline PDFs. Independent publication; not affiliated with any model vendor.",
+    "short_zh": "面向开发者与独立产品构建者的四大 AI 编程智能体双语实战蓝皮书系列。",
+    "long_zh": "完整四部曲中英双语实战蓝皮书（合计 86 章与 8 份 PDF），系统覆盖 OpenAI Codex（v1.5.0）、Claude Code（v1.0.0）、Gemini Antigravity（v1.0.0）与 Kimi Code K3.1 Pro（v1.0.0），配套四书横向选型表、多工具规约生成器与可运行工程套件。由独立作者维护，并非任何厂商官方出版物。",
     "character_counts": {
-      "short_en": 54,
-      "medium_en": 173,
-      "long_en": 384
+      "short_en": 89,
+      "medium_en": 155,
+      "long_en": 442
     }
   },
   "categories": {
@@ -50,17 +50,20 @@
     ]
   },
   "features": [
-    "13 chapters in Chinese and English",
-    "Online reading and bilingual PDF downloads",
-    "AGENTS.md protocol generator",
-    "Example projects for web, browser extensions and mobile development"
+    "Complete 4-book bilingual series (86 chapters): Codex v1.5.0, Claude v1.0.0, Gemini v1.0.0, and Kimi v1.0.0",
+    "2026 four-agent horizontal comparison hub (/compare & /en/compare)",
+    "Multi-agent rules generator supporting Codex, Claude Code, Gemini Antigravity, and Kimi Code",
+    "GEO/SEO ready with sitemap.xml, robots.txt, 5 llms*.txt corpora, JSON-LD, and 8 bilingual PDFs"
   ],
   "keywords": [
+    "AI Coding Blue Books",
     "Codex Blue Book",
     "Codex 蓝皮书",
-    "Codex workflows",
+    "Claude Code guide",
+    "Google Antigravity",
+    "Kimi Code K3.1",
     "AGENTS.md",
-    "coding agents"
+    "CLAUDE.md"
   ],
   "pricing": {
     "model": null,
@@ -83,8 +86,19 @@
     "demo_video": null,
     "repository": "https://github.com/aipmer/codex-blue-book",
     "english_homepage": "https://book.pmer.cn/en/",
+    "compare_en": "https://book.pmer.cn/en/compare",
+    "llms_txt": "https://book.pmer.cn/llms.txt",
+    "claude_hub_en": "https://book.pmer.cn/en/claude/",
+    "gemini_hub_en": "https://book.pmer.cn/en/gemini/",
+    "kimi_hub_en": "https://book.pmer.cn/en/kimi/",
     "pdf_en": "https://book.pmer.cn/downloads/codex_blue_book_en.pdf",
-    "pdf_zh": "https://book.pmer.cn/downloads/codex_blue_book_zh.pdf"
+    "pdf_zh": "https://book.pmer.cn/downloads/codex_blue_book_zh.pdf",
+    "claude_pdf_en": "https://book.pmer.cn/downloads/claude_blue_book_en.pdf",
+    "claude_pdf_zh": "https://book.pmer.cn/downloads/claude_blue_book_zh.pdf",
+    "gemini_pdf_en": "https://book.pmer.cn/downloads/gemini_blue_book_en.pdf",
+    "gemini_pdf_zh": "https://book.pmer.cn/downloads/gemini_blue_book_zh.pdf",
+    "kimi_pdf_en": "https://book.pmer.cn/downloads/kimi_blue_book_en.pdf",
+    "kimi_pdf_zh": "https://book.pmer.cn/downloads/kimi_blue_book_zh.pdf"
   },
   "contact": {
     "approved_contact_alias": null,
@@ -98,21 +112,24 @@
   },
   "submission_defaults": {
     "website_url": "https://book.pmer.cn/en/",
-    "anchor_preference": "Codex Blue Book",
+    "anchor_preference": "AI Coding Blue Books",
     "newsletter_opt_in": false,
     "promotional_upgrade": false
   },
   "verification": {
     "status": "local_source_verified_not_platform_ready",
-    "verified_at": "2026-10-21",
+    "verified_at": "2026-11-26",
     "review_after": null,
     "sources": [
       "AGENTS.md",
       ".vitepress/config.mts",
       "index.md",
       "en/index.md",
+      "compare.md",
+      "en/compare.md",
       "generator.md",
       "en/generator.md",
+      "public/llms.txt",
       "package.json",
       "examples/",
       "public/downloads/"

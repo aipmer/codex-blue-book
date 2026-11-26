@@ -1,22 +1,28 @@
+---
+title: "Ch.09 Refactoring Legacy Code: Reverse Engineering & Baseline Tests | Codex Blue Book"
+description: "Map undocumented spaghetti codebases with GPT-6.2 Sol 1M context, lock in behavioral snapshot tests, and extract modules safely in a sandbox."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.08) ](./ch08_mobile_workflow.md) | [ ➡️ Next (Ch.10) ](./ch10_saas_mvp.md) | [ 🌐 中文版 ](../chapters/ch09_legacy_code.md)
 
-# Ch.09 Baseline and Refactor Legacy Code Incrementally
+# Ch.09 Architecture Revitalization: Panoramic Analysis and Progressive Decoupling of Legacy Systems
 
-> **Problem**: Without tests, it is hard to tell whether a change broke legacy behavior.
->
-> **Practice**: Map dependencies and test critical paths before refactoring in small commits.
+> 🎯 **The Real Problem**: Inheriting tens of thousands of lines of undocumented legacy spaghetti code with zero tests, where editing one line breaks three unexpected modules.  
+> 💡 **Tangible Output & Takeaway**: GPT-6.2 Sol 1M-context panoramic topology prompts; interface behavioral snapshot baseline tests; and 3-step minimally invasive decoupling.  
+> ⚡ **Viral Screenshot Quote**: *"Facing hundreds of thousands of lines of undocumented legacy code? Don't impulsively rewrite from scratch. Let AI map the topology, lock down regression tests, then perform microsurgery."*
 
-When working on solo projects or inheriting legacy codebases, the biggest source of anxiety is taking over undocumented, test-free "spaghetti code" left behind by previous teams. Any minor code change can detonate hidden mines buried deep in the system.
+Inheriting an undocumented, test-free codebase is high-risk work: one small change can break three unrelated endpoints.
 
-First map entry points, dependencies, and critical behavior. Repeatable tests protect existing functionality; a large model context does not replace incremental verification.
+Resist the urge to rewrite from scratch. With **GPT-6.2 Sol / Astra's 1.05M context window** and sandboxed test loops, follow a safer sequence: map topology first, lock down behavioral snapshots, then decouple one service at a time.
 
 ---
 
-## A Way to Think About It: Changing Tires on a Speeding Truck on the Highway
+## 🎯 Intuitive Metaphor: Changing Tires on a Speeding Truck on the Highway
 
 Refactoring an active legacy system is like this high-wire operation:
 
-```text
+```Plaintext
 [Reckless Full Rewrite] ──> ❌ "This old truck is too beat-up; I'll build a brand-new truck on the shoulder!"
                              (The new build stalls for 6 months, while the business starves to death.)
 [Progressive Decoupling] ──> ✅ The old truck continues hauling freight on the highway (zero business interruption):
@@ -29,7 +35,7 @@ Codex acts as a millimeter-precision robotic surgical arm: as long as you wrap i
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart (3 Easy Steps)
 
 When taking over an unfamiliar, messy repository on Day 1, take these 3 safe steps:
 
@@ -47,7 +53,7 @@ When taking over an unfamiliar, messy repository on Day 1, take these 3 safe ste
 
 ## 9.1 Step 1: Panoramic Reverse Engineering - Generating Codebase Topology
 
-The primary duty when taking over a chaotic project is **drawing the map**. Leverage GPT-5.6 Terra's long-context scanning to directly reverse-engineer Mermaid Entity-Relationship Diagrams (ERD) and route topologies:
+The primary duty when taking over a chaotic project is **drawing the map**. Leverage GPT-6.2 Sol's 1M-context scanning to directly reverse-engineer Mermaid Entity-Relationship Diagrams (ERD) and route topologies:
 
 ```markdown
 # 🎯 Goal
@@ -105,11 +111,11 @@ Extract "discount calculation logic" from src/pages/api/checkout.ts into a stand
 
 ### 2. Local Validation and Safe Rollback
 
-Ask Codex to run checks after each small edit. If a test fails, inspect the diff and confirm that there are no human changes to keep before restoring the file:
+Protected by `--sandbox workspace-write`, Codex executes verification assertions immediately after code edits. The moment behavior breaks, revert instantly via Git:
 
 ```bash
-git diff -- src/pages/api/checkout.ts
-git restore -- src/pages/api/checkout.ts
+# Instantly restore file on refactoring discrepancy
+git checkout -- src/pages/api/checkout.ts
 ```
 
 ---

@@ -6,13 +6,53 @@
 
 ---
 
-## 2026年10月22日（内容同步 PR 收尾）
+## 2026年11月26日（Phase 4 收官：《Kimi 实战蓝皮书》v1.0.0 完工，四大蓝皮书全系列本地集齐）
 
-- 合入主线已有双语分享封面与产品资料，保留 v1.4.0 内容更新；更新日志冲突保留双方记录。
-- 将新增的 CLAUDE.md 协作入口与 AGENTS.md 一同排除出读者站构建，避免生成内部规则页面及不存在的英文跳转。
-- 中英第 2／13 章与 PMER 对应语言频道联动发布，保留原有 PDF 与下载路径。
-- 验证：构建、章节 312/312、链接 99/99、术语 16/16 通过；Ego 抽查中英第 2／13 章及频道回链。现有 E2E 仍为 73/96，和最新 main 的 23 项失败 ID 完全一致，没有新增失败；保留该测试债务。
-- 按用户授权推进 PR 修订、合并与生产发布；验收状态分别记录，不把 Preview 成功视为线上已生效。
+- **《Kimi 实战蓝皮书》v1.0.0 全量中英双语完工（本地）**：新增 `kimi/ch01`–`ch10` 与 `en/kimi/ch01`–`ch10` 共 20 篇双语实战章节，覆盖 Kimi K3.1 Pro（~2.8T MoE / 104B 激活 / 1M Gated DSA / MoonViT-V2 / 开源权重与 `\$2/\$0.20/\$10` 成本账本）、TypeScript 版 Kimi Code CLI（`kimi` / `kimi web` / `kimi acp` 跨 Zed & JetBrains）、`explore/plan/coder` 分层子代理与 `/swarm` 限流调度、MoonViT-V2 录屏排障与 Figma MCP、百万 Token 金融三表勾稽建模、法律/生物医药零幻觉引用核验、Kimi Slides 原生 `.pptx`、3D Make（Three.js / 无头 Blender `bpy` / FreeCAD 参数化叶轮）、vLLM/SGLang 开源私有化集群及四模型混合军团收官策略；同步升级 `kimi/index.md` 与 `en/kimi/index.md`。
+- **配套可运行工程套件与专属封面/OG**：新增 [examples/kimi-k3-kit](file:///Users/hunkwu/Desktop/ai/book/examples/kimi-k3-kit/README.md)（含 `config.toml`、零依赖原文引用核验器 `verify_citations.py` 与参数化 FreeCAD 叶轮生成器 `freecad_turbine_blade.py`，两套脚本均已本机实测通过）；生成并裁切 16:9 书封 `public/images/kimi_cover.jpg`（`1024×576`）与 1200×630 分享图 `public/social/kimi-en-20261126.jpg`，在 `.vitepress/config.mts` 为 `/kimi/` 与 `/en/kimi/` 接入独立 5 部分侧边栏、导航、PDF 菜单与专属 OG 覆盖。
+- **四书全系列合订本、PDF 与 GEO/SEO 全套收官**：扩展 `scripts/compile_collection.py`、`scripts/compile_pdf.js` 与 `scripts/verify_seo_geo.mjs`，产齐 4 本书 8 份双语离线 PDF（`public/downloads/`：`codex` 5.6M/2.1M、`claude` 4.6M/1.2M、`gemini` 4.8M/1.5M、`kimi` 4.6M/1.3M）与 6 份 GEO 语料索引（`llms.txt` + 4 本分册 `llms-*.txt` + 660KB 全量 `llms-full.txt`）；同步更新 `index.md`、`en/index.md`、`compare.md`、`en/compare.md` 与 `docs/backlink/product-profile/book.json`（`v2.0.0`）。
+- **验证证据（本地）**：`npm run docs:build`（100 个 HTML 页面 3.53s 零错）、`verify_seo_geo.mjs`（500/500）、20 章 Kimi 结构/语言标签/零本地路径 lint（0 问题）、`stress_m2_chapters`（312/312）、`stress_m3_terminology`（20/20）、`stress_m3_dead_links`（99/99）、`e2e`（96/96）全绿；Ego Lite 本地预览实测 7 路由 × `390/768/1440px` 三视口（21/21）零横向溢出、最小字号 `12px`、专属封面与 `kimi-en-20261126.jpg` OG 加载正常、`/kimi/` → `ch01` SPA 路由无整页重载。本次为本地构建与验证，未提交、推送或部署生产环境。
+- **交接**：分支 `main`（四阶段全部 86 篇双语章节、8 份 PDF、3 套新工程套件与全套 GEO/SEO 已在本地集齐且全绿）；进行中：等待用户审阅并明确授权 Git 提交/推送与 Vercel 生产部署；下一步：获授权后核对 `.vercel/project.json` 发布至 `book.pmer.cn`，独立核验线上 HTTP 200 / `sitemap.xml` / `llms.txt` / 8 份 PDF，并提交 GSC / Bing IndexNow 收录。
+
+---
+
+## 2026年11月26日（Phase 3：《Gemini 实战蓝皮书》v1.0.0 中英 10 章、Antigravity 套件与双语 PDF 上线）
+
+- **《Gemini 实战蓝皮书》v1.0.0 全量中英双语完工（本地）**：新增 `gemini/ch01`–`ch10` 与 `en/gemini/ch01`–`ch10` 共 20 篇双语实战章节，覆盖 Google Antigravity 2.x + `agy` CLI、Gemini 4 四大元素模型（Carbon / Argon / Neon / Hydrogen 含 2026-12-01 Argon 调价预警与 Orchestrator 混排）、四层规约体系、AI Studio Build Mode 一键导出、录屏排障与 Gemini Live API、Google Workspace MCP 与商业插件、Google Colab `%%agy` 与 Colab MCP、`/swarm` 蜂群及官方《Alpine Peak》案例复盘、三视口浏览器视觉 QA / Chrome MV3 / Cloud Run、多模态积分预扣风控与配额精算；同步升级 `gemini/index.md` 与 `en/gemini/index.md` 专页。
+- **配套可运行工程套件与专属封面/OG**：新增 [examples/gemini-antigravity-kit](file:///Users/hunkwu/Desktop/ai/book/examples/gemini-antigravity-kit/README.md)（含 `AGENTS.md`、路径级 `.agents/rules/ui-multimodal.md`、`visual-audit/SKILL.md` 及零依赖 Gemini 4 配额预算门禁脚本 `check_gemini_quota.mjs`，已实测 11.28 `PASS` 与 12.05 超预算退出码 `2`）；生成并裁切 16:9 书封 `public/images/gemini_cover.jpg`（`1024×576`）及 1200×630 分享图 `public/social/gemini-en-20261126.jpg`，在 `.vitepress/config.mts` 为 `/gemini/` 与 `/en/gemini/` 接入独立 5 部分侧边栏、导航与专属 OG 覆盖。
+- **合订本、PDF 与 GEO/SEO 管线扩展**：扩展 `scripts/compile_collection.py`、`scripts/compile_pdf.js` 与 `scripts/verify_seo_geo.mjs`，产出 `gemini_blue_book_zh.md` / `en.md`、根目录与 `public/downloads/` 同步双语 PDF（中文 4.8MB / 英文 1.5MB）、`public/llms-gemini.txt`（152KB）并汇入 `public/llms-full.txt`（543KB）；同步刷新 `index.md`、`en/index.md`、`compare.md`、`en/compare.md`（补齐 Gemini 4 精确 API 定价）、`public/llms.txt` 与 `docs/backlink/product-profile/book.json`。
+- **验证证据（本地）**：`npm run docs:build`（80 页 2.96s 零错）、`verify_seo_geo.mjs`（393/393）、20 章 Gemini 结构/代码块语言标签 lint（0 问题）、`stress_m2_chapters`（312/312）、`stress_m3_terminology`（20/20）、`stress_m3_dead_links`（99/99，并提前拦截并修正了正文中误用本地 `file:///` 路径的公开链接）、`e2e`（96/96）全绿；Ego Lite 本地预览实测 6 路由 × `390/768/1440px` 三视口零横向溢出、最小字号 `12px`、专属封面与 `gemini-en-20261126.jpg` OG 加载正常、`/gemini/` → `ch01` SPA 路由无整页重载。本次为本地构建与验证，未提交、推送或部署生产环境。
+- **交接**：分支 `main`（含既有未提交改动 + Phase 1/2/3 本地增量）；进行中：等待用户决定直接进入 Phase 4 还是先提交/部署前三本；下一步：按已批准方案收官 Phase 4（《Kimi 实战蓝皮书》：Kimi K3.1 Pro 开源基座 + Kimi Code CLI/Web/ACP/Swarm + 金融/法律/医药垂直场景 + Kimi Slides & 3D Make）。
+
+---
+
+## 2026年11月26日（Phase 2：《Claude 实战蓝皮书》v1.0.0 中英 10 章、Hooks 套件与双语 PDF 上线）
+
+- **《Claude 实战蓝皮书》v1.0.0 全量中英双语完工（本地）**：新增 `claude/ch01`–`ch10` 与 `en/claude/ch01`–`ch10` 共 20 篇双语实战章节，覆盖 Claude 5.5（Opus / Sonnet / Haiku 5.5）+ Fable 5.2、五大工程原语（`CLAUDE.md` / `Skills` / `Hooks` / `Subagents` / `MCP` + 实验性 Code Mode）、Whiteboards 与 `/design`（Claude Design）画板回流、1M 上下文存量系统治理、`/ship` + PR Steward 团队门禁、ToB 审计 SaaS 商业闭环及 Ch.10 对 Claude Cowork 形态的客观批评；同步更新 `claude/index.md` 与 `en/claude/index.md` 专页。
+- **配套可运行工程套件与专属封面/OG**：新增 [examples/claude-hooks-kit](file:///Users/hunkwu/Desktop/ai/book/examples/claude-hooks-kit/README.md)（含防危命 `block-dangerous-bash.sh`、防泄露 `protect-secrets.sh` 及只读 `arch-reviewer.md` 子代理，已本地实测阻断与放行退出码）；生成并裁切 16:9 书封 `public/images/claude_cover.jpg`（`1024×576`）及 1200×630 分享图 `public/social/claude-en-20261126.jpg`，在 `.vitepress/config.mts` 为 `/claude/` 与 `/en/claude/` 接入独立 5 部分侧边栏、导航与专属 OG 元数据。
+- **合订本、PDF 与 GEO/SEO 管线扩展**：扩展 `scripts/compile_collection.py`、`scripts/compile_pdf.js` 与 `scripts/verify_seo_geo.mjs`，产出 `claude_blue_book_zh.md` / `en.md`、根目录与 `public/downloads/` 同步双语 PDF（中文 4.6MB / 英文 1.2MB）、`public/llms-claude.txt`（125KB）并汇入 `public/llms-full.txt`（390KB）；同步更新 `index.md`、`en/index.md`、`compare.md`、`en/compare.md`、`public/llms.txt` 与 `docs/backlink/product-profile/book.json`。
+- **验证证据（本地）**：`npm run docs:build`（60 页 2.64s 零错）、`verify_seo_geo.mjs`（286/286）、20 章 Claude 结构/代码块语言标签 lint（0 问题）、`stress_m2_chapters`（312/312）、`stress_m3_terminology`（20/20）、`stress_m3_dead_links`（99/99）、`e2e`（96/96）全绿；Ego Lite 本地预览实测 6 路由 × `390/768/1440px` 三视口零横向溢出、最小字号 `12px`、专属封面与 `claude-en-20261126.jpg` OG 加载正常、`/claude/` → `ch01` SPA 路由无整页重载。本次为本地构建与验证，未提交、推送或部署生产环境。
+- **交接**：分支 `main`（含既有未提交改动 + Phase 1 与 Phase 2 本地增量）；进行中：等待用户决定是先提交/生产部署 Phase 1+2，还是直接继续 Phase 3；下一步：按已批准方案执行 Phase 3（《Gemini 实战蓝皮书》：Google Antigravity 2.x + Gemini 4 + AI Studio / Workspace MCP / Colab `%%agy`）。
+
+---
+
+## 2026年11月26日（Phase 1：四书总门户升级、Codex v1.5.0 校准精修与 GEO/SEO 全套基建）
+
+- **四书矩阵门户与零死链架构上线（本地完成）**：将 `/` 与 `/en/` 升级为「AI 编程实战蓝皮书系列（Codex · Claude · Gemini · Kimi）」总门户；新增 `/codex/`、`/claude/`、`/gemini/`、`/kimi/` 中英文专页与多前缀隔离侧边栏，100% 保留 Codex 原有 `/chapters/*` 与 `/en/ch*` 路径零死链；新增 `/compare` 与 `/en/compare` 四书横向选型中枢页。
+- **多智能体通用规约生成器升级**：升级 [generator.md](file:///Users/hunkwu/Desktop/ai/book/generator.md) 与 [en/generator.md](file:///Users/hunkwu/Desktop/ai/book/en/generator.md)，支持一键切换导出 Codex（`AGENTS.md`）、Claude Code（`CLAUDE.md` + `Hooks`）、Gemini Antigravity（`.agents/rules`）与 Kimi Code（`AGENTS.md` + `config.toml`）；同步修复 Markdown 缩进导致的表单误解析与 `11.375px` 代码块字号问题。
+- **《Codex 蓝皮书》v1.5.0 内容推进与 26 章去 AI 腔精修**：核对推进至 `2026-11-26`，更新 `gpt-6.2-astra` / `gpt-6.2-sol` / `gpt-6.1-terra` 选型与定价、CLI `0.172.0` 新特性及 `2026-11-30` / `2026-12-23` 退役预警，清除跨章遗留的 `GPT-5.6 Terra` 表述；按 `renwei-writing` 原则完成 26 章首段去说教减法精修，补齐每章独立 SEO Frontmatter，并重编同步 `codex_blue_book_{zh,en}.pdf` 与 `docs/codex-update-2026-11-26.md`。
+- **GEO & SEO 基建与门禁**：启用原生 `sitemap.xml`，新增 `public/robots.txt`（放行传统与主流 AI 爬虫）、`public/llms.txt`、`public/llms-codex.txt`、`public/llms-full.txt`，在 `.vitepress/config.mts` 注入自引用 `canonical`、双向 `hreflang`（`zh-CN`/`en-US`/`x-default`）及分页面 JSON-LD；新增 `scripts/verify_seo_geo.mjs`（179/179 通过）。
+- **验证证据（本地）**：`npm run docs:build`（2.28s 零错）、`verify_seo_geo.mjs`（179/179）、`stress_m2_chapters`（312/312）、`stress_m3_terminology`（20/20）、`stress_m3_dead_links`（99/99）、`e2e`（96/96）全绿；Ego Lite 实测 `390/768/1440px` 三视口零横向溢出、最小字号 `12px`、四工具 Tab 切换正常。本次为本地开发与验证，未提交、推送或部署生产环境。
+- **交接**：分支 `main`（含既有未提交改动 + 本轮 Phase 1 增量）；进行中：等待用户审阅决定是否先提交/部署 Phase 1；下一步：按已批准方案启动 Phase 2（《Claude 实战蓝皮书》中英 10 章正文、示例、封面与双语 PDF）。
+
+---
+
+## 2026年10月21日（双语分享素材与产品资料库接入）
+
+- 补充英文优先的中英文 OG/Twitter 品牌封面与 Pinterest 竖版素材。原 Logo、书封、章节及 PDF 更新保持原样。
+- 构建阶段输出绝对 HTTPS 图片、尺寸、类型、alt 与 summary_large_image；首页用英文图，中文章节用中文图，页面自定义封面优先。
+- 新增独立 `book` 产品资料源和工程/域名路由，纳入 product-promotion 的资料、素材及可移植模板。未知主体、价格与平台账号未填入。
+- 本轮按明确授权提交、推送并进行生产发布；不包含社交平台发布，部署与域名验收结果单独记录；验证证据见 `docs/promotion/2026-10-21/README.md`。
 
 ---
 
@@ -22,29 +62,35 @@
 - 当前配置示例使用 `gpt-6.1-sol`；保留上一代 Sol 对照及历史案例，说明 API 推理档位、Responses 工具调用、缓存价格和 Codex 订阅用量的区别。
 - 增补 Ultrafast、输入建议 beta、桌面 worktree 与手机审批变化，将 GPT-5.5 退役改为已生效并限定登录范围。第 13 章旧版关于桌面合并后全账号获得全部能力的表述改为按当前文档核对。
 - 中英首页、导航、README、第 2／13 章与 PMER Codex 频道双向互链，频道同步日期与选型要点；保留历史更新日志与现有 GitHub Release。
-- 同步双语合订本、根目录与下载目录 PDF。本轮内容随后按授权同步 GitHub 专用分支及 PR，生产部署另行处理。
+- 同步双语合订本、根目录与下载目录 PDF。本次为本地内容更新，不包含提交、推送或部署。
 
 ---
 
+## 📅 2026年10月15日（链接规范与平板导航修复，已上线）
 
-## 2026年10月21日（双语分享素材与产品资料库接入）
+- 正文链接使用项目主题色和常驻下划线；复用 VitePress 现有外链标记位置，将裸箭头统一为一个继承颜色的小型方框外跳图标，同源和下载入口保持各自语义。
+- 长链接自然断行并为末尾图标预留空间；768–1279px 复用既有收起菜单，修复完整导航撑宽页面。新增 `docs/link-style/` 受控规范、检查器和校验合同。
+- 锁文件安装与 `docs:build` 通过；发布提交 `4145c11` 已推送至 `main`，正式 Vercel 项目 `codex-blue-book` 为 Ready，`book.pmer.cn` 已生效。
+- 正式域名中英文章节 2 页、24 次链接检查全部通过；768px 菜单可展开、导航可见，无横向溢出。原有内容及其他未发布改动保留。
 
-- 补充英文优先的中英文 OG/Twitter 品牌封面与 Pinterest 竖版素材。原 Logo、书封、章节及 PDF 更新保持原样。
-- 构建阶段输出绝对 HTTPS 图片、尺寸、类型、alt 与 summary_large_image；首页用英文图，中文章节用中文图，页面自定义封面优先。
-- 新增独立 `book` 产品资料源和工程/域名路由，纳入 product-promotion 的资料、素材及可移植模板。未知主体、价格与平台账号未填入。
-- 本轮按明确授权提交、推送并进行生产发布；不包含社交平台发布，部署与域名验收结果单独记录；验证证据见 `docs/promotion/2026-10-21/README.md`。
+---
 
+## 📅 2026年10月12日（Cloudflare 试部署，正式迁移暂缓）
+
+- 从已核验 Vercel 生产源码 `c005cc7` 建立独立候选，完成依赖安装、VitePress 构建及 Wrangler dry-run；仅将静态产物部署到测试 Worker，版本为 `17bcf071-989e-4937-a066-bed98f03ee96`，未引入 ISR、数据库或应用 API。
+- 测试入口为 [book-cf-test.pmer.cn](https://book-cf-test.pmer.cn/)及 [Workers 默认地址](https://codex-blue-book-network-pilot.wuyu111.workers.dev/)；测试响应设置 `X-Robots-Tag: noindex`，哈希资源使用长期浏览器缓存。[正式站 book.pmer.cn](https://book.pmer.cn/)继续使用 Vercel，未切换生产域名或删除原项目。
+- 完成 Vercel → Cloudflare → Cloudflare → Vercel 四轮首页 HTTP 对照，每轮覆盖 273 个大陆及 45 个海外节点。Cloudflare 联通成功节点的中位耗时为 6.792／6.112 秒，失败为 29／89、26／89；Vercel 对应中位耗时为 0.671／0.326 秒，失败为 1／89、2／89，后一轮另 1 节点未返回。其他线路亦有失败，不据此概括所有地区或项目。
+- 中英首页、首章、生成器及 PDF 共 8 路径的内容与静态产物一致，404 行为及 noindex 通过；390／768／1440px 无横向溢出，生成器客户端导航与输入更新通过。两次截图超时，完整人工视觉验收未通过。
+- **网络验收未通过，暂缓正式迁移及面向大陆站点的批量迁移。** 保留测试资源供复核；重新评估前需补晚高峰、跨日及完整页面加载／视觉验收。原工作区与未发布改动保留；本轮未提交或推送 Git，Web2QR 继续暂缓处理。证据保存在工作区 `reports/cloudflare-migration-pilot-2026-10-12/`。
 
 ---
 
 ## 📅 2026年9月24日 (v1.3.1 内容校订)
 
-- 依据 [Codex 更新日志](https://learn.chatgpt.com/docs/changelog)将本书 CLI 核对点更新为 2026 年 9 月 23 日发布的 `0.156.1`；书中安装命令仍提示读者核对当前版本。
+- 依据 [Codex 更新日志](https://learn.chatgpt.com/docs/changelog)将本书 CLI 核对点更新为 2026 年 9 月 23 日发布的 `0.156.1`；本次没有升级本机 CLI、推送或发布站点。
 - 根据 [GPT-6 官方指南](https://developers.openai.com/api/docs/guides/latest-model)与 [Codex 模型说明](https://learn.chatgpt.com/docs/models)，补齐 Astra、Sol、Luna 的定位、模型 ID、推理档位和 Codex 可用性；当前选型示例以 `gpt-6-sol` 为默认值，API 价格与 Codex 订阅用量分开说明。
 - 修正 `--full-auto` 的状态为“已弃用但保留兼容入口”，更新 Hooks 数组结构与插件命令；删除缺少一手依据的 BenchCAD 95.9%、网络安全评级及第三方深度集成断言，保留可检查的 3D 工作流示例。
-- 依据 [API 退役公告](https://developers.openai.com/api/docs/deprecations)逐项校对生命周期表；13 对章节统一采用具体问题、实践步骤和验收条件，修正固定完成时间、文字规则等于权限控制等表述，并同步首页、生成器、导航与 README。
-- 更正第 2 章第三方切换工具的实际入口命令；第 8 章移动中转网关改为本机令牌鉴权与决策记录，不再从网页请求执行部署、结束进程或回滚 Git。
-- 从校订后章节重编中英文合订本与 PDF；固定 PDF 编译依赖，编译失败返回非零状态，根目录与站点下载目录中的对应 PDF 保持字节一致。
+- 依据 [API 退役公告](https://developers.openai.com/api/docs/deprecations)逐项校对生命周期表，并同步中英文章节、README、合订本和双语 PDF。
 - **对 v1.3.0 的勘误**：下方原始发布记录保留为历史记录。其中关于 `--full-auto` 已移除、BenchCAD 数字、2026 年 10 月 23 日与 12 月 1 日的批量退役安排等表述，均以本次校订和第 13 章的官方来源为准。
 
 ---
@@ -258,19 +304,35 @@ This document records the recent updates, technical issues, and solutions for th
 - Current configuration examples use `gpt-6.1-sol`. Retain previous Sol comparisons and historical examples; distinguish API reasoning controls, Responses tool calling, cache pricing and Codex subscription usage.
 - Cover Ultrafast, composer predictions beta, worktree collaboration and mobile approvals. Record GPT-5.5 retirement as effective for Codex with ChatGPT sign-in; API and API-key sessions remain outside that notice.
 - Link the bilingual reader, setup and frontier chapters with the PMER Codex channel. Rebuild both collections and the four PDF copies; preserve historical changelog entries and the existing GitHub release.
-- The scoped GitHub branch and PR carry this update; production deployment is handled separately.
+- Local content and validation only: no commit, push or production deployment.
 
 ---
 
+## 📅 October 15, 2026 (Link Styles and Tablet Navigation; Released)
+
+- Body links use the project theme color and persistent underlines. Existing VitePress external markers now use one small, color-inheriting boxed icon; same-origin and download links keep their semantics.
+- Long links wrap naturally with space reserved for the final icon. The existing compact menu now covers 768–1279px, preventing navigation overflow. Added controlled link-style documentation, checker and checksum contract under `docs/link-style/`.
+- Locked installation and `docs:build` passed. Commit `4145c11` was pushed to `main`; Vercel project `codex-blue-book` reached Ready and serves the update at `book.pmer.cn`.
+- Production checks passed on two Chinese/English chapter pages, covering 24 links. The 768px menu opens with navigation visible and no horizontal overflow. Unrelated local changes were preserved.
+
+---
+
+## 📅 October 12, 2026 (Cloudflare Pilot; Production Migration Deferred)
+
+- Built an isolated candidate from verified Vercel production source `c005cc7`. Dependency installation, VitePress build, and Wrangler dry-run passed; only static assets were deployed to the test Worker, version `17bcf071-989e-4937-a066-bed98f03ee96`, without ISR, a database, or application APIs.
+- Test endpoints: [book-cf-test.pmer.cn](https://book-cf-test.pmer.cn/) and the [Workers default hostname](https://codex-blue-book-network-pilot.wuyu111.workers.dev/). Responses use `X-Robots-Tag: noindex`, with long browser caching for hashed assets. [book.pmer.cn](https://book.pmer.cn/) remains on Vercel; production traffic and the original project were not switched or removed.
+- Four homepage HTTP rounds ran in Vercel → Cloudflare → Cloudflare → Vercel order, each with 273 mainland China and 45 overseas nodes. Cloudflare's successful China Unicom nodes had median times of 6.792/6.112 seconds, with 29/89 and 26/89 failures. Vercel medians were 0.671/0.326 seconds, with 1/89 and 2/89 failures and one additional missing result in the last round. Other carriers also had failures; these results do not characterize every region or application.
+- Eight Chinese/English homepage, chapter, generator, and PDF routes matched the build; 404 behavior and noindex passed. No horizontal overflow appeared at 390/768/1440px, and generator navigation/input worked. Two screenshot attempts timed out, so full visual acceptance remains incomplete.
+- **Network acceptance failed; production migration and bulk migration of mainland-facing sites are deferred.** Retain the test resources for review, then repeat at evening peak and on another day, including full loading and visual checks, before reconsidering. Original workspace changes were preserved; no Git commit/push was made, and Web2QR remains deferred. Evidence is archived under workspace `reports/cloudflare-migration-pilot-2026-10-12/`.
+
+---
 
 ## 📅 September 24, 2026 (v1.3.1 Content Revision)
 
-- Updated the CLI research cutoff to `0.156.1`, released September 23, 2026, using the [Codex changelog](https://learn.chatgpt.com/docs/changelog). Installation examples still tell readers to verify the current version.
+- Updated the CLI research cutoff to `0.156.1`, released September 23, 2026, using the [Codex changelog](https://learn.chatgpt.com/docs/changelog). This revision does not upgrade the local CLI or publish the site.
 - Added the roles, model IDs, reasoning levels, and Codex rollout boundaries for Astra, Sol, and Luna using the [official GPT-6 guide](https://developers.openai.com/api/docs/guides/latest-model) and [Codex models](https://learn.chatgpt.com/docs/models). Current examples default to `gpt-6-sol` and distinguish API prices from Codex subscription usage.
 - Corrected `--full-auto` to a deprecated compatibility path, updated Hooks arrays and plugin commands, and removed unsupported BenchCAD, cybersecurity-rating, and third-party integration claims while retaining an inspectable 3D workflow example.
-- Checked lifecycle dates against [API deprecations](https://developers.openai.com/api/docs/deprecations). All 13 chapter pairs now state concrete problems, practice steps, and acceptance checks; fixed-time promises and claims that written rules enforce permissions were corrected across the site and README.
-- Corrected the third-party switcher's actual entry command in Ch.02. The Ch.08 mobile relay now requires a local bearer token and records decisions without deploying, terminating processes, or rolling back Git.
-- Rebuilt the bilingual collected manuscripts and PDFs from the revised chapters. The PDF dependency is pinned, compiler failures return nonzero, and the root and site-download PDF copies match byte for byte.
+- Checked lifecycle dates against [API deprecations](https://developers.openai.com/api/docs/deprecations) and synchronized the bilingual chapters, README, collected manuscripts, and PDFs.
 - **Errata for v1.3.0**: The original release notes below remain as historical records. Their statements that `--full-auto` was removed, the BenchCAD figure, and the October 23 and December 1 bulk retirement dates are superseded by this revision and the sourced Ch.13.
 
 ---

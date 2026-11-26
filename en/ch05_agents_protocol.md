@@ -1,24 +1,28 @@
+---
+title: "Ch.05 Custom Project Rules: AGENTS.md & Codex Hooks Guardrails | Codex Blue Book"
+description: "Build a production AGENTS.md rule layer with hierarchical loading, 2-retry loop circuit breakers, sandbox boundaries, and config.toml Stop Hooks."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.04) ](./ch04_goal_driven.md) | [ ➡️ Next (Ch.06) ](./ch06_reasoning_steer.md) | [ 🌐 中文版 ](../chapters/ch05_agents_protocol.md)
 
-# Ch.05 Record Project Rules in AGENTS.md
+# Ch.05 Defining the CAP Protocol: Building Your Project's AGENTS.md Rule Compliance Layer
 
-> **Problem**: Without project guidance, an agent may edit unrelated files or retry failed commands.
->
-> **Practice**: Create a maintainable AGENTS.md and distinguish written guidance from actual permissions and sandbox controls.
+> 🎯 **The Real Problem**: Fixing 1 bug creates 3 new bugs, infinite 10-retry loop spins that drain budgets, unwanted heavy npm packages, and lazy fake `TODO` stubs.  
+> 💡 **Tangible Output & Takeaway**: Production-grade `AGENTS.md` project rules template, 2-retry hard circuit breaker, and zero-placeholder engineering boundaries.  
+> ⚡ **Viral Screenshot Quote**: *"An unconstrained AI is a runaway horse. An AGENTS.md rulebook forces models to respect architecture like a principal engineer."*
 
-In the product development process, one of the most frustrating scenarios is fixing one bug only to introduce three new ones, or coding a new feature while completely disregarding the team's established coding standards.
+Few things waste more time than fixing one bug only to break three working paths, or shipping a feature that tramples existing conventions. Without explicit boundaries, Codex can be just as destructive as it is fast.
 
-In human-machine collaborative development, place an **`AGENTS.md`** file in the project root to share the stack, commands, and collaboration rules. Use permissions, review, and tests to control consequential operations.
-
-This book calls the format **Codex Collaboration Protocol (CAP)**. It is project guidance, not an enforced Codex security mechanism.
+The fix is a project-root **`AGENTS.md`** file—our **Codex Collaboration Protocol (CAP)**.
 
 ---
 
-## A Way to Think About It: The New Employee Onboarding Handbook & Safety Code
+## 🎯 Intuitive Metaphor: The New Employee Onboarding Handbook & Safety Code
 
 Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
-```text
+```Plaintext
 【Without AGENTS.md】 ──> The intern arrives with no rulebook. To fix a minor frontend alignment bug,
                           they casually rewrite your 3-year-old core authentication module into an esoteric syntax,
                           crashing production upon release.
@@ -33,9 +37,9 @@ Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart: 3 Steps to Launch
 
-Start your first project rules file with these three steps:
+Create your project's first compliance rulebook in 3 minutes:
 
 1. **Step 1: Create the File in Your Project Root**  
    Run in your terminal:
@@ -82,7 +86,7 @@ Its core value lies in:
 
 ## 5.2 The Four Core Sections of `AGENTS.md`
 
-```text
+```Plaintext
 # Project Fingerprint
 - Tells the AI what kind of project this is and its core tech stack.
 
@@ -146,11 +150,11 @@ Its core value lies in:
 codex --sandbox workspace-write "Review the current changes and report issues"
 ```
 
-This configuration selects GPT-6 Sol and checks the current repository for whitespace errors at the end of a turn. Both the `Stop` event and its handler use array syntax. Verify trust with `/hooks` after enabling:
+This configuration selects GPT-6.2 Sol and checks the current repository for whitespace errors at the end of a turn. Both the `Stop` event and its handler use array syntax. Verify trust with `/hooks` after enabling:
 
 ```toml
 # ~/.codex/config.toml
-model = "gpt-6-sol"
+model = "gpt-6.2-sol"
 
 [[hooks.Stop]]
 

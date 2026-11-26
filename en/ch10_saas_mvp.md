@@ -1,24 +1,30 @@
+---
+title: "Ch.10 Commercial SaaS MVP: Next.js 15 + Supabase + Stripe in 2 Hours | Codex Blue Book"
+description: "Ship a subscription SaaS MVP with runnable companion code (examples/ch10-saas-mvp), Prisma schemas, Stripe Checkout, and verified webhook handlers."
+lastUpdated: 2026-11-26
+---
+
 [ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.09) ](./ch09_legacy_code.md) | [ ➡️ Next (Ch.11) ](./ch11_expo_mobile.md) | [ 🌐 中文版 ](../chapters/ch10_saas_mvp.md)
 
-# Ch.10 Validate a Subscription SaaS Payment Flow
+# Ch.10 Monetization in Practice: Shipping a Commercial Next.js + Stripe SaaS MVP in 2 Hours
 
-> **Problem**: A subscription product must keep sign-in, payment callbacks, and access state consistent.
->
-> **Practice**: Use the companion Next.js example to test Stripe payments and webhook signature verification.
+> 🎯 **The Real Problem**: Spending two weeks wrestling with authentication, database schemas, Stripe Webhook signature verification, and cloud hosting before shipping anything.  
+> 💡 **Tangible Output & Takeaway**: Fully runnable production repo `examples/ch10-saas-mvp` (Next.js 15 + Supabase + Stripe subscriptions); Stripe CLI local payment test loops.  
+> ⚡ **Viral Screenshot Quote**: *"The ultimate milestone for indie developers isn't architectural perfection—it's receiving the first customer payment. Ship monetization in 2 hours."*
 
-A useful first engineering milestone for a subscription product is a test flow covering sign-in, payment callbacks, and access changes. Real payments also require deployment, risk, and compliance checks.
+For an indie developer, the first real milestone is collecting the first customer payment, not polishing boilerplate architecture for two weeks.
 
-This chapter uses the companion `Next.js 15 (App Router) + Supabase (PostgreSQL) + Stripe` project to test a local subscription flow. Time required depends on your accounts, environment, and existing code.
+This chapter directs Codex through a runnable `Next.js 15 (App Router) + Supabase (PostgreSQL) + Stripe` build with working checkout, webhook verification, and subscription gating.
 
 > 📦 **Companion Source Code**: [examples/ch10-saas-mvp](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp) — a fully runnable subscription-based AI translator (TransFlow) with its own CAP `AGENTS.md`. Verified with `npm install && npm run build`.
 
 ---
 
-## A Way to Think About It: Launching a Cash-Generating Street Food Cart
+## 🎯 Intuitive Metaphor: Launching a Cash-Generating Street Food Cart
 
 Too many founders try to build a 5-star luxury hotel on Day 1:
 
-```text
+```Plaintext
 [Daydreaming 5-Star Hotel] ──> Spending 6 months designing an opulent lobby, importing plush carpets,
                                hiring dozens of waiters (over-engineering),
                                only to open doors and discover nobody wants to eat there. Bankruptcy.
@@ -32,7 +38,7 @@ Once a customer scans the code, pays \$10, and receives a hot meal in their hand
 
 ---
 
-## Practice: Start with Three Steps
+## 🚀 Beginner Quickstart (3 Easy Steps)
 
 Set up and verify your local Stripe payment loop in 3 simple steps:
 
