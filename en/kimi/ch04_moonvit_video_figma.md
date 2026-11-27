@@ -4,15 +4,15 @@ description: "Use Kimi K3.1 Pro MoonViT-V2 native-resolution vision for Video-to
 lastUpdated: 2026-11-26
 ---
 
-[Back to Kimi Hub](/en/kimi/) | [Prev: Subagents & /swarm](/en/kimi/ch03_subagents_swarm) | [Next: Financial Research & Modeling](/en/kimi/ch05_finance_audit_modeling)
+[Back to Kimi Hub](/en/kimi/) | [Prev: Subagents & Multi-Agent Collaboration](/en/kimi/ch03_subagents_swarm) | [Next: Financial Research & Modeling](/en/kimi/ch05_finance_audit_modeling)
 
 # Ch.04 MoonViT-V2 Visual Engineering: Video-to-Fix & Figma MCP Fidelity
 
-> 🎯 **Engineering pain solved**: Transient flicker and layout-shift bugs take paragraphs to explain in tickets, while slicing complex Figma mocks by eyeballing screenshots misses spacing tokens and accessibility labels.
+> **Engineering pain solved**: Transient flicker and layout-shift bugs take paragraphs to explain in tickets, while slicing complex Figma mocks by eyeballing screenshots misses spacing tokens and accessibility labels.
 >
-> 💡 **What you ship**: A compact **Video-to-Fix** workflow leveraging **MoonViT-V2** native resolution, a structured **Figma MCP → CSS token** prompt pattern, and a runnable Playwright responsive + a11y gate.
+> **What you ship**: A compact **Video-to-Fix** workflow leveraging **MoonViT-V2** native resolution, a structured **Figma MCP → CSS token** prompt pattern, and a runnable Playwright responsive + a11y gate.
 >
-> ⚡ **Bottom line**: Native-resolution video input captures timing bugs static screenshots miss, and Figma MCP gives exact design tokens without guesswork.
+> **Bottom line**: Native-resolution video input captures timing bugs static screenshots miss, and Figma MCP gives exact design tokens without guesswork.
 
 ---
 
@@ -55,11 +55,9 @@ Read Figma node `https://www.figma.com/design/FILE_KEY/App?node-id=123-456` via 
 import { chromium } from "playwright";
 
 const URL = process.argv[2] || "http://127.0.0.1:4173/";
-const VIEWPORTS = [
-  { name: "mobile", width: 390, height: 844 },
+const VIEWPORTS = [{ name: "mobile", width: 390, height: 844 },
   { name: "tablet", width: 768, height: 1024 },
-  { name: "desktop", width: 1440, height: 900 }
-];
+  { name: "desktop", width: 1440, height: 900 }];
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
@@ -86,7 +84,7 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Test Video-to-Fix**: Compress one 15-second UI bug recording with `ffmpeg` and pass it to Kimi Code alongside the component file.
 2. **Convert one Figma component**: Extract via Figma MCP into your existing CSS tokens rather than raw hex values.
@@ -94,14 +92,12 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | 4K Retina `.mov` upload times out | Raw 60fps capture exceeds 50MB | Transcode to `1280px` wide, `4 fps`, `-an` with `ffmpeg` before uploading |
 | Figma export looks crisp on desktop but breaks on 390px mobile | Fixed pixel widths copied literally from desktop frames | Replace rigid widths with `max-width`, `width: 100%`, and `minmax(0, 1fr)` grids |
-| Icon buttons fail keyboard & screen-reader audits | Clickable `<div>` used instead of native `<button>` | Enforce `<button type="button" aria-label="...">` across interactive icons |
+| Icon buttons fail keyboard & screen-reader audits | Clickable `<div>` used instead of native `<button>` | Enforce `<button type="button" aria-label="...">` across interactive icons | ---
 
----
-
-[Back to Kimi Hub](/en/kimi/) | [Prev: Subagents & /swarm](/en/kimi/ch03_subagents_swarm) | [Next: Financial Research & Modeling](/en/kimi/ch05_finance_audit_modeling)
+[Back to Kimi Hub](/en/kimi/) | [Prev: Subagents & Multi-Agent Collaboration](/en/kimi/ch03_subagents_swarm) | [Next: Financial Research & Modeling](/en/kimi/ch05_finance_audit_modeling)

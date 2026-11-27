@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.01 告别单线程 CLI：Google Antigravity 架构与 Gemini 4 模型矩阵
 
-> 🎯 **本章解决的工程麻烦**：面对 `Antigravity App`、`Antigravity IDE`、`agy CLI` 和企业版 `gemini` CLI 四个名字，以及 Gemini 4 的四个化学元素代号，不知道该装哪一套、什么时候用订阅配额、什么时候走 API，结果要么把 Pro 配额半小时烧光，要么 12 月 1 日 Argon 涨价翻倍才发现账单失控。
+> **本章解决的工程麻烦**：面对 `Antigravity App`、`Antigravity IDE`、`agy CLI` 和企业版 `gemini` CLI 四个名字，以及 Gemini 4 的四个化学元素代号，不知道该装哪一套、什么时候用订阅配额、什么时候走 API，结果要么把 Pro 配额半小时烧光，要么 12 月 1 日 Argon 涨价翻倍才发现账单失控。
 >
-> 💡 **实战落地收益**：明确 Antigravity 与 GCP 企业工具的选型边界，掌握 **Gemini 4（Carbon / Argon / Neon / Hydrogen）** 截至 2026 年 11 月 26 日的真实定价账本、**Orchestrator** 混排配置，以及 5 分钟将现有 Cursor / Claude / Codex 规则无损迁入 Antigravity Plugin。
+> **实战落地收益**：明确 Antigravity 与 GCP 企业工具的选型边界，掌握 **Gemini 4（Carbon / Argon / Neon / Hydrogen）** 截至 2026 年 11 月 26 日的真实定价账本、**Orchestrator** 混排配置，以及 5 分钟将现有 Cursor / Claude / Codex 规则无损迁入 Antigravity Plugin。
 >
-> ⚡ **一句话结论**：单线程 CLI 只能线性串行改代码，Antigravity 把多模型路由、独立 Git Worktree 蜂群和内置浏览器视觉验证收进同一个调度平面。
+> **一句话结论**：单线程 CLI 只能线性串行改代码，Antigravity 把多模型路由、独立 Git Worktree 蜂群和内置浏览器视觉验证收进同一个调度平面。
 
 大多数开发者刚接触 Google 2026 年底的编码工具链时，第一道坎卡在命名上：桌面端有 Antigravity 2.x，终端里有 `agy`，谷歌云文档里还有一套 Gemini Code Assist 和 `gemini` CLI。装错入口，后面所有关于 `/swarm`、内置浏览器巡检和 AI Studio 一键导出的工作流都跑不通。
 
@@ -30,9 +30,7 @@ lastUpdated: 2026-11-26
 | **多模型混排** | 原生 **Orchestrator**（Neon/Carbon 规划 + Hydrogen 执行） | 偏固定模型端点绑定 |
 | **并发架构** | 原生 **`/swarm`**（Coordinator + Git Worktrees + 对抗性 Verifier） | 单会话或外部 CI 编排 |
 | **多模态与预览** | 内置浏览器子代理、原生生图、AI Studio 带上下文一键导出 | 侧重代码补全与 Cloud Shell 集成 |
-| **身份与认证** | Google AI Pro / Ultra 个人订阅，或设置 `AGY_ADC_AUTH` 走企业网关 | GCP 项目账号与 Vertex AI IAM 绑定 |
-
-日常写业务、做多模态应用、需要一边改代码一边让代理打开浏览器测响应式排版，直接装 **Antigravity + `agy` CLI**。如果公司要求所有流量必须经由内部 Vertex AI 网关审计，依然可以用 `agy`，只需开启 `AGY_ADC_AUTH` 走 Application Default Credentials，不用放弃 `/swarm` 和本地定制插件。
+| **身份与认证** | Google AI Pro / Ultra 个人订阅，或设置 `AGY_ADC_AUTH` 走企业网关 | GCP 项目账号与 Vertex AI IAM 绑定 | 日常写业务、做多模态应用、需要一边改代码一边让代理打开浏览器测响应式排版，直接装 **Antigravity + `agy` CLI**。如果公司要求所有流量必须经由内部 Vertex AI 网关审计，依然可以用 `agy`，只需开启 `AGY_ADC_AUTH` 走 Application Default Credentials，不用放弃 `/swarm` 和本地定制插件。
 
 ---
 
@@ -42,12 +40,10 @@ Gemini 4 放弃了过去 `Pro / Flash / Ultra` 容易混淆的版本号，改用
 
 | 模型 ID | 工程定位 | 标准输入（/1M） | 缓存读取（/1M） | 输出（/1M） | 关键提醒 |
 | :--- | :--- | ---: | ---: | ---: | :--- |
-| `gemini-4-hydrogen` | 极速日常执行、蜂群 Worker、批处理 | \$1.50 | 缓存优惠 | \$7.50 | 1M 窗口一口价，最适合跑高频文件修改与单测修复 |
+| `gemini-4-hydrogen` | 极速日常执行、并行执行代理、批处理 | \$1.50 | 缓存优惠 | \$7.50 | 1M 窗口一口价，最适合跑高频文件修改与单测修复 |
 | `gemini-4-neon` | 复杂编码甜点、Orchestrator 默认协调器 | \$3.00 | \$0.15 | \$15.00 | 支持 `Low / Medium / High / XHigh` 四档思考力度 |
 | `gemini-4-argon` | 企业级复杂工程与长程知识推理 | \$2.00 → **\$4.00** | \$0.10 → **\$0.20** | \$10.00 → **\$20.00** | **硬节点预警：\$2/\$10 首发价截至 2026-11-30，12 月 1 日起翻倍** |
-| `gemini-4-carbon` | 旗舰深度探索、安全审计、硬核长链路排障 | \$2.00（首发档） | 缓存优惠 | \$10.00（首发档） | Pro / Ultra 订阅配额消耗最快，只用在真正卡壳的架构与根因定位 |
-
-> **账单防踩坑**：如果你在生产脚本或 CI 中绑定了 `gemini-4-argon`，请在 **2026 年 12 月 1 日** 之前复核月预算。常规代码修改和 PR 扫描优先切到 `gemini-4-hydrogen`（\$1.50/\$7.50）或 `gemini-4-neon`，把 Argon 和 Carbon 留给高价值架构评审。
+| `gemini-4-carbon` | 旗舰深度探索、安全审计、硬核长链路排障 | \$2.00（首发档） | 缓存优惠 | \$10.00（首发档） | Pro / Ultra 订阅配额消耗最快，只用在真正卡壳的架构与根因定位 | > **账单防踩坑**：如果你在生产脚本或 CI 中绑定了 `gemini-4-argon`，请在 **2026 年 12 月 1 日** 之前复核月预算。常规代码修改和 PR 扫描优先切到 `gemini-4-hydrogen`（\$1.50/\$7.50）或 `gemini-4-neon`，把 Argon 和 Carbon 留给高价值架构评审。
 
 你可以直接运行配套仓库中的零依赖脚本 [check_gemini_quota.mjs](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs) 测算 12 月前后同一批任务的真实差价：
 
@@ -137,7 +133,7 @@ agy -p "运行 migrate-agent-settings，扫描当前项目的 .claude/、.cursor
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **安装并核验身份**：安装 Antigravity 桌面端与 `agy` CLI 后，在终端执行 `agy --version && agy models`，确认账号已看到 `gemini-4-hydrogen` 与 `gemini-4-neon`。
 2. **启用混排配置**：在 `~/.gemini/antigravity-cli/settings.json` 写入上文 `orchestrator` 配置，把日常 worker 下沉给 Hydrogen。
@@ -145,14 +141,12 @@ agy -p "运行 migrate-agent-settings，扫描当前项目的 .claude/、.cursor
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | Pro 订阅配额半小时见底，频繁触发冷却 | 全局默认锁死了 `gemini-4-carbon` + `XHigh` 思考档位，连改文案都在烧旗舰额度 | 切换默认模型为 `gemini-4-neon`（`medium`）并开启 Orchestrator 下放给 `gemini-4-hydrogen`；仅在复杂排障时临时点名 Carbon |
 | 12 月初 API 账单突然比 11 月翻倍 | 脚本中硬编码了 `gemini-4-argon`，未留意 2026-12-01 从 \$2/\$10 恢复为 \$4/\$20 标准价 | 用 `check_gemini_quota.mjs --date 2026-12-01` 复算所有批处理任务，日常任务改走 `gemini-4-hydrogen` 并开启 Context Caching |
-| 迁移 Cursor / Claude 配置后规则互相打架 | 同时保留了旧全局提示词与重复的 `.agents/rules/`，导致模型指令冲突 | 执行 `/plugin` 查看已加载插件清单，只保留一份唯一真相源（根目录 `AGENTS.md` + 路径级 `.agents/rules/`） |
-
----
+| 迁移 Cursor / Claude 配置后规则互相打架 | 同时保留了旧全局提示词与重复的 `.agents/rules/`，导致模型指令冲突 | 执行 `/plugin` 查看已加载插件清单，只保留一份唯一真相源（根目录 `AGENTS.md` + 路径级 `.agents/rules/`） | ---
 
 [返回 Gemini 专页](/gemini/) | [下一章：多模态规约与自定义 Skills](/gemini/ch02_multimodal_rules_skills)

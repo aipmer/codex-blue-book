@@ -4,13 +4,13 @@ description: "掌握 Codex TUI 实时推理摘要解读、依赖狂躁与打地�
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.05) ](./ch05_agents_protocol.md) | [ ➡️ 下一章 (Ch.07) ](./ch07_desktop_computer_use.md) | [ 🌐 English ](../en/ch06_reasoning_steer.md)
+[主目录](/) | [上一章 (Ch.05)](./ch05_agents_protocol.md) | [下一章 (Ch.07)](./ch07_desktop_computer_use.md) | [English](../en/ch06_reasoning_steer.md)
 
 # Ch.06 思维纠偏：如何像技术总监一样透视推理过程
 
-> 🎯 **具体工程麻烦**：面对强推理模型只能干等；当 AI 第一步假设走偏时，它会顺着错误连续深陷，搞乱代码库。  
-> 💡 **可运行实战代码与落地收益**：终端 TUI 实时透视 CoT 思考步骤方法；两类死循环特征识别表；配套 Chrome 扩展实战工程 (`examples/ch06-chrome-extension`)。  
-> ⚡ **社交传播 / 截图金句**：“别让 AI 蒙头狂奔 20 分钟才告诉你走偏了。看懂思考日志，在它跑偏的第一步一键拽回。”
+> **具体工程麻烦**：面对强推理模型只能干等；当 AI 第一步假设走偏时，它会顺着错误连续深陷，搞乱代码库。  
+> **可运行实战代码与落地收益**：终端 TUI 实时透视 CoT 思考步骤方法；两类死循环特征识别表；配套 Chrome 扩展实战工程 (`examples/ch06-chrome-extension`)。  
+> **社交传播 / 截图金句**：“别让 AI 蒙头狂奔 20 分钟才告诉你走偏了。看懂思考日志，在它跑偏的第一步一键拽回。”
 
 带初级工程师最头疼的，是对方闷头写一周，交出来的代码和业务目标南辕北辙，还把主干分支改崩。
 
@@ -20,7 +20,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：在 AI 脑海里装一个“监考透视窗”
+## 生活化直觉隐喻：在 AI 脑海里装一个“监考透视窗”
 
 不要把 AI 推理当成一个黑盒魔术：
 
@@ -36,7 +36,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 用 3 步学会像技术总监一样监督并纠正 AI：
 
@@ -58,7 +58,7 @@ lastUpdated: 2026-11-26
                  └───(在 TUI 中显示为 Reasoning Summary，即你的“监考视窗”)───┘
 ```
 
-> ⚠️ **注意**：完整的思维链（Chain of Thought）为安全防护内部流，TUI 中看到的是模型自主生成的**高保真推理摘要**——这已经完全足够用来判断其技术选型与规划方向。
+> **注意**：完整的思维链（Chain of Thought）为安全防护内部流，TUI 中看到的是模型自主生成的**高保真推理摘要**——这已经完全足够用来判断其技术选型与规划方向。
 
 ---
 
@@ -70,9 +70,9 @@ lastUpdated: 2026-11-26
 
 ```bash
 # TUI 交互快捷命令
-/diff       # 查看当前会话生成的真实代码变动
-/review     # 唤起子智能体自动审查最近的代码变更
-/copy       # 快速复制最后一条响应代码
+/diff # 查看当前会话生成的真实代码变动
+/review # 唤起子智能体自动审查最近的代码变更
+/copy # 快速复制最后一条响应代码
 ```
 
 ### 2. 非交互模式（脚本化分析）
@@ -140,7 +140,7 @@ git checkout -- src/lib/redis.ts
 
 为了让读者直观体验如何使用 Codex 思考链引导与 Anti-Loop 护栏进行浏览器插件开发，本项目配套提供了开箱即用的轻量开源样例：
 
-👉 **源码沙盒目录**：[examples/ch06-chrome-extension](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch06-chrome-extension)
+ **源码沙盒目录**：[examples/ch06-chrome-extension](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch06-chrome-extension)
 
 ### 核心亮点：
 1. **纯原生 Manifest V3**：零打包依赖，直接在 Chrome 浏览器中「加载已解压的扩展程序」即可 1 分钟开箱体验；
@@ -149,15 +149,13 @@ git checkout -- src/lib/redis.ts
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速排查与自救指南 |
 | :--- | :--- | :--- |
 | **AI 陷入自我修改死循环停不下来** | 提示词缺少明确的重试上限阈值 | 立即 `Ctrl + C` 中断，在对话中追加指令：“已触发重试阈值，停止自旋，输出排查结论” |
 | **打断后重新提问，AI 忘记了前面的背景** | 会话上下文丢失 | 使用 `codex resume` 恢复原有会话线程，保留先前的思考上下文 |
-| **AI 改坏了多个历史核心文件** | 未在修改前做 Git 干净分支隔离 | 运行 `git checkout .` 快速还原，并重新使用 `--sandbox workspace-write` 约束活动范围 |
+| **AI 改坏了多个历史核心文件** | 未在修改前做 Git 干净分支隔离 | 运行 `git checkout .` 快速还原，并重新使用 `--sandbox workspace-write` 约束活动范围 | ---
 
----
-
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.05) ](./ch05_agents_protocol.md) | [ ➡️ 下一章 (Ch.07) ](./ch07_desktop_computer_use.md) | [ 🌐 English ](../en/ch06_reasoning_steer.md)
+[主目录](/) | [上一章 (Ch.05)](./ch05_agents_protocol.md) | [下一章 (Ch.07)](./ch07_desktop_computer_use.md) | [English](../en/ch06_reasoning_steer.md)
 

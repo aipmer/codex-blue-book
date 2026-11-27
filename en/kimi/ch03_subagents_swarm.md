@@ -6,13 +6,13 @@ lastUpdated: 2026-11-26
 
 [Back to Kimi Hub](/en/kimi/) | [Prev: config.toml & kimi acp](/en/kimi/ch02_acp_config_failover) | [Next: MoonViT-V2 & Figma MCP](/en/kimi/ch04_moonvit_video_figma)
 
-# Ch.03 Tiered Subagents (`explore / plan / coder`) & `/swarm` Parallel Refactors
+# Ch.03 Tiered Subagents (`explore / plan / coder`) & Parallel Multi-Agent Refactors
 
-> 🎯 **Engineering pain solved**: Refactoring 40 files in a single chat fills context with stale stack traces and breaks earlier edits—while uncapped parallel agents immediately trigger `429` rate limits.
+> **Engineering pain solved**: Refactoring 40 files in a single chat fills context with stale stack traces and breaks earlier edits—while uncapped parallel agents immediately trigger `429` rate limits.
 >
-> 💡 **What you ship**: A disciplined `explore → plan → coder` workflow, rate-controlled `/swarm` execution (`KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY`), and a three-strike loop breaker.
+> **What you ship**: A disciplined `explore → plan → coder` workflow, rate-controlled `/swarm` execution (`KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY`), and a three-strike loop breaker.
 >
-> ⚡ **Bottom line**: Isolate noisy exploration from code editing, freeze shared types before fanning out, and let 90%-discounted prefix caching multiply swarm ROI.
+> **Bottom line**: Isolate noisy exploration from code editing, freeze shared types before fanning out, and let 90%-discounted prefix caching multiply swarm ROI.
 
 ---
 
@@ -22,9 +22,7 @@ lastUpdated: 2026-11-26
 | :--- | :--- | :--- | :--- |
 | **`explore`** | Read-only | Symbol map, dependency graph, blast radius | Absorbs raw search noise; returns a concise 1-page map |
 | **`plan`** | Zero writes | Phased rollout plan, disjoint directory slices, test commands | Surfaces architectural conflicts before touching source files |
-| **`coder`** | Scoped writes + shell tests | Atomic diff + passing test output | Executes cleanly against frozen specs without stale chatter |
-
-```mermaid
+| **`coder`** | Scoped writes + shell tests | Atomic diff + passing test output | Executes cleanly against frozen specs without stale chatter | ```mermaid
 flowchart LR
     Req["Large Refactor Goal"] --> Exp["explore (Read-only repo scan)"]
     Exp -->|"Compact dependency map"| Plan["plan (Disjoint slices + assertions)"]
@@ -67,7 +65,7 @@ Enforce three guardrails in `AGENTS.md` and `config.toml`:
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Practice the 3-step handoff**: Run `explore → plan → coder` sequentially on one medium PR.
 2. **Launch a 2-slice swarm**: Run `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2 kimi` on two non-overlapping directories and inspect `git diff --stat`.
@@ -75,14 +73,12 @@ Enforce three guardrails in `AGENTS.md` and `config.toml`:
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Swarm workers flood `429 Too Many Requests` | Uncapped concurrency exceeds account RPM/TPM | Set `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2` or `3` and batch slices |
 | Worker deletes failing unit tests to pass | Test diff not audited and weakening assertions not explicitly forbidden | Audit `git diff -- '*.test.*' '*.spec.*'` and reject skipped assertions |
-| Slices pass locally but fail combined build | Shared exports changed mid-swarm without freezing contracts | Freeze shared types on base branch first, then run repo-wide `tsc --noEmit` |
-
----
+| Slices pass locally but fail combined build | Shared exports changed mid-swarm without freezing contracts | Freeze shared types on base branch first, then run repo-wide `tsc --noEmit` | ---
 
 [Back to Kimi Hub](/en/kimi/) | [Prev: config.toml & kimi acp](/en/kimi/ch02_acp_config_failover) | [Next: MoonViT-V2 & Figma MCP](/en/kimi/ch04_moonvit_video_figma)

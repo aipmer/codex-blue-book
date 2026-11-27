@@ -4,23 +4,23 @@ description: "Automate PR delivery with November 2026 Claude Ship (/ship), PR St
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_subagents_refactoring.md) | [ ➡️ Next (Ch.09) ](./ch09_enterprise_saas.md) | [ 🌐 中文版 ](/claude/ch08_ship_pr_steward)
+[Home](/en/) | [Prev (Ch.07)](./ch07_subagents_refactoring.md) | [Next (Ch.09)](./ch09_enterprise_saas.md) | [中文版](/claude/ch08_ship_pr_steward)
 
 # Ch.08 Closing the Last Mile: `/ship`, PR Steward & Team Governance
 
-> 🎯 **The Real Problem**: AI finishes coding in ten minutes, yet PRs sit stalled in CI queues for three days over flaky lint errors, missing test edge cases, and review bottlenecks.  
-> 💡 **Tangible Output & Takeaway**: End-to-end **Claude Ship (`/ship`) + PR Steward + Claude Approvals** rollout guide, declarative approval policy YAML, and team cost guardrails.  
-> ⚡ **Viral Screenshot Quote**: *"Generating code is only half the job—merging cleanly into main is shipping. Hand CI ping-pong to `/ship` so humans review real risk."*
+> **The Real Problem**: AI finishes coding in ten minutes, yet PRs sit stalled in CI queues for three days over flaky lint errors, missing test edge cases, and review bottlenecks.  
+> **Tangible Output & Takeaway**: End-to-end **Claude Ship (`/ship`) + PR Steward + Claude Approvals** rollout guide, declarative approval policy YAML, and team cost guardrails.  
+> **Viral Screenshot Quote**: *"Generating code is only half the job—merging cleanly into main is shipping. Hand CI ping-pong to `/ship` so humans review real risk."*
 
 For modern teams, the bottleneck has shifted from code authoring to **PR review and CI rework**. In late November 2026, Anthropic introduced **Claude Ship (`/ship`)**, **PR Steward (Beta)**, and **Claude Approvals** to close the gap between local diffs and production merges.
 
 ---
 
-## 🎯 Intuitive Metaphor: Automated Airport Security & Boarding Lanes
+## Intuitive Metaphor: Automated Airport Security & Boarding Lanes
 
 ```text
 [Manual PR Queue] ──> Push PR → wait for CI failure → read logs manually → push fix → wait days for review.
-[Claude Ship]     ──> Run `/ship` in terminal:
+[Claude Ship] ──> Run `/ship` in terminal:
                       1. PR Steward watches CI checks, pulls failure logs, and pushes targeted fixes;
                       2. Claude Approvals checks diffs against team policy—approving low-risk changes
                          automatically while routing auth, billing, and schema edits to human sign-off.
@@ -28,7 +28,7 @@ For modern teams, the bottleneck has shifted from code authoring to **PR review 
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 1. **Step 1: Verify local Hooks and tests pass cleanly**
    ```bash
@@ -79,14 +79,12 @@ Before scaling automated PR workflows across a team, enable three controls:
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **PR Steward deletes a failing test to turn CI green** | Policy lacked anti-weakening guard | Block any diff that removes or skips assertions via `arch-reviewer` and CI checks |
 | **Concurrent PR fixes spike daily API spend** | Missing Efficient Mode and spending caps | Set hard org caps immediately and route CI triage to Sonnet 5.5 |
-| **Automated merge lands a locking DB migration** | `migrations/` omitted from human-review paths | Protect migration paths via GitHub CODEOWNERS and mandatory human approval |
+| **Automated merge lands a locking DB migration** | `migrations/` omitted from human-review paths | Protect migration paths via GitHub CODEOWNERS and mandatory human approval | ---
 
----
-
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_subagents_refactoring.md) | [ ➡️ Next (Ch.09) ](./ch09_enterprise_saas.md) | [ 🌐 中文版 ](/claude/ch08_ship_pr_steward)
+[Home](/en/) | [Prev (Ch.07)](./ch07_subagents_refactoring.md) | [Next (Ch.09)](./ch09_enterprise_saas.md) | [中文版](/claude/ch08_ship_pr_steward)

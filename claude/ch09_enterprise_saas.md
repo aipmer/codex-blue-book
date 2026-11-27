@@ -4,13 +4,13 @@ description: "避开通用聊天套壳，利用 Claude 5.5 百万上下文、Pro
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.08) ](./ch08_ship_pr_steward.md) | [ ➡️ 下一章 (Ch.10) ](./ch10_frontier_cowork_critique.md) | [ 🌐 English ](/en/claude/ch09_enterprise_saas)
+[首页](/) | [上一章 (Ch.08)](./ch08_ship_pr_steward.md) | [下一章 (Ch.10)](./ch10_frontier_cowork_critique.md) | [English](/en/claude/ch09_enterprise_saas)
 
 # Ch.09 商业化实战：基于 Claude 打造高客单价企业级审计与情报 SaaS
 
-> 🎯 **具体工程麻烦**：做了通用 AI 聊天套壳，客单价卖不到 $10 还被大厂免费功能碾压；做长文档或整仓分析产品，又怕百万 Token API 账单把毛利吃光。  
-> 💡 **可运行实战代码与落地收益**：Claude 高毛利 ToB 选品三象限；基于 Prompt Caching 与严格 JSON Schema 的多租户审计引擎核心代码；企业合规交付清单。  
-> ⚡ **社交传播 / 截图金句**：“别拿 Claude 去卷 $9.9 的泛聊天工具。把百万上下文和低价缓存封装进严肃业务审计流，企业客户愿意按年付高溢价。”
+> **具体工程麻烦**：做了通用 AI 聊天套壳，客单价卖不到 $10 还被大厂免费功能碾压；做长文档或整仓分析产品，又怕百万 Token API 账单把毛利吃光。  
+> **可运行实战代码与落地收益**：Claude 高毛利 ToB 选品三象限；基于 Prompt Caching 与严格 JSON Schema 的多租户审计引擎核心代码；企业合规交付清单。  
+> **社交传播 / 截图金句**：“别拿 Claude 去卷 $9.9 的泛聊天工具。把百万上下文和低价缓存封装进严肃业务审计流，企业客户愿意按年付高溢价。”
 
 前面几章我们把 Claude Code 当成写代码的武器；这一章切换商业视角——怎么用 Claude 5.5 的核心长板，**做出别人愿意按席位或按审计量高价买单的商业产品**。
 
@@ -18,7 +18,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：从“街边算命摊”升级为“持牌会计师事务所”
+## 生活化直觉隐喻：从“街边算命摊”升级为“持牌会计师事务所”
 
 ```text
 【泛聊天套壳产品】 ──> 用户问一句答一句，谁都能复制，毛利薄如纸。
@@ -29,7 +29,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：选定一个“错一次代价极高”的严肃审计场景**
    例如：SaaS 团队发版前 SOC2 / OWASP 代码安全门禁、跨境电商隐私条款合规核查、或建筑/软件招投标文档逐条偏离表生成。
@@ -81,8 +81,7 @@ export async function runComplianceAudit(params: {
   const response = await client.messages.create({
     model,
     max_tokens: 4096,
-    system: [
-      {
+    system: [{
         type: 'text',
         text: 'You are a strict compliance auditor. Return ONLY a valid JSON object matching {"findings": AuditFinding[]}. Every finding must cite an exact verbatim evidenceQuote from the input.'
       },
@@ -90,14 +89,11 @@ export async function runComplianceAudit(params: {
         type: 'text',
         text: params.policyManualMarkdown,
         cache_control: { type: 'ephemeral' }
-      }
-    ],
-    messages: [
-      {
+      }],
+    messages: [{
         role: 'user',
         content: `Audit the following submission strictly against the cached policy manual:\n\n${params.targetPayload}`
-      }
-    ]
+      }]
   })
 
   const rawText = response.content
@@ -142,14 +138,12 @@ ToB 产品活下来的关键，是算清毛利账并过得了企业安全评审�
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **Prompt Caching 命中率为 0，账单没降反升** | 把会随请求变化的时间戳或用户名放进了系统提示词前面 | 把完全静态的规则手册放在 `system` 最顶部，动态变量全部移到 `messages` 末尾 |
 | **模型输出 JSON 偶尔带 Markdown 围栏导致 `JSON.parse` 崩溃** | 未做严格结构化约束或输出清洗 | 使用官方 Structured Outputs / Tool Use 强制 Schema，并在服务端加 Zod 校验与重试 |
-| **客户质疑审计结论是 AI 编造的** | 报告缺少原文行号与原句摘录 | 强制每条 `AuditFinding` 返回 `evidenceQuote`，服务端校验该子串真实存在于原文后再展示 |
+| **客户质疑审计结论是 AI 编造的** | 报告缺少原文行号与原句摘录 | 强制每条 `AuditFinding` 返回 `evidenceQuote`，服务端校验该子串真实存在于原文后再展示 | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.08) ](./ch08_ship_pr_steward.md) | [ ➡️ 下一章 (Ch.10) ](./ch10_frontier_cowork_critique.md) | [ 🌐 English ](/en/claude/ch09_enterprise_saas)
+[首页](/) | [上一章 (Ch.08)](./ch08_ship_pr_steward.md) | [下一章 (Ch.10)](./ch10_frontier_cowork_critique.md) | [English](/en/claude/ch09_enterprise_saas)

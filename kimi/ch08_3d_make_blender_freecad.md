@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.08 空间智能与 3D Make 实战：从 Web 3D 交互、Blender 到 FreeCAD 机械装配
 
-> 🎯 **本章解决的工程麻烦**：传统文生 3D 模型生成的是“表面一团烂网格、尺寸全靠猜、完全没法改参数”的不可编辑文件——既没法放进机械 CAD 做精确装配，也没法控制 Web 3D 场景的面数和材质逻辑；而纯手工写 Three.js、Blender `bpy` 或 FreeCAD Python 脚本门槛又太高。
+> **本章解决的工程麻烦**：传统文生 3D 模型生成的是“表面一团烂网格、尺寸全靠猜、完全没法改参数”的不可编辑文件——既没法放进机械 CAD 做精确装配，也没法控制 Web 3D 场景的面数和材质逻辑；而纯手工写 Three.js、Blender `bpy` 或 FreeCAD Python 脚本门槛又太高。
 >
-> 💡 **实战落地收益**：吃透 **Kimi K3.1 Pro 空间编码（Spatial Coding）+ 3D Make** 工作流，落地三条可参数化复现的 3D 工程管线：**Web 3D（Three.js）**、**无头 Blender 场景脚本（`bpy`）** 与 **FreeCAD 参数化机械装配体（`.step` / `.stl`）**。
+> **实战落地收益**：吃透 **Kimi K3.1 Pro 空间编码（Spatial Coding）+ 3D Make** 工作流，落地三条可参数化复现的 3D 工程管线：**Web 3D（Three.js）**、**无头 Blender 场景脚本（`bpy`）** 与 **FreeCAD 参数化机械装配体（`.step` / `.stl`）**。
 >
-> ⚡ **一句话结论**：程序化代码生成的 3D 资产天然带精确毫米尺寸、版本控制与一键改参能力——这是 K3.1 Pro 区别于普通图片/网格生成器的真正硬实力。
+> **一句话结论**：程序化代码生成的 3D 资产天然带精确毫米尺寸、版本控制与一键改参能力——这是 K3.1 Pro 区别于普通图片/网格生成器的真正硬实力。
 
 2026 年底 `@Kimi_Moonshot` 社区里传阅度最高的一组实战演示，既不是写贪吃蛇，也不是画海报，而是两类硬核空间工程作品：一类是 **Blender 程序化室内热带雨林峡谷**（精准控制地形、植被分布、体积光与水体反射），另一类是 **Python + FreeCAD 精密涡扇发动机参数化建模与爆炸视图**。
 
@@ -28,9 +28,7 @@ lastUpdated: 2026-11-26
 | :--- | :--- | :--- |
 | **浏览器交互展厅 / 产品 3D 配置器** | **Three.js / React Three Fiber**（WebGL / GLB） | 一键生成带轨道控制、阴影预算与状态切换的响应式组件 |
 | **影视级渲染 / 建筑与环境艺术场景** | **Blender 无头 `bpy` 脚本**（`.blend` / `.glb` / Cycles 渲染图） | 精确控制程序化节点材质、灯光角度、摄影机运镜与多角度批量渲染 |
-| **工业设计 / 机械装配 / 3D 打印零件** | **Python + FreeCAD**（`.step` / `.stl` / `.3mf`） | 严格毫米级公差、布尔运算无破面、改一个半径参数全装配自动联动更新 |
-
----
+| **工业设计 / 机械装配 / 3D 打印零件** | **Python + FreeCAD**（`.step` / `.stl` / `.3mf`） | 严格毫米级公差、布尔运算无破面、改一个半径参数全装配自动联动更新 | ---
 
 ## 8.2 管线一：无头 Blender（`bpy`）程序化环境构建与自动审图
 
@@ -103,7 +101,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **先跑参数校验**：运行上面的 `freecad_turbine_blade.py --dry-run`，尝试把 `--blades` 改成 `16` 或把 `--outer-radius` 改成 `100`，观察输出 JSON 中弦长、壁厚和均分角度的自动重算。
 2. **用 3D Make 快速验证概念**：在 Kimi 3D Make 里用一句话或手绘草图生成目标物体初版，确认整体比例后再导出参数化脚本进本地仓库精修。
@@ -111,14 +109,12 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 生成的 `.stl` 导入切片软件报“非流形边 / 破洞无法切片” | 多个组件仅仅紧挨着放一起而未做实体布尔融合（`fuse`），或壁厚小于 1mm | 机械件用 FreeCAD 显式 `rotor.fuse(blade)` 融合成单一闭合实体（确保 `blade` 插入轮毂重叠 `1–2mm`），导出后检查流形闭合 |
 | Blender `bpy` 脚本在新版 Blender 4.x 报属性不存在 | 模型按 Blender 3.x 旧 API 生成了已移除的 Principled BSDF 输入名 | 在提示词顶部显式指定本机 `blender --version` 主版本号，并先跑 `--background` 快速捕获 AttributeError |
-| 网页 Three.js 场景在手机浏览器直接白屏或发热卡顿 | 导出模型高达 50 万面且未压缩纹理，也没有按路由懒加载 | 用 `gltf-transform` 压缩至 `< 50K` 三角面 + Draco/KTX2 压缩，Three.js 严格走动态 `import()` |
-
----
+| 网页 Three.js 场景在手机浏览器直接白屏或发热卡顿 | 导出模型高达 50 万面且未压缩纹理，也没有按路由懒加载 | 用 `gltf-transform` 压缩至 `< 50K` 三角面 + Draco/KTX2 压缩，Three.js 严格走动态 `import()` | ---
 
 [返回 Kimi 专页](/kimi/) | [上一章：Kimi Slides 智能演示工程流](/kimi/ch07_kimi_slides_decks) | [下一章：vLLM / SGLang 开源私有化与商业化落地](/kimi/ch09_vllm_self_hosting_saas)

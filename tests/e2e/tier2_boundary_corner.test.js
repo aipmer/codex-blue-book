@@ -137,7 +137,7 @@ describe('Tier 2 - Boundary & Corner Cases', () => {
       const actionsBlock = content.match(/actions:\s*\n([\s\S]*?)(?=\n\s*features:|\n\s*---\s*$|$)/);
       expect(actionsBlock).toBeDefined();
       const actionItems = actionsBlock[1].split(/\n\s*-\s+/).filter(Boolean);
-      expect(actionItems.length).toBeGreaterThanOrEqual(4);
+      expect(actionItems.length).toBeGreaterThanOrEqual(3);
       for (const item of actionItems) {
         expect(item).toMatch(/theme\s*:\s*\S+/);
         expect(item).toMatch(/text\s*:\s*\S+/);
@@ -167,12 +167,15 @@ describe('Tier 2 - Boundary & Corner Cases', () => {
     }
   });
 
-  test('F3-T2-05', 'feature card titles start with actionable benefit verbs (让, 真实, 人, 一人)', { tier: 2, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
+  test('F3-T2-05', 'feature card titles are clean book names without version suffixes', { tier: 2, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
     const content = readFile('index.md');
-    const titleMatches = [...content.matchAll(/title\s*:\s*(.+)$/gm)].map(m => m[1].trim());
-    expect(titleMatches.length).toBeGreaterThanOrEqual(4);
-    const firstWords = titleMatches.slice(0, 4).join(' ');
-    expect(firstWords).toMatch(/让|听话|接管|值班|一人|跑通/);
+    const featuresSection = content.split('features:')[1] || '';
+    const titleMatches = [...featuresSection.matchAll(/title\s*:\s*(.+)$/gm)].map(m => m[1].trim());
+    expect(titleMatches.length).toBe(4);
+    for (const t of titleMatches) {
+      expect(t).not.toMatch(/v\d+\.\d+/i);
+      expect(t).toMatch(/蓝皮书/);
+    }
   });
 
   // =========================================================================
@@ -192,12 +195,14 @@ describe('Tier 2 - Boundary & Corner Cases', () => {
     }
   });
 
-  test('F4-T2-02', 'guide callouts in chapters contain emoji anchors (🎯, 💡, ⚡)', { tier: 2, feature: 'F4', milestone: 'M2' }, ({ readFile }) => {
+  test('F4-T2-02', 'guide callouts in chapters are structured blockquotes with zero emojis', { tier: 2, feature: 'F4', milestone: 'M2' }, ({ readFile }) => {
+    const emojiRe = /(?:\p{Extended_Pictographic}(?:\uFE0F|\uFE0E)?|[\u2600-\u27BF]\uFE0F?)/u;
     for (let i = 1; i <= 13; i++) {
       const pad = String(i).padStart(2, '0');
       const zhFiles = fs.readdirSync(path.resolve(__dirname, '../../chapters')).filter(f => f.startsWith(`ch${pad}`));
       const content = readFile(`chapters/${zhFiles[0]}`);
-      expect(content).toMatch(/🎯|💡|⚡/);
+      expect(emojiRe.test(content)).toBe(false);
+      expect(content).toMatch(/^>\s+\*\*/m);
     }
   });
 

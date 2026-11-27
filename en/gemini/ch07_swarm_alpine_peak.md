@@ -1,18 +1,18 @@
 ---
-title: "Ch.07 /swarm Architecture & Official Alpine Peak Full-Stack Case Study"
+title: "Ch.07 Multi-Agent Collaboration Architecture & Official Alpine Peak Full-Stack Case Study"
 description: "Master Google Antigravity native /swarm orchestration—Coordinator, Git worktree parallel workers, and adversarial verifiers—and dissect the official Alpine Peak 3D simulation workflow."
 lastUpdated: 2026-11-26
 ---
 
-[Back to Gemini Hub](/en/gemini/) | [Prev: Colab %%agy Pipelines](/en/gemini/ch06_colab_agy_pipelines) | [Next: Browser QA & Cross-Platform Delivery](/en/gemini/ch08_browser_qa_cross_platform)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Colab Agent Extension Pipelines](/en/gemini/ch06_colab_agy_pipelines) | [Next: Browser QA & Cross-Platform Delivery](/en/gemini/ch08_browser_qa_cross_platform)
 
-# Ch.07 `/swarm` Architecture & Official "Alpine Peak" Full-Stack Case Study
+# Ch.07 Multi-Agent Collaboration Architecture & Official "Alpine Peak" Full-Stack Case Study
 
-> 🎯 **Engineering pain solved**: Serializing a four-subsystem feature through one agent is slow and loses context, while opening four terminal tabs by hand produces painful Git merge conflicts.
+> **Engineering pain solved**: Serializing a four-subsystem feature through one agent is slow and loses context, while opening four terminal tabs by hand produces painful Git merge conflicts.
 >
-> 💡 **What you ship**: A clean mental model and copy-paste kickoff template for Antigravity **`/swarm`** (Coordinator + isolated Git worktrees + Adversarial Verifier + `Alt+S` Swarm Board), plus an end-to-end breakdown of Google's **Alpine Peak** 3D simulation showcase.
+> **What you ship**: A clean mental model and copy-paste kickoff template for Antigravity **`/swarm`** (Coordinator + isolated Git worktrees + Adversarial Verifier + `Alt+S` Swarm Board), plus an end-to-end breakdown of Google's **Alpine Peak** 3D simulation showcase.
 >
-> ⚡ **Bottom line**: Parallel agents only speed up shipping when file ownership is physically disjoint and an independent verifier challenges every diff with real test evidence.
+> **Bottom line**: Parallel agents only speed up shipping when file ownership is physically disjoint and an independent verifier challenges every diff with real test evidence.
 
 ---
 
@@ -77,7 +77,7 @@ Google's **Alpine Peak** 3D ski-terrain simulation demonstrates how the full sta
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Start small (2 workers + 1 verifier)**: Split a feature across `src/api/` and `src/ui/` with one read-only verifier to practice conflict-free merging.
 2. **Inspect the live Swarm Board**: Press `Alt + S` (`/swarm board`) to track thinking/tool timings and message handoffs.
@@ -85,14 +85,12 @@ Google's **Alpine Peak** 3D ski-terrain simulation demonstrates how the full sta
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Merge conflicts on `package.json` or `src/types.ts` | Shared files edited simultaneously by two workers | Pause workers, let Coordinator land shared types on base branch, then rebase workers |
 | Entire swarm sits idle waiting on each other | Missing `@mention` wakeup chain between members | Post on the board targeting `@coordinator` to inspect blockers or release finished branches to the verifier |
-| Verifier approves diff that breaks the build | Verifier only skimmed static diff without running commands | Require explicit command output and exit code `0` (`npm run build && npm test`) in the verifier brief |
+| Verifier approves diff that breaks the build | Verifier only skimmed static diff without running commands | Require explicit command output and exit code `0` (`npm run build && npm test`) in the verifier brief | ---
 
----
-
-[Back to Gemini Hub](/en/gemini/) | [Prev: Colab %%agy Pipelines](/en/gemini/ch06_colab_agy_pipelines) | [Next: Browser QA & Cross-Platform Delivery](/en/gemini/ch08_browser_qa_cross_platform)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Colab Agent Extension Pipelines](/en/gemini/ch06_colab_agy_pipelines) | [Next: Browser QA & Cross-Platform Delivery](/en/gemini/ch08_browser_qa_cross_platform)

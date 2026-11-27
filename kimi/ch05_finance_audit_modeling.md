@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.05 金融投研与量化工程实战：百万 Token 财报审计与自动建模
 
-> 🎯 **本章解决的工程麻烦**：传统 RAG 把一份 200 页上市公司 10-K 年报切成几百段碎片塞进向量库，结果“利润表主数据”和“附注 14 里的商誉减值说明”被切散，模型要么漏掉关键口径变更，要么直接心算加减把毛利率算错 3 个百分点。
+> **本章解决的工程麻烦**：传统 RAG 把一份 200 页上市公司 10-K 年报切成几百段碎片塞进向量库，结果“利润表主数据”和“附注 14 里的商誉减值说明”被切散，模型要么漏掉关键口径变更，要么直接心算加减把毛利率算错 3 个百分点。
 >
-> 💡 **实战落地收益**：利用 **Kimi K3.1 Pro 1M 原生窗口 + Prompt Caching（\$0.20/1M）** 整本吞吐多期财报与行业研报，建立 **“模型负责提取带页码结构化科目 → Python 沙盒负责全部计算与 Excel 公式输出”** 的零算术幻觉金融工程管线。
+> **实战落地收益**：利用 **Kimi K3.1 Pro 1M 原生窗口 + Prompt Caching（\$0.20/1M）** 整本吞吐多期财报与行业研报，建立 **“模型负责提取带页码结构化科目 → Python 沙盒负责全部计算与 Excel 公式输出”** 的零算术幻觉金融工程管线。
 >
-> ⚡ **一句话结论**：严肃金融投研绝不让大模型心算数字；让 K3.1 Pro 在百万上下文里做全量口径对齐与异常线索发现，把所有加减乘除和回测交给确定性 Python 代码。
+> **一句话结论**：严肃金融投研绝不让大模型心算数字；让 K3.1 Pro 在百万上下文里做全量口径对齐与异常线索发现，把所有加减乘除和回测交给确定性 Python 代码。
 
 金融投研之所以长期是 AI 应用的深水区，原因就两个字：**容错率为零**。写周报差个形容词没人追究，但投资备忘录里把自由现金流（FCF）算错一位小数、把 Non-GAAP 调整项和 GAAP 净利混在一起，整份报告的公信力当场归零。
 
@@ -97,10 +97,8 @@ def analyze_periods(periods: list[PeriodMetrics]) -> dict:
     return {"metrics": report, "alerts": alerts}
 
 if __name__ == "__main__":
-    sample = [
-        PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
-        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),
-    ]
+    sample = [PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
+        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),]
     print(json.dumps(analyze_periods(sample), indent=2, ensure_ascii=False))
 ```
 
@@ -116,7 +114,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑通勾稽演示**：直接运行 `python3 financial_audit.py`，观察它如何自动捕捉应收账款增速远超营收增速的风险警报。
 2. **整本装载一次真实年报**：挑一家上市公司的公开 10-K 文本，通过 `kimi-k3.1-pro`（开启 `prompt_caching`）只抽取原始科目 JSON 与附注原文句，再用 [verify_citations.py](https://github.com/aipmer/codex-blue-book/blob/main/examples/kimi-k3-kit/scripts/verify_citations.py) 核验引用真实性。
@@ -124,14 +122,12 @@ if __name__ == "__main__":
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 同比数据差了整整 1000 倍 | 一份报表单位是 `in thousands`，另一份是 `in millions`，抽取时漏提单位字段 | 在抽取 Schema 中强制加入 `unit_multiplier`（`1` / `1000` / `1000000`）与 `currency`，由 Python 统一归一化后再对比 |
 | 模型把非经常性收益算进了核心经营利润 | 未在提示词中要求区分 GAAP 与 Non-GAAP 口径，也未抽取附注调节表 | 显式声明分别抽取 `gaap_operating_income` 与 `non_gaap_adjustments[]`，并在 Python 端核对加总是否相等 |
-| PDF 转文本后财报数字列全错位串行 | 用了劣质纯文本 PDF 提取器丢失了表格列对齐 | 改用保留表格结构的 Markdown/HTML 解析器（如 MinerU / Docling）或直接配合 MoonViT-V2 对关键财务页做视觉校对 |
-
----
+| PDF 转文本后财报数字列全错位串行 | 用了劣质纯文本 PDF 提取器丢失了表格列对齐 | 改用保留表格结构的 Markdown/HTML 解析器（如 MinerU / Docling）或直接配合 MoonViT-V2 对关键财务页做视觉校对 | ---
 
 [返回 Kimi 专页](/kimi/) | [上一章：MoonViT-V2 录屏诊断与 Figma 还原](/kimi/ch04_moonvit_video_figma) | [下一章：法律合规、生物医药与零幻觉引用校验](/kimi/ch06_legal_medical_citations)

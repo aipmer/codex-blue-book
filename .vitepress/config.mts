@@ -161,7 +161,7 @@ function buildJsonLd(
         ]
       : [
           {
-            q: '同一个项目需要为四款工具分别写四份规约文件吗？',
+            q: '同一个项目需要为四款工具分别写四份项目规则文件吗？',
             a: '不需要。在根目录统一维护 AGENTS.md 即可，Codex、Antigravity 与 Kimi Code 原生支持，Claude Code 只需在 CLAUDE.md 中写入 @AGENTS.md 即可复用。'
           },
           {
@@ -307,8 +307,8 @@ const codexSidebarZh = [
     text: '附录：系列工具与沙盒样例',
     collapsed: false,
     items: [
-      { text: '四书横向选型总表', link: '/compare' },
-      { text: '多智能体通用规约生成器', link: '/generator' },
+      { text: '工具对比', link: '/compare' },
+      { text: 'AI 协作规则生成器', link: '/generator' },
       { text: 'Chrome 扩展沙盒样例 (Ch.06)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/ch06-chrome-extension' },
       { text: 'Next.js 全栈 SaaS 样例 (Ch.10)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp' },
       { text: 'Expo 移动端 App 样例 (Ch.11)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/ch11-expo-mobile' }
@@ -365,7 +365,7 @@ const codexSidebarEn = [
     text: 'Appendix: Tools & Sandboxes',
     collapsed: false,
     items: [
-      { text: 'Four-Agent Comparison Hub', link: '/en/compare' },
+      { text: 'Tool Comparison', link: '/en/compare' },
       { text: 'Multi-Agent Rules Generator', link: '/en/generator' },
       { text: 'Chrome Extension Sample (Ch.06)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/ch06-chrome-extension' },
       { text: 'Next.js SaaS MVP Sample (Ch.10)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp' },
@@ -421,8 +421,8 @@ const claudeSidebarZh = [
     collapsed: false,
     items: [
       { text: 'Hooks 与子代理可运行套件 (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit' },
-      { text: '四书横向选型总表', link: '/compare' },
-      { text: '多智能体通用规约生成器', link: '/generator' }
+      { text: '工具对比', link: '/compare' },
+      { text: 'AI 协作规则生成器', link: '/generator' }
     ]
   }
 ]
@@ -474,7 +474,7 @@ const claudeSidebarEn = [
     collapsed: false,
     items: [
       { text: 'Runnable Hooks & Subagents Kit (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit' },
-      { text: 'Four-Agent Comparison Hub', link: '/en/compare' },
+      { text: 'Tool Comparison', link: '/en/compare' },
       { text: 'Multi-Agent Rules Generator', link: '/en/generator' }
     ]
   }
@@ -487,7 +487,7 @@ const geminiSidebarZh = [
     items: [
       { text: 'Gemini 蓝皮书专页 (v1.0.0)', link: '/gemini/' },
       { text: 'Ch.01 告别单线程 CLI：Antigravity 与 Gemini 4 矩阵', link: '/gemini/ch01_antigravity_gemini4' },
-      { text: 'Ch.02 多模态规约：AGENTS.md、.agents/rules 与 Skills', link: '/gemini/ch02_multimodal_rules_skills' }
+      { text: 'Ch.02 多模态项目规则：AGENTS.md、.agents/rules 与 Skills', link: '/gemini/ch02_multimodal_rules_skills' }
     ]
   },
   {
@@ -503,14 +503,14 @@ const geminiSidebarZh = [
     collapsed: false,
     items: [
       { text: 'Ch.05 办公流即研发流：Workspace MCP 与插件商业化', link: '/gemini/ch05_workspace_mcp' },
-      { text: 'Ch.06 云端算力外挂：Colab (%%agy) 数据管线闭环', link: '/gemini/ch06_colab_agy_pipelines' }
+      { text: 'Ch.06 云端算力外挂：Colab 代理扩展与数据管线', link: '/gemini/ch06_colab_agy_pipelines' }
     ]
   },
   {
-    text: '第四部分：/swarm 蜂群编排、视觉巡检与跨端交付',
+    text: '第四部分：多智能体协作、视觉巡检与跨端交付',
     collapsed: false,
     items: [
-      { text: 'Ch.07 /swarm 蜂群架构与官方《Alpine Peak》复盘', link: '/gemini/ch07_swarm_alpine_peak' },
+      { text: 'Ch.07 多智能体协作架构与官方《Alpine Peak》复盘', link: '/gemini/ch07_swarm_alpine_peak' },
       { text: 'Ch.08 浏览器视觉走查、Chrome MV3 与 Cloud Run', link: '/gemini/ch08_browser_qa_cross_platform' }
     ]
   },
@@ -526,9 +526,9 @@ const geminiSidebarZh = [
     text: '附录：套件与系列工具',
     collapsed: false,
     items: [
-      { text: 'Antigravity 规约与配额门禁套件 (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit' },
-      { text: '四书横向选型总表', link: '/compare' },
-      { text: '多智能体通用规约生成器', link: '/generator' }
+      { text: 'Antigravity 规则与配额门禁套件 (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit' },
+      { text: '工具对比', link: '/compare' },
+      { text: 'AI 协作规则生成器', link: '/generator' }
     ]
   }
 ]
@@ -556,14 +556,14 @@ const geminiSidebarEn = [
     collapsed: false,
     items: [
       { text: 'Ch.05 Workspace MCP Automation & Add-ons', link: '/en/gemini/ch05_workspace_mcp' },
-      { text: 'Ch.06 Cloud Compute Offload: Colab (%%agy) Pipelines', link: '/en/gemini/ch06_colab_agy_pipelines' }
+      { text: 'Ch.06 Cloud Compute Offload: Colab Agent Pipelines', link: '/en/gemini/ch06_colab_agy_pipelines' }
     ]
   },
   {
-    text: 'Part 4: /swarm Orchestration & Visual QA',
+    text: 'Part 4: Multi-Agent Collaboration & Visual QA',
     collapsed: false,
     items: [
-      { text: 'Ch.07 /swarm Architecture & Alpine Peak Case Study', link: '/en/gemini/ch07_swarm_alpine_peak' },
+      { text: 'Ch.07 Multi-Agent Architecture & Alpine Peak Case Study', link: '/en/gemini/ch07_swarm_alpine_peak' },
       { text: 'Ch.08 Browser Visual QA, Chrome MV3 & Cloud Run', link: '/en/gemini/ch08_browser_qa_cross_platform' }
     ]
   },
@@ -580,7 +580,7 @@ const geminiSidebarEn = [
     collapsed: false,
     items: [
       { text: 'Antigravity Rules & Quota Kit (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit' },
-      { text: 'Four-Agent Comparison Hub', link: '/en/compare' },
+      { text: 'Tool Comparison', link: '/en/compare' },
       { text: 'Multi-Agent Rules Generator', link: '/en/generator' }
     ]
   }
@@ -597,10 +597,10 @@ const kimiSidebarZh = [
     ]
   },
   {
-    text: '第二部分：蜂群并发研发与视觉录屏排障',
+    text: '第二部分：多智能体协作与视觉录屏排障',
     collapsed: false,
     items: [
-      { text: 'Ch.03 分层子代理（explore/plan/coder）与 /swarm', link: '/kimi/ch03_subagents_swarm' },
+      { text: 'Ch.03 分层子代理（explore/plan/coder）与多智能体并行', link: '/kimi/ch03_subagents_swarm' },
       { text: 'Ch.04 MoonViT-V2 录屏诊断与 Figma MCP 还原', link: '/kimi/ch04_moonvit_video_figma' }
     ]
   },
@@ -633,8 +633,8 @@ const kimiSidebarZh = [
     collapsed: false,
     items: [
       { text: 'Kimi K3.1 配置、引用校验与 FreeCAD 套件 (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit' },
-      { text: '四书横向选型总表', link: '/compare' },
-      { text: '多智能体通用规约生成器', link: '/generator' }
+      { text: '工具对比', link: '/compare' },
+      { text: 'AI 协作规则生成器', link: '/generator' }
     ]
   }
 ]
@@ -650,10 +650,10 @@ const kimiSidebarEn = [
     ]
   },
   {
-    text: 'Part 2: Swarm Engineering & Video Debugging',
+    text: 'Part 2: Multi-Agent Engineering & Video Debugging',
     collapsed: false,
     items: [
-      { text: 'Ch.03 Tiered Subagents (explore/plan/coder) & /swarm', link: '/en/kimi/ch03_subagents_swarm' },
+      { text: 'Ch.03 Tiered Subagents & Parallel Multi-Agent Refactors', link: '/en/kimi/ch03_subagents_swarm' },
       { text: 'Ch.04 MoonViT-V2 Video-to-Fix & Figma MCP Fidelity', link: '/en/kimi/ch04_moonvit_video_figma' }
     ]
   },
@@ -686,7 +686,7 @@ const kimiSidebarEn = [
     collapsed: false,
     items: [
       { text: 'Kimi K3.1 Config, Citation & FreeCAD Kit (GitHub)', link: 'https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit' },
-      { text: 'Four-Agent Comparison Hub', link: '/en/compare' },
+      { text: 'Tool Comparison', link: '/en/compare' },
       { text: 'Multi-Agent Rules Generator', link: '/en/generator' }
     ]
   }
@@ -694,22 +694,22 @@ const kimiSidebarEn = [
 
 const seriesSidebarZh = [
   {
-    text: '四大蓝皮书矩阵',
+    text: 'AI 编程实战蓝皮书',
     collapsed: false,
     items: [
-      { text: '系列总门户', link: '/' },
-      { text: '四书横向选型总表', link: '/compare' },
-      { text: 'Codex 蓝皮书 (v1.5.0 已上线)', link: '/codex/' },
-      { text: 'Claude 蓝皮书 (v1.0.0 已上线)', link: '/claude/' },
-      { text: 'Gemini 蓝皮书 (v1.0.0 已上线)', link: '/gemini/' },
-      { text: 'Kimi 蓝皮书 (v1.0.0 已上线)', link: '/kimi/' }
+      { text: '首页', link: '/' },
+      { text: '工具对比', link: '/compare' },
+      { text: 'Codex 蓝皮书', link: '/codex/' },
+      { text: 'Claude 蓝皮书', link: '/claude/' },
+      { text: 'Gemini 蓝皮书', link: '/gemini/' },
+      { text: 'Kimi 蓝皮书', link: '/kimi/' }
     ]
   },
   {
     text: '共享工程工具',
     collapsed: false,
     items: [
-      { text: '多智能体通用规约生成器', link: '/generator' },
+      { text: '规则生成器', link: '/generator' },
       { text: '飞书助理 (GitHub)', link: 'https://github.com/aipmer/plugins-codex-feishu' },
       { text: 'Codex Switch (GitHub)', link: 'https://github.com/aipmer/codex-switch' }
     ]
@@ -718,15 +718,15 @@ const seriesSidebarZh = [
 
 const seriesSidebarEn = [
   {
-    text: 'Four-Book Series Matrix',
+    text: 'AI Coding Blue Books',
     collapsed: false,
     items: [
-      { text: 'Series Home', link: '/en/' },
-      { text: 'Four-Agent Comparison Hub', link: '/en/compare' },
-      { text: 'Codex Blue Book (v1.5.0 Live)', link: '/en/codex/' },
-      { text: 'Claude Blue Book (v1.0.0 Live)', link: '/en/claude/' },
-      { text: 'Gemini Blue Book (v1.0.0 Live)', link: '/en/gemini/' },
-      { text: 'Kimi Blue Book (v1.0.0 Live)', link: '/en/kimi/' }
+      { text: 'Home', link: '/en/' },
+      { text: 'Tool Comparison', link: '/en/compare' },
+      { text: 'Codex Blue Book', link: '/en/codex/' },
+      { text: 'Claude Blue Book', link: '/en/claude/' },
+      { text: 'Gemini Blue Book', link: '/en/gemini/' },
+      { text: 'Kimi Blue Book', link: '/en/kimi/' }
     ]
   },
   {
@@ -870,16 +870,15 @@ export default defineConfig({
           {
             text: '蓝皮书系列',
             items: [
-              { text: 'Codex 蓝皮书 (v1.5.0 已上线)', link: '/codex/' },
-              { text: 'Claude 蓝皮书 (v1.0.0 已上线)', link: '/claude/' },
-              { text: 'Gemini 蓝皮书 (v1.0.0 已上线)', link: '/gemini/' },
-              { text: 'Kimi 蓝皮书 (v1.0.0 已上线)', link: '/kimi/' }
+              { text: 'Codex 蓝皮书', link: '/codex/' },
+              { text: 'Claude 蓝皮书', link: '/claude/' },
+              { text: 'Gemini 蓝皮书', link: '/gemini/' },
+              { text: 'Kimi 蓝皮书', link: '/kimi/' }
             ]
           },
-          { text: '横向选型', link: '/compare' },
-          { text: '规约生成器', link: '/generator' },
-          { text: 'Codex 频道', link: 'https://pmer.cn/ai-tools/codex/' },
-          { text: '飞书助理', link: 'https://github.com/aipmer/plugins-codex-feishu' },
+          { text: '工具对比', link: '/compare' },
+          { text: '规则生成器', link: '/generator' },
+          { text: '更多AI发现', link: 'https://pmer.cn/ai/' },
           {
             text: '下载 PDF',
             items: [
@@ -928,16 +927,15 @@ export default defineConfig({
           {
             text: 'Blue Books',
             items: [
-              { text: 'Codex Blue Book (v1.5.0 Live)', link: '/en/codex/' },
-              { text: 'Claude Blue Book (v1.0.0 Live)', link: '/en/claude/' },
-              { text: 'Gemini Blue Book (v1.0.0 Live)', link: '/en/gemini/' },
-              { text: 'Kimi Blue Book (v1.0.0 Live)', link: '/en/kimi/' }
+              { text: 'Codex Blue Book', link: '/en/codex/' },
+              { text: 'Claude Blue Book', link: '/en/claude/' },
+              { text: 'Gemini Blue Book', link: '/en/gemini/' },
+              { text: 'Kimi Blue Book', link: '/en/kimi/' }
             ]
           },
-          { text: 'Compare', link: '/en/compare' },
+          { text: 'Compare Tools', link: '/en/compare' },
           { text: 'Rules Generator', link: '/en/generator' },
-          { text: 'Codex Hub (中文)', link: 'https://pmer.cn/ai-tools/codex/' },
-          { text: 'Feishu Assistant', link: 'https://github.com/aipmer/plugins-codex-feishu' },
+          { text: 'More AI Discovery', link: 'https://pmer.cn/ai/' },
           {
             text: 'Download PDF',
             items: [
@@ -1008,7 +1006,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Released under the MIT & Apache-2.0 Licenses.',
-      copyright: 'Copyright © 2026 AIPMER'
+      copyright: 'Copyright © 2026 <a href="https://pmer.cn" target="_blank" rel="noopener noreferrer">pmer.cn</a>'
     }
   }
 })

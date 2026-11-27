@@ -4,13 +4,13 @@ description: "掌握 CLAUDE.md 150 行精简法则与 @AGENTS.md 跨工具复用
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.01) ](./ch01_programmable_platform.md) | [ ➡️ 下一章 (Ch.03) ](./ch03_hooks_code_mode.md) | [ 🌐 English ](/en/claude/ch02_context_economics)
+[首页](/) | [上一章 (Ch.01)](./ch01_programmable_platform.md) | [下一章 (Ch.03)](./ch03_hooks_code_mode.md) | [English](/en/claude/ch02_context_economics)
 
 # Ch.02 上下文经济学：精简 `CLAUDE.md` 与按需加载 `Skills` 体系
 
-> 🎯 **具体工程麻烦**：把所有规范、数据库文档和部署手册全堆进 `CLAUDE.md`，导致每轮请求 Token 飙升、模型注意力被稀释，关键禁令反而失效。  
-> 💡 **可运行实战代码与落地收益**：150 行 `CLAUDE.md` + `@AGENTS.md` 跨工具复用结构；标准 `SKILL.md` 渐进式披露模板；`claude plugin eval` 评测命令。  
-> ⚡ **社交传播 / 截图金句**：“往 `CLAUDE.md` 塞 1000 行规范，等于把禁烟标志贴满整面广告墙——真正致命的那条，AI 反而看不见。”
+> **具体工程麻烦**：把所有规范、数据库文档和部署手册全堆进 `CLAUDE.md`，导致每轮请求 Token 飙升、模型注意力被稀释，关键禁令反而失效。  
+> **可运行实战代码与落地收益**：150 行 `CLAUDE.md` + `@AGENTS.md` 跨工具复用结构；标准 `SKILL.md` 渐进式披露模板；`claude plugin eval` 评测命令。  
+> **社交传播 / 截图金句**：“往 `CLAUDE.md` 塞 1000 行规范，等于把禁烟标志贴满整面广告墙——真正致命的那条，AI 反而看不见。”
 
 很多团队用完一周 Claude Code 后，会把踩过的每一个坑都追加到 `CLAUDE.md` 里。一个月后，这个文件膨胀到上千行，涵盖前端规范、数据库迁移、发布流程和客服文案。结果每发一句“帮我改个按钮颜色”，模型都要先吞下上千行无关背景，既烧缓存写入费，又让核心约束被噪音淹没。
 
@@ -18,7 +18,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：口袋卡片 vs 挂墙维修手册
+## 生活化直觉隐喻：口袋卡片 vs 挂墙维修手册
 
 ```text
 【臃肿 CLAUDE.md】 ──> 要求技师每天背着 20 斤重的全厂百科全书上班，拧一颗螺丝也要翻半小时。
@@ -29,7 +29,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：用 `@AGENTS.md` 实现四工具共享一套项目规则**
    如果你的仓库已经有面向 Codex / Antigravity / Kimi 的 `AGENTS.md`，在项目根目录创建极简 `CLAUDE.md`：
@@ -137,14 +137,12 @@ claude plugin eval ./plugins/db-migration-kit --baseline none
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **写好了 `SKILL.md` 却从不被自动触发** | `description` 写得太抽象，缺少明确触发关键词 | 在 `description` 写明具体文件后缀与场景动词（如“修改 `schema.prisma` 时使用”） |
 | **多人协作时 `CLAUDE.md` 与 `AGENTS.md` 内容打架** | 两份文件各自维护，规则互相覆盖 | 统一以 `AGENTS.md` 为唯一事实源，`CLAUDE.md` 首行只写 `@AGENTS.md` |
-| **引入第三方 Skill 后被暗藏脚本改坏环境** | 未启用 `PreSkillShellCommand` 拦截与来源审查 | 接入第三方插件前先人工读 `SKILL.md`，并在 `.claude/settings.json` 配置门禁钩子 |
+| **引入第三方 Skill 后被暗藏脚本改坏环境** | 未启用 `PreSkillShellCommand` 拦截与来源审查 | 接入第三方插件前先人工读 `SKILL.md`，并在 `.claude/settings.json` 配置门禁钩子 | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.01) ](./ch01_programmable_platform.md) | [ ➡️ 下一章 (Ch.03) ](./ch03_hooks_code_mode.md) | [ 🌐 English ](/en/claude/ch02_context_economics)
+[首页](/) | [上一章 (Ch.01)](./ch01_programmable_platform.md) | [下一章 (Ch.03)](./ch03_hooks_code_mode.md) | [English](/en/claude/ch02_context_economics)

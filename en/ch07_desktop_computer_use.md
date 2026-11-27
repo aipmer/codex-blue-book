@@ -4,13 +4,13 @@ description: "Use ChatGPT Desktop Code Mode with GPT-6.1 Terra and GPT-6.2 Astra
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.06) ](./ch06_reasoning_steer.md) | [ ➡️ Next (Ch.08) ](./ch08_mobile_workflow.md) | [ 🌐 中文版 ](../chapters/ch07_desktop_computer_use.md)
+[Index](/en/) | [Prev (Ch.06)](./ch06_reasoning_steer.md) | [Next (Ch.08)](./ch08_mobile_workflow.md) | [中文版](../chapters/ch07_desktop_computer_use.md)
 
 # Ch.07 Closing the Visual Loop: Automated Inspection and Design Fidelity with Desktop Computer Use
 
-> 🎯 **The Real Problem**: Manual pixel-peeping for UI styling, responsive layouts missing hidden modals, and headless CLI tests incapable of verifying real browser rendering and clicks.  
-> 💡 **Tangible Output & Takeaway**: ChatGPT Desktop Code Mode setup; automated Figma-to-DOM screenshot visual diff workflows; and UI visual telemetry reproductions.  
-> ⚡ **Viral Screenshot Quote**: *"Still squinting at pixels to verify responsive UI? Let AI open the browser, measure dimensions, click buttons, and annotate visual discrepancies."*
+> **The Real Problem**: Manual pixel-peeping for UI styling, responsive layouts missing hidden modals, and headless CLI tests incapable of verifying real browser rendering and clicks.  
+> **Tangible Output & Takeaway**: ChatGPT Desktop Code Mode setup; automated Figma-to-DOM screenshot visual diff workflows; and UI visual telemetry reproductions.  
+> **Viral Screenshot Quote**: *"Still squinting at pixels to verify responsive UI? Let AI open the browser, measure dimensions, click buttons, and annotate visual discrepancies."*
 
 Manual UI QA drains hours: a button sits 4 pixels off, a modal hides behind the mobile keyboard, and every CSS tweak forces another browser reload.
 
@@ -20,7 +20,7 @@ This chapter covers safe Computer Use permissions and automated design-fidelity 
 
 ---
 
-## 🎯 Intuitive Metaphor: A 24/7 Tireless "Pixel Quality Inspector"
+## Intuitive Metaphor: A 24/7 Tireless "Pixel Quality Inspector"
 
 Think of Computer Use as hiring a dedicated UI QA inspector sitting right beside your desk:
 
@@ -28,7 +28,7 @@ Think of Computer Use as hiring a dedicated UI QA inspector sitting right beside
 [Manual UI Inspection] ──> Holding Figma mockups in one hand, switching Chrome tabs with the other,
                            squinting to verify font sizes, resizing windows manually for breakpoints,
                            and manually refreshing pages after every CSS tweak (slow and exhausting).
-[Computer Use Mode]    ──> You hand the inspector a task card: "Review /auth/login against design mockup."
+[Computer Use Mode] ──> You hand the inspector a task card: "Review /auth/login against design mockup."
                            The inspector puts on blue-light glasses (screenshot analysis),
                            takes the mouse (simulated clicks), measures a 16px offset,
                            updates the Tailwind classes in the editor, refreshes the browser,
@@ -39,7 +39,7 @@ You never need to act as a human pixel-comparison machine again, freeing your en
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 Run your first AI visual inspection in 3 simple steps:
 
@@ -87,28 +87,28 @@ Combined with the 2026 **Appshots** feature (double-tap shortcut), visual snapsh
 
 This is the most practical automated scenario: **having Codex autonomously compare design mockups with local web rendering, auto-tuning styles.**
 
-### 🎯 Goal
+### Goal
 Compare local page `/auth/login` with design mockup screenshot `figma_login_mockup.png`, eliminating spacing discrepancies.
 
-### 🛑 Constraints
+### Constraints
 - Only Tailwind utility class adjustments in `src/app/login/page.tsx` are permitted.
 - Modifying existing DOM trees or semantic tags is prohibited.
 
-### 🧪 Automated Execution Specs
+### Automated Execution Specs
 
 Submit this prompt in the ChatGPT Desktop client:
 
 ```markdown
 @Chrome Complete the UI visual inspection following these steps:
 
-# 🎯 Goal
+# Goal
 Compare and align browser rendering with figma_login_mockup.png.
 
-# 🛑 Constraints
+# Constraints
 - Only use Tailwind utility classes in src/app/login/page.tsx.
 - Do not change the DOM structure.
 
-# 🚀 Execution Steps
+# Execution Steps
 1. Open Google Chrome and navigate to http://localhost:3000/auth/login.
 2. Capture screenshot of the login form container.
 3. Compare against assets/figma_login_mockup.png and identify padding discrepancies.
@@ -140,7 +140,7 @@ Leveraging the 2026 ChatGPT Desktop **Sites** feature alongside mobile breakpoin
 
 ```markdown
 @Chrome
-# 📱 Mobile Viewport Inspection
+# Mobile Viewport Inspection
 1. Open Chrome DevTools.
 2. Toggle Device Toolbar and select iPhone 15 Pro (393 x 852).
 3. Verify the submit button does not drop below the first screen fold.
@@ -162,14 +162,12 @@ In a desktop environment, agents can autonomously interact with professional 3D 
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | `Computer Use is not supported on this platform` | OS is not macOS or user is in an unsupported region | Ensure macOS client is used, or switch to a Headless Puppeteer script approach as an alternative |
 | `Failed to capture window: Permission denied` | macOS Screen Recording permissions missing or needs refresh | Open System Settings, toggle ChatGPT's "Screen Recording" permission off and on, and restart the client |
-| **AI mouse clicks wild coordinates off target** | Browser zoom is not 100% or multi-display DPI scaling mismatch | Reset Chrome zoom to standard 100%, and position the target test window in the center of the primary display |
+| **AI mouse clicks wild coordinates off target** | Browser zoom is not 100% or multi-display DPI scaling mismatch | Reset Chrome zoom to standard 100%, and position the target test window in the center of the primary display | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.06) ](./ch06_reasoning_steer.md) | [ ➡️ Next (Ch.08) ](./ch08_mobile_workflow.md) | [ 🌐 中文版 ](../chapters/ch07_desktop_computer_use.md)
+[Index](/en/) | [Prev (Ch.06)](./ch06_reasoning_steer.md) | [Next (Ch.08)](./ch08_mobile_workflow.md) | [中文版](../chapters/ch07_desktop_computer_use.md)

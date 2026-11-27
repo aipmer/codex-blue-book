@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.09 Commercial Multimodal SaaS: Credit Metering, Guardrails & Distribution
 
-> 🎯 **Engineering pain solved**: Flat \$19/month "unlimited" multimodal plans get wiped out when one power user uploads 200 HD videos and runs up an \$85 Gemini API bill—while standalone web apps struggle to get noticed after launch day.
+> **Engineering pain solved**: Flat \$19/month "unlimited" multimodal plans get wiped out when one power user uploads 200 HD videos and runs up an \$85 Gemini API bill—while standalone web apps struggle to get noticed after launch day.
 >
-> 💡 **What you ship**: A margin-verified multimodal product matrix, a runnable TypeScript **Reserve → Execute → Settle** credit-metering guard, and a three-channel distribution loop across Chrome Web Store, Workspace Marketplace, and GEO/SEO.
+> **What you ship**: A margin-verified multimodal product matrix, a runnable TypeScript **Reserve → Execute → Settle** credit-metering guard, and a three-channel distribution loop across Chrome Web Store, Workspace Marketplace, and GEO/SEO.
 >
-> ⚡ **Bottom line**: Durable multimodal SaaS turns volatile per-second media costs into predictable unit margins and embeds inside high-intent daily surfaces.
+> **Bottom line**: Durable multimodal SaaS turns volatile per-second media costs into predictable unit margins and embeds inside high-intent daily surfaces.
 
 ---
 
@@ -24,9 +24,7 @@ Require at least a **5x safety cushion** between monthly subscription price and 
 | :--- | :--- | :--- | :--- |
 | **Visual UI & Listing Compliance Auditor** | Images + short recordings + JSON Schema | Indie founders, e-commerce ops, frontend teams | \$29–\$79/mo; single image check on `gemini-4-hydrogen` costs < \$0.005 (>85% gross margin) |
 | **Real-Time Audio/Video Coaching & QA** | Gemini Live API (16kHz PCM + 1 FPS frames) | Interview prep, sales teams, field technicians | Metered minute packs (e.g., \$19 for 120 live minutes)—never "unlimited live streaming" |
-| **Vertical Google Workspace Add-ons** | Docs / Sheets / Slides sidebar + Cloud Run | Legal, finance, HR, cross-border catalog teams | \$15–\$49/seat/mo with high retention inside daily office tools |
-
----
+| **Vertical Google Workspace Add-ons** | Docs / Sheets / Slides sidebar + Cloud Run | Legal, finance, HR, cross-border catalog teams | \$15–\$49/seat/mo with high retention inside daily office tools | ---
 
 ## 9.2 Reserve → Execute → Settle Credit Metering (`src/billing/credits.ts`)
 
@@ -110,7 +108,7 @@ Pair this with a database constraint `CHECK (balance >= 0)` on `user_wallets` so
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Model unit economics first**: Run typical media workloads through `estimateRequiredCredits` or [check_gemini_quota.mjs](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs) and verify >75% gross margin.
 2. **Ship hard caps on day one**: Gate free tiers to small compressed images with strict daily quotas; expose live remaining credits in the UI.
@@ -118,14 +116,12 @@ Pair this with a database constraint `CHECK (balance >= 0)` on `user_wallets` so
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Free endpoint drained overnight by bots | Anonymous access with no rate limit and unrestricted video uploads | Enforce verified OAuth login + edge rate limits; restrict free tier to compressed images |
 | Backgrounded browser tab leaves Live session billing indefinitely | Missing server-side silence and hard session timeouts | Close Live sockets automatically after 180s silence and enforce 15-minute metered renewals |
-| Retried Stripe webhooks double-credit wallets | Webhook handler lacks idempotency key tracking | Insert `event_id` into `billing_webhook_events(event_id PRIMARY KEY)` inside the same DB transaction |
-
----
+| Retried Stripe webhooks double-credit wallets | Webhook handler lacks idempotency key tracking | Insert `event_id` into `billing_webhook_events(event_id PRIMARY KEY)` inside the same DB transaction | ---
 
 [Back to Gemini Hub](/en/gemini/) | [Prev: Browser QA & Cross-Platform Delivery](/en/gemini/ch08_browser_qa_cross_platform) | [Next: 2026 Frontier & Quota Economics](/en/gemini/ch10_frontier_quota_spatial)

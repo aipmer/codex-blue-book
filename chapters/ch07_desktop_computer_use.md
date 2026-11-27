@@ -4,13 +4,13 @@ description: "使用 ChatGPT 桌面端代码模式、GPT-6.1 Terra 视觉推理�
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.06) ](./ch06_reasoning_steer.md) | [ ➡️ 下一章 (Ch.08) ](./ch08_mobile_workflow.md) | [ 🌐 English ](../en/ch07_desktop_computer_use.md)
+[主目录](/) | [上一章 (Ch.06)](./ch06_reasoning_steer.md) | [下一章 (Ch.08)](./ch08_mobile_workflow.md) | [English](../en/ch07_desktop_computer_use.md)
 
 # Ch.07 视觉闭环：Desktop Computer Use 自动巡检与设计还原
 
-> 🎯 **具体工程麻烦**：传统前端 UI 还原依赖肉眼查像素，响应式漏看弹窗遮挡；纯命令行测试无法覆盖真实浏览器渲染与点击。  
-> 💡 **可运行实战代码与落地收益**：ChatGPT 桌面端代码模式操作框配置；Figma 设计稿与本地网页自动截图比对走查流程；UI 视觉巡检真实录屏复现。  
-> ⚡ **社交传播 / 截图金句**：“写完前端还在肉眼查像素？让 AI 自己打开浏览器量尺寸、点按钮，截图标注哪里不合规。”
+> **具体工程麻烦**：传统前端 UI 还原依赖肉眼查像素，响应式漏看弹窗遮挡；纯命令行测试无法覆盖真实浏览器渲染与点击。  
+> **可运行实战代码与落地收益**：ChatGPT 桌面端代码模式操作框配置；Figma 设计稿与本地网页自动截图比对走查流程；UI 视觉巡检真实录屏复现。  
+> **社交传播 / 截图金句**：“写完前端还在肉眼查像素？让 AI 自己打开浏览器量尺寸、点按钮，截图标注哪里不合规。”
 
 前端走查里最耗时间的往往是肉眼核对像素：按钮左偏了 4px，移动端弹窗被软键盘挡住，改完又要切回浏览器反复刷新。
 
@@ -20,7 +20,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：24 小时不知疲倦的“像素质检员”
+## 生活化直觉隐喻：24 小时不知疲倦的“像素质检员”
 
 把 Computer Use 想象成你工位旁雇佣的专职体验质检员：
 
@@ -36,7 +36,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 用 3 步跑通你的首次 AI 视觉走查：
 
@@ -84,28 +84,28 @@ Computer Use 遵循高可靠的感知闭环：
 
 这是最实用的自动化场景：**让 Codex 自主比对设计图与本地网页渲染，自动微调样式。**
 
-### 🎯 目标 (Goal)
+### 目标 (Goal)
 对比本地网页 `/auth/login` 与设计稿截图 `figma_login_mockup.png`，消除视觉间距差异。
 
-### 🛑 约束 (Constraints)
+### 约束 (Constraints)
 - 仅允许调整 `src/app/login/page.tsx` 的 Tailwind 工具类。
 - 禁止改动原有 DOM 树与语义化标签。
 
-### 🧪 自动化执行 Specs
+### 自动化执行 Specs
 
 在 ChatGPT 客户端中发送：
 
 ```markdown
 @Chrome 请按以下步骤完成 UI 视觉走查：
 
-# 🎯 Goal
+# Goal
 Compare and align browser rendering with figma_login_mockup.png.
 
-# 🛑 Constraints
+# Constraints
 - Only use Tailwind utility classes in src/app/login/page.tsx.
 - Do not change the DOM structure.
 
-# 🚀 Execution Steps
+# Execution Steps
 1. Open Google Chrome and navigate to http://localhost:3000/auth/login.
 2. Capture screenshot of the login form container.
 3. Compare against assets/figma_login_mockup.png and identify padding discrepancies.
@@ -137,7 +137,7 @@ Compare and align browser rendering with figma_login_mockup.png.
 
 ```markdown
 @Chrome
-# 📱 Mobile Viewport Inspection
+# Mobile Viewport Inspection
 1. Open Chrome DevTools.
 2. Toggle Device Toolbar and select iPhone 15 Pro (393 x 852).
 3. Verify the submit button does not drop below the first screen fold.
@@ -159,14 +159,12 @@ GPT-6 Astra 可在支持的客户端和工具中参与桌面工作流。以下 B
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救指南 |
 | :--- | :--- | :--- |
 | `Computer Use is not supported on this platform` | 当前系统非 macOS 或位于未开放区域 | 确认使用 macOS 客户端，或改用 Headless Puppeteer 纯脚本方案作为替代 |
 | `Failed to capture window: Permission denied` | macOS 屏幕录制权限未正确勾选或需要刷新 | 打开系统设置，重新开关一次 ChatGPT 的「屏幕录制」权限并彻底重启客户端 |
-| **AI 鼠标在屏幕上乱点，点不到目标按钮** | 浏览器缩放比例不是 100% 或多屏幕 DPI 换算异常 | 将 Chrome 缩放比例重置为标准 100%，并将待测窗口放置于主显示器正中 |
+| **AI 鼠标在屏幕上乱点，点不到目标按钮** | 浏览器缩放比例不是 100% 或多屏幕 DPI 换算异常 | 将 Chrome 缩放比例重置为标准 100%，并将待测窗口放置于主显示器正中 | ---
 
----
-
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.06) ](./ch06_reasoning_steer.md) | [ ➡️ 下一章 (Ch.08) ](./ch08_mobile_workflow.md) | [ 🌐 English ](../en/ch07_desktop_computer_use.md)
+[主目录](/) | [上一章 (Ch.06)](./ch06_reasoning_steer.md) | [下一章 (Ch.08)](./ch08_mobile_workflow.md) | [English](../en/ch07_desktop_computer_use.md)

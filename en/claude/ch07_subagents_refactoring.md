@@ -4,22 +4,22 @@ description: "Configure .claude/agents/*.md isolated subagents and break down of
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.06) ](./ch06_legacy_governance.md) | [ ➡️ Next (Ch.08) ](./ch08_ship_pr_steward.md) | [ 🌐 中文版 ](/claude/ch07_subagents_refactoring)
+[Home](/en/) | [Prev (Ch.06)](./ch06_legacy_governance.md) | [Next (Ch.08)](./ch08_ship_pr_steward.md) | [中文版](/claude/ch07_subagents_refactoring)
 
 # Ch.07 Isolated Subagents & Long-Horizon Autonomous Refactoring
 
-> 🎯 **The Real Problem**: Mixing codebase search, multi-file edits, noisy test logs, and self-review inside one thread clogs context and blinds the model to its own flawed assumptions.  
-> 💡 **Tangible Output & Takeaway**: Production `.claude/agents/*.md` templates (Haiku explorer + Opus independent reviewer) plus deep breakdowns of Rakuten's 7-hour run and Anthropic's Python-to-Rust migration.  
-> ⚡ **Viral Screenshot Quote**: *"Never let the same context window both author and approve a refactor. Split exploration, editing, and adversarial review into isolated Subagents."*
+> **The Real Problem**: Mixing codebase search, multi-file edits, noisy test logs, and self-review inside one thread clogs context and blinds the model to its own flawed assumptions.  
+> **Tangible Output & Takeaway**: Production `.claude/agents/*.md` templates (Haiku explorer + Opus independent reviewer) plus deep breakdowns of Rakuten's 7-hour run and Anthropic's Python-to-Rust migration.  
+> **Viral Screenshot Quote**: *"Never let the same context window both author and approve a refactor. Split exploration, editing, and adversarial review into isolated Subagents."*
 
 Long-horizon refactors hit two walls in a single conversation: search noise fills the window, and the authoring context defends its own mistakes during review. **Claude Code Subagents (`.claude/agents/*.md`)** isolate each role into its own context window, tool allowlist, and model tier—returning only a crisp summary to the coordinator.
 
 ---
 
-## 🎯 Intuitive Metaphor: Splitting One Overloaded Worker into Scout, Builder & Inspector
+## Intuitive Metaphor: Splitting One Overloaded Worker into Scout, Builder & Inspector
 
 ```text
-[Single Thread]     ──> One person drafts, builds, and signs their own inspection sheet on a cluttered desk.
+[Single Thread] ──> One person drafts, builds, and signs their own inspection sheet on a cluttered desk.
 [Subagent Division] ──> Coordinator (Opus 5.5) dispatches isolated specialists:
                         ├── Scout (`repo-explorer`, Haiku 5.5, read-only): scans 100 files, returns 30-line map;
                         ├── Builder (`domain-refactor`, Sonnet/Opus 5.5): edits scoped directory and runs tests;
@@ -28,7 +28,7 @@ Long-horizon refactors hit two walls in a single conversation: search noise fill
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 1. **Step 1: Create `.claude/agents/` in your repository**
    ```bash
@@ -111,7 +111,7 @@ Anthropic's own engineering team migrated their core **Messages API from Python 
 ```text
 Shared Request Corpus
    ├──► Legacy Python Service ──► Response A (status, headers, JSON)
-   └──► New Rust Service      ──► Response B (status, headers, JSON)
+   └──► New Rust Service ──► Response B (status, headers, JSON)
                                        │
                                        ▼
                 Diff harness catches any mismatch ──► Subagent patches Rust & re-verifies
@@ -121,14 +121,12 @@ You can apply the exact same differential harness whenever migrating legacy serv
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **Parallel write subagents overwrite each other's files** | Multiple writers sharing one working tree | Partition mutually exclusive directories or give each writer a dedicated `git worktree` |
 | **Subagent dumps 3,000 lines of raw logs into main thread** | Missing output budget in agent prompt | Require concise `<40`-line summaries with file paths only |
-| **Main session never delegates to your custom subagent** | Trigger conditions missing from `description` | Add explicit trigger scenarios to `description` or invoke `@arch-reviewer` directly |
+| **Main session never delegates to your custom subagent** | Trigger conditions missing from `description` | Add explicit trigger scenarios to `description` or invoke `@arch-reviewer` directly | ---
 
----
-
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.06) ](./ch06_legacy_governance.md) | [ ➡️ Next (Ch.08) ](./ch08_ship_pr_steward.md) | [ 🌐 中文版 ](/claude/ch07_subagents_refactoring)
+[Home](/en/) | [Prev (Ch.06)](./ch06_legacy_governance.md) | [Next (Ch.08)](./ch08_ship_pr_steward.md) | [中文版](/claude/ch07_subagents_refactoring)

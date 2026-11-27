@@ -110,34 +110,26 @@ async function runStressTest() {
     }
   }
 
-  // 4. Reading Guide Callout Check (🎯, 💡, ⚡)
-  console.log('\n--- 4. Checking Reading Guide Callouts (🎯, 💡, ⚡) ---');
+  // 4. Reading Guide Callout Check (Clean non-emoji blockquote)
+  console.log('\n--- 4. Checking Standardized Reading Guide Callouts & Zero Emojis ---');
+  const EMOJI_RE = /(?:\p{Extended_Pictographic}(?:\uFE0F|\uFE0E)?(?:\u200D\p{Extended_Pictographic}(?:\uFE0F|\uFE0E)?)*|[\u2600-\u27BF]\uFE0F?)/u;
   for (const name of CHAPTER_FILES) {
     for (const [lang, dir] of [['ZH', ZH_DIR], ['EN', EN_DIR]]) {
       const filePath = path.join(dir, name);
       if (!fs.existsSync(filePath)) continue;
       const content = fs.readFileSync(filePath, 'utf8');
-      
-      const hasTarget = content.includes('🎯');
-      const hasBulb = content.includes('💡');
-      const hasZap = content.includes('⚡');
 
       const lines = content.split('\n');
-      const guideLines = lines.filter(l => l.startsWith('>') && (l.includes('🎯') || l.includes('💡') || l.includes('⚡')));
-
-      const allPresent = hasTarget && hasBulb && hasZap;
+      const guideLines = lines.filter(l => l.startsWith('>') && /\*\*/.test(l));
+      const hasEmoji = EMOJI_RE.test(content);
       const isBlockquote = guideLines.length >= 3;
-      const pass = allPresent && isBlockquote;
+      const pass = !hasEmoji && isBlockquote;
 
       let detail = '';
-      if (!allPresent) {
-        detail += `Missing emoji(s): ${!hasTarget ? '🎯 ' : ''}${!hasBulb ? '💡 ' : ''}${!hasZap ? '⚡ ' : ''}; `;
-      }
-      if (!isBlockquote) {
-        detail += `Expected >= 3 blockquote lines with emojis, found ${guideLines.length}`;
-      }
+      if (hasEmoji) detail += 'Unexpected emoji found in chapter body; ';
+      if (!isBlockquote) detail += `Expected >= 3 structured bold blockquote lines, found ${guideLines.length}`;
 
-      record(pass, `Standardized callout in ${lang} ${path.basename(dir)}/${name}`, detail);
+      record(pass, `Clean standardized callout (no emojis) in ${lang} ${path.basename(dir)}/${name}`, detail);
     }
   }
 
@@ -210,7 +202,7 @@ async function runStressTest() {
       const raw = fs.readFileSync(filePath, 'utf8');
       const stripped = raw.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n+/, '');
       const firstLine = stripped.split('\n')[0];
-      const hasNav = firstLine.includes('[ 🏠') || firstLine.includes('[ 🌐');
+      const hasNav = firstLine.includes('[主目录]') || firstLine.includes('[Index]') || firstLine.includes('[中文版]');
       record(hasNav, `Nav bar header on line 1 in ${lang} ${path.basename(dir)}/${name}`, `First line: ${firstLine}`);
     }
   }

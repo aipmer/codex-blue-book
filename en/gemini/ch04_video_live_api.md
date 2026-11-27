@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.04 Video Understanding & Gemini Live API Real-Time Applications
 
-> 🎯 **Engineering pain solved**: Race-condition UI flickers cannot be explained in text bug reports, while chaining separate `STT → LLM → TTS` services for real-time voice/camera assistants introduces 3-second lag and breaks when users interrupt mid-sentence.
+> **Engineering pain solved**: Race-condition UI flickers cannot be explained in text bug reports, while chaining separate `STT → LLM → TTS` services for real-time voice/camera assistants introduces 3-second lag and breaks when users interrupt mid-sentence.
 >
-> 💡 **What you ship**: A runnable video bug-repro analyzer with exact `MM:SS` timeline schemas, a bidirectional **Gemini Live API** WebSocket connector supporting native barge-in, and three anti-hallucination guardrails.
+> **What you ship**: A runnable video bug-repro analyzer with exact `MM:SS` timeline schemas, a bidirectional **Gemini Live API** WebSocket connector supporting native barge-in, and three anti-hallucination guardrails.
 >
-> ⚡ **Bottom line**: Feed screen recordings for timing bugs and use native Live WebSockets for real-time audio/video—stop gluing three brittle media pipelines together.
+> **Bottom line**: Feed screen recordings for timing bugs and use native Live WebSockets for real-time audio/video—stop gluing three brittle media pipelines together.
 
 Static screenshots miss the entire class of bugs that live on a timeline: state-race flickers, modal focus traps, and mobile keyboards shoving submit buttons off screen. Gemini's native video understanding and **Gemini Live API** turn continuous video and bidirectional audio into first-class developer primitives.
 
@@ -44,17 +44,13 @@ async function diagnoseBugVideo(videoPath: string) {
 
   const res = await ai.models.generateContent({
     model: "gemini-4-neon",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          { fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
+        parts: [{ fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
           {
             text: "List every user interaction and visual anomaly with exact MM:SS timestamps, then infer the most likely frontend state or race condition root cause."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -100,9 +96,7 @@ Gemini Live streams audio and JPEG frames over one stateful WebSocket and suppor
 | **Upstream Audio** | Raw 16-bit PCM, `16kHz`, Little-Endian, mono | Capture via `AudioWorklet` in 100ms chunks |
 | **Upstream Video** | JPEG frames, `<= 1 FPS`, `768px` long edge | 1 FPS handles inspection/coaching without burning bandwidth |
 | **Downstream Audio** | Raw 16-bit PCM, `24kHz`, Little-Endian | Flush queued audio buffers immediately on `interrupted: true` |
-| **Auth Security** | Server-minted **Ephemeral Token** | Never embed long-lived `GEMINI_API_KEY` in client WebSocket code |
-
-```typescript
+| **Auth Security** | Server-minted **Ephemeral Token** | Never embed long-lived `GEMINI_API_KEY` in client WebSocket code | ```typescript
 import { GoogleGenAI, Modality } from "@google/genai";
 
 export async function startLiveAssistant(
@@ -161,7 +155,7 @@ export async function startLiveAssistant(
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run offline video diagnosis**: Record a 15-second UI bug repro as `bug-repro.mp4` and execute `diagnoseBugVideo` to inspect the timestamped JSON timeline.
 2. **Price your video budget**: Run `node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs --model gemini-4-hydrogen --video-seconds 300 --output-tokens 8000 --budget 1`.
@@ -169,14 +163,12 @@ export async function startLiveAssistant(
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Live audio plays slow-motion or chipmunk-pitched | 24kHz server PCM played on a 16kHz or 48kHz `AudioContext` | Construct playback `AudioContext({ sampleRate: 24000 })` while resampling mic capture to `16000` |
 | Old audio keeps playing after user interrupts | Client ignores `serverContent.interrupted` | Call `.stop()` on all queued `AudioBufferSourceNode` instances and reset playback cursor on interrupt |
-| Long video uploads time out or spike API bills | Raw 4K 60fps capture uploaded without downsampling | Transcode first: `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` |
-
----
+| Long video uploads time out or spike API bills | Raw 4K 60fps capture uploaded without downsampling | Transcode first: `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` | ---
 
 [Back to Gemini Hub](/en/gemini/) | [Prev: AI Studio Handoff](/en/gemini/ch03_ai_studio_handoff) | [Next: Workspace MCP Automation](/en/gemini/ch05_workspace_mcp)

@@ -1,18 +1,21 @@
 ---
-title: "Codex Blue Book (v1.5.0): Autonomous Agent Orchestration & Delivery"
-description: "Complete index and PDF downloads for Codex Blue Book v1.5.0 covering GPT-6.2, GPT-6.1 Terra, CLI 0.172.0, AGENTS.md guardrails, Feishu Assistant, and SaaS MVPs."
+title: "Codex Blue Book: OpenAI AI Coding Practical Guide"
+description: "Overview of OpenAI and Codex (CLI 0.172.0, ChatGPT Desktop Code Mode, GPT-6.2 / GPT-6.1 Terra), with all 13 bilingual chapters, PDF downloads, and companion repos."
 lastUpdated: 2026-11-26
 ---
 
 # Codex Practical Blue Book: From Beginner to Architect
 
-> **Edition**: v1.5.0 · Verified **November 26, 2026**  
-> **Focus**: Help indie developers, technical PMs, and full-stack engineers ship monetizable software with **OpenAI Codex (CLI 0.172.0 + ChatGPT Desktop Code Mode)** and **GPT-6.2 / GPT-6.1 Terra**.
+## About Codex & OpenAI
+
+**OpenAI**, founded in 2015 in San Francisco, builds ChatGPT and the GPT model family. **OpenAI Codex** is its autonomous software-engineering suite spanning **Codex CLI (`0.172.0`)**, **ChatGPT Desktop Code Mode**, and cloud task sandboxes—powered by **GPT-6.2 Astra / Sol** for reasoning and coding, **GPT-6.1 Terra** for desktop visual audits, and **GPT-6 Luna** for fast routing.
+
+> **Book Focus**: Help indie developers, technical PMs, and full-stack engineers ship production web and mobile software from scratch (verified **November 26, 2026**, edition `v1.5.0`).
 
 - [Start Reading Ch.01](/en/ch01_mindset)
 - [Jump to 2026 Battle Map (Ch.13)](/en/ch13_2026_frontier)
 - [Download English PDF](/downloads/codex_blue_book_en.pdf) · [中文版 PDF](/downloads/codex_blue_book_zh.pdf)
-- [Generate AGENTS.md Rules](/en/generator) · [Compare All 4 Agents](/en/compare)
+- [Generate AGENTS.md Rules](/en/generator) · [Tool Comparison](/en/compare)
 
 ---
 

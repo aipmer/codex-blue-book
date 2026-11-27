@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.10 2026 Frontier Finale: Four-Agent Hybrid Strategy & Official Tracking
 
-> 🎯 **Engineering pain solved**: After mastering all four ecosystems, teams wonder whether to bet exclusively on one vendor or mix tools—and how to mix without creating conflicting rules, merge collisions, and runaway bills.
+> **Engineering pain solved**: After mastering all four ecosystems, teams wonder whether to bet exclusively on one vendor or mix tools—and how to mix without creating conflicting rules, merge collisions, and runaway bills.
 >
-> 💡 **What you ship**: A pragmatic **Four-Agent Hybrid Playbook** unified by one root `AGENTS.md`, three anti-chaos team guardrails, and an official primary-source tracking table across all four vendors.
+> **What you ship**: A pragmatic **Four-Agent Hybrid Playbook** unified by one root `AGENTS.md`, three anti-chaos team guardrails, and an official primary-source tracking table across all four vendors.
 >
-> ⚡ **Bottom line**: Mature engineering teams avoid model tribalism—keep one source of truth in `AGENTS.md` and route each stage to the agent with the highest determinism and ROI.
+> **Bottom line**: Mature engineering teams avoid model tribalism—keep one source of truth in `AGENTS.md` and route each stage to the agent with the highest determinism and ROI.
 
 ---
 
@@ -24,10 +24,8 @@ Maintain shared repository boundaries once in root **`AGENTS.md`** (native in Co
 | :--- | :--- | :--- |
 | **0→1 MVPs, local tunneling & mobile duty alerts** | **OpenAI Codex** (GPT-6.2 + Feishu Assistant) | Fast full-stack shipping, mobile approvals, Codex Switch failover |
 | **High-risk legacy refactors, deterministic CI & `/design`** | **Claude Code** (Claude 5.5 + Hooks + `/ship`) | Hard `PreToolUse` command gates, `/design` artboards, PR Steward |
-| **Multimodal apps, Workspace/Colab & visual QA** | **Gemini Antigravity** (Gemini 4 + `/swarm`) | AI Studio context handoff, Orchestrator speed, Workspace MCP & Colab `%%agy` |
-| **High-ROI IDE swarms, verticals, Slides, 3D CAD & on-prem** | **Kimi Code** (K3.1 Pro + `kimi acp` + open weights) | \$2/\$0.20/\$10 pricing, Zed/JetBrains ACP, finance/legal/medical, Slides/FreeCAD & self-hosting |
-
-```mermaid
+| **Multimodal apps, Workspace/Colab & visual QA** | **Gemini Antigravity** (Gemini 4 + `/swarm`) | AI Studio context handoff, Orchestrator speed, Workspace MCP & Colab Agent Extension |
+| **High-ROI IDE swarms, verticals, Slides, 3D CAD & on-prem** | **Kimi Code** (K3.1 Pro + `kimi acp` + open weights) | \$2/\$0.20/\$10 pricing, Zed/JetBrains ACP, finance/legal/medical, Slides/FreeCAD & self-hosting | ```mermaid
 flowchart LR
     Spec["Single Root AGENTS.md (Source of Truth)"]
     Spec --> S1["Prototyping & Design: Gemini AI Studio / Claude /design"]
@@ -53,11 +51,9 @@ flowchart LR
 | **Kimi / Moonshot** | `@Kimi_Moonshot` | `kimi.com` · `platform.moonshot.ai` · Hugging Face `moonshotai/` |
 | **OpenAI Codex** | `@OpenAIDevs` · `@OpenAI` | `learn.chatgpt.com/docs/changelog` · `developers.openai.com/api/docs/deprecations` |
 | **Anthropic Claude** | `@AnthropicAI` · `@claudeai` | `docs.anthropic.com` · `anthropic.com/news` |
-| **Google Gemini / Antigravity** | `@GoogleAI` · `@GoogleDeepMind` | `antigravity.google/llms.txt` · `ai.google.dev` |
+| **Google Gemini / Antigravity** | `@GoogleAI` · `@GoogleDeepMind` | `antigravity.google/llms.txt` · `ai.google.dev` | ---
 
----
-
-## 🚀 Series Finale 3-Step Action Plan
+## Series Finale 3-Step Action Plan
 
 1. **Standardize your root rules**: Generate a clean `AGENTS.md` plus tool-specific add-ons in the [Multi-Agent Rules Generator](/en/generator).
 2. **Adopt one high-ROI bottleneck first**: Start with the single workflow that saves your team the most pain this week (citation verification, deterministic Hooks, ACP IDE swarms, or 3-viewport visual QA).
@@ -65,14 +61,12 @@ flowchart LR
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Four tools drift into four incompatible code styles | Missing shared `AGENTS.md` and automated formatting gate | Commit one root `AGENTS.md`, import it via `@AGENTS.md` in `CLAUDE.md`, and enforce formatting in CI |
 | Unattended agent triggers accidental production push or email | External side effects not separated from local sandbox work | Require explicit human confirmation before `git push`, production deploys, payments, or outbound messages |
-| Production breaks months later from retired model IDs | Model slugs hardcoded across application files | Centralize model routing in config/env variables and audit vendor deprecation schedules monthly |
-
----
+| Production breaks months later from retired model IDs | Model slugs hardcoded across application files | Centralize model routing in config/env variables and audit vendor deprecation schedules monthly | ---
 
 [Back to Kimi Hub](/en/kimi/) | [Prev: vLLM Self-Hosting & Enterprise SaaS](/en/kimi/ch09_vllm_self_hosting_saas) | [Back to Series Portal](/en/)

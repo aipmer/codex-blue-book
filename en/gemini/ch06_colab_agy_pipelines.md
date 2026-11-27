@@ -1,24 +1,24 @@
 ---
-title: "Ch.06 Cloud Compute Offload: Google Colab (%%agy) & Notebook Pipelines"
-description: "Use Google Colab %%agy cell magic and Colab MCP Server to offload telemetry analysis, batch embeddings, and GPU experiments, syncing clean JSON artifacts back to Antigravity."
+title: "Ch.06 Cloud Compute Offload: Google Colab Agent Extension & Notebook Pipelines"
+description: "Use Google Colab Agent Extension cell magic and Colab MCP Server to offload telemetry analysis, batch embeddings, and GPU experiments, syncing clean JSON artifacts back to Antigravity."
 lastUpdated: 2026-11-26
 ---
 
-[Back to Gemini Hub](/en/gemini/) | [Prev: Workspace MCP Automation](/en/gemini/ch05_workspace_mcp) | [Next: /swarm & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Workspace MCP Automation](/en/gemini/ch05_workspace_mcp) | [Next: Multi-Agent Collaboration & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak)
 
-# Ch.06 Cloud Compute Offload: Google Colab (`%%agy`) & Notebook Pipelines
+# Ch.06 Cloud Compute Offload: Google Colab Agent Extension & Notebook Pipelines
 
-> 🎯 **Engineering pain solved**: Running 200K-row telemetry clustering, batch embeddings, or LoRA tuning on a laptop stalls local dev work and wastes hours fighting Python/CUDA dependencies—while ad-hoc cloud notebooks drift completely out of sync with Git.
+> **Engineering pain solved**: Running 200K-row telemetry clustering, batch embeddings, or LoRA tuning on a laptop stalls local dev work and wastes hours fighting Python/CUDA dependencies—while ad-hoc cloud notebooks drift completely out of sync with Git.
 >
-> 💡 **What you ship**: A repeatable **Google Colab (`%%agy` + Colab MCP Server)** compute-offload workflow that executes heavy data jobs on cloud runtimes and feeds sanitized JSON reports back into your local Antigravity repository.
+> **What you ship**: A repeatable **Google Colab (Colab agent extension + Colab MCP Server)** compute-offload workflow that executes heavy data jobs on cloud runtimes and feeds sanitized JSON reports back into your local Antigravity repository.
 >
-> ⚡ **Bottom line**: Keep your local repo focused on clean application code; offload heavy batch data and GPU workloads to ephemeral Colab runtimes with versioned Python scripts.
+> **Bottom line**: Keep your local repo focused on clean application code; offload heavy batch data and GPU workloads to ephemeral Colab runtimes with versioned Python scripts.
 
 ---
 
-## 6.1 Invoking Antigravity Inside Notebooks with `%%agy`
+## 6.1 Invoking Antigravity Inside Notebooks with Colab agent extension
 
-The `%%agy` cell magic lets you write natural-language pipeline instructions directly inside a Colab cell with live awareness of in-memory DataFrame schemas and shapes:
+The Colab agent cell extension lets you write natural-language pipeline instructions directly inside a Colab cell with live awareness of in-memory DataFrame schemas and shapes:
 
 ```python
 %%agy --model gemini-4-neon
@@ -50,16 +50,14 @@ def build_slow_routes_report(parquet_path: str, output_json: str) -> list[dict]:
     )
 
     flagged = grouped[(grouped["p95_ms"] > 2500) | (grouped["error_rate"] > 0.02)]
-    records = [
-        {
+    records = [{
             "route": row.route,
             "viewport": row.viewport_bucket,
             "p95_ms": round(float(row.p95_ms), 1),
             "error_rate": round(float(row.error_rate), 4),
             "sample_count": int(row.sample_count),
         }
-        for row in flagged.itertuples(index=False)
-    ]
+        for row in flagged.itertuples(index=False)]
 
     Path(output_json).parent.mkdir(parents=True, exist_ok=True)
     Path(output_json).write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -79,7 +77,7 @@ Mounting the **Colab MCP Server** lets local Antigravity trigger cloud notebook 
 ```mermaid
 flowchart LR
     Repo["Local Antigravity Repo"] -->|"Colab MCP run"| Colab["Google Colab Cloud Runtime"]
-    Colab -->|"%%agy clean / embed / eval"| Drive["Drive / Sanitized JSON"]
+    Colab -->|"Cloud agent clean / embed / eval"| Drive["Drive / Sanitized JSON"]
     Drive -->|"Sync back"| Repo
     Repo --> Fix["Antigravity optimizes top slow routes"]
 ```
@@ -90,28 +88,24 @@ flowchart LR
 
 | Recurring Workload | Recommended Stack | Why It Wins |
 | :--- | :--- | :--- |
-| **Weekly SEO / search query clustering** | Sheets MCP → Colab `%%agy` → write back to Sheets | Zero local Python env churn |
+| **Weekly SEO / search query clustering** | Sheets MCP → Colab Agent Extension → write back to Sheets | Zero local Python env churn |
 | **100K-doc vector re-indexing** | Drive corpus → Colab GPU / Batch Embeddings | Survives laptop sleep with resumable Drive checkpoints |
-| **Multimodal prompt regression evals** | Eval images/videos → Colab batch `gemini-4-hydrogen` → CSV diff | Quantitative pass/fail scores before every prompt rollout |
+| **Multimodal prompt regression evals** | Eval images/videos → Colab batch `gemini-4-hydrogen` → CSV diff | Quantitative pass/fail scores before every prompt rollout | ---
 
----
-
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Test the deterministic script**: Save `telemetry_rollup.py`, run it on sample Parquet/CSV telemetry, and confirm valid JSON output.
-2. **Iterate visually with `%%agy`**: Generate P95 breakdown charts in Colab, then export clean transformation logic back into `notebooks/*.py`.
+2. **Iterate visually with Colab agent extension**: Generate P95 breakdown charts in Colab, then export clean transformation logic back into `notebooks/*.py`.
 3. **Close the code loop**: Run `agy -p "Read reports/slow_routes.json and list concrete frontend fixes for the top 3 slowest routes"`.
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Colab disconnects at 90 minutes and loses progress | Intermediate outputs written to ephemeral `/content/` | Mount `/content/drive` at cell 1 and checkpoint every 500 records to Drive or GCS |
 | `.ipynb` commit leaks `GEMINI_API_KEY` | Raw secret pasted into cell code or captured in stdout | Read secrets via `google.colab.userdata.get('GEMINI_API_KEY')` and enable `nbstripout` |
-| Cloud notebooks diverge from Git repo | One-off browser edits never synced back to `.py` files | Enforce "explore in notebook, freeze in `scripts/*.py`"; notebooks import versioned modules only |
+| Cloud notebooks diverge from Git repo | One-off browser edits never synced back to `.py` files | Enforce "explore in notebook, freeze in `scripts/*.py`"; notebooks import versioned modules only | ---
 
----
-
-[Back to Gemini Hub](/en/gemini/) | [Prev: Workspace MCP Automation](/en/gemini/ch05_workspace_mcp) | [Next: /swarm & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Workspace MCP Automation](/en/gemini/ch05_workspace_mcp) | [Next: Multi-Agent Collaboration & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak)

@@ -1,18 +1,18 @@
 ---
 title: "Ch.07 /swarm 多代理蜂群架构与官方《Alpine Peak》全栈案例复盘"
-description: "深度拆解 Google Antigravity 原生 /swarm 蜂群机制：Coordinator、Git Worktree 隔离并行 Worker 与对抗性 Verifier，全景复盘《Alpine Peak》3D 仿真工程链路。"
+description: "深度拆解 Google Antigravity 原生 多智能体协作机制：Coordinator、Git Worktree 隔离并行 Worker 与对抗性 Verifier，全景复盘《Alpine Peak》3D 仿真工程链路。"
 lastUpdated: 2026-11-26
 ---
 
-[返回 Gemini 专页](/gemini/) | [上一章：Google Colab %%agy 云端算力外挂](/gemini/ch06_colab_agy_pipelines) | [下一章：浏览器视觉走查与跨端上架](/gemini/ch08_browser_qa_cross_platform)
+[返回 Gemini 专页](/gemini/) | [上一章：Google Colab 代理扩展 云端算力外挂](/gemini/ch06_colab_agy_pipelines) | [下一章：浏览器视觉走查与跨端上架](/gemini/ch08_browser_qa_cross_platform)
 
-# Ch.07 `/swarm` 多代理蜂群架构与官方《Alpine Peak》全栈案例复盘
+# Ch.07 多智能体协作架构与官方《Alpine Peak》全栈案例复盘
 
-> 🎯 **本章解决的工程麻烦**：面对跨 4 个子系统的大型功能（后端 API、前端交互、WebGL 渲染、自动化测试），让单个智能体串行开发既慢又容易写到后面忘了前面；而自己手动开 4 个终端窗口并行写代码，最后 `git merge` 冲突解到怀疑人生。
+> **本章解决的工程麻烦**：面对跨 4 个子系统的大型功能（后端 API、前端交互、WebGL 渲染、自动化测试），让单个智能体串行开发既慢又容易写到后面忘了前面；而自己手动开 4 个终端窗口并行写代码，最后 `git merge` 冲突解到怀疑人生。
 >
-> 💡 **实战落地收益**：掌握 Antigravity 原生 **`/swarm`** 蜂群调度模型（Coordinator + 独立 Git Worktree Worker + 对抗性 Verifier + 实时 Swarm UI 看板），拆解 Google 官方 **《Alpine Peak》** 3D 物理仿真工程的全链路打法。
+> **实战落地收益**：掌握 Antigravity 原生 **`/swarm`** 多智能体调度模型（Coordinator + 独立 Git Worktree Worker + 对抗性 Verifier + 实时 Swarm UI 看板），拆解 Google 官方 **《Alpine Peak》** 3D 物理仿真工程的全链路打法。
 >
-> ⚡ **一句话结论**：并行多代理能不能真正提效，不取决于同时开几个窗口，而取决于文件边界是否物理互斥、以及有没有独立的对抗性验收员盯着合入质量。
+> **一句话结论**：并行多代理能不能真正提效，不取决于同时开几个窗口，而取决于文件边界是否物理互斥、以及有没有独立的对抗性验收员盯着合入质量。
 
 如果你把单智能体开发比作“一个人依次刷墙、铺砖、装灯、验收”，那 **`/swarm`** 就是带项目经理和独立质检员的施工队：水电工、木工、油漆工各自领走互不打架的房间同时干活，干完不是自己签字过关，而是交给专挑毛病的质检员逐项复核，全部过关后项目经理统一合并交付。
 
@@ -40,7 +40,7 @@ flowchart TD
     Coord --> Merge["合并分支 + 清理临时 Worktree"]
 ```
 
-在 `agy` CLI 中，按下 **`Alt + S`** 或输入 `/swarm board` 可以打开实时蜂群监控看板，一眼看清每个成员当前处于 `working`（干活中）、`waiting`（休眠零消耗）还是 `stopped` 状态。
+在 `agy` CLI 中，按下 **`Alt + S`** 或输入 `/swarm board` 可以打开实时多智能体协作看板，一眼看清每个成员当前处于 `working`（干活中）、`waiting`（休眠零消耗）还是 `stopped` 状态。
 
 ### 一份拿来即用的 `/swarm` 任务派发模板
 
@@ -85,7 +85,7 @@ Google Antigravity 演示中最具代表性的工程案例之一是 **《Alpine 
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **从小规模双 Worker 练手**：选一个既有前后端、测试脚本齐全的仓库，用 `/swarm` 拆成 `api-worker`（改 `src/api/`）和 `ui-worker`（改 `src/ui/`）外加 1 个 `verifier`，体验零冲突合并。
 2. **打开 Swarm Board 实时观察**：按 `Alt + S`（或输入 `/swarm board`）观察各 Worker 的思考与命令计时、留言板交接与 Verifier 的打回记录。
@@ -93,14 +93,12 @@ Google Antigravity 演示中最具代表性的工程案例之一是 **《Alpine 
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 两个 Worker 同时修改了 `package.json` 或 `src/types.ts` 导致合并冲突 | 任务派发前未划分互斥目录，也未先由 Coordinator 冻结公共类型与依赖 | 立即暂停并行，先由 Coordinator 手动收敛 `src/types.ts` 到基线分支，再通知两个 Worker rebase 到新基线 |
 | 整个蜂群半小时没动静，所有人互相干等 | 两位成员都在等对方先发消息，缺少显式唤醒链条 | 在共享留言板直接 `@coordinator` 指令汇总当前阻塞项，或让 Verifier 先验收已完成的那一组分支 |
-| Verifier 说“看起来没问题”但合并后构建炸了 | Verifier 只读了静态 diff，没有真正跑构建命令或启动预览验收 | 在 Verifier 简报中强制写明必须贴出真实命令输出与退出码（`npm run build && npm test`），无执行证据禁止放行 |
+| Verifier 说“看起来没问题”但合并后构建炸了 | Verifier 只读了静态 diff，没有真正跑构建命令或启动预览验收 | 在 Verifier 简报中强制写明必须贴出真实命令输出与退出码（`npm run build && npm test`），无执行证据禁止放行 | ---
 
----
-
-[返回 Gemini 专页](/gemini/) | [上一章：Google Colab %%agy 云端算力外挂](/gemini/ch06_colab_agy_pipelines) | [下一章：浏览器视觉走查与跨端上架](/gemini/ch08_browser_qa_cross_platform)
+[返回 Gemini 专页](/gemini/) | [上一章：Google Colab 代理扩展 云端算力外挂](/gemini/ch06_colab_agy_pipelines) | [下一章：浏览器视觉走查与跨端上架](/gemini/ch08_browser_qa_cross_platform)

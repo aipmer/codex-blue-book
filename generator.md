@@ -1,38 +1,40 @@
 ---
-title: "多智能体通用规约生成器：一键导出 Codex / Claude / Gemini / Kimi 项目规则"
-description: "30 秒生成适配 OpenAI Codex (AGENTS.md)、Claude Code (CLAUDE.md + Hooks)、Gemini Antigravity (.agents/rules) 与 Kimi Code (config.toml) 的防死循环防御规约。"
-lastUpdated: 2026-11-26
+title: "AI 协作规则生成器：一键导出 Codex / Claude / Gemini / Kimi 项目规则"
+description: "30 秒生成适配 OpenAI Codex (AGENTS.md)、Claude Code (CLAUDE.md + Hooks)、Gemini Antigravity (.agents/rules) 与 Kimi Code (config.toml) 的项目协作规则与配套配置，支持一键复制与下载。"
+lastUpdated: 2026-11-27
 ---
 
-# 多智能体通用规约生成器（AGENTS.md / CLAUDE.md）
+# AI 协作规则生成器（AGENTS.md / CLAUDE.md）
 
-> 防止 AI 破坏既有架构、胡乱安装依赖、陷入死循环盲猜或虚构假代码。支持一键切换 **Codex、Claude Code、Gemini Antigravity 与 Kimi Code** 四套主流工具，30 秒生成可直接落盘的项目级防御规约。
+> 给项目立好清晰的协作边界，防止 AI 破坏既有架构、私自安装冗余依赖、陷入死循环盲猜或提交未完成的假代码。支持 **Codex、Claude Code、Gemini Antigravity 与 Kimi Code** 四款工具，主规则文件与工具专属配置分开生成，直接复制或一键下载落盘。
 
 <ClientOnly>
 <div class="generator-app">
 <div class="form-grid">
   <div class="form-group">
-    <label class="label">0. 选择目标 AI 编程工具（切换输出规约格式与专属护栏）：</label>
+    <label class="label">0. 选择目标 AI 编程工具（自动匹配规则格式与配套配置文件）：</label>
     <div class="agent-tabs">
-      <button type="button" :class="['agent-tab', { active: selectedAgent === 'codex' }]" @click="selectedAgent = 'codex'">Codex (AGENTS.md)</button>
+      <button type="button" :class="['agent-tab', { active: selectedAgent === 'codex' }]" @click="selectedAgent = 'codex'">Codex (AGENTS.md + config.toml)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'claude' }]" @click="selectedAgent = 'claude'">Claude Code (CLAUDE.md + Hooks)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'gemini' }]" @click="selectedAgent = 'gemini'">Gemini Antigravity (.agents/rules)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'kimi' }]" @click="selectedAgent = 'kimi'">Kimi Code (AGENTS.md + config.toml)</button>
     </div>
   </div>
   <div class="form-group">
-    <label class="label">1. 选择你的项目技术栈（对号入座，锁定技术规范）：</label>
+    <label class="label">1. 选择项目技术栈（自动注入对应构建、测试命令与避坑约束）：</label>
     <select v-model="selectedStack" class="select-input">
       <option value="nextjs">Next.js 14/15 (React 全栈)</option>
       <option value="vue3">Vue 3 + Vite + TypeScript</option>
-      <option value="fastapi">FastAPI (Python 现代微服务)</option>
+      <option value="fastapi">FastAPI (Python 现代后端)</option>
       <option value="django">Django (Python 经典后端)</option>
+      <option value="datascience">Python 数据科学与科研 (Jupyter / PyTorch)</option>
       <option value="spring">Spring Boot (Java 3.x)</option>
       <option value="expo">React Native (Expo 移动端)</option>
       <option value="go">Go (Gin / Fiber)</option>
       <option value="rust">Rust (Axum / Tokio)</option>
       <option value="svelte">SvelteKit (Svelte 5)</option>
       <option value="chrome">Chrome 扩展 (Manifest V3)</option>
+      <option value="general">通用项目 / 文档站与自动化脚本</option>
     </select>
   </div>
   <div class="form-group">
@@ -42,41 +44,63 @@ lastUpdated: 2026-11-26
   <div class="form-group">
     <label class="label">3. 运行环境与权限边界（防危险操作与数据泄漏）：</label>
     <select v-model="sandboxLevel" class="select-input">
-      <option value="standard">标准开发防御（允许安装依赖、跑测试与编译构建；禁止越权访问生产凭证与外网密钥）</option>
-      <option value="strict">严格只读保护（AI 仅分析代码与输出修改方案，禁止私自执行终端命令，全部变更必须走人工 PR 审查）</option>
-      <option value="tunnel">本地联调模式（允许打通本地端口访问 Docker 数据库与外部 API，配合飞书助理远程审批高危操作）</option>
+      <option value="standard">标准开发模式（允许安装依赖、跑测试与编译构建；禁止越权访问生产密钥与外部部署）</option>
+      <option value="strict">严格只读保护（AI 仅分析代码与输出修改方案，禁止私自执行终端命令，全部变更走人工 PR 审查）</option>
+      <option value="local">本地联调模式（允许访问本地端口、Docker 数据库与受控外部 API，破坏性或线上操作必须人工确认）</option>
     </select>
   </div>
   <div class="form-group">
-    <label class="label">4. 激活核心安全护栏（防御常见工程失控事故）：</label>
+    <label class="label">4. 激活核心安全护栏（防御常见失控场景）：</label>
     <div class="checkbox-group">
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.antiLoop" />
-        <span>🛑 防自旋死循环：同一编译或测试报错连续修复 2 次不通过立即暂停，输出排错思考链，严禁无脑烧 Token 乱试</span>
+        <span>防自旋死循环：同一编译或测试报错连续修复 2 次不通过立即暂停，输出排错思路，严禁无脑烧 Token 乱试</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.noPlaceholder" />
-        <span>🚫 防虚假伪造：严禁提交含有 // TODO、假 mock 数据或未实现的空函数，所有交付代码必须真实可编译</span>
+        <span>防虚假伪造：严禁提交含有 // TODO、假 mock 数据或未实现的空函数，所有交付代码必须真实可编译</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.noExternalDeps" />
-        <span>📦 防滥装依赖：常规逻辑优先使用原生标准库与内置 API，严禁未经确认私自安装体积庞大的非必要外部包</span>
+        <span>防滥装依赖：常规逻辑优先使用原生标准库与内置 API，严禁未经确认私自安装体积庞大的非必要外部包</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.enforceValidation" />
-        <span>✅ 交付必带测试：阶段性修改完成后必须由智能体自动跑通测试与生产构建，退出码为 0 才算完成交付</span>
+        <span>交付必带测试：阶段性修改完成后必须自动跑通测试与生产构建，退出码为 0 才算完成交付</span>
       </label>
     </div>
   </div>
 </div>
+
 <div class="output-section">
   <div class="output-header">
-    <span class="output-title">📄 实时生成预览（{{ targetFileHint }}）：</span>
-    <button class="btn-copy" @click="copyContent">
-      {{ copied ? '✅ 已复制到剪贴板' : '📋 一键复制规约' }}
-    </button>
+    <span class="output-title">主项目规则文件：<code>{{ primaryFile.path }}</code></span>
+    <div class="output-actions">
+      <button type="button" class="btn-secondary" @click="downloadFile(primaryFile.downloadName, primaryContent)">
+        下载 {{ primaryFile.downloadName }}
+      </button>
+      <button type="button" class="btn-copy" @click="copyText(primaryContent, 'primary')">
+        {{ copiedKey === 'primary' ? '已复制到剪贴板' : '一键复制规则' }}
+      </button>
+    </div>
   </div>
-  <pre class="code-preview"><code>{{ generatedContent }}</code></pre>
+  <pre class="code-preview"><code>{{ primaryContent }}</code></pre>
+</div>
+
+<div class="output-section">
+  <div class="output-header">
+    <span class="output-title">工具专属配套配置：<code>{{ companionFile.path }}</code></span>
+    <div class="output-actions">
+      <button type="button" class="btn-secondary" @click="downloadFile(companionFile.downloadName, companionContent)">
+        下载 {{ companionFile.downloadName }}
+      </button>
+      <button type="button" class="btn-copy" @click="copyText(companionContent, 'companion')">
+        {{ copiedKey === 'companion' ? '已复制到剪贴板' : '复制配套配置' }}
+      </button>
+    </div>
+  </div>
+  <p class="companion-hint">{{ companionFile.hint }}</p>
+  <pre class="code-preview"><code>{{ companionContent }}</code></pre>
 </div>
 </div>
 </ClientOnly>
@@ -84,11 +108,13 @@ lastUpdated: 2026-11-26
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const selectedAgent = ref<'codex' | 'claude' | 'gemini' | 'kimi'>('codex')
+type AgentKey = 'codex' | 'claude' | 'gemini' | 'kimi'
+
+const selectedAgent = ref<AgentKey>('codex')
 const selectedStack = ref('nextjs')
 const projectName = ref('my-saas-mvp')
 const sandboxLevel = ref('standard')
-const copied = ref(false)
+const copiedKey = ref<'' | 'primary' | 'companion'>('')
 
 const rules = ref({
   antiLoop: true,
@@ -97,7 +123,7 @@ const rules = ref({
   enforceValidation: true
 })
 
-const stackConfigs: Record<string, any> = {
+const stackConfigs: Record<string, { name: string; buildCmd: string; testCmd: string; specificRules: string[] }> = {
   nextjs: {
     name: 'Next.js (App Router) + TypeScript',
     buildCmd: 'npm run build',
@@ -135,6 +161,16 @@ const stackConfigs: Record<string, any> = {
     specificRules: [
       '涉及数据表修改必须自动生成与执行 makemigrations，禁止手写裸 SQL 迁移',
       '严禁在视图层编写 N+1 查询，显式使用 select_related / prefetch_related'
+    ]
+  },
+  datascience: {
+    name: 'Python 数据科学与科研 (Jupyter / PyTorch)',
+    buildCmd: 'python -m compileall src/',
+    testCmd: 'pytest -v && ruff check src/',
+    specificRules: [
+      '所有实验脚本固定随机种子（random / numpy / torch），并将超参数与数据版本写入日志确保可复现',
+      '原始数据集只读挂载，清洗与中间特征写入独立输出目录，严禁覆盖原始数据',
+      '将核心建模逻辑沉淀在 src/ 模块中，Notebook 仅保留实验调用、图表输出与结论记录'
     ]
   },
   spring: {
@@ -192,83 +228,160 @@ const stackConfigs: Record<string, any> = {
       'Service Worker 具备短暂休眠特性，状态持久化必须写入 chrome.storage.local',
       '申请权限遵循最小特权原则，默认优先使用 activeTab'
     ]
+  },
+  general: {
+    name: '通用项目 / 文档站与自动化脚本',
+    buildCmd: 'npm run build',
+    testCmd: 'npm test',
+    specificRules: [
+      '修改文档或脚本前先盘点关联引用与构建入口，避免遗留死链或破坏现有自动化任务',
+      '严禁将 API Key、Cookie、Token 或本机私密路径写入仓库代码与文档'
+    ]
   }
 }
 
 const sandboxText: Record<string, string> = {
-  standard: '- 标准开发防御：允许在项目内执行依赖安装、测试与代码构建。严禁任何生产部署、外部密钥读写等越权高危行为。',
-  strict: '- 严格只读保护：智能体仅具备文件阅读与方案输出权限，禁止私自执行终端命令。所有变更必须由人类在终端显式审查后走 PR 合并。',
-  tunnel: '- 本地联调模式：允许打通本地端口访问 Docker 数据库与外部 API，配合飞书助理移动端随时接收告警与审批高危操作。'
+  standard: '- 标准开发模式：允许在项目内执行依赖安装、测试与代码构建；严禁任何生产部署、外部密钥读取或越权写操作。',
+  strict: '- 严格只读保护：智能体仅具备文件阅读与方案输出权限，禁止私自执行终端命令；所有变更必须由人工审查后合并。',
+  local: '- 本地联调模式：允许访问本地端口、Docker 数据库与受控测试 API；涉及删库、覆盖配置、推送或线上部署必须提前人工确认。'
 }
 
-const targetFileHint = computed(() => {
-  const map = {
-    codex: 'AGENTS.md (OpenAI Codex)',
-    claude: 'CLAUDE.md + .claude/settings.json (Claude Code)',
-    gemini: 'AGENTS.md + .agents/rules/project.md (Gemini Antigravity)',
-    kimi: 'AGENTS.md + ~/.kimi-code/config.toml (Kimi Code)'
+const primaryFile = computed(() => {
+  if (selectedAgent.value === 'claude') {
+    return { path: 'CLAUDE.md', downloadName: 'CLAUDE.md' }
+  }
+  return { path: 'AGENTS.md', downloadName: 'AGENTS.md' }
+})
+
+const companionFile = computed(() => {
+  const map: Record<AgentKey, { path: string; downloadName: string; hint: string }> = {
+    codex: {
+      path: '~/.codex/config.toml',
+      downloadName: 'config.toml',
+      hint: '用于控制 Codex CLI 的主力模型、审批策略与沙盒边界，放于用户目录或项目级配置中。'
+    },
+    claude: {
+      path: '.claude/settings.json',
+      downloadName: 'settings.json',
+      hint: '确定性 PreToolUse 门禁：执行 Bash 前自动校验命令，命中 rm -rf /、读取 .env 或 git push --force 时直接以退出码 2 拦截。'
+    },
+    gemini: {
+      path: '.agents/rules/project.md',
+      downloadName: 'project.md',
+      hint: '放入项目 .agents/rules/ 目录，Antigravity 会按触发条件自动加载视觉验收、方案双审与模型分层红线。'
+    },
+    kimi: {
+      path: '~/.kimi-code/config.toml',
+      downloadName: 'config.toml',
+      hint: '配置 Kimi Code 默认模型（kimi-k3.1-pro）、权限模式以及 explore / plan / coder 子代理协作。'
+    }
   }
   return map[selectedAgent.value]
 })
 
-const generatedContent = computed(() => {
+const primaryContent = computed(() => {
   const stack = stackConfigs[selectedStack.value]
   const pName = projectName.value || 'my-project'
 
-  let core = `## 📌 项目指纹\n`
+  let core = `## 项目指纹\n`
   core += `- **项目名称**：${pName}\n`
-  core += `- **目标架构**：${stack.name}\n`
-  core += `- **协作模式**：遵循生产级防自旋死循环、防虚假代码与自动化测试防线\n\n`
+  core += `- **目标技术栈**：${stack.name}\n`
+  core += `- **协作原则**：小改优于大改，先读清上下文再动代码，禁止编造未核实的配置或测试结果\n\n`
 
-  core += `## 🛑 运行环境与权限边界\n`
+  core += `## 运行环境与权限边界\n`
   core += `${sandboxText[sandboxLevel.value]}\n\n`
 
-  core += `## 🛡️ 核心工程防御护栏 (Anti-Loop)\n`
+  core += `## 核心安全护栏\n`
+  let idx = 1
   if (rules.value.antiLoop) {
-    core += `1. **🛑 防自旋死循环 (Anti-Loop)**：如果同一编译或测试错误在修改后重试 2 次仍未解决，必须立即强制暂停，向开发者输出排错思考链 (CoT)，严禁陷入自旋死循环。\n`
+    core += `${idx++}. **防自旋死循环**：如果同一编译或测试报错连续修复 2 次仍未通过，必须立即暂停，输出完整排查思路并等待确认，严禁盲目重试。\n`
   }
   if (rules.value.noPlaceholder) {
-    core += `2. **🚫 防虚假伪造 (严禁占位符)**：严禁提交含有 \`// TODO: 实现此逻辑\`、\`pass\`、或虚构假数据的未完成函数，所有代码必须真实可编译。\n`
+    core += `${idx++}. **防虚假伪造**：严禁提交含有 \`// TODO\`、\`pass\`、占位函数或虚构假数据的半成品，所有交付代码必须真实可运行。\n`
   }
   if (rules.value.noExternalDeps) {
-    core += `3. **📦 防滥装依赖 (依赖守卫)**：常规逻辑优先使用原生标准库与内置 API，严禁未经确认私自安装体积庞大的未知第三方包。\n`
+    core += `${idx++}. **防滥装依赖**：常规逻辑优先使用原生标准库与现有依赖，严禁未经确认私自引入重量级外部包。\n`
   }
-  stack.specificRules.forEach((rule: string, idx: number) => {
-    core += `${idx + 4}. **技术栈专有防御**：${rule}\n`
+  stack.specificRules.forEach((rule: string) => {
+    core += `${idx++}. **技术栈约束**：${rule}\n`
   })
   core += `\n`
 
   if (rules.value.enforceValidation) {
-    core += `## 🧪 验证标准 (Validation Specs)\n`
-    core += `智能体在每次阶段性修改完成后，必须按顺序执行以下命令进行自检，确认退出码为 0 后方可交付：\n\n`
-    core += `\`\`\`bash\n# 1. 运行静态检查与单元测试\n${stack.testCmd}\n\n# 2. 验证生产构建\n${stack.buildCmd}\n\`\`\`\n`
-  }
-
-  if (selectedAgent.value === 'codex') {
-    return `# 🤖 项目专属 AI 协作防御规约 (AGENTS.md)\n\n${core}`
+    core += `## 交付验收命令\n`
+    core += `阶段性修改完成后，必须按顺序跑通以下命令并确认退出码为 0：\n\n`
+    core += `\`\`\`bash\n# 1. 运行静态检查与单元测试\n${stack.testCmd}\n\n# 2. 验证构建产物\n${stack.buildCmd}\n\`\`\`\n`
   }
 
   if (selectedAgent.value === 'claude') {
-    return `# CLAUDE.md (Claude Code 精简常驻规则 · 可配合 @AGENTS.md 复用)\n\n${core}\n## 🔒 Claude Code 确定性门禁 (.claude/settings.json 片段)\n\`\`\`json\n{\n  "hooks": {\n    "PreToolUse": [\n      {\n        "matcher": "Bash",\n        "hooks": [{ "type": "command", "command": "echo '[Hook] Verify no destructive rm/prod deploy before execution'" }]\n      }\n    ]\n  }\n}\n\`\`\`\n`
+    return `# CLAUDE.md（Claude Code 常驻项目规则）\n\n> 若团队同时使用多款工具，可把通用边界维护在根目录 \`AGENTS.md\`，在本文开头写一行 \`@AGENTS.md\` 直接复用。\n\n${core}`
+  }
+
+  return `# 项目协作规则 (AGENTS.md)\n\n${core}`
+})
+
+const companionContent = computed(() => {
+  const isStrict = sandboxLevel.value === 'strict'
+  const isLocal = sandboxLevel.value === 'local'
+
+  if (selectedAgent.value === 'codex') {
+    const approval = isStrict ? 'untrusted' : 'on-request'
+    const sandbox = isStrict ? 'read-only' : isLocal ? 'danger-full-access' : 'workspace-write'
+    return `# ~/.codex/config.toml (OpenAI Codex CLI 推荐配置)\nmodel = "gpt-6.2-sol"\nmodel_reasoning_effort = "medium"\napproval_policy = "${approval}"\nsandbox_mode = "${sandbox}"\n\n[profiles.deep-debug]\nmodel = "gpt-6.2-astra"\nmodel_reasoning_effort = "high"\n`
+  }
+
+  if (selectedAgent.value === 'claude') {
+    const guardCmd = `node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8'));const cmd=(d.tool_input&&d.tool_input.command)||'';const blocked=[/rm\\s+-rf\\s+(\\/|~|\\.)/,/git\\s+push\\s+.*--force/,/\\.env\\b/];if(blocked.some(r=>r.test(cmd))){console.error('[Hook Blocked] Dangerous command rejected: '+cmd);process.exit(2);}"`
+    return JSON.stringify(
+      {
+        hooks: {
+          PreToolUse: [
+            {
+              matcher: 'Bash',
+              hooks: [
+                {
+                  type: 'command',
+                  command: guardCmd
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null,
+      2
+    )
   }
 
   if (selectedAgent.value === 'gemini') {
-    return `# Gemini Antigravity 项目规约 (AGENTS.md / .agents/rules/project.md)\n\n${core}\n## 🎨 多模态与视觉验收红线 (Antigravity 专属)\n- 前端页面变更须覆盖 390px / 768px / 1440px 视口，确认可见字号 >= 12px 且无横向溢出。\n- 复杂架构规划优先采用 Gemini 4 Carbon / Argon，日常高频执行与测试交由 Orchestrator 分流至 Hydrogen。\n`
+    return `---\ntrigger: always_on\ndescription: "${projectName.value || 'my-project'} 视觉验收与方案双审规则"\n---\n\n# Antigravity 项目专属规则\n\n## 视觉与多端验收\n- 前端改动完成后需核查 390px / 768px / 1440px 三个视口：正文可见字号 >= 12px，无横向溢出，无文字截断。\n- 涉及页面交互与表单流转时，使用浏览器真实复测，不以静态构建通过替代视觉验收。\n\n## 方案双审与模型分层\n- 重大架构选型或数据方案先由推理档模型（Gemini 4 Carbon / Argon）输出方案并做一轮反向挑刺（双审制），再交给执行模型批量落地。\n- 高频局部改动与测试验证交由 Orchestrator 自动分流至 Gemini 4 Hydrogen，控制配额与响应延迟。\n`
   }
 
-  return `# Kimi Code 项目规约 (AGENTS.md)\n\n${core}\n## ⚙️ ~/.kimi-code/config.toml 推荐配置片段\n\`\`\`toml\n[runtime]\nmodel = "kimi-k3.1-pro"\npermission_mode = "${sandboxLevel.value === 'strict' ? 'always_ask' : 'auto'}"\n\n[subagents]\nexplore = true\nplan = true\ncoder = true\n\`\`\`\n`
+  return `# ~/.kimi-code/config.toml (Kimi Code 推荐配置)\n[runtime]\nmodel = "kimi-k3.1-pro"\npermission_mode = "${isStrict ? 'always_ask' : 'auto'}"\nmax_context_tokens = 1000000\n\n[subagents]\nexplore = true\nplan = true\ncoder = true\n`
 })
 
-async function copyContent() {
+async function copyText(text: string, key: 'primary' | 'companion') {
   try {
-    await navigator.clipboard.writeText(generatedContent.value)
-    copied.value = true
+    await navigator.clipboard.writeText(text)
+    copiedKey.value = key
     setTimeout(() => {
-      copied.value = false
+      if (copiedKey.value === key) copiedKey.value = ''
     }, 2500)
   } catch (err) {
     alert('复制失败，请手动选中代码框内容复制。')
   }
+}
+
+function downloadFile(filename: string, content: string) {
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
 }
 </script>
 
@@ -285,7 +398,7 @@ async function copyContent() {
   gap: 8px;
 }
 .agent-tab {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
@@ -342,11 +455,15 @@ async function copyContent() {
 }
 .checkbox-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   font-size: 13px;
+  line-height: 1.5;
   cursor: pointer;
   color: var(--vp-c-text-2);
+}
+.checkbox-item input {
+  margin-top: 3px;
 }
 .checkbox-item:hover {
   color: var(--vp-c-text-1);
@@ -368,19 +485,41 @@ async function copyContent() {
   font-weight: 600;
   font-size: 14px;
 }
-.btn-copy {
-  background: var(--vp-c-brand-1);
-  color: white;
-  padding: 6px 14px;
+.output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.companion-hint {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+.btn-copy,
+.btn-secondary {
+  padding: 7px 14px;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 500;
-  border: none;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.btn-copy {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+  border: 1px solid var(--vp-c-brand-1);
+}
+.btn-secondary {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
 }
 .btn-copy:hover {
   opacity: 0.9;
+}
+.btn-secondary:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 .code-preview {
   max-width: 100%;

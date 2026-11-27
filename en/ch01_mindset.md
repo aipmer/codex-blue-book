@@ -4,13 +4,13 @@ description: "Shift from manual coding to AI agent orchestration with OpenAI Cod
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ➡️ Next (Ch.02) ](./ch02_setup.md) | [ 🌐 中文版 ](../chapters/ch01_mindset.md)
+[Index](/en/) | [Next (Ch.02)](./ch02_setup.md) | [中文版](../chapters/ch01_mindset.md)
 
 # Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding
 
-> 🎯 **The Real Problem**: Developers treat AI as fancy auto-complete, grinding through repetitive boilerplate, or let agents run without architecture guardrails.  
-> 💡 **Tangible Output & Takeaway**: A 3-stage mental model for AI-native orchestration and a runnable PRD boundary assertion template to cut boilerplate work.  
-> ⚡ **Viral Screenshot Quote**: *"Humans should no longer manually write boilerplate code. Your hands belong on the steering wheel, not the pushcart."*
+> **The Real Problem**: Developers treat AI as fancy auto-complete, grinding through repetitive boilerplate, or let agents run without architecture guardrails.  
+> **Tangible Output & Takeaway**: A 3-stage mental model for AI-native orchestration and a runnable PRD boundary assertion template to cut boilerplate work.  
+> **Viral Screenshot Quote**: *"Humans should no longer manually write boilerplate code. Your hands belong on the steering wheel, not the pushcart."*
 
 When talking with readers of "实战产品说" (Real-World Product Talk), one pattern shows up often: developers try to memorize AI coding shortcuts and flags as if cramming for an API manual.
 
@@ -20,14 +20,14 @@ This chapter walks through the shift from code typist to AI orchestrator.
 
 ---
 
-## 🎯 Intuitive Metaphor: Stop Being a Bricklayer, Become the Chief Architect
+## Intuitive Metaphor: Stop Being a Bricklayer, Become the Chief Architect
 
 If you are new to AI-native development, do not view AI as a cold code generator:
 
 ```Plaintext
 【Traditional Handwritten Code】 ──> You act as a manual bricklayer, stacking bricks one by one. If one corner is misaligned, the whole building collapses.
-【Traditional AI Completion】    ──> You lay bricks while AI hands you mortar (you type a line, it guesses half; your hands never rest).
-【Codex Orchestration Era】     ──> You are the "Chief Construction Architect", and Codex is your "elite engineering crew":
+【Traditional AI Completion】 ──> You lay bricks while AI hands you mortar (you type a line, it guesses half; your hands never rest).
+【Codex Orchestration Era】 ──> You are the "Chief Construction Architect", and Codex is your "elite engineering crew":
                                     - You sketch blueprints (Define the Goal);
                                     - You erect safety fences (Enforce Sandboxes & Constraints);
                                     - You inspect structural safety with laser levels (Automated Validation);
@@ -42,27 +42,27 @@ When your focus changes from "how do I type this loop" to "how do I dispatch a f
 
 ```text
 +-------------------------------------------------------------+
-| Stage 1: Assisted Completion (Copilot)                      |
-| - Experience: Input suggestions. You type, it guesses.       |
+| Stage 1: Assisted Completion (Copilot) |
+| - Experience: Input suggestions. You type, it guesses. |
 +-------------------------------------------------------------+
                               │
                               ▼
 +-------------------------------------------------------------+
 | Stage 2: Terminal Dialog & Execution (Claude Code / Cursor) |
-| - Experience: Outsourced developer. You prompt, it edits.    |
+| - Experience: Outsourced developer. You prompt, it edits. |
 +-------------------------------------------------------------+
                               │
                               ▼
 +-------------------------------------------------------------+
-| Stage 3: Autonomous Multi-Surface Agent (OpenAI Codex)      |
-| - Experience: Digital full-stack team. Sandbox testing,     |
-|   multi-surface (IDE/CLI/Mobile/Desktop) orchestration.      |
+| Stage 3: Autonomous Multi-Surface Agent (OpenAI Codex) |
+| - Experience: Digital full-stack team. Sandbox testing, |
+| multi-surface (IDE/CLI/Mobile/Desktop) orchestration. |
 +-------------------------------------------------------------+
 ```
 
 Codex has pushed us into Stage 3:
-*   **Multi-Surface Productivity Matrix**: Automated execution via CLI, complex reviews and Sites in-place preview on ChatGPT Desktop (Code Mode), 24/7 mobile monitoring with Guardian approvals, and visual browser audits via Desktop Computer Use.
-*   **Frontier Reasoning & Agentic Core**: From **GPT-6.2 Astra** for the hardest cross-tool work and **GPT-6.2 Sol** for everyday complex coding to **GPT-6.1 Terra** for visual computer use and **GPT-6 Luna** for focused tasks, choose a model by task and verify tools, permissions, and results in your own environment. [Current model guidance](https://learn.chatgpt.com/docs/models)
+* **Multi-Surface Productivity Matrix**: Automated execution via CLI, complex reviews and Sites in-place preview on ChatGPT Desktop (Code Mode), 24/7 mobile monitoring with Guardian approvals, and visual browser audits via Desktop Computer Use.
+* **Frontier Reasoning & Agentic Core**: From **GPT-6.2 Astra** for the hardest cross-tool work and **GPT-6.2 Sol** for everyday complex coding to **GPT-6.1 Terra** for visual computer use and **GPT-6 Luna** for focused tasks, choose a model by task and verify tools, permissions, and results in your own environment. [Current model guidance](https://learn.chatgpt.com/docs/models)
 
 ---
 
@@ -71,9 +71,9 @@ Codex has pushed us into Stage 3:
 As a Product Manager (PM), you know that when writing a PRD, you don't instruct developers on "how to structure their loops." You define acceptance criteria and boundary constraints.
 
 With Codex, the same rule applies. Stop micromanaging how AI writes logic. As an orchestrator, focus on three things:
-1.  **Define the End State (Goal)**: What problem are we solving for users?
-2.  **Establish Guardrails (Constraints)**: Which modules are off-limits? How are secrets isolated?
-3.  **Automate Validation (Validation)**: Write test suites so Codex can prove its work is correct.
+1. **Define the End State (Goal)**: What problem are we solving for users?
+2. **Establish Guardrails (Constraints)**: Which modules are off-limits? How are secrets isolated?
+3. **Automate Validation (Validation)**: Write test suites so Codex can prove its work is correct.
 
 > [!IMPORTANT]
 > **Orchestrator Formula**  
@@ -81,7 +81,7 @@ With Codex, the same rule applies. Stop micromanaging how AI writes logic. As an
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 For first-time users, avoid dumping thousands of words of vague thoughts. Follow this 3-step loop:
 
@@ -94,15 +94,13 @@ For first-time users, avoid dumping thousands of words of vague thoughts. Follow
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **Treating AI as a search engine for theory** | Hours of conversation without a single line of working code | Stop chatting; dispatch a concrete spec: "Create a login card in `src/` and pass tests" |
 | **Pasting 10,000 lines of unrelated code** | Context bloated with noise, causing hallucinations | Point out 1-2 specific files to keep agent edits surgically targeted |
-| **Trusting AI claims without running tests** | AI assumed it fixed the bug, but runtime crashes | Add mandatory validation specs: "Must run `npm test` in sandbox and print green pass report" |
-
----
+| **Trusting AI claims without running tests** | AI assumed it fixed the bug, but runtime crashes | Add mandatory validation specs: "Must run `npm test` in sandbox and print green pass report" | ---
 
 ## 1.3 Your New Moat: Orchestration and Domain Insight
 
@@ -112,4 +110,4 @@ As shared on [pmer.cn](https://pmer.cn): **Your value lies in defining business 
 
 ---
 
-[ 🏠 Index ](/en/) | [ ➡️ Next (Ch.02) ](./ch02_setup.md) | [ 🌐 中文版 ](../chapters/ch01_mindset.md)
+[Index](/en/) | [Next (Ch.02)](./ch02_setup.md) | [中文版](../chapters/ch01_mindset.md)

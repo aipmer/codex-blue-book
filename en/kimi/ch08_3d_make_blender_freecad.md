@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.08 Spatial Coding & 3D Make: Three.js, Headless Blender & Parametric FreeCAD
 
-> 🎯 **Engineering pain solved**: Text-to-mesh generators output messy, uneditable triangle soups with arbitrary dimensions—useless for precision CAD assemblies or budgeted WebGL scenes—while hand-writing `bpy` or FreeCAD Python scripts takes specialized geometry skills.
+> **Engineering pain solved**: Text-to-mesh generators output messy, uneditable triangle soups with arbitrary dimensions—useless for precision CAD assemblies or budgeted WebGL scenes—while hand-writing `bpy` or FreeCAD Python scripts takes specialized geometry skills.
 >
-> 💡 **What you ship**: Three reproducible spatial-coding pipelines powered by **Kimi K3.1 Pro + 3D Make**: WebGL **Three.js**, headless **Blender (`bpy`)** with MoonViT-V2 visual self-review, and a runnable **FreeCAD** parametric turbine rotor generator (`.step` / `.stl`).
+> **What you ship**: Three reproducible spatial-coding pipelines powered by **Kimi K3.1 Pro + 3D Make**: WebGL **Three.js**, headless **Blender (`bpy`)** with MoonViT-V2 visual self-review, and a runnable **FreeCAD** parametric turbine rotor generator (`.step` / `.stl`).
 >
-> ⚡ **Bottom line**: Code-generated 3D assets give you exact millimeter tolerances, Git version control, and instant parameter sweeps—turning 3D into an engineering pipeline instead of lottery meshes.
+> **Bottom line**: Code-generated 3D assets give you exact millimeter tolerances, Git version control, and instant parameter sweeps—turning 3D into an engineering pipeline instead of lottery meshes.
 
 ---
 
@@ -22,9 +22,7 @@ lastUpdated: 2026-11-26
 | :--- | :--- | :--- |
 | **Interactive web configurator / showcase** | **Three.js / React Three Fiber** (WebGL / GLB) | Generates camera rigs, lighting budgets, and responsive state bindings |
 | **Architectural / environment rendering** | **Headless Blender (`bpy`)** (`.blend` / `.glb` / Cycles PNG) | Procedural terrain, shaders, lighting, and automated multi-angle preview renders |
-| **Mechanical CAD / 3D-printable parts** | **Python + FreeCAD** (`.step` / `.stl` / `.3mf`) | Exact B-Rep solids, watertight boolean unions, and parametric dimension updates |
-
----
+| **Mechanical CAD / 3D-printable parts** | **Python + FreeCAD** (`.step` / `.stl` / `.3mf`) | Exact B-Rep solids, watertight boolean unions, and parametric dimension updates | ---
 
 ## 8.2 Headless Blender (`bpy`) + MoonViT-V2 Visual Loop
 
@@ -85,7 +83,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Validate parametric math**: Run `freecad_turbine_blade.py --dry-run` with `--blades 16 --outer-radius 100` to verify automatic chord/spacing recalculation.
 2. **Prototype visually in 3D Make**: Block out proportions from a sketch or prompt in Kimi 3D Make, then port into versioned scripts.
@@ -93,14 +91,12 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Slicer rejects `.stl` with non-manifold edges | Parts touch face-to-face without solid boolean union | Overlap blades into hub by `1–2mm` and call `rotor.fuse(blade)` before exporting |
 | `bpy` script fails with `AttributeError` in Blender 4.x | Deprecated Blender 3.x Principled BSDF socket names | Pin your exact `blender --version` in prompts and test via `--background` immediately |
-| Mobile browser freezes on Three.js product page | Uncompressed 500K-triangle mesh loaded in root bundle | Decimate/compress with `gltf-transform` (`< 50K` tris, Draco/KTX2) and lazy-load via dynamic `import()` |
-
----
+| Mobile browser freezes on Three.js product page | Uncompressed 500K-triangle mesh loaded in root bundle | Decimate/compress with `gltf-transform` (`< 50K` tris, Draco/KTX2) and lazy-load via dynamic `import()` | ---
 
 [Back to Kimi Hub](/en/kimi/) | [Prev: Kimi Slides Executive Decks](/en/kimi/ch07_kimi_slides_decks) | [Next: vLLM Self-Hosting & Enterprise SaaS](/en/kimi/ch09_vllm_self_hosting_saas)

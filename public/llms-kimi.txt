@@ -12,16 +12,16 @@ Source: https://book.pmer.cn/kimi/
 
 Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
-[ 🌐 中文 PDF 版 ](./kimi_blue_book_zh.pdf) | [ 🌐 Online Hub ](https://book.pmer.cn/en/kimi/)
+[中文 PDF 版](./kimi_blue_book_zh.pdf) | [Online Hub](https://book.pmer.cn/en/kimi/)
 
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: K3.1 Foundation & Multi-Mode Cockpit
 - Ch.01 The 2.8T Open-Weight Generation: Kimi K3.1 Pro & Kimi Code CLI
 - Ch.02 Protocol-First Connectivity: `config.toml`, `kimi acp` & Multi-Provider Failover
 
 ### Part 2: Swarm Engineering & Video Debugging
-- Ch.03 Tiered Subagents (`explore / plan / coder`) & `/swarm` Parallel Refactors
+- Ch.03 Tiered Subagents (`explore / plan / coder`) & Parallel Multi-Agent Refactors
 - Ch.04 MoonViT-V2 Visual Engineering: Video-to-Fix & Figma MCP Fidelity
 
 ### Part 3: Regulated Vertical Workflows (Finance · Legal · Medical)
@@ -38,7 +38,7 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
 ---
 
-## 🔌 Companion Engineering Kit
+##  Companion Engineering Kit
 
 *   **[Kimi K3.1 Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit)**: Production `config.toml`, zero-hallucination `verify_citations.py` gate, and parametric `freecad_turbine_blade.py` CAD generator.
 
@@ -48,11 +48,11 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
 # Ch.01 The 2.8T Open-Weight Generation: Kimi K3.1 Pro & Kimi Code CLI
 
-> 🎯 **Engineering pain solved**: Treating Kimi as a consumer web chat tool misses its real engineering leverage—an open-weight ~2.8T MoE model priced at \$2/\$10 (\$0.20 cached) paired with a fast TypeScript **Kimi Code CLI** (`kimi` / `kimi web` / `kimi acp`).
+> **Engineering pain solved**: Treating Kimi as a consumer web chat tool misses its real engineering leverage—an open-weight ~2.8T MoE model priced at \$2/\$10 (\$0.20 cached) paired with a fast TypeScript **Kimi Code CLI** (`kimi` / `kimi web` / `kimi acp`).
 >
-> 💡 **What you ship**: A verified November 26, 2026 architecture and pricing ledger comparing `kimi-k3.1-pro`, `kimi-k3`, and `kimi-k2.5`, plus a working local `kimi` TUI and `kimi web` setup.
+> **What you ship**: A verified November 26, 2026 architecture and pricing ledger comparing `kimi-k3.1-pro`, `kimi-k3`, and `kimi-k2.5`, plus a working local `kimi` TUI and `kimi web` setup.
 >
-> ⚡ **Bottom line**: Kimi pairs flagship open weights, 90%-discounted 1M-token caching, cross-IDE ACP, and native Slides/3D pipelines inside one cost-efficient stack.
+> **Bottom line**: Kimi pairs flagship open weights, 90%-discounted 1M-token caching, cross-IDE ACP, and native Slides/3D pipelines inside one cost-efficient stack.
 
 ---
 
@@ -71,9 +71,7 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 | **`kimi-k3.1-pro`** | ~2.8T MoE (104B active), 1M context, **Open Weights** | **\$2.00** | **\$0.20** (90% off) | **\$10.00** | Default for coding, `/swarm`, finance/legal audits, and 3D spatial coding |
 | `kimi-k3.1-pro-highspeed` | Low-latency tier | ~\$4.00 | Discounted | ~\$20.00 | Latency-critical interactive coding and live demos |
 | `kimi-k3` (predecessor) | 1M context, Open Weights | \$3.00 | \$0.30 | \$15.00 | Legacy benchmark comparisons and narrow exact-recall pipelines |
-| `kimi-k2.5` | Lighter open weights | Lower GPU floor | Supported | Self-hosted | Department-scale offline clusters and domain LoRA fine-tuning |
-
-> **Immediate savings**: Any pipeline still pinned to `kimi-k3` (\$3/\$15) should evaluate upgrading to `kimi-k3.1-pro` (\$2/\$10, \$0.20 cached)—cutting cost by a third while upgrading sparse attention and coding/spatial capability.
+| `kimi-k2.5` | Lighter open weights | Lower GPU floor | Supported | Self-hosted | Department-scale offline clusters and domain LoRA fine-tuning | > **Immediate savings**: Any pipeline still pinned to `kimi-k3` (\$3/\$15) should evaluate upgrading to `kimi-k3.1-pro` (\$2/\$10, \$0.20 cached)—cutting cost by a third while upgrading sparse attention and coding/spatial capability.
 
 ---
 
@@ -99,7 +97,7 @@ kimi web --port 4310
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Verify CLI & caching**: Run `kimi --version` and execute one read-only architecture summary in a test repo.
 2. **Try `kimi web`**: Launch `kimi web` to inspect side-by-side diffs and tool timelines in your browser.
@@ -107,25 +105,23 @@ kimi web --port 4310
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `kimi` throws Python traceback or lacks `acp` subcommand | Legacy Python `kimi-cli` precedes TypeScript CLI in `PATH` | Run `which -a kimi`, uninstall the legacy pip binary, and keep the npm/official TS binary |
 | Multi-turn bill misses the \$0.20 cached read tier | Dynamic timestamps or random IDs injected at the top of system prompts bust prefix cache | Keep static `AGENTS.md` and reference docs at the prompt prefix; append dynamic queries at the end |
-| `kimi web` unreachable from another device | Binds to `127.0.0.1` by default for safety | Never expose `0.0.0.0` directly; tunnel securely via `ssh -L 4310:127.0.0.1:4310` |
-
----
+| `kimi web` unreachable from another device | Binds to `127.0.0.1` by default for safety | Never expose `0.0.0.0` directly; tunnel securely via `ssh -L 4310:127.0.0.1:4310` | ---
 
 ---
 
 # Ch.02 Protocol-First Connectivity: `config.toml`, `kimi acp` & Multi-Provider Failover
 
-> 🎯 **Engineering pain solved**: Teams split across Zed, JetBrains, and terminal CLIs waste days maintaining incompatible editor plugins—and stall completely whenever a single model provider hits a late-night rate limit.
+> **Engineering pain solved**: Teams split across Zed, JetBrains, and terminal CLIs waste days maintaining incompatible editor plugins—and stall completely whenever a single model provider hits a late-night rate limit.
 >
-> 💡 **What you ship**: A clean `~/.kimi-code/config.toml` paired with root `AGENTS.md`, one-line **`kimi acp`** integration for Zed/JetBrains, and instant multi-provider failover using **Codex Switch** or OpenAI-compatible endpoints.
+> **What you ship**: A clean `~/.kimi-code/config.toml` paired with root `AGENTS.md`, one-line **`kimi acp`** integration for Zed/JetBrains, and instant multi-provider failover using **Codex Switch** or OpenAI-compatible endpoints.
 >
-> ⚡ **Bottom line**: Lock project rules in `AGENTS.md`, connect any IDE over open `ACP`, and keep a warm backup provider ready so quotas never block a release.
+> **Bottom line**: Lock project rules in `AGENTS.md`, connect any IDE over open `ACP`, and keep a warm backup provider ready so quotas never block a release.
 
 ---
 
@@ -207,7 +203,7 @@ In **JetBrains IDEs**, add a Custom ACP Agent pointing to `kimi` with argument `
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Generate configs**: Open the [Multi-Agent Rules Generator](/en/generator), select **Kimi Code**, and export `AGENTS.md` + `config.toml`.
 2. **Connect one IDE over ACP**: Wire `kimi acp` into Zed or JetBrains and run a read-only route audit.
@@ -215,25 +211,23 @@ In **JetBrains IDEs**, add a Custom ACP Agent pointing to `kimi` with argument `
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `kimi acp` exits immediately inside Zed/JetBrains | GUI app did not inherit `.zshrc` `PATH` or `MOONSHOT_API_KEY` | Set the absolute path from `which kimi` in editor ACP settings and pass env vars explicitly |
 | Figma MCP hangs on startup | `FIGMA_API_KEY` missing or first `npx` fetch blocked by proxy | Pre-warm with `npx -y figma-developer-mcp --help` in terminal, then re-test via `/mcp-config` |
-| Cross-provider session resume fails schema validation | Reasoning-field formatting differs slightly across providers | Use [Codex Switch](https://github.com/aipmer/codex-switch) normalization or run `/compact` to carry a clean summary |
+| Cross-provider session resume fails schema validation | Reasoning-field formatting differs slightly across providers | Use [Codex Switch](https://github.com/aipmer/codex-switch) normalization or run `/compact` to carry a clean summary | ---
 
 ---
 
----
+# Ch.03 Tiered Subagents (`explore / plan / coder`) & Parallel Multi-Agent Refactors
 
-# Ch.03 Tiered Subagents (`explore / plan / coder`) & `/swarm` Parallel Refactors
-
-> 🎯 **Engineering pain solved**: Refactoring 40 files in a single chat fills context with stale stack traces and breaks earlier edits—while uncapped parallel agents immediately trigger `429` rate limits.
+> **Engineering pain solved**: Refactoring 40 files in a single chat fills context with stale stack traces and breaks earlier edits—while uncapped parallel agents immediately trigger `429` rate limits.
 >
-> 💡 **What you ship**: A disciplined `explore → plan → coder` workflow, rate-controlled `/swarm` execution (`KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY`), and a three-strike loop breaker.
+> **What you ship**: A disciplined `explore → plan → coder` workflow, rate-controlled `/swarm` execution (`KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY`), and a three-strike loop breaker.
 >
-> ⚡ **Bottom line**: Isolate noisy exploration from code editing, freeze shared types before fanning out, and let 90%-discounted prefix caching multiply swarm ROI.
+> **Bottom line**: Isolate noisy exploration from code editing, freeze shared types before fanning out, and let 90%-discounted prefix caching multiply swarm ROI.
 
 ---
 
@@ -243,9 +237,7 @@ In **JetBrains IDEs**, add a Custom ACP Agent pointing to `kimi` with argument `
 | :--- | :--- | :--- | :--- |
 | **`explore`** | Read-only | Symbol map, dependency graph, blast radius | Absorbs raw search noise; returns a concise 1-page map |
 | **`plan`** | Zero writes | Phased rollout plan, disjoint directory slices, test commands | Surfaces architectural conflicts before touching source files |
-| **`coder`** | Scoped writes + shell tests | Atomic diff + passing test output | Executes cleanly against frozen specs without stale chatter |
-
-```mermaid
+| **`coder`** | Scoped writes + shell tests | Atomic diff + passing test output | Executes cleanly against frozen specs without stale chatter | ```mermaid
 flowchart LR
     Req["Large Refactor Goal"] --> Exp["explore (Read-only repo scan)"]
     Exp -->|"Compact dependency map"| Plan["plan (Disjoint slices + assertions)"]
@@ -288,7 +280,7 @@ Enforce three guardrails in `AGENTS.md` and `config.toml`:
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Practice the 3-step handoff**: Run `explore → plan → coder` sequentially on one medium PR.
 2. **Launch a 2-slice swarm**: Run `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2 kimi` on two non-overlapping directories and inspect `git diff --stat`.
@@ -296,25 +288,23 @@ Enforce three guardrails in `AGENTS.md` and `config.toml`:
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Swarm workers flood `429 Too Many Requests` | Uncapped concurrency exceeds account RPM/TPM | Set `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2` or `3` and batch slices |
 | Worker deletes failing unit tests to pass | Test diff not audited and weakening assertions not explicitly forbidden | Audit `git diff -- '*.test.*' '*.spec.*'` and reject skipped assertions |
-| Slices pass locally but fail combined build | Shared exports changed mid-swarm without freezing contracts | Freeze shared types on base branch first, then run repo-wide `tsc --noEmit` |
-
----
+| Slices pass locally but fail combined build | Shared exports changed mid-swarm without freezing contracts | Freeze shared types on base branch first, then run repo-wide `tsc --noEmit` | ---
 
 ---
 
 # Ch.04 MoonViT-V2 Visual Engineering: Video-to-Fix & Figma MCP Fidelity
 
-> 🎯 **Engineering pain solved**: Transient flicker and layout-shift bugs take paragraphs to explain in tickets, while slicing complex Figma mocks by eyeballing screenshots misses spacing tokens and accessibility labels.
+> **Engineering pain solved**: Transient flicker and layout-shift bugs take paragraphs to explain in tickets, while slicing complex Figma mocks by eyeballing screenshots misses spacing tokens and accessibility labels.
 >
-> 💡 **What you ship**: A compact **Video-to-Fix** workflow leveraging **MoonViT-V2** native resolution, a structured **Figma MCP → CSS token** prompt pattern, and a runnable Playwright responsive + a11y gate.
+> **What you ship**: A compact **Video-to-Fix** workflow leveraging **MoonViT-V2** native resolution, a structured **Figma MCP → CSS token** prompt pattern, and a runnable Playwright responsive + a11y gate.
 >
-> ⚡ **Bottom line**: Native-resolution video input captures timing bugs static screenshots miss, and Figma MCP gives exact design tokens without guesswork.
+> **Bottom line**: Native-resolution video input captures timing bugs static screenshots miss, and Figma MCP gives exact design tokens without guesswork.
 
 ---
 
@@ -357,11 +347,9 @@ Read Figma node `https://www.figma.com/design/FILE_KEY/App?node-id=123-456` via 
 import { chromium } from "playwright";
 
 const URL = process.argv[2] || "http://127.0.0.1:4173/";
-const VIEWPORTS = [
-  { name: "mobile", width: 390, height: 844 },
+const VIEWPORTS = [{ name: "mobile", width: 390, height: 844 },
   { name: "tablet", width: 768, height: 1024 },
-  { name: "desktop", width: 1440, height: 900 }
-];
+  { name: "desktop", width: 1440, height: 900 }];
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
@@ -388,7 +376,7 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Test Video-to-Fix**: Compress one 15-second UI bug recording with `ffmpeg` and pass it to Kimi Code alongside the component file.
 2. **Convert one Figma component**: Extract via Figma MCP into your existing CSS tokens rather than raw hex values.
@@ -396,25 +384,23 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | 4K Retina `.mov` upload times out | Raw 60fps capture exceeds 50MB | Transcode to `1280px` wide, `4 fps`, `-an` with `ffmpeg` before uploading |
 | Figma export looks crisp on desktop but breaks on 390px mobile | Fixed pixel widths copied literally from desktop frames | Replace rigid widths with `max-width`, `width: 100%`, and `minmax(0, 1fr)` grids |
-| Icon buttons fail keyboard & screen-reader audits | Clickable `<div>` used instead of native `<button>` | Enforce `<button type="button" aria-label="...">` across interactive icons |
-
----
+| Icon buttons fail keyboard & screen-reader audits | Clickable `<div>` used instead of native `<button>` | Enforce `<button type="button" aria-label="...">` across interactive icons | ---
 
 ---
 
 # Ch.05 Financial Research & Modeling: 1M-Context Audits & Formula Spreadsheets
 
-> 🎯 **Engineering pain solved**: Chunked RAG splits income-statement tables away from Footnote 14 goodwill impairments, while asking LLMs to do mental arithmetic silently corrupts gross margins and free cash flow.
+> **Engineering pain solved**: Chunked RAG splits income-statement tables away from Footnote 14 goodwill impairments, while asking LLMs to do mental arithmetic silently corrupts gross margins and free cash flow.
 >
-> 💡 **What you ship**: A zero-arithmetic-hallucination financial pipeline combining **Kimi K3.1 Pro 1M cached context (\$0.20/1M)** for full-filing extraction with deterministic Python balance-sheet tie-outs and live-formula `.xlsx` models.
+> **What you ship**: A zero-arithmetic-hallucination financial pipeline combining **Kimi K3.1 Pro 1M cached context (\$0.20/1M)** for full-filing extraction with deterministic Python balance-sheet tie-outs and live-formula `.xlsx` models.
 >
-> ⚡ **Bottom line**: Let K3.1 Pro read entire filings and surface footnote discrepancies; let deterministic Python execute every single sum, growth rate, and backtest.
+> **Bottom line**: Let K3.1 Pro read entire filings and surface footnote discrepancies; let deterministic Python execute every single sum, growth rate, and backtest.
 
 ---
 
@@ -483,10 +469,8 @@ def analyze_periods(periods: list[PeriodMetrics]) -> dict:
     return {"metrics": report, "alerts": alerts}
 
 if __name__ == "__main__":
-    sample = [
-        PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
-        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),
-    ]
+    sample = [PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
+        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),]
     print(json.dumps(analyze_periods(sample), indent=2))
 ```
 
@@ -502,7 +486,7 @@ Enforce two rules when generating spreadsheets with `openpyxl`:
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run `financial_audit.py`**: Confirm it flags the receivables-vs-revenue divergence automatically.
 2. **Extract one real public 10-K**: Load the full text into `kimi-k3.1-pro` with caching enabled, extract raw JSON line items + verbatim quotes, and verify quotes via [verify_citations.py](https://github.com/aipmer/codex-blue-book/blob/main/examples/kimi-k3-kit/scripts/verify_citations.py).
@@ -510,25 +494,23 @@ Enforce two rules when generating spreadsheets with `openpyxl`:
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | YoY numbers off by 1,000× | One filing reports `in thousands`, the next `in millions` | Require explicit `unit_multiplier` and `currency` in extraction JSON and normalize in Python |
 | Non-GAAP adjustments mixed into GAAP operating profit | Prompt omitted GAAP vs. Non-GAAP separation | Extract `gaap_operating_income` and `non_gaap_adjustments[]` separately and verify reconciliation sums |
-| PDF financial columns scrambled into one line | Plain-text PDF dump stripped table structure | Parse filings with table-preserving Markdown extractors or visually verify key tables with MoonViT-V2 |
-
----
+| PDF financial columns scrambled into one line | Plain-text PDF dump stripped table structure | Parse filings with table-preserving Markdown extractors or visually verify key tables with MoonViT-V2 | ---
 
 ---
 
 # Ch.06 Legal Compliance & Biomedical Evidence: Zero-Hallucination Citation Gates
 
-> 🎯 **Engineering pain solved**: In 120-page M&A agreements or multi-trial clinical reviews, clause exceptions hide across separate appendices—and a single fabricated citation destroys legal or medical credibility.
+> **Engineering pain solved**: In 120-page M&A agreements or multi-trial clinical reviews, clause exceptions hide across separate appendices—and a single fabricated citation destroys legal or medical credibility.
 >
-> 💡 **What you ship**: A hybrid **K3 / K3.1 Pro** long-document audit pattern backed by the runnable zero-dependency script `verify_citations.py`, blocking any output whose quotes do not appear verbatim in source filings.
+> **What you ship**: A hybrid **K3 / K3.1 Pro** long-document audit pattern backed by the runnable zero-dependency script `verify_citations.py`, blocking any output whose quotes do not appear verbatim in source filings.
 >
-> ⚡ **Bottom line**: In regulated law and biomedicine, unverified AI claims are worth zero; use K3.1 Pro to surface cross-document conflicts and deterministic code to enforce verbatim source grounding.
+> **Bottom line**: In regulated law and biomedicine, unverified AI claims are worth zero; use K3.1 Pro to surface cross-document conflicts and deterministic code to enforce verbatim source grounding.
 
 ---
 
@@ -567,7 +549,7 @@ When exit code `2` triggers, feed only the failed items back to the cached K3.1 
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run the self-test**: Execute `python3 examples/kimi-k3-kit/scripts/verify_citations.py --self-test` and verify valid quotes pass while fabricated quotes fail.
 2. **Audit one public Terms of Service**: Ask `kimi-k3.1-pro` for `[{"claim", "quote"}]` covering termination, liability caps, and data ownership, then run `verify_citations.py` to confirm 100% verbatim match.
@@ -575,25 +557,23 @@ When exit code `2` triggers, feed only the failed items back to the cached K3.1 
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Valid finding rejected by `verify_citations.py` | Model spliced non-contiguous phrases with `...` or curved quotes | Forbid ellipses inside `quote` in your prompt and normalize punctuation before matching |
 | Scanned contract PDFs produce garbled clauses | Low-grade OCR dropped columns or stamped regions | Re-run with layout-aware OCR or verify signature/table pages visually via MoonViT-V2 |
-| Law firm or hospital forbids public cloud APIs | Strict NDA, data residency, or HIPAA rules | Deploy K3.1 Pro / K2.5 open weights on-prem inside the client's air-gapped VPC (Ch.09) |
-
----
+| Law firm or hospital forbids public cloud APIs | Strict NDA, data residency, or HIPAA rules | Deploy K3.1 Pro / K2.5 open weights on-prem inside the client's air-gapped VPC (Ch.09) | ---
 
 ---
 
 # Ch.07 Executive Delivery with Kimi Slides: Structured Data to Editable `.pptx`
 
-> 🎯 **Engineering pain solved**: Teams spend days producing rigorous financial or engineering analysis, then lose an entire evening formatting slides—or get burned by AI deck tools that export flattened uneditable images.
+> **Engineering pain solved**: Teams spend days producing rigorous financial or engineering analysis, then lose an entire evening formatting slides—or get burned by AI deck tools that export flattened uneditable images.
 >
-> 💡 **What you ship**: A repeatable **Storyline Brief → Kimi Slides Native `.pptx` → Targeted Refinement** workflow plus a zero-dependency Python brief compiler that turns live metrics into board-ready slide specs.
+> **What you ship**: A repeatable **Storyline Brief → Kimi Slides Native `.pptx` → Targeted Refinement** workflow plus a zero-dependency Python brief compiler that turns live metrics into board-ready slide specs.
 >
-> ⚡ **Bottom line**: Treat slide decks as a presentation layer compiled from verified JSON—exporting native editable `.pptx` charts and text gives you AI speed without sacrificing final human control.
+> **Bottom line**: Treat slide decks as a presentation layer compiled from verified JSON—exporting native editable `.pptx` charts and text gives you AI speed without sacrificing final human control.
 
 ---
 
@@ -620,12 +600,10 @@ import json
 from pathlib import Path
 
 def build_deck_brief(metrics: dict, out_md: str) -> None:
-    lines = [
-        f"# {metrics['title']}",
+    lines = [f"# {metrics['title']}",
         f"- Audience: {metrics['audience']}",
         "- Style: Clean navy executive layout. One data-backed action title and source footnote per slide.",
-        "",
-    ]
+        "",]
     for idx, slide in enumerate(metrics["slides"], start=1):
         lines.append(f"## Slide {idx}: {slide['action_title']}")
         lines.append(f"- Layout: {slide['layout']}")
@@ -646,8 +624,7 @@ if __name__ == "__main__":
     sample = {
         "title": "Q4 Engineering Velocity & Multimodal Cost Review",
         "audience": "Executive & Architecture Committee",
-        "slides": [
-            {
+        "slides": [{
                 "action_title": "K3.1 Pro prefix caching cut long-document audit cost by 78%",
                 "layout": "Left summary card + right comparison bar chart",
                 "bullets": ["86% steady-state prefix cache hit rate", "P95 review time reduced from 42m to 6m"],
@@ -656,8 +633,7 @@ if __name__ == "__main__":
                     "rows": [["Legacy RAG", "1.45", "42 min"], ["K3.1 Pro + Cache", "0.32", "6 min"]],
                 },
                 "source": "Internal Billing Telemetry (2026-11-26)",
-            }
-        ],
+            }],
     }
     build_deck_brief(sample, "deck_brief.md")
     print("Generated deck_brief.md")
@@ -674,7 +650,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Compile a real brief**: Run `build_deck_brief.py` (or pipe Ch.05 audit JSON) to produce `deck_brief.md`.
 2. **Generate & refine in Kimi Slides**: Upload `deck_brief.md`, tighten the densest slide by 40%, and export `.pptx`.
@@ -682,25 +658,23 @@ if __name__ == "__main__":
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Slides look like dense walls of text | Raw 30K-word doc fed directly without per-slide word budgets | Distill into a structured storyboard (`<= 60 words / 3 bullets` per slide) before rendering |
 | Titles wrap awkwardly on a client's Windows laptop | Non-standard font triggered wide fallback metrics | Lock master fonts to cross-platform families (Inter / Arial / Noto Sans) or send PDF |
-| Chart numbers disagree with headline text | Headline edited without updating underlying chart table | Generate both headline and chart arrays from one canonical JSON file |
-
----
+| Chart numbers disagree with headline text | Headline edited without updating underlying chart table | Generate both headline and chart arrays from one canonical JSON file | ---
 
 ---
 
 # Ch.08 Spatial Coding & 3D Make: Three.js, Headless Blender & Parametric FreeCAD
 
-> 🎯 **Engineering pain solved**: Text-to-mesh generators output messy, uneditable triangle soups with arbitrary dimensions—useless for precision CAD assemblies or budgeted WebGL scenes—while hand-writing `bpy` or FreeCAD Python scripts takes specialized geometry skills.
+> **Engineering pain solved**: Text-to-mesh generators output messy, uneditable triangle soups with arbitrary dimensions—useless for precision CAD assemblies or budgeted WebGL scenes—while hand-writing `bpy` or FreeCAD Python scripts takes specialized geometry skills.
 >
-> 💡 **What you ship**: Three reproducible spatial-coding pipelines powered by **Kimi K3.1 Pro + 3D Make**: WebGL **Three.js**, headless **Blender (`bpy`)** with MoonViT-V2 visual self-review, and a runnable **FreeCAD** parametric turbine rotor generator (`.step` / `.stl`).
+> **What you ship**: Three reproducible spatial-coding pipelines powered by **Kimi K3.1 Pro + 3D Make**: WebGL **Three.js**, headless **Blender (`bpy`)** with MoonViT-V2 visual self-review, and a runnable **FreeCAD** parametric turbine rotor generator (`.step` / `.stl`).
 >
-> ⚡ **Bottom line**: Code-generated 3D assets give you exact millimeter tolerances, Git version control, and instant parameter sweeps—turning 3D into an engineering pipeline instead of lottery meshes.
+> **Bottom line**: Code-generated 3D assets give you exact millimeter tolerances, Git version control, and instant parameter sweeps—turning 3D into an engineering pipeline instead of lottery meshes.
 
 ---
 
@@ -710,9 +684,7 @@ if __name__ == "__main__":
 | :--- | :--- | :--- |
 | **Interactive web configurator / showcase** | **Three.js / React Three Fiber** (WebGL / GLB) | Generates camera rigs, lighting budgets, and responsive state bindings |
 | **Architectural / environment rendering** | **Headless Blender (`bpy`)** (`.blend` / `.glb` / Cycles PNG) | Procedural terrain, shaders, lighting, and automated multi-angle preview renders |
-| **Mechanical CAD / 3D-printable parts** | **Python + FreeCAD** (`.step` / `.stl` / `.3mf`) | Exact B-Rep solids, watertight boolean unions, and parametric dimension updates |
-
----
+| **Mechanical CAD / 3D-printable parts** | **Python + FreeCAD** (`.step` / `.stl` / `.3mf`) | Exact B-Rep solids, watertight boolean unions, and parametric dimension updates | ---
 
 ## 8.2 Headless Blender (`bpy`) + MoonViT-V2 Visual Loop
 
@@ -773,7 +745,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Validate parametric math**: Run `freecad_turbine_blade.py --dry-run` with `--blades 16 --outer-radius 100` to verify automatic chord/spacing recalculation.
 2. **Prototype visually in 3D Make**: Block out proportions from a sketch or prompt in Kimi 3D Make, then port into versioned scripts.
@@ -781,25 +753,23 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Slicer rejects `.stl` with non-manifold edges | Parts touch face-to-face without solid boolean union | Overlap blades into hub by `1–2mm` and call `rotor.fuse(blade)` before exporting |
 | `bpy` script fails with `AttributeError` in Blender 4.x | Deprecated Blender 3.x Principled BSDF socket names | Pin your exact `blender --version` in prompts and test via `--background` immediately |
-| Mobile browser freezes on Three.js product page | Uncompressed 500K-triangle mesh loaded in root bundle | Decimate/compress with `gltf-transform` (`< 50K` tris, Draco/KTX2) and lazy-load via dynamic `import()` |
-
----
+| Mobile browser freezes on Three.js product page | Uncompressed 500K-triangle mesh loaded in root bundle | Decimate/compress with `gltf-transform` (`< 50K` tris, Draco/KTX2) and lazy-load via dynamic `import()` | ---
 
 ---
 
 # Ch.09 Enterprise Self-Hosting with vLLM / SGLang & Vertical Agent SaaS
 
-> 🎯 **Engineering pain solved**: Regulated enterprise deals die on day one when legal or security blocks public-cloud LLM APIs, while thin chat wrappers struggle to command premium pricing.
+> **Engineering pain solved**: Regulated enterprise deals die on day one when legal or security blocks public-cloud LLM APIs, while thin chat wrappers struggle to command premium pricing.
 >
-> 💡 **What you ship**: Realistic **vLLM / SGLang** open-weight deployment sizing for K3.1 Pro and K2.5, zero-code-change internal endpoint wiring for Kimi Code CLI, and a high-ticket vertical deliverable architecture.
+> **What you ship**: Realistic **vLLM / SGLang** open-weight deployment sizing for K3.1 Pro and K2.5, zero-code-change internal endpoint wiring for Kimi Code CLI, and a high-ticket vertical deliverable architecture.
 >
-> ⚡ **Bottom line**: Open weights let one OpenAI-compatible codebase serve both high-margin cloud SaaS and air-gapped enterprise deployments.
+> **Bottom line**: Open weights let one OpenAI-compatible codebase serve both high-margin cloud SaaS and air-gapped enterprise deployments.
 
 ---
 
@@ -809,9 +779,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 | :--- | :--- | :--- | :--- |
 | **Large bank / enterprise platform** | **Kimi K3.1 Pro** (~2.8T MoE FP8) | Multi-node H200 / B200 + **vLLM / SGLang** (TP + EP + Prefix Caching) | Firm-wide research, 1M compliance audits, internal coding hub |
 | **Mid-size law firm / hospital / R&D lab** | **Kimi K2.5** (or fine-tuned domain variant) | Single-node 8×H100 / H20 + **SGLang / vLLM** | Contract review, clinical extraction, private knowledge base |
-| **Project-based strict isolation** | Dedicated customer VPC endpoint | On-demand isolated cloud GPU instances | M&A diligence sprints and peak annual audit windows |
-
-> **License check**: Always review the current **Open-Weights License** on Hugging Face `moonshotai/` for scale-based attribution terms prior to commercial rollout.
+| **Project-based strict isolation** | Dedicated customer VPC endpoint | On-demand isolated cloud GPU instances | M&A diligence sprints and peak annual audit windows | > **License check**: Always review the current **Open-Weights License** on Hugging Face `moonshotai/` for scale-based attribution terms prior to commercial rollout.
 
 Launch an internal OpenAI-compatible gateway with prefix caching and tool parsing enabled (adjust `--tensor-parallel-size` and parser flags to match your cluster and vLLM version):
 
@@ -856,7 +824,7 @@ Charge **per diligence case or per seat (\$299–\$2,000/mo or annual on-prem li
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Decouple provider config**: Read `LLM_BASE_URL`, `LLM_API_KEY`, and `LLM_MODEL` from env so cloud and private gateways swap cleanly.
 2. **Benchmark prefix caching**: Run 5 sequential queries on one 200K-token filing and compare TTFT with and without `--enable-prefix-caching`.
@@ -864,25 +832,23 @@ Charge **per diligence case or per seat (\$299–\$2,000/mo or annual on-prem li
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Immediate GPU OOM when enabling 1M context | KV cache allocation exceeds VRAM under high concurrency | Start with `--max-model-len 262144`, enable FP8 KV cache + `--gpu-memory-utilization 0.90`, and scale with telemetry |
 | Air-gapped security scanner flags outbound HTTPS calls | Container tried to fetch tokenizer files from Hugging Face Hub at boot | Pre-stage full weights and tokenizer locally and run with `HF_HUB_OFFLINE=1` |
-| Tool calls return raw text instead of structured `tool_calls` | Missing `--enable-auto-tool-choice` or mismatched `--tool-call-parser` | Verify parser compatibility against the K3.1 Pro model card and smoke-test one tool call via `curl` |
-
----
+| Tool calls return raw text instead of structured `tool_calls` | Missing `--enable-auto-tool-choice` or mismatched `--tool-call-parser` | Verify parser compatibility against the K3.1 Pro model card and smoke-test one tool call via `curl` | ---
 
 ---
 
 # Ch.10 2026 Frontier Finale: Four-Agent Hybrid Strategy & Official Tracking
 
-> 🎯 **Engineering pain solved**: After mastering all four ecosystems, teams wonder whether to bet exclusively on one vendor or mix tools—and how to mix without creating conflicting rules, merge collisions, and runaway bills.
+> **Engineering pain solved**: After mastering all four ecosystems, teams wonder whether to bet exclusively on one vendor or mix tools—and how to mix without creating conflicting rules, merge collisions, and runaway bills.
 >
-> 💡 **What you ship**: A pragmatic **Four-Agent Hybrid Playbook** unified by one root `AGENTS.md`, three anti-chaos team guardrails, and an official primary-source tracking table across all four vendors.
+> **What you ship**: A pragmatic **Four-Agent Hybrid Playbook** unified by one root `AGENTS.md`, three anti-chaos team guardrails, and an official primary-source tracking table across all four vendors.
 >
-> ⚡ **Bottom line**: Mature engineering teams avoid model tribalism—keep one source of truth in `AGENTS.md` and route each stage to the agent with the highest determinism and ROI.
+> **Bottom line**: Mature engineering teams avoid model tribalism—keep one source of truth in `AGENTS.md` and route each stage to the agent with the highest determinism and ROI.
 
 ---
 
@@ -894,10 +860,8 @@ Maintain shared repository boundaries once in root **`AGENTS.md`** (native in Co
 | :--- | :--- | :--- |
 | **0→1 MVPs, local tunneling & mobile duty alerts** | **OpenAI Codex** (GPT-6.2 + Feishu Assistant) | Fast full-stack shipping, mobile approvals, Codex Switch failover |
 | **High-risk legacy refactors, deterministic CI & `/design`** | **Claude Code** (Claude 5.5 + Hooks + `/ship`) | Hard `PreToolUse` command gates, `/design` artboards, PR Steward |
-| **Multimodal apps, Workspace/Colab & visual QA** | **Gemini Antigravity** (Gemini 4 + `/swarm`) | AI Studio context handoff, Orchestrator speed, Workspace MCP & Colab `%%agy` |
-| **High-ROI IDE swarms, verticals, Slides, 3D CAD & on-prem** | **Kimi Code** (K3.1 Pro + `kimi acp` + open weights) | \$2/\$0.20/\$10 pricing, Zed/JetBrains ACP, finance/legal/medical, Slides/FreeCAD & self-hosting |
-
-```mermaid
+| **Multimodal apps, Workspace/Colab & visual QA** | **Gemini Antigravity** (Gemini 4 + `/swarm`) | AI Studio context handoff, Orchestrator speed, Workspace MCP & Colab Agent Extension |
+| **High-ROI IDE swarms, verticals, Slides, 3D CAD & on-prem** | **Kimi Code** (K3.1 Pro + `kimi acp` + open weights) | \$2/\$0.20/\$10 pricing, Zed/JetBrains ACP, finance/legal/medical, Slides/FreeCAD & self-hosting | ```mermaid
 flowchart LR
     Spec["Single Root AGENTS.md (Source of Truth)"]
     Spec --> S1["Prototyping & Design: Gemini AI Studio / Claude /design"]
@@ -923,11 +887,9 @@ flowchart LR
 | **Kimi / Moonshot** | `@Kimi_Moonshot` | `kimi.com` · `platform.moonshot.ai` · Hugging Face `moonshotai/` |
 | **OpenAI Codex** | `@OpenAIDevs` · `@OpenAI` | `learn.chatgpt.com/docs/changelog` · `developers.openai.com/api/docs/deprecations` |
 | **Anthropic Claude** | `@AnthropicAI` · `@claudeai` | `docs.anthropic.com` · `anthropic.com/news` |
-| **Google Gemini / Antigravity** | `@GoogleAI` · `@GoogleDeepMind` | `antigravity.google/llms.txt` · `ai.google.dev` |
+| **Google Gemini / Antigravity** | `@GoogleAI` · `@GoogleDeepMind` | `antigravity.google/llms.txt` · `ai.google.dev` | ---
 
----
-
-## 🚀 Series Finale 3-Step Action Plan
+## Series Finale 3-Step Action Plan
 
 1. **Standardize your root rules**: Generate a clean `AGENTS.md` plus tool-specific add-ons in the [Multi-Agent Rules Generator](/en/generator).
 2. **Adopt one high-ROI bottleneck first**: Start with the single workflow that saves your team the most pain this week (citation verification, deterministic Hooks, ACP IDE swarms, or 3-viewport visual QA).
@@ -935,22 +897,20 @@ flowchart LR
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Four tools drift into four incompatible code styles | Missing shared `AGENTS.md` and automated formatting gate | Commit one root `AGENTS.md`, import it via `@AGENTS.md` in `CLAUDE.md`, and enforce formatting in CI |
 | Unattended agent triggers accidental production push or email | External side effects not separated from local sandbox work | Require explicit human confirmation before `git push`, production deploys, payments, or outbound messages |
-| Production breaks months later from retired model IDs | Model slugs hardcoded across application files | Centralize model routing in config/env variables and audit vendor deprecation schedules monthly |
-
----
+| Production breaks months later from retired model IDs | Model slugs hardcoded across application files | Centralize model routing in config/env variables and audit vendor deprecation schedules monthly | ---
 
 ---
 
 
 ## Chinese Edition
 
-# 《Kimi 实战蓝皮书：K3.1 全栈蜂群、垂直行业深水区与 PPT/3D 跃迁指南》
+# 《Kimi 实战蓝皮书：K3.1 全栈多智能体协作、垂直行业深水区与 PPT/3D 跃迁指南》
 
 **v1.0.0 · 资料核对至 2026 年 11 月 26 日**
 
@@ -959,16 +919,16 @@ flowchart LR
 
 主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
-[ 🌐 English PDF Version ](./kimi_blue_book_en.pdf) | [ 🌐 在线阅读站 ](https://book.pmer.cn/kimi/)
+[English PDF Version](./kimi_blue_book_en.pdf) | [在线阅读站](https://book.pmer.cn/kimi/)
 
-## 🧭 目录 (Table of Contents)
+## 目录 (Table of Contents)
 
 ### 第一部分：K3.1 基座全景与 Kimi Code 三态指挥舱
 - Ch.01 3 万亿参数开源新纪元：Kimi K3 / K3.1 Pro 架构与选型心智
 - Ch.02 全协议互联：`config.toml`、`kimi acp` 跨 IDE 直连与多源容灾矩阵
 
-### 第二部分：蜂群并发研发与视觉录屏排障
-- Ch.03 分层子代理（`explore / plan / coder`）与 `/swarm` 蜂群全栈实战
+### 第二部分：多智能体并行研发与视觉录屏排障
+- Ch.03 分层子代理（`explore / plan / coder`）与 多智能体并行全栈实战
 - Ch.04 MoonViT-V2 视觉工程流：录屏诊断、Figma 还原与前端精修
 
 ### 第三部分：高壁垒垂直行业深水区（金融 · 法律 · 医药）
@@ -985,21 +945,21 @@ flowchart LR
 
 ---
 
-## 🔌 配套开源套件
+##  配套开源套件
 
 *   **[Kimi K3.1 Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit)**：包含 `~/.kimi-code/config.toml` 基线配置、零幻觉原文引用核验器 `verify_citations.py` 及 FreeCAD 参数化叶轮脚本 `freecad_turbine_blade.py`。
 
-*   **[多智能体通用规约生成器](https://book.pmer.cn/generator)**：一键导出 Kimi `AGENTS.md` + `config.toml`。
+*   **[AI 协作规则生成器](https://book.pmer.cn/generator)**：一键导出 Kimi `AGENTS.md` + `config.toml`。
 
 ---
 
 # Ch.01 3 万亿参数开源新纪元：Kimi K3 / K3.1 Pro 架构与选型心智
 
-> 🎯 **本章解决的工程麻烦**：很多人把 Kimi 当成单纯的“网页长文档问答工具”，既没意识到 **Kimi K3.1 Pro** 已经开源权重且 API 成本只有同类旗舰的几分之一，也没用上 TypeScript 重写后的 **Kimi Code CLI** 与本地可视化会话台 `kimi web`。
+> **本章解决的工程麻烦**：很多人把 Kimi 当成单纯的“网页长文档问答工具”，既没意识到 **Kimi K3.1 Pro** 已经开源权重且 API 成本只有同类旗舰的几分之一，也没用上 TypeScript 重写后的 **Kimi Code CLI** 与本地可视化会话台 `kimi web`。
 >
-> 💡 **实战落地收益**：读懂 K3.1 Pro（~2.8T MoE / 104B 激活 / 1M 上下文 / MoonViT-V2）的真实工程长板，掌握截至 2026 年 11 月 26 日的 API 成本账本（\$2 输入 / \$0.20 缓存 / \$10 输出），并 5 分钟跑通 `kimi` 终端与 `kimi web` 双形态。
+> **实战落地收益**：读懂 K3.1 Pro（~2.8T MoE / 104B 激活 / 1M 上下文 / MoonViT-V2）的真实工程长板，掌握截至 2026 年 11 月 26 日的 API 成本账本（\$2 输入 / \$0.20 缓存 / \$10 输出），并 5 分钟跑通 `kimi` 终端与 `kimi web` 双形态。
 >
-> ⚡ **一句话结论**：Kimi 最大的护城河在于把 2.8T 级开源权重、90% 缓存折扣的百万上下文、跨 IDE 协议（ACP）和原生 PPT/3D 交付压进了同一套低成本工程栈。
+> **一句话结论**：Kimi 最大的护城河在于把 2.8T 级开源权重、90% 缓存折扣的百万上下文、跨 IDE 协议（ACP）和原生 PPT/3D 交付压进了同一套低成本工程栈。
 
 选编程智能体不能只看榜单总分，更要看**单位美元能撬动多少真实工程吞吐**，以及**数据能不能留在自己机房**。
 
@@ -1021,12 +981,10 @@ flowchart LR
 
 | 模型 / 档位 | 架构与授权状态 | 标准输入（/1M） | 缓存读取（/1M） | 输出（/1M） | 最佳适用场景 |
 | :--- | :--- | ---: | ---: | ---: | :--- |
-| **`kimi-k3.1-pro`** | ~2.8T MoE（104B 激活），1M 窗口，**开源权重** | **\$2.00** | **\$0.20**（90% 折扣） | **\$10.00** | 全栈编码、`/swarm` 蜂群、金融建模、3D 空间编码默认主力 |
+| **`kimi-k3.1-pro`** | ~2.8T MoE（104B 激活），1M 窗口，**开源权重** | **\$2.00** | **\$0.20**（90% 折扣） | **\$10.00** | 全栈编码、多智能体协作、金融建模、3D 空间编码默认主力 |
 | `kimi-k3.1-pro-highspeed` | 低延迟加速档 | ~\$4.00 | 缓存优惠 | ~\$20.00 | 交互延迟极度敏感的实时开发与高并发演示 |
 | `kimi-k3`（前代基准） | 1M 窗口，开源权重 | \$3.00 | \$0.30 | \$15.00 | 特定法条精确召回与既有评测基线对照（注意 K3.1 Pro 反而更便宜且更强） |
-| `kimi-k2.5` | 轻量开源权重 | 更低自托管门槛 | 支持 | 私有部署 | 显存预算有限的中小团队内网离线推理与领域 LoRA 微调 |
-
-> **选型重点**：如果团队还在旧脚本里调用 `kimi-k3`（\$3/\$15），立即评估迁移至 **`kimi-k3.1-pro`（\$2/\$10，缓存读 \$0.20）**——单价直降三分之一，同时长上下文稀疏注意力和编码/3D 能力显著增强。并且 K3.1 Pro 已在 Hugging Face 公开开源权重（带商用分级署名条款），允许金融、律所和医院在离线内网自建集群。
+| `kimi-k2.5` | 轻量开源权重 | 更低自托管门槛 | 支持 | 私有部署 | 显存预算有限的中小团队内网离线推理与领域 LoRA 微调 | > **选型重点**：如果团队还在旧脚本里调用 `kimi-k3`（\$3/\$15），立即评估迁移至 **`kimi-k3.1-pro`（\$2/\$10，缓存读 \$0.20）**——单价直降三分之一，同时长上下文稀疏注意力和编码/3D 能力显著增强。并且 K3.1 Pro 已在 Hugging Face 公开开源权重（带商用分级署名条款），允许金融、律所和医院在离线内网自建集群。
 
 ---
 
@@ -1055,7 +1013,7 @@ kimi web --port 4310
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **装好 CLI 并测通密钥**：运行 `kimi --version`，在任意测试仓库执行一次只读诊断，确认 API 响应与缓存命中正常。
 2. **体验 `kimi web` 可视化面板**：运行 `kimi web`，在浏览器中对比多个会话分支的 Diff 视图与工具调用轨迹，感受它与纯黑框终端的差异。
@@ -1063,25 +1021,23 @@ kimi web --port 4310
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 终端运行 `kimi` 报缺少 Python 依赖或版本过旧 | 机器上残留了早期 Python 版 `kimi-cli`，PATH 优先级盖过了新版 TypeScript CLI | 执行 `which -a kimi` 排查冲突路径，卸载旧 pip 包后保留新版 `npm` / 官方二进制安装路径 |
 | 多轮长仓库对话费用高于预期，没有享受到 \$0.20 缓存价 | 每次提问都在系统提示词开头插入了动态时间戳或随机 UUID，导致前缀缓存全部失效 | 保持 `AGENTS.md` 与静态参考文档位于提示词最前方且内容稳定，仅把变化问题放在末尾 |
-| `kimi web` 打开后提示跨域或拒绝外部访问 | 安全默认值仅监听 `127.0.0.1`，防止局域网裸奔 | 切勿直接绑定 `0.0.0.0` 暴露公网；如需远程访问，务必通过 SSH 端口转发（`ssh -L 4310:127.0.0.1:4310`） |
-
----
+| `kimi web` 打开后提示跨域或拒绝外部访问 | 安全默认值仅监听 `127.0.0.1`，防止局域网裸奔 | 切勿直接绑定 `0.0.0.0` 暴露公网；如需远程访问，务必通过 SSH 端口转发（`ssh -L 4310:127.0.0.1:4310`） | ---
 
 ---
 
 # Ch.02 全协议互联：`config.toml`、`kimi acp` 跨 IDE 直连与多源容灾矩阵
 
-> 🎯 **本章解决的工程麻烦**：团队里有人死守 JetBrains（IntelliJ / WebStorm），有人迷恋 Zed，有人习惯终端 CLI——每次换工具就要重新适配一套插件；更头疼的是，单一厂商半夜触发限流或接口抖动，正在重构到一半的长会话直接卡死。
+> **本章解决的工程麻烦**：团队里有人死守 JetBrains（IntelliJ / WebStorm），有人迷恋 Zed，有人习惯终端 CLI——每次换工具就要重新适配一套插件；更头疼的是，单一厂商半夜触发限流或接口抖动，正在重构到一半的长会话直接卡死。
 >
-> 💡 **实战落地收益**：落盘标准 `~/.kimi-code/config.toml` 与 `AGENTS.md` 共享规约，用一行 **`kimi acp`** 把 Kimi Code 变成 Zed / JetBrains 原生智能体后端，并通过 **Codex Switch** 与 Bedrock / OpenRouter 建好 1 秒容灾切换防线。
+> **实战落地收益**：落盘标准 `~/.kimi-code/config.toml` 与 `AGENTS.md` 共享规约，用一行 **`kimi acp`** 把 Kimi Code 变成 Zed / JetBrains 原生智能体后端，并通过 **Codex Switch** 与 Bedrock / OpenRouter 建好 1 秒容灾切换防线。
 >
-> ⚡ **一句话结论**：不要把研发流绑死在某一个封闭 IDE 里；用 `AGENTS.md` 统一项目纪律，用 `ACP` 统一编辑器入口，用多供应商切换兜底可用性。
+> **一句话结论**：不要把研发流绑死在某一个封闭 IDE 里；用 `AGENTS.md` 统一项目纪律，用 `ACP` 统一编辑器入口，用多供应商切换兜底可用性。
 
 过去两年，AI 编程工具最大的割裂来自“一家一个封闭壳”。你在终端调顺了工具链，回到 JetBrains 又得用另一套残血补全插件。
 
@@ -1092,7 +1048,7 @@ Kimi Code 选择了一条更开放的协议路线：**`AGENTS.md` 承接项目�
 ## 2.1 零摩擦配置：`~/.kimi-code/config.toml` 与 `AGENTS.md` 继承
 
 Kimi Code 将运行时配置拆分为两个清爽文件：
-- `~/.kimi-code/config.toml`：模型、供应商端点、权限审批档位、蜂群并发上限与 MCP 配置；
+- `~/.kimi-code/config.toml`：模型、供应商端点、权限审批档位、多智能体并行上限与 MCP 配置；
 - `~/.kimi-code/tui.toml`：终端主题、快捷键与界面排版偏好。
 
 以下是配套套件 [examples/kimi-k3-kit/config.toml](https://github.com/aipmer/codex-blue-book/blob/main/examples/kimi-k3-kit/config.toml) 的生产基线：
@@ -1173,33 +1129,31 @@ flowchart LR
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
-1. **生成并落盘配置**：前往本站 [多智能体通用规约生成器](/generator) 切换到 **Kimi Code** 标签页，导出 `AGENTS.md` 与 `config.toml` 至本地。
+1. **生成并落盘配置**：前往本站 [AI 协作规则生成器](/generator) 切换到 **Kimi Code** 标签页，导出 `AGENTS.md` 与 `config.toml` 至本地。
 2. **打通一个编辑器 ACP**：在 Zed 或 JetBrains 中配置 `kimi acp`，打开当前项目让它只读梳理核心路由并提出 1 处测试补充。
 3. **演练一次容灾切换**：在配置中备好备用供应商环境变量（例如 OpenRouter 或 DeepInfra 托管的 K3.1 Pro），验证切源后 `kimi` 仍能正常响应。
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | Zed / JetBrains 启动 `kimi acp` 立即断开报错 | GUI 编辑器未继承终端 `.zshrc` 的 `PATH` 或 `MOONSHOT_API_KEY` | 在编辑器 ACP 配置中填写 `kimi` 的绝对路径（`which kimi`），并显式声明密钥读取方式 |
 | 挂载 Figma MCP 后一直卡在初始化超时 | `FIGMA_API_KEY` 未导出或 `npx` 首次冷下载被网络代理阻塞 | 先在终端手动跑一次 `npx -y figma-developer-mcp --help` 预热缓存，再用 `/mcp-config` 复测连通性 |
-| 跨供应商切换后历史对话报参数不合法 | 不同厂商对 `reasoning_content` 或工具调用 ID 格式校验存在细微差异 | 使用 [Codex Switch](https://github.com/aipmer/codex-switch) 自动清洗字段差异，或用 `/compact` 压缩为纯文本交接摘要后切源 |
+| 跨供应商切换后历史对话报参数不合法 | 不同厂商对 `reasoning_content` 或工具调用 ID 格式校验存在细微差异 | 使用 [Codex Switch](https://github.com/aipmer/codex-switch) 自动清洗字段差异，或用 `/compact` 压缩为纯文本交接摘要后切源 | ---
 
 ---
 
----
+# Ch.03 分层子代理（`explore / plan / coder`）与 多智能体并行全栈实战
 
-# Ch.03 分层子代理（`explore / plan / coder`）与 `/swarm` 蜂群全栈实战
-
-> 🎯 **本章解决的工程麻烦**：面对 40 个文件需要统一升级设计 Token、迁移 API 客户端或补齐测试的重构任务，单会话干到第 15 个文件就开始丢上下文、反复改坏前面刚修好的导入路径；一开全并发又立刻撞上 API 速率上限（429）全盘报错。
+> **本章解决的工程麻烦**：面对 40 个文件需要统一升级设计 Token、迁移 API 客户端或补齐测试的重构任务，单会话干到第 15 个文件就开始丢上下文、反复改坏前面刚修好的导入路径；一开全并发又立刻撞上 API 速率上限（429）全盘报错。
 >
-> 💡 **实战落地收益**：掌握 Kimi Code 内置 **`explore` / `plan` / `coder`** 三剑客的分层隔离协作，用 `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY` 稳控 **`/swarm`** 并发节奏，并套用编译错误栈追踪与“3 次重试熔断”防死循环护栏。
+> **实战落地收益**：掌握 Kimi Code 内置 **`explore` / `plan` / `coder`** 三剑客的分层隔离协作，用 `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY` 稳控 **`/swarm`** 并发节奏，并套用编译错误栈追踪与“3 次重试熔断”防死循环护栏。
 >
-> ⚡ **一句话结论**：先把“只读查图、零副作用定方案、隔离写代码”三步拆清，再用限流蜂群并行推进，百万上下文才能变成稳定的工程生产力。
+> **一句话结论**：先把“只读查图、零副作用定方案、隔离写代码”三步拆清，再用限流蜂群并行推进，百万上下文才能变成稳定的工程生产力。
 
 很多开发者把 1M 上下文当成“垃圾桶”——查日志、翻 80 个源码文件、试错 10 轮报错全塞进同一个对话里。哪怕底层有 Gated DSA，满屏废弃的报错堆栈一样会干扰后续判断。
 
@@ -1213,9 +1167,7 @@ Kimi Code 把高频研发动作拆成了三个职责清晰的子代理，再往�
 | :--- | :--- | :--- | :--- |
 | **`explore`** | 严格只读（读文件、grep、查依赖） | 精炼的符号地图、调用链与影响面清单 | 吞掉几十个大文件搜索噪音，只把 1 页纸结论交回主会话 |
 | **`plan`** | 零代码修改 | 分阶段改造方案、互斥目录切分与验收命令 | 在动手前把设计分歧暴露出来，避免写一半返工 |
-| **`coder`** | 受控读写 + Shell 自测 | 原子化代码提交、单元测试与通过日志 | 拿到干净方案后专心实现与跑测，不被无关历史记录带偏 |
-
-```mermaid
+| **`coder`** | 受控读写 + Shell 自测 | 原子化代码提交、单元测试与通过日志 | 拿到干净方案后专心实现与跑测，不被无关历史记录带偏 | ```mermaid
 flowchart LR
     Req["大型重构需求"] --> Exp["explore (只读扫描全仓依赖)"]
     Exp -->|"输出精炼模块地图"| Plan["plan (划分互斥切片 + 验收断言)"]
@@ -1230,7 +1182,7 @@ flowchart LR
 
 ---
 
-## 3.2 启动 `/swarm` 蜂群并发与 429 速率平滑控制
+## 3.2 启动 多智能体并行协作与 429 速率平滑控制
 
 在 Kimi Code 中批量重构一个中大型 Web 仓库（例如全站把分散的旧色值与老版请求封装统一迁移到新 Design Tokens 与 Typed SDK）时，最稳的启动姿势是**显式锁死最大并发数**，防止蜂群瞬间把账号 RPM 打爆：
 
@@ -1265,7 +1217,7 @@ KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=4 kimi
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **先走三步串行闭环**：在一个真实需求上刻意按 `explore → plan → coder` 三阶段推进，体会只读探索如何让主上下文保持清爽。
 2. **设置并发上限演练双切片 `/swarm`**：用 `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2 kimi` 同时改造两个互不交叉的组件目录，观察合并后的 `git diff --stat`。
@@ -1273,25 +1225,23 @@ KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=4 kimi
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | `/swarm` 跑了一半大片 Worker 报 `429 Too Many Requests` | 并发数开太大撞上账号 RPM/TPM 上限 | 立刻收敛 `KIMI_CODE_AGENT_SWARM_MAX_CONCURRENCY=2` 或 `3`，分批推进切片 |
 | 单个 Worker 把单元测试改成空跑来强行通过验收 | 未在 `AGENTS.md` 中明令禁止削弱断言，也未审阅测试 diff | 执行 `git diff -- '*.test.*' '*.spec.*'` 专审测试文件改动，打回任何删除断言或 `skip` 的提交 |
-| 多个切片分别单测通过，合在一起构建报错 | 切片间隐含共享状态未在 `plan` 阶段冻结 | 由主会话先固定公共类型与导出口，再统一执行全仓 `tsc --noEmit` 定位剩余接口不匹配 |
-
----
+| 多个切片分别单测通过，合在一起构建报错 | 切片间隐含共享状态未在 `plan` 阶段冻结 | 由主会话先固定公共类型与导出口，再统一执行全仓 `tsc --noEmit` 定位剩余接口不匹配 | ---
 
 ---
 
 # Ch.04 MoonViT-V2 视觉工程流：录屏诊断、Figma 还原与前端精修
 
-> 🎯 **本章解决的工程麻烦**：前端遇到“快速切换 Tab 时弹窗闪一下错位”“滚动吸顶把正文遮掉 12 像素”这类动态 Bug，写 500 字工单开发半天复现不出来；还原设计师给的复杂 Figma 稿时，光靠截图量间距、抄字号和补无障碍标签耗时一整天。
+> **本章解决的工程麻烦**：前端遇到“快速切换 Tab 时弹窗闪一下错位”“滚动吸顶把正文遮掉 12 像素”这类动态 Bug，写 500 字工单开发半天复现不出来；还原设计师给的复杂 Figma 稿时，光靠截图量间距、抄字号和补无障碍标签耗时一整天。
 >
-> 💡 **实战落地收益**：用 **Kimi K3.1 Pro（MoonViT-V2）** 跑通 **操作录屏直出修复补丁（Video-to-Fix）**，并把 **Figma MCP** 接进 Kimi Code，一次性输出高保真响应式组件与可访问性（a11y）检查清单。
+> **实战落地收益**：用 **Kimi K3.1 Pro（MoonViT-V2）** 跑通 **操作录屏直出修复补丁（Video-to-Fix）**，并把 **Figma MCP** 接进 Kimi Code，一次性输出高保真响应式组件与可访问性（a11y）检查清单。
 >
-> ⚡ **一句话结论**：原生分辨率视觉编码器配合设计稿结构化 MCP，让前端交付从“肉眼对照像素猜样式”变成“看录屏定根因、读节点树生成代码”。
+> **一句话结论**：原生分辨率视觉编码器配合设计稿结构化 MCP，让前端交付从“肉眼对照像素猜样式”变成“看录屏定根因、读节点树生成代码”。
 
 传统多模态模型把高清界面截图强行切成固定小图块缩放，经常把 `12px` 小字、细边框和 1 像素对齐偏差糊掉。**MoonViT-V2** 采用原生分辨率编码策略，保留高密度 UI 细节与连续视频帧时序——这在前端排障与高审美还原上优势非常直接。
 
@@ -1344,11 +1294,9 @@ ffmpeg -i raw-repro.mov -vf "scale='min(1280,iw)':-2,fps=4" \
 import { chromium } from "playwright";
 
 const URL = process.argv[2] || "http://127.0.0.1:4173/";
-const VIEWPORTS = [
-  { name: "mobile", width: 390, height: 844 },
+const VIEWPORTS = [{ name: "mobile", width: 390, height: 844 },
   { name: "tablet", width: 768, height: 1024 },
-  { name: "desktop", width: 1440, height: 900 }
-];
+  { name: "desktop", width: 1440, height: 900 }];
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
@@ -1377,7 +1325,7 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑一次 Video-to-Fix**：把你项目里一个偶发样式跳动录 15 秒压缩成 MP4，喂给 Kimi Code 定位根因并验证修复补丁。
 2. **用 Figma MCP 还原一个复杂卡片**：先要求映射现有 CSS Token，再生成组件代码，核对是否消灭了多余的魔法数字。
@@ -1385,25 +1333,23 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 投喂 4K Retina 录屏后响应极慢或超出单请求体积 | 原始 `.mov` 码率高达 50MB+ 且帧率 60fps | 先用 `ffmpeg` 降到 `1280px` 宽 + `4 fps` + `-an` 去音轨，文件瞬间缩小 20 倍且文字清晰 |
 | Figma 还原出来桌面端一模一样，手机端全挤在一起 | 只按桌面端固定像素 `width: 480px` 写死，未把 Figma Auto Layout 转成弹性 Grid/Flex | 规则中要求所有容器使用 `max-width` + `width: 100%` + `minmax(0, 1fr)`，并在 `390px` 视口强制验收 |
-| 生成的纯图标按钮被无障碍审计报严重错误 | 用了 `<div onClick>` 代替 `<button>`，且未加 `aria-label` | 强制使用原生 `<button type="button" aria-label="...">`，保留键盘 `Tab` 与 `Enter` 聚焦可用性 |
-
----
+| 生成的纯图标按钮被无障碍审计报严重错误 | 用了 `<div onClick>` 代替 `<button>`，且未加 `aria-label` | 强制使用原生 `<button type="button" aria-label="...">`，保留键盘 `Tab` 与 `Enter` 聚焦可用性 | ---
 
 ---
 
 # Ch.05 金融投研与量化工程实战：百万 Token 财报审计与自动建模
 
-> 🎯 **本章解决的工程麻烦**：传统 RAG 把一份 200 页上市公司 10-K 年报切成几百段碎片塞进向量库，结果“利润表主数据”和“附注 14 里的商誉减值说明”被切散，模型要么漏掉关键口径变更，要么直接心算加减把毛利率算错 3 个百分点。
+> **本章解决的工程麻烦**：传统 RAG 把一份 200 页上市公司 10-K 年报切成几百段碎片塞进向量库，结果“利润表主数据”和“附注 14 里的商誉减值说明”被切散，模型要么漏掉关键口径变更，要么直接心算加减把毛利率算错 3 个百分点。
 >
-> 💡 **实战落地收益**：利用 **Kimi K3.1 Pro 1M 原生窗口 + Prompt Caching（\$0.20/1M）** 整本吞吐多期财报与行业研报，建立 **“模型负责提取带页码结构化科目 → Python 沙盒负责全部计算与 Excel 公式输出”** 的零算术幻觉金融工程管线。
+> **实战落地收益**：利用 **Kimi K3.1 Pro 1M 原生窗口 + Prompt Caching（\$0.20/1M）** 整本吞吐多期财报与行业研报，建立 **“模型负责提取带页码结构化科目 → Python 沙盒负责全部计算与 Excel 公式输出”** 的零算术幻觉金融工程管线。
 >
-> ⚡ **一句话结论**：严肃金融投研绝不让大模型心算数字；让 K3.1 Pro 在百万上下文里做全量口径对齐与异常线索发现，把所有加减乘除和回测交给确定性 Python 代码。
+> **一句话结论**：严肃金融投研绝不让大模型心算数字；让 K3.1 Pro 在百万上下文里做全量口径对齐与异常线索发现，把所有加减乘除和回测交给确定性 Python 代码。
 
 金融投研之所以长期是 AI 应用的深水区，原因就两个字：**容错率为零**。写周报差个形容词没人追究，但投资备忘录里把自由现金流（FCF）算错一位小数、把 Non-GAAP 调整项和 GAAP 净利混在一起，整份报告的公信力当场归零。
 
@@ -1488,10 +1434,8 @@ def analyze_periods(periods: list[PeriodMetrics]) -> dict:
     return {"metrics": report, "alerts": alerts}
 
 if __name__ == "__main__":
-    sample = [
-        PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
-        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),
-    ]
+    sample = [PeriodMetrics("FY2024", 1200.0, 540.0, 260.0, 75.0, 2100.0, 950.0, 1150.0, 180.0),
+        PeriodMetrics("FY2025", 1380.0, 648.6, 215.0, 90.0, 2420.0, 1140.0, 1280.0, 255.0),]
     print(json.dumps(analyze_periods(sample), indent=2, ensure_ascii=False))
 ```
 
@@ -1507,7 +1451,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑通勾稽演示**：直接运行 `python3 financial_audit.py`，观察它如何自动捕捉应收账款增速远超营收增速的风险警报。
 2. **整本装载一次真实年报**：挑一家上市公司的公开 10-K 文本，通过 `kimi-k3.1-pro`（开启 `prompt_caching`）只抽取原始科目 JSON 与附注原文句，再用 [verify_citations.py](https://github.com/aipmer/codex-blue-book/blob/main/examples/kimi-k3-kit/scripts/verify_citations.py) 核验引用真实性。
@@ -1515,25 +1459,23 @@ if __name__ == "__main__":
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 同比数据差了整整 1000 倍 | 一份报表单位是 `in thousands`，另一份是 `in millions`，抽取时漏提单位字段 | 在抽取 Schema 中强制加入 `unit_multiplier`（`1` / `1000` / `1000000`）与 `currency`，由 Python 统一归一化后再对比 |
 | 模型把非经常性收益算进了核心经营利润 | 未在提示词中要求区分 GAAP 与 Non-GAAP 口径，也未抽取附注调节表 | 显式声明分别抽取 `gaap_operating_income` 与 `non_gaap_adjustments[]`，并在 Python 端核对加总是否相等 |
-| PDF 转文本后财报数字列全错位串行 | 用了劣质纯文本 PDF 提取器丢失了表格列对齐 | 改用保留表格结构的 Markdown/HTML 解析器（如 MinerU / Docling）或直接配合 MoonViT-V2 对关键财务页做视觉校对 |
-
----
+| PDF 转文本后财报数字列全错位串行 | 用了劣质纯文本 PDF 提取器丢失了表格列对齐 | 改用保留表格结构的 Markdown/HTML 解析器（如 MinerU / Docling）或直接配合 MoonViT-V2 对关键财务页做视觉校对 | ---
 
 ---
 
 # Ch.06 法律合规与生物医药实战：超长文献交叉推理与零幻觉引用校验
 
-> 🎯 **本章解决的工程麻烦**：法务审查一份 120 页并购主协议加 6 份附件时，第 3 条赔偿上限和附件四的例外条款互相打架，人工翻漏一条就是百万级敞口；临床科研交叉比对几十篇试验方案和不良反应报告时，大模型偶尔编造一段“听起来很像真的”参考文献，直接毁掉整份综述。
+> **本章解决的工程麻烦**：法务审查一份 120 页并购主协议加 6 份附件时，第 3 条赔偿上限和附件四的例外条款互相打架，人工翻漏一条就是百万级敞口；临床科研交叉比对几十篇试验方案和不良反应报告时，大模型偶尔编造一段“听起来很像真的”参考文献，直接毁掉整份综述。
 >
-> 💡 **实战落地收益**：建立 **法律合规（条款冲突扫描）+ 生物医药（跨文献证据链）** 的长上下文工程架构，掌握 K3 与 K3.1 Pro 混合路由技巧，并落盘配套零依赖脚本 `verify_citations.py` 对每一条模型结论做**原文逐字引用核验**。
+> **实战落地收益**：建立 **法律合规（条款冲突扫描）+ 生物医药（跨文献证据链）** 的长上下文工程架构，掌握 K3 与 K3.1 Pro 混合路由技巧，并落盘配套零依赖脚本 `verify_citations.py` 对每一条模型结论做**原文逐字引用核验**。
 >
-> ⚡ **一句话结论**：在法律与医药领域，没有原文逐字锚点支撑的 AI 结论等于零；把大模型当“高通量线索发现引擎”，把确定性字符串/索引脚本做成发版前的零幻觉拦截闸。
+> **一句话结论**：在法律与医药领域，没有原文逐字锚点支撑的 AI 结论等于零；把大模型当“高通量线索发现引擎”，把确定性字符串/索引脚本做成发版前的零幻觉拦截闸。
 
 法律与生物医药有两个共同工程特征：**文档极长、跨文件隐蔽矛盾极多、对编造事实的容忍度绝对为零。**
 
@@ -1582,7 +1524,7 @@ python3 examples/kimi-k3-kit/scripts/verify_citations.py \
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑通零幻觉核验自测**：执行 `python3 examples/kimi-k3-kit/scripts/verify_citations.py --self-test`，确认输出中 `pass_case.status === "PASS"` 且 `fail_case.status === "BLOCKED_UNVERIFIED_CITATIONS"`。
 2. **用一份脱敏合同实战**：把一份公开 SaaS 服务条款（ToS）喂给 `kimi-k3.1-pro`，要求仅按 `[{"claim": "...", "quote": "..."}]` 格式提取解约、责任上限与数据归属条款，再跑 `verify_citations.py` 验证 100% 逐字命中。
@@ -1590,25 +1532,23 @@ python3 examples/kimi-k3-kit/scripts/verify_citations.py \
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 模型明明看对了条款，却被 `verify_citations.py` 判失败 | 模型习惯用省略号 `...` 拼接不连续的两句话，或把英文直引号改成了弯引号 | 在 Prompt 中明确规定 `quote` 必须是原文中连续无删节的子串（禁用 `...`），并在归一化函数里统一标点编码 |
 | 扫描 PDF 合同里的数字和条款大面积乱码 | 扫描件未经高质量 OCR，直接抽文本丢失了印章盖住或分栏文字 | 先经高精度表格/文档 OCR 管线转结构化 Markdown，或把关键签署页直接用 MoonViT-V2 视觉核验 |
-| 律所或医院法务拒绝把真实合同上传至公有云 API | 客户受数据出境、保密协议或 HIPAA/等保约束 | 直接切至第 9 章的 **K3.1 Pro / K2.5 开源权重内网离线部署方案**，数据全程不出客户机房 |
-
----
+| 律所或医院法务拒绝把真实合同上传至公有云 API | 客户受数据出境、保密协议或 HIPAA/等保约束 | 直接切至第 9 章的 **K3.1 Pro / K2.5 开源权重内网离线部署方案**，数据全程不出客户机房 | ---
 
 ---
 
 # Ch.07 从原始数据到路演级交付：Kimi Slides 智能演示工程流
 
-> 🎯 **本章解决的工程麻烦**：前面花三天把财报数据、架构方案和实验指标全算出来了，最后一公里还要花一整晚手工调 PowerPoint 字体对齐、截死图贴表、反复改老板要的“10 页投委会路演版”；而市面上很多 AI PPT 工具导出的是整张压平的死图片，进到 PowerPoint 里连一个数字都改不了。
+> **本章解决的工程麻烦**：前面花三天把财报数据、架构方案和实验指标全算出来了，最后一公里还要花一整晚手工调 PowerPoint 字体对齐、截死图贴表、反复改老板要的“10 页投委会路演版”；而市面上很多 AI PPT 工具导出的是整张压平的死图片，进到 PowerPoint 里连一个数字都改不了。
 >
-> 💡 **实战落地收益**：把 **Kimi Slides** 纳入工程交付终点，从结构化 Markdown/JSON 与 Excel 数据直接生成**原生可编辑 `.pptx`（含原生图表元素）**，并用“先定叙事大纲 → 再渲染版式 → 局部对话精修”三步法替代通宵手搓幻灯片。
+> **实战落地收益**：把 **Kimi Slides** 纳入工程交付终点，从结构化 Markdown/JSON 与 Excel 数据直接生成**原生可编辑 `.pptx`（含原生图表元素）**，并用“先定叙事大纲 → 再渲染版式 → 局部对话精修”三步法替代通宵手搓幻灯片。
 >
-> ⚡ **一句话结论**：演示文稿不是美工画画，而是结构化数据的最终展示层；把数据、图表和文字元素原生落进 `.pptx`，才能同时拿到 AI 的生成速度与人工终稿的完全掌控权。
+> **一句话结论**：演示文稿不是美工画画，而是结构化数据的最终展示层；把数据、图表和文字元素原生落进 `.pptx`，才能同时拿到 AI 的生成速度与人工终稿的完全掌控权。
 
 对咨询顾问、金融分析师、技术负责人和独立创业者来说，**最终让人拍板签字的交付物往往不是代码仓库，而是一份 12 页的演示文稿。**
 
@@ -1646,12 +1586,10 @@ import json
 from pathlib import Path
 
 def build_deck_brief(metrics: dict, out_md: str) -> None:
-    lines = [
-        f"# {metrics['title']}",
+    lines = [f"# {metrics['title']}",
         f"- 受众：{metrics['audience']}",
         f"- 风格：深蓝商务极简，禁止空泛口号，每页保留 1 条带数据动作标题与数据来源脚注。",
-        "",
-    ]
+        "",]
     for idx, slide in enumerate(metrics["slides"], start=1):
         lines.append(f"## Slide {idx}: {slide['action_title']}")
         lines.append(f"- 版式建议：{slide['layout']}")
@@ -1673,8 +1611,7 @@ if __name__ == "__main__":
     sample = {
         "title": "Q4 研发效能与多模态成本复盘",
         "audience": "管理层与技术委员会",
-        "slides": [
-            {
+        "slides": [{
                 "action_title": "接入 K3.1 Pro 缓存后，长文档审计单次成本下降 78%",
                 "layout": "左结论卡片 + 右对比柱状图",
                 "bullets": ["前缀缓存命中率稳定在 86%", "P95 审阅耗时从 42 分钟压降至 6 分钟"],
@@ -1683,8 +1620,7 @@ if __name__ == "__main__":
                     "rows": [["旧版 RAG", "1.45", "42 min"], ["K3.1 Pro + 缓存", "0.32", "6 min"]],
                 },
                 "source": "内部 Billing Telemetry (2026-11-26)",
-            }
-        ],
+            }],
     }
     build_deck_brief(sample, "deck_brief.md")
     print("Generated deck_brief.md")
@@ -1702,7 +1638,7 @@ if __name__ == "__main__":
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **先产出一份硬核分镜稿**：运行上面的 `build_deck_brief` 脚本（或直接喂入第 5 章的财报 JSON），生成结构清晰的 `deck_brief.md`。
 2. **用 Kimi Slides 渲染并局部精修**：上传 `deck_brief.md` 生成演示文稿，挑选最密的一页用自然语言指令要求“压缩字数 40% 并改为双栏对比”，再导出 `.pptx`。
@@ -1710,25 +1646,23 @@ if __name__ == "__main__":
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 生成的幻灯片文字密密麻麻像 Word 文档 | 输入源直接扔了 3 万字原文，未先限定“每页 <= 60 字 / 3 个要点” | 先由 K3.1 Pro 压缩输出结构化分镜 JSON，严格限制每页要点字数再送入 Kimi Slides |
 | `.pptx` 在客户电脑打开后排版错乱、标题折成三行 | 使用了客户系统未安装的冷门字体，触发系统宽字体回退 | 在母版中统一替换为跨平台安全字体（英文 Inter / Arial，中文思源黑体 / 微软雅黑 / 苹方）或导出 PDF 演示 |
-| 图表里的数字和正文写的结论对不上 | 正文修改了口径但忘记同步更新图表数据表 | 所有数据由同一份 JSON 单源生成，发版前按 7.3 节 3 分钟清单逐页核对图表标签 |
-
----
+| 图表里的数字和正文写的结论对不上 | 正文修改了口径但忘记同步更新图表数据表 | 所有数据由同一份 JSON 单源生成，发版前按 7.3 节 3 分钟清单逐页核对图表标签 | ---
 
 ---
 
 # Ch.08 空间智能与 3D Make 实战：从 Web 3D 交互、Blender 到 FreeCAD 机械装配
 
-> 🎯 **本章解决的工程麻烦**：传统文生 3D 模型生成的是“表面一团烂网格、尺寸全靠猜、完全没法改参数”的不可编辑文件——既没法放进机械 CAD 做精确装配，也没法控制 Web 3D 场景的面数和材质逻辑；而纯手工写 Three.js、Blender `bpy` 或 FreeCAD Python 脚本门槛又太高。
+> **本章解决的工程麻烦**：传统文生 3D 模型生成的是“表面一团烂网格、尺寸全靠猜、完全没法改参数”的不可编辑文件——既没法放进机械 CAD 做精确装配，也没法控制 Web 3D 场景的面数和材质逻辑；而纯手工写 Three.js、Blender `bpy` 或 FreeCAD Python 脚本门槛又太高。
 >
-> 💡 **实战落地收益**：吃透 **Kimi K3.1 Pro 空间编码（Spatial Coding）+ 3D Make** 工作流，落地三条可参数化复现的 3D 工程管线：**Web 3D（Three.js）**、**无头 Blender 场景脚本（`bpy`）** 与 **FreeCAD 参数化机械装配体（`.step` / `.stl`）**。
+> **实战落地收益**：吃透 **Kimi K3.1 Pro 空间编码（Spatial Coding）+ 3D Make** 工作流，落地三条可参数化复现的 3D 工程管线：**Web 3D（Three.js）**、**无头 Blender 场景脚本（`bpy`）** 与 **FreeCAD 参数化机械装配体（`.step` / `.stl`）**。
 >
-> ⚡ **一句话结论**：程序化代码生成的 3D 资产天然带精确毫米尺寸、版本控制与一键改参能力——这是 K3.1 Pro 区别于普通图片/网格生成器的真正硬实力。
+> **一句话结论**：程序化代码生成的 3D 资产天然带精确毫米尺寸、版本控制与一键改参能力——这是 K3.1 Pro 区别于普通图片/网格生成器的真正硬实力。
 
 2026 年底 `@Kimi_Moonshot` 社区里传阅度最高的一组实战演示，既不是写贪吃蛇，也不是画海报，而是两类硬核空间工程作品：一类是 **Blender 程序化室内热带雨林峡谷**（精准控制地形、植被分布、体积光与水体反射），另一类是 **Python + FreeCAD 精密涡扇发动机参数化建模与爆炸视图**。
 
@@ -1744,9 +1678,7 @@ if __name__ == "__main__":
 | :--- | :--- | :--- |
 | **浏览器交互展厅 / 产品 3D 配置器** | **Three.js / React Three Fiber**（WebGL / GLB） | 一键生成带轨道控制、阴影预算与状态切换的响应式组件 |
 | **影视级渲染 / 建筑与环境艺术场景** | **Blender 无头 `bpy` 脚本**（`.blend` / `.glb` / Cycles 渲染图） | 精确控制程序化节点材质、灯光角度、摄影机运镜与多角度批量渲染 |
-| **工业设计 / 机械装配 / 3D 打印零件** | **Python + FreeCAD**（`.step` / `.stl` / `.3mf`） | 严格毫米级公差、布尔运算无破面、改一个半径参数全装配自动联动更新 |
-
----
+| **工业设计 / 机械装配 / 3D 打印零件** | **Python + FreeCAD**（`.step` / `.stl` / `.3mf`） | 严格毫米级公差、布尔运算无破面、改一个半径参数全装配自动联动更新 | ---
 
 ## 8.2 管线一：无头 Blender（`bpy`）程序化环境构建与自动审图
 
@@ -1819,7 +1751,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **先跑参数校验**：运行上面的 `freecad_turbine_blade.py --dry-run`，尝试把 `--blades` 改成 `16` 或把 `--outer-radius` 改成 `100`，观察输出 JSON 中弦长、壁厚和均分角度的自动重算。
 2. **用 3D Make 快速验证概念**：在 Kimi 3D Make 里用一句话或手绘草图生成目标物体初版，确认整体比例后再导出参数化脚本进本地仓库精修。
@@ -1827,25 +1759,23 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 生成的 `.stl` 导入切片软件报“非流形边 / 破洞无法切片” | 多个组件仅仅紧挨着放一起而未做实体布尔融合（`fuse`），或壁厚小于 1mm | 机械件用 FreeCAD 显式 `rotor.fuse(blade)` 融合成单一闭合实体（确保 `blade` 插入轮毂重叠 `1–2mm`），导出后检查流形闭合 |
 | Blender `bpy` 脚本在新版 Blender 4.x 报属性不存在 | 模型按 Blender 3.x 旧 API 生成了已移除的 Principled BSDF 输入名 | 在提示词顶部显式指定本机 `blender --version` 主版本号，并先跑 `--background` 快速捕获 AttributeError |
-| 网页 Three.js 场景在手机浏览器直接白屏或发热卡顿 | 导出模型高达 50 万面且未压缩纹理，也没有按路由懒加载 | 用 `gltf-transform` 压缩至 `< 50K` 三角面 + Draco/KTX2 压缩，Three.js 严格走动态 `import()` |
-
----
+| 网页 Three.js 场景在手机浏览器直接白屏或发热卡顿 | 导出模型高达 50 万面且未压缩纹理，也没有按路由懒加载 | 用 `gltf-transform` 压缩至 `< 50K` 三角面 + Draco/KTX2 压缩，Three.js 严格走动态 `import()` | ---
 
 ---
 
 # Ch.09 政企合规与商业化落地：vLLM / SGLang 私有化部署与垂直 Agent 产品化
 
-> 🎯 **本章解决的工程麻烦**：拿到银行、律所、三甲医院或大型制造业的高客单价大单，客户一句话就能把闭源公有云方案否决——“核心合同、病历和 CAD 图纸绝对不能出内网”；或者自己上线了垂直 SaaS，却被客户质疑只是随时可能断供的公有云套壳。
+> **本章解决的工程麻烦**：拿到银行、律所、三甲医院或大型制造业的高客单价大单，客户一句话就能把闭源公有云方案否决——“核心合同、病历和 CAD 图纸绝对不能出内网”；或者自己上线了垂直 SaaS，却被客户质疑只是随时可能断供的公有云套壳。
 >
-> 💡 **实战落地收益**：掌握基于 Hugging Face 开源权重的 **vLLM / SGLang 私有化部署拓扑**（区分中小团队 K2.5 轻量集群与大型机构 K3.1 Pro 多机 MoE 集群），并给出一套“**百万字审计 + 自动建表 + 原生 `.pptx` 交付**”的高毛利垂直工作台变现架构。
+> **实战落地收益**：掌握基于 Hugging Face 开源权重的 **vLLM / SGLang 私有化部署拓扑**（区分中小团队 K2.5 轻量集群与大型机构 K3.1 Pro 多机 MoE 集群），并给出一套“**百万字审计 + 自动建表 + 原生 `.pptx` 交付**”的高毛利垂直工作台变现架构。
 >
-> ⚡ **一句话结论**：开源权重给你的不仅是低推理成本，更是打进政企与强监管行业的一张入场门票——同一个 OpenAI 兼容代码库，公有云卖 SaaS，内网卖私有化部署授权。
+> **一句话结论**：开源权重给你的不仅是低推理成本，更是打进政企与强监管行业的一张入场门票——同一个 OpenAI 兼容代码库，公有云卖 SaaS，内网卖私有化部署授权。
 
 在四大主流编程智能体家族里，OpenAI、Anthropic 和 Google 的旗舰模型均为纯闭源 API；**Kimi K3 / K3.1 Pro 是唯一同步开放旗舰 MoE 权重且原生带 1M 上下文与视觉能力的选手**。
 
@@ -1861,9 +1791,7 @@ freecadcmd examples/kimi-k3-kit/scripts/freecad_turbine_blade.py \
 | :--- | :--- | :--- | :--- |
 | **大型金融机构 / 央国企 / 云厂商专有区** | **Kimi K3.1 Pro**（~2.8T MoE / FP8 量化权重） | 多节点 H200 / B200 集群 + **vLLM / SGLang**（TP + EP 专家并行 + Prefix Caching） | 全行级投研审计、百万字合规与跨仓库内部编程中台 |
 | **中型律所 / 研发中心 / 区域医院** | **Kimi K2.5** 或领域微调版 | 单机 8×H100 / H20 + **SGLang / vLLM** | 部门级合同审查、病历结构化与内部知识库问答 |
-| **无自建 GPU 但要求数据不入公网** | 专属 VPC 托管端点（云上隔离实例） | 客户云账号内按小时拉起专用推理实例 | 阶段性并购尽调项目、年度审计高峰期弹性扩容 |
-
-> **授权合规提醒**：上线商业产品前，务必核对 Hugging Face 上 `moonshotai/` 对应仓库当日的 **Open-Weights License 条款**（重点核查高营收/大月活场景的署名与商用边界），保留完整合规备案记录。
+| **无自建 GPU 但要求数据不入公网** | 专属 VPC 托管端点（云上隔离实例） | 客户云账号内按小时拉起专用推理实例 | 阶段性并购尽调项目、年度审计高峰期弹性扩容 | > **授权合规提醒**：上线商业产品前，务必核对 Hugging Face 上 `moonshotai/` 对应仓库当日的 **Open-Weights License 条款**（重点核查高营收/大月活场景的署名与商用边界），保留完整合规备案记录。
 
 以下是使用 **vLLM** 启动兼容 OpenAI `/v1/chat/completions` 接口、并开启前缀缓存与工具调用解析的标准内网启动模板（以实际拉取的本地权重路径与集群并行度为准）：
 
@@ -1914,7 +1842,7 @@ flowchart LR
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **验证 OpenAI 兼容层零耦合**：把你的垂直工作台后端改造成只读取 `LLM_BASE_URL`、`LLM_API_KEY`、`LLM_MODEL` 三个环境变量，确认无需改代码即可在 Moonshot 官方 API 与本地测试网关之间秒切。
 2. **压测前缀缓存收益**：对同一批 200K Token 合同反复发起 5 个不同维度的审计请求，记录开/关 `--enable-prefix-caching` 前后的首字延迟（TTFT）与吞吐对比。
@@ -1922,25 +1850,23 @@ flowchart LR
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 私有化集群拉起 1M 上下文后显存瞬间 OOM 崩溃 | `--max-model-len` 直接拉满 1M 但 KV Cache 显存与并发槽位估算不足 | 先按实际业务分布设 `--max-model-len 262144` 并启用 FP8 KV Cache 与 `--gpu-memory-utilization 0.90`，再按实测并发逐步上调 |
 | 客户内网安全扫描报出出网外连告警 | 容器启动时试图从 Hugging Face Hub 在线下载 tokenizer 或依赖脚本 | 提前在内网制品库完整落盘模型权重、tokenizer 与离线容器镜像，运行时设置 `HF_HUB_OFFLINE=1` 彻底断网验证 |
-| 工具调用在私有化 vLLM 上返回纯文本而非 `tool_calls` | 启动参数漏加 `--enable-auto-tool-choice` 或 `--tool-call-parser` 与模型版本不匹配 | 核对所用 vLLM/SGLang 版本与 K3.1 Pro 官方模型卡推荐的 parser 名称，并用单条函数调用 curl 验收后再接入 Kimi Code |
-
----
+| 工具调用在私有化 vLLM 上返回纯文本而非 `tool_calls` | 启动参数漏加 `--enable-auto-tool-choice` 或 `--tool-call-parser` 与模型版本不匹配 | 核对所用 vLLM/SGLang 版本与 K3.1 Pro 官方模型卡推荐的 parser 名称，并用单条函数调用 curl 验收后再接入 Kimi Code | ---
 
 ---
 
 # Ch.10 2026 前沿瞭望：四模型混合军团协同策略与官方情报追踪
 
-> 🎯 **本章解决的工程麻烦**：把四本蓝皮书全读完之后，反而容易陷入选择困难——同一个真实业务项目里，到底应该押注一家全家桶，还是混用多款智能体？混用时又怎么防止规范打架、成本失控、团队认知分裂？
+> **本章解决的工程麻烦**：把四本蓝皮书全读完之后，反而容易陷入选择困难——同一个真实业务项目里，到底应该押注一家全家桶，还是混用多款智能体？混用时又怎么防止规范打架、成本失控、团队认知分裂？
 >
-> 💡 **实战落地收益**：拿走一套面向 2026–2027 年的**「四模型混合军团」实战分工蓝图**，用一份根目录 `AGENTS.md` 统管四套工具，并附带 `@Kimi_Moonshot` 及四大厂商官方一手核对清单。
+> **实战落地收益**：拿走一套面向 2026–2027 年的**「四模型混合军团」实战分工蓝图**，用一份根目录 `AGENTS.md` 统管四套工具，并附带 `@Kimi_Moonshot` 及四大厂商官方一手核对清单。
 >
-> ⚡ **一句话结论**：成熟工程团队不搞模型宗教信仰；用统一 `AGENTS.md` 锁死项目边界，在每个环节调用单位性价比和工程确定性最高的那一款智能体。
+> **一句话结论**：成熟工程团队不搞模型宗教信仰；用统一 `AGENTS.md` 锁死项目边界，在每个环节调用单位性价比和工程确定性最高的那一款智能体。
 
 走到这里，《AI 编程实战蓝皮书》四部曲——**Codex · Claude · Gemini · Kimi**——全部拼图已经合拢。
 
@@ -1956,10 +1882,8 @@ flowchart LR
 | :--- | :--- | :--- |
 | **0→1 快速验证、全栈 SaaS 起盘与手机远程值班** | **OpenAI Codex**（GPT-6.2 + 飞书助理） | 沙盒穿透丝滑，手机飞书随时审批、收日报，配合 Codex Switch 永不断粮 |
 | **高风险存量重构、CI 安全门禁与 `/design` 画板** | **Claude Code**（Claude 5.5 + Hooks + `/ship`） | 确定性 `PreToolUse` Hooks 零妥协挡危命，`/design` 到源码与 `/ship` 自动合并最稳 |
-| **多模态富交互、Workspace/Colab 联动与 3D 预览** | **Gemini Antigravity**（Gemini 4 + `/swarm`） | AI Studio 一键带上下文导出、Orchestrator 混排提速、Workspace MCP 与 Colab `%%agy` 全家桶闭环 |
-| **高性价比跨 IDE 并发、垂直长文档、PPT、3D CAD 与私有化** | **Kimi Code**（K3.1 Pro + `kimi acp` + 开源权重） | `\$2 / \$0.20 缓存 / \$10` 超高性价比、Zed/JetBrains 原生 ACP、金融法务医药 + Slides/FreeCAD 与内网离线部署 |
-
-```mermaid
+| **多模态富交互、Workspace/Colab 联动与 3D 预览** | **Gemini Antigravity**（Gemini 4 + `/swarm`） | AI Studio 一键带上下文导出、Orchestrator 混排提速、Workspace MCP 与 Colab Colab 代理扩展 全家桶闭环 |
+| **高性价比跨 IDE 并发、垂直长文档、PPT、3D CAD 与私有化** | **Kimi Code**（K3.1 Pro + `kimi acp` + 开源权重） | `\$2 / \$0.20 缓存 / \$10` 超高性价比、Zed/JetBrains 原生 ACP、金融法务医药 + Slides/FreeCAD 与内网离线部署 | ```mermaid
 flowchart LR
     Spec["共享根目录 AGENTS.md (唯一真相源)"]
     Spec --> S1["需求与多模态原型: Gemini AI Studio / Claude /design"]
@@ -1993,22 +1917,20 @@ flowchart LR
 
 ---
 
-## 🚀 全系列收官 3 步落地清单
+## 全系列收官 3 步落地清单
 
-1. **先给主力仓库立好统一规约**：打开本站 [多智能体通用规约生成器](/generator)，导出根目录 `AGENTS.md` 及你正在使用的工具配套文件（`Hooks` / `.agents/rules` / `config.toml`）。
+1. **先给主力仓库立好统一规则**：打开本站 [AI 协作规则生成器](/generator)，导出根目录 `AGENTS.md` 及你正在使用的工具配套文件（`Hooks` / `.agents/rules` / `config.toml`）。
 2. **挑一个最痛的瓶颈试点落地**：不要试图一天把四本书全搬进团队——先选一个最高 ROI 的点（例如用 Kimi `verify_citations.py` 堵住长文档幻觉，或用 Claude Hooks 挡住误删命令，或用 Codex 飞书助理解放下班盯 CI）。
 3. **横向回查与版本迭代**：随时回到 [2026 四大 AI 编程智能体横向选型总表](/compare) 或下载四本最新双语 PDF，对照你当下的业务阶段升级工具链。
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 团队同时引入四款工具后，大家各写各的提示词导致代码风格撕裂 | 缺少共享仓库级 `AGENTS.md` 与统一 CI 格式化/Lint 门禁 | 立即收敛唯一 `AGENTS.md` 进 Git 主干，所有工具通过 `CLAUDE.md (@AGENTS.md)` 或原生读取共享规则，风格交给 Biome/ESLint/Prettier 强制执行 |
 | 盲目追求“全自动无人值守”导致线上误发布或误发客户消息 | 混淆了本地沙盒自动化与外部副作用操作（生产部署、推送、外发邮件、付款） | 在四款工具的规则中统一立下红线：任何提交推送、生产发布、外部发送与配置覆盖必须显式人工确认 |
-| 半年后脚本突然报错模型 ID 不存在或价格飙升 | 业务代码硬编码了旧模型 ID，从未追踪官方退役与调价公告 | 所有项目运行时模型 ID 统一收口到配置层/环境变量，每月按 10.3 节一手清单核对一次模型生命周期 |
-
----
+| 半年后脚本突然报错模型 ID 不存在或价格飙升 | 业务代码硬编码了旧模型 ID，从未追踪官方退役与调价公告 | 所有项目运行时模型 ID 统一收口到配置层/环境变量，每月按 10.3 节一手清单核对一次模型生命周期 | ---
 
 ---

@@ -7,9 +7,9 @@
 
 Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
-[ 🌐 中文 PDF 版 ](./gemini_blue_book_zh.pdf) | [ 🌐 Online Hub ](https://book.pmer.cn/en/gemini/)
+[中文 PDF 版](./gemini_blue_book_zh.pdf) | [Online Hub](https://book.pmer.cn/en/gemini/)
 
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: Antigravity Cockpit & Gemini 4 Routing
 - Ch.01 Beyond Single-Loop CLIs: Google Antigravity & Gemini 4 Model Matrix
@@ -21,10 +21,10 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
 ### Part 3: Google Workspace × Colab Leverage
 - Ch.05 Workspace MCP Automation: Docs, Sheets, Slides & Commercial Add-ons
-- Ch.06 Cloud Compute Offload: Google Colab (`%%agy`) & Notebook Pipelines
+- Ch.06 Cloud Compute Offload: Google Colab Agent Extension & Notebook Pipelines
 
-### Part 4: `/swarm` Orchestration & Visual QA
-- Ch.07 `/swarm` Architecture & Official "Alpine Peak" Full-Stack Case Study
+### Part 4: Multi-Agent Collaboration & Visual QA
+- Ch.07 Multi-Agent Collaboration Architecture & Official "Alpine Peak" Full-Stack Case Study
 - Ch.08 Automated Browser Visual QA, Chrome MV3 & Firebase / Cloud Run Delivery
 
 ### Part 5: Monetization & Frontier Watch
@@ -33,7 +33,7 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
 ---
 
-## 🔌 Companion Engineering Kit
+##  Companion Engineering Kit
 
 *   **[Gemini Antigravity Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit)**: Runnable `AGENTS.md`, glob-scoped `.agents/rules/ui-multimodal.md`, `visual-audit` Skill, and zero-dependency `check_gemini_quota.mjs` budget guardrail.
 
@@ -43,11 +43,11 @@ Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))
 
 # Ch.01 Beyond Single-Loop CLIs: Google Antigravity & Gemini 4 Model Matrix
 
-> 🎯 **Engineering pain solved**: Facing four product names (`Antigravity App`, `Antigravity IDE`, `agy CLI`, and GCP `gemini` CLI) plus four elemental Gemini 4 model tiers leads teams to install the wrong runtime, burn through Pro quotas in 30 minutes, or miss the December 1, 2026 Argon rate step-up.
+> **Engineering pain solved**: Facing four product names (`Antigravity App`, `Antigravity IDE`, `agy CLI`, and GCP `gemini` CLI) plus four elemental Gemini 4 model tiers leads teams to install the wrong runtime, burn through Pro quotas in 30 minutes, or miss the December 1, 2026 Argon rate step-up.
 >
-> 💡 **What you ship**: A clear boundary between Antigravity and enterprise GCP tooling, a verified November 26, 2026 Gemini 4 pricing ledger, runnable Orchestrator settings, and a 5-minute migration path from Cursor, Claude Code, or Codex rules.
+> **What you ship**: A clear boundary between Antigravity and enterprise GCP tooling, a verified November 26, 2026 Gemini 4 pricing ledger, runnable Orchestrator settings, and a 5-minute migration path from Cursor, Claude Code, or Codex rules.
 >
-> ⚡ **Bottom line**: Single-loop CLIs serialize every edit through one context window; Antigravity unifies multi-model routing, Git worktree swarms, and browser visual audits under one control plane.
+> **Bottom line**: Single-loop CLIs serialize every edit through one context window; Antigravity unifies multi-model routing, Git worktree swarms, and browser visual audits under one control plane.
 
 Most developers hit a naming wall the first day they evaluate Google's late-2026 developer stack. Desktop has Antigravity 2.x, the terminal has `agy`, and Google Cloud documentation talks about Gemini Code Assist and `gemini` CLI. Picking the wrong entry point cuts you off from `/swarm`, browser visual verification, and one-click AI Studio exports.
 
@@ -65,9 +65,7 @@ GCP's `gemini` CLI and Code Assist target strict cloud-compliance environments c
 | **Multi-Model Routing** | Native **Orchestrator** (Neon/Carbon plans + Hydrogen executes) | Fixed endpoint bindings |
 | **Concurrency** | Native **`/swarm`** (Coordinator + Git Worktrees + Adversarial Verifier) | Single-session or external CI scripting |
 | **Multimodal & Preview** | Built-in browser subagent, native image gen, AI Studio export | Code completion and Cloud Shell workflows |
-| **Auth & Identity** | Google AI Pro / Ultra subscription, or `AGY_ADC_AUTH` for enterprise gateways | GCP project IAM + Vertex AI billing |
-
-If your company mandates traffic through an internal Vertex AI gateway, you still do not have to abandon Antigravity: set `AGY_ADC_AUTH=1` to authenticate via Application Default Credentials while keeping local plugins and `/swarm`.
+| **Auth & Identity** | Google AI Pro / Ultra subscription, or `AGY_ADC_AUTH` for enterprise gateways | GCP project IAM + Vertex AI billing | If your company mandates traffic through an internal Vertex AI gateway, you still do not have to abandon Antigravity: set `AGY_ADC_AUTH=1` to authenticate via Application Default Credentials while keeping local plugins and `/swarm`.
 
 ---
 
@@ -80,9 +78,7 @@ Gemini 4 replaces ambiguous `Pro / Flash / Ultra` naming with four elemental tie
 | `gemini-4-hydrogen` | High-speed execution, swarm workers, batch ops | \$1.50 | Discounted | \$7.50 | Flat 1M pricing; default workhorse for edits and test fixes |
 | `gemini-4-neon` | Coding sweet spot, default Orchestrator coordinator | \$3.00 | \$0.15 | \$15.00 | Configurable `Low / Medium / High / XHigh` thinking tiers |
 | `gemini-4-argon` | Enterprise engineering and deep knowledge work | \$2.00 → **\$4.00** | \$0.10 → **\$0.20** | \$10.00 → **\$20.00** | **Deadline alert**: \$2/\$10 intro rate ends **2026-11-30**; doubles **2026-12-01** |
-| `gemini-4-carbon` | Flagship long-horizon reasoning & hard debugging | \$2.00 (intro tier) | Discounted | \$10.00 (intro tier) | Consumes Pro/Ultra quota fastest; reserve for tough architecture or root-cause bugs |
-
-> **Cost guardrail**: Audit any production script pinning `gemini-4-argon` before **December 1, 2026**. Route routine PR checks and bulk edits to `gemini-4-hydrogen` (\$1.50/\$7.50) or `gemini-4-neon`, keeping Argon and Carbon for high-leverage reasoning.
+| `gemini-4-carbon` | Flagship long-horizon reasoning & hard debugging | \$2.00 (intro tier) | Discounted | \$10.00 (intro tier) | Consumes Pro/Ultra quota fastest; reserve for tough architecture or root-cause bugs | > **Cost guardrail**: Audit any production script pinning `gemini-4-argon` before **December 1, 2026**. Route routine PR checks and bulk edits to `gemini-4-hydrogen` (\$1.50/\$7.50) or `gemini-4-neon`, keeping Argon and Carbon for high-leverage reasoning.
 
 Test the exact cost delta with the zero-dependency companion script [check_gemini_quota.mjs](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs):
 
@@ -167,7 +163,7 @@ Teammates staying on Codex or Claude Code continue reading their existing config
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Verify CLI & models**: Run `agy --version && agy models` and confirm `gemini-4-hydrogen` and `gemini-4-neon` appear.
 2. **Enable Orchestrator**: Write the `settings.json` snippet above to `~/.gemini/antigravity-cli/settings.json` so routine work offloads to Hydrogen.
@@ -175,25 +171,23 @@ Teammates staying on Codex or Claude Code continue reading their existing config
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Pro quota drains in 30 minutes | Default pinned to `gemini-4-carbon` with `XHigh` effort on trivial edits | Switch default to `gemini-4-neon` (`medium`) with Orchestrator offloading execution to `gemini-4-hydrogen` |
 | API bill doubles in December | Production scripts hardcode `gemini-4-argon` past the Nov 30 intro rate | Run `check_gemini_quota.mjs --date 2026-12-01`, move routine jobs to `gemini-4-hydrogen`, and enable Context Caching |
-| Migrated rules contradict each other | Duplicate legacy prompts coexist with newly generated `.agents/rules/` | Run `/plugin` to inspect loaded bundles and keep one source of truth (`AGENTS.md` + scoped `.agents/rules/`) |
-
----
+| Migrated rules contradict each other | Duplicate legacy prompts coexist with newly generated `.agents/rules/` | Run `/plugin` to inspect loaded bundles and keep one source of truth (`AGENTS.md` + scoped `.agents/rules/`) | ---
 
 ---
 
 # Ch.02 Multimodal Rules: `AGENTS.md`, `.agents/rules` & Custom Skills
 
-> 🎯 **Engineering pain solved**: Dumping CSS conventions, image pipelines, and deployment steps into one giant global prompt wastes thousands of input tokens every turn—while agents still declare "responsive layout complete" on pages that overflow mobile screens and render 9px micro-labels.
+> **Engineering pain solved**: Dumping CSS conventions, image pipelines, and deployment steps into one giant global prompt wastes thousands of input tokens every turn—while agents still declare "responsive layout complete" on pages that overflow mobile screens and render 9px micro-labels.
 >
-> 💡 **What you ship**: A clean four-tier Antigravity rule hierarchy, a runnable path-scoped multimodal rule + `visual-audit` skill, and strict isolation boundaries for read-only subagent attachment reviews.
+> **What you ship**: A clean four-tier Antigravity rule hierarchy, a runnable path-scoped multimodal rule + `visual-audit` skill, and strict isolation boundaries for read-only subagent attachment reviews.
 >
-> ⚡ **Bottom line**: Good guardrails stay lean through lazy loading and enforce quality with computed browser metrics and exit codes, not adjectives.
+> **Bottom line**: Good guardrails stay lean through lazy loading and enforce quality with computed browser metrics and exit codes, not adjectives.
 
 Backend regressions usually fail loudly in compilation or unit tests. Multimodal frontend regressions fail silently: `npm run build` passes with zero warnings even when an image 404s, a table stretches a 390px phone viewport by 240px, or an unoptimized 8MB PNG stalls first paint.
 
@@ -263,7 +257,7 @@ Reviewing 20-page PDFs, a dozen competitor screenshots, or raw log bundles insid
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Export starter rules**: Open the [Multi-Agent Rules Generator](/en/generator), switch to the **Gemini Antigravity** tab, pick your stack, and save `AGENTS.md` + `.agents/rules/`.
 2. **Install the visual audit skill**: Copy [examples/gemini-antigravity-kit/.agents](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/.agents/skills/visual-audit/SKILL.md) into your repo root.
@@ -271,25 +265,23 @@ Reviewing 20-page PDFs, a dozen competitor screenshots, or raw log bundles insid
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `.agents/rules/ui-multimodal.md` never triggers | Invalid YAML frontmatter or mismatched `globs` (e.g., `src/app/**` vs `app/**`) | Validate YAML syntax and align `globs` to actual repo paths |
 | Code blocks measure `11.375px` despite `13px` container | Nested theme rule applies `code { font-size: 0.875em; }` twice | Set explicit pixel size (`font-size: 13px;`) on the target code selector and re-measure in browser |
-| `public/` balloons past 30MB | Uncompressed 4K generated PNGs committed directly to `public/images/` | Move raw art to `assets-src/` and commit only resized WebP/JPEG runtime assets |
-
----
+| `public/` balloons past 30MB | Uncompressed 4K generated PNGs committed directly to `public/images/` | Move raw art to `assets-src/` and commit only resized WebP/JPEG runtime assets | ---
 
 ---
 
 # Ch.03 Idea to Production Repo: AI Studio Build Mode Context-Preserving Handoff
 
-> 🎯 **Engineering pain solved**: Browser playgrounds produce slick demos that turn into amnesiac ZIP archives the moment you export them—your local IDE loses all prompt tuning rationale, and client components leak `GEMINI_API_KEY` straight into browser bundles.
+> **Engineering pain solved**: Browser playgrounds produce slick demos that turn into amnesiac ZIP archives the moment you export them—your local IDE loses all prompt tuning rationale, and client components leak `GEMINI_API_KEY` straight into browser bundles.
 >
-> 💡 **What you ship**: A clean **AI Studio Build Mode → Export to Antigravity** relay workflow, a production Next.js server-side `@google/genai` route with strict JSON Schema output, and an inline media asset workflow.
+> **What you ship**: A clean **AI Studio Build Mode → Export to Antigravity** relay workflow, a production Next.js server-side `@google/genai` route with strict JSON Schema output, and an inline media asset workflow.
 >
-> ⚡ **Bottom line**: Use AI Studio to prove multimodal feasibility at zero setup cost; use Antigravity to turn that prototype into a hardened, billable repository.
+> **Bottom line**: Use AI Studio to prove multimodal feasibility at zero setup cost; use Antigravity to turn that prototype into a hardened, billable repository.
 
 The biggest time sink in multimodal engineering used to be the handoff gap between browser prototyping and production code. Google closed that gap by connecting **AI Studio Build Mode** directly to **Antigravity**.
 
@@ -357,17 +349,13 @@ export async function POST(req: Request) {
 
   const response = await ai.models.generateContent({
     model: "gemini-4-hydrogen",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          { inlineData: { mimeType, data: imageBase64 } },
+        parts: [{ inlineData: { mimeType, data: imageBase64 } },
           {
             text: "Inspect this mobile UI screenshot for text clipping, low contrast, tiny labels (<12px), and overflow. Return concrete CSS fixes."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: auditSchema,
@@ -392,7 +380,7 @@ Avoid shipping gray placeholder boxes while waiting days for design assets. Insi
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Validate schema in AI Studio**: Upload one real mobile screenshot to Build Mode, run `auditSchema` with `gemini-4-neon`, and inspect the returned JSON.
 2. **Export locally**: Click **Export to Antigravity**, add `GEMINI_API_KEY` to `.env.local` (verified git-ignored), and move model calls to `/api/analyze-ui`.
@@ -400,25 +388,23 @@ Avoid shipping gray placeholder boxes while waiting days for design assets. Insi
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | API key appears in compiled frontend JS | Prototype `VITE_GEMINI_API_KEY` left in `.env` and client bundle | Rotate the leaked key immediately and route requests through a server-only API handler |
 | Base64 image POST fails with `413 Payload Too Large` | Uncompressed 8MB PNG exceeds 4.5MB serverless body limits | Downscale client-side via `<canvas>` (`<= 1600px`, JPEG 0.82) or upload to GCS/R2 first |
-| Local output quality degrades vs. AI Studio | Export dropped `systemInstruction` or defaulted `temperature` to `1.0` | Pin `systemInstruction`, `temperature: 0.2`, and `responseSchema` explicitly in server code |
-
----
+| Local output quality degrades vs. AI Studio | Export dropped `systemInstruction` or defaulted `temperature` to `1.0` | Pin `systemInstruction`, `temperature: 0.2`, and `responseSchema` explicitly in server code | ---
 
 ---
 
 # Ch.04 Video Understanding & Gemini Live API Real-Time Applications
 
-> 🎯 **Engineering pain solved**: Race-condition UI flickers cannot be explained in text bug reports, while chaining separate `STT → LLM → TTS` services for real-time voice/camera assistants introduces 3-second lag and breaks when users interrupt mid-sentence.
+> **Engineering pain solved**: Race-condition UI flickers cannot be explained in text bug reports, while chaining separate `STT → LLM → TTS` services for real-time voice/camera assistants introduces 3-second lag and breaks when users interrupt mid-sentence.
 >
-> 💡 **What you ship**: A runnable video bug-repro analyzer with exact `MM:SS` timeline schemas, a bidirectional **Gemini Live API** WebSocket connector supporting native barge-in, and three anti-hallucination guardrails.
+> **What you ship**: A runnable video bug-repro analyzer with exact `MM:SS` timeline schemas, a bidirectional **Gemini Live API** WebSocket connector supporting native barge-in, and three anti-hallucination guardrails.
 >
-> ⚡ **Bottom line**: Feed screen recordings for timing bugs and use native Live WebSockets for real-time audio/video—stop gluing three brittle media pipelines together.
+> **Bottom line**: Feed screen recordings for timing bugs and use native Live WebSockets for real-time audio/video—stop gluing three brittle media pipelines together.
 
 Static screenshots miss the entire class of bugs that live on a timeline: state-race flickers, modal focus traps, and mobile keyboards shoving submit buttons off screen. Gemini's native video understanding and **Gemini Live API** turn continuous video and bidirectional audio into first-class developer primitives.
 
@@ -450,17 +436,13 @@ async function diagnoseBugVideo(videoPath: string) {
 
   const res = await ai.models.generateContent({
     model: "gemini-4-neon",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          { fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
+        parts: [{ fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
           {
             text: "List every user interaction and visual anomaly with exact MM:SS timestamps, then infer the most likely frontend state or race condition root cause."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -506,9 +488,7 @@ Gemini Live streams audio and JPEG frames over one stateful WebSocket and suppor
 | **Upstream Audio** | Raw 16-bit PCM, `16kHz`, Little-Endian, mono | Capture via `AudioWorklet` in 100ms chunks |
 | **Upstream Video** | JPEG frames, `<= 1 FPS`, `768px` long edge | 1 FPS handles inspection/coaching without burning bandwidth |
 | **Downstream Audio** | Raw 16-bit PCM, `24kHz`, Little-Endian | Flush queued audio buffers immediately on `interrupted: true` |
-| **Auth Security** | Server-minted **Ephemeral Token** | Never embed long-lived `GEMINI_API_KEY` in client WebSocket code |
-
-```typescript
+| **Auth Security** | Server-minted **Ephemeral Token** | Never embed long-lived `GEMINI_API_KEY` in client WebSocket code | ```typescript
 import { GoogleGenAI, Modality } from "@google/genai";
 
 export async function startLiveAssistant(
@@ -567,7 +547,7 @@ export async function startLiveAssistant(
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run offline video diagnosis**: Record a 15-second UI bug repro as `bug-repro.mp4` and execute `diagnoseBugVideo` to inspect the timestamped JSON timeline.
 2. **Price your video budget**: Run `node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs --model gemini-4-hydrogen --video-seconds 300 --output-tokens 8000 --budget 1`.
@@ -575,25 +555,23 @@ export async function startLiveAssistant(
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Live audio plays slow-motion or chipmunk-pitched | 24kHz server PCM played on a 16kHz or 48kHz `AudioContext` | Construct playback `AudioContext({ sampleRate: 24000 })` while resampling mic capture to `16000` |
 | Old audio keeps playing after user interrupts | Client ignores `serverContent.interrupted` | Call `.stop()` on all queued `AudioBufferSourceNode` instances and reset playback cursor on interrupt |
-| Long video uploads time out or spike API bills | Raw 4K 60fps capture uploaded without downsampling | Transcode first: `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` |
-
----
+| Long video uploads time out or spike API bills | Raw 4K 60fps capture uploaded without downsampling | Transcode first: `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` | ---
 
 ---
 
 # Ch.05 Workspace MCP Automation: Docs, Sheets, Slides & Commercial Add-ons
 
-> 🎯 **Engineering pain solved**: PRDs sit in Google Docs, localization tables live in Sheets, bug reports pile up in Gmail, and weekly updates live in Slides—burning two hours a day on manual copy-paste and stale specs.
+> **Engineering pain solved**: PRDs sit in Google Docs, localization tables live in Sheets, bug reports pile up in Gmail, and weekly updates live in Slides—burning two hours a day on manual copy-paste and stale specs.
 >
-> 💡 **What you ship**: Least-privilege **Google Workspace MCP** integration inside Antigravity, three high-leverage bidirectional workflows (Docs→code, Sheets↔i18n JSON, Git→Slides), and a Cloud Run-backed Workspace Add-on skeleton.
+> **What you ship**: Least-privilege **Google Workspace MCP** integration inside Antigravity, three high-leverage bidirectional workflows (Docs→code, Sheetsi18n JSON, Git→Slides), and a Cloud Run-backed Workspace Add-on skeleton.
 >
-> ⚡ **Bottom line**: Half of your product truth lives outside Git; connecting Workspace MCP gives your coding agent the business context without copy-paste drift.
+> **Bottom line**: Half of your product truth lives outside Git; connecting Workspace MCP gives your coding agent the business context without copy-paste drift.
 
 ---
 
@@ -634,7 +612,7 @@ flowchart LR
 agy -p "Read Google Doc https://docs.google.com/document/d/EXAMPLE_DOC_ID/edit via Workspace MCP. Extract Section 3 billing states into src/billing/state-machine.ts with Vitest tests, and list 3 ambiguities in the PRD."
 ```
 
-2. **Sheets ↔ Repo Localization Diff (`scripts/sync_i18n_diff.mjs`)**:
+2. **Sheets Repo Localization Diff (`scripts/sync_i18n_diff.mjs`)**:
 ```typescript
 import fs from "node:fs";
 
@@ -697,7 +675,7 @@ function auditSelectedRange() {
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Grant minimal scopes**: Enable Google Docs and Sheets plugins in Antigravity first without outbound email send permissions.
 2. **Test live PRD ingestion**: Point `agy` at one active Google Doc to generate TypeScript interfaces and verify edge cases match the spec.
@@ -705,31 +683,29 @@ function auditSelectedRange() {
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `403 insufficientPermissions` on Sheets write | OAuth authorized with `readonly` scope only | Re-authorize the specific `sheets.readwrite` scope in Plugins Manager |
 | Sheet formulas overwritten with raw text | Agent overwrote calculated columns instead of raw data ranges | Restrict write rules to non-formula columns (e.g., `A2:D100`) and inspect with `valueRenderOption=FORMULA` first |
-| Marketplace OAuth review rejected | Requested broad `drive` scope without justification | Narrow scope to `drive.file` (user-opened files only) and submit a short OAuth demo video |
+| Marketplace OAuth review rejected | Requested broad `drive` scope without justification | Narrow scope to `drive.file` (user-opened files only) and submit a short OAuth demo video | ---
 
 ---
 
----
+# Ch.06 Cloud Compute Offload: Google Colab Agent Extension & Notebook Pipelines
 
-# Ch.06 Cloud Compute Offload: Google Colab (`%%agy`) & Notebook Pipelines
-
-> 🎯 **Engineering pain solved**: Running 200K-row telemetry clustering, batch embeddings, or LoRA tuning on a laptop stalls local dev work and wastes hours fighting Python/CUDA dependencies—while ad-hoc cloud notebooks drift completely out of sync with Git.
+> **Engineering pain solved**: Running 200K-row telemetry clustering, batch embeddings, or LoRA tuning on a laptop stalls local dev work and wastes hours fighting Python/CUDA dependencies—while ad-hoc cloud notebooks drift completely out of sync with Git.
 >
-> 💡 **What you ship**: A repeatable **Google Colab (`%%agy` + Colab MCP Server)** compute-offload workflow that executes heavy data jobs on cloud runtimes and feeds sanitized JSON reports back into your local Antigravity repository.
+> **What you ship**: A repeatable **Google Colab (Colab agent extension + Colab MCP Server)** compute-offload workflow that executes heavy data jobs on cloud runtimes and feeds sanitized JSON reports back into your local Antigravity repository.
 >
-> ⚡ **Bottom line**: Keep your local repo focused on clean application code; offload heavy batch data and GPU workloads to ephemeral Colab runtimes with versioned Python scripts.
+> **Bottom line**: Keep your local repo focused on clean application code; offload heavy batch data and GPU workloads to ephemeral Colab runtimes with versioned Python scripts.
 
 ---
 
-## 6.1 Invoking Antigravity Inside Notebooks with `%%agy`
+## 6.1 Invoking Antigravity Inside Notebooks with Colab agent extension
 
-The `%%agy` cell magic lets you write natural-language pipeline instructions directly inside a Colab cell with live awareness of in-memory DataFrame schemas and shapes:
+The Colab agent cell extension lets you write natural-language pipeline instructions directly inside a Colab cell with live awareness of in-memory DataFrame schemas and shapes:
 
 ```python
 %%agy --model gemini-4-neon
@@ -761,16 +737,14 @@ def build_slow_routes_report(parquet_path: str, output_json: str) -> list[dict]:
     )
 
     flagged = grouped[(grouped["p95_ms"] > 2500) | (grouped["error_rate"] > 0.02)]
-    records = [
-        {
+    records = [{
             "route": row.route,
             "viewport": row.viewport_bucket,
             "p95_ms": round(float(row.p95_ms), 1),
             "error_rate": round(float(row.error_rate), 4),
             "sample_count": int(row.sample_count),
         }
-        for row in flagged.itertuples(index=False)
-    ]
+        for row in flagged.itertuples(index=False)]
 
     Path(output_json).parent.mkdir(parents=True, exist_ok=True)
     Path(output_json).write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -790,7 +764,7 @@ Mounting the **Colab MCP Server** lets local Antigravity trigger cloud notebook 
 ```mermaid
 flowchart LR
     Repo["Local Antigravity Repo"] -->|"Colab MCP run"| Colab["Google Colab Cloud Runtime"]
-    Colab -->|"%%agy clean / embed / eval"| Drive["Drive / Sanitized JSON"]
+    Colab -->|"Cloud agent clean / embed / eval"| Drive["Drive / Sanitized JSON"]
     Drive -->|"Sync back"| Repo
     Repo --> Fix["Antigravity optimizes top slow routes"]
 ```
@@ -801,39 +775,35 @@ flowchart LR
 
 | Recurring Workload | Recommended Stack | Why It Wins |
 | :--- | :--- | :--- |
-| **Weekly SEO / search query clustering** | Sheets MCP → Colab `%%agy` → write back to Sheets | Zero local Python env churn |
+| **Weekly SEO / search query clustering** | Sheets MCP → Colab Agent Extension → write back to Sheets | Zero local Python env churn |
 | **100K-doc vector re-indexing** | Drive corpus → Colab GPU / Batch Embeddings | Survives laptop sleep with resumable Drive checkpoints |
-| **Multimodal prompt regression evals** | Eval images/videos → Colab batch `gemini-4-hydrogen` → CSV diff | Quantitative pass/fail scores before every prompt rollout |
+| **Multimodal prompt regression evals** | Eval images/videos → Colab batch `gemini-4-hydrogen` → CSV diff | Quantitative pass/fail scores before every prompt rollout | ---
 
----
-
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Test the deterministic script**: Save `telemetry_rollup.py`, run it on sample Parquet/CSV telemetry, and confirm valid JSON output.
-2. **Iterate visually with `%%agy`**: Generate P95 breakdown charts in Colab, then export clean transformation logic back into `notebooks/*.py`.
+2. **Iterate visually with Colab agent extension**: Generate P95 breakdown charts in Colab, then export clean transformation logic back into `notebooks/*.py`.
 3. **Close the code loop**: Run `agy -p "Read reports/slow_routes.json and list concrete frontend fixes for the top 3 slowest routes"`.
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Colab disconnects at 90 minutes and loses progress | Intermediate outputs written to ephemeral `/content/` | Mount `/content/drive` at cell 1 and checkpoint every 500 records to Drive or GCS |
 | `.ipynb` commit leaks `GEMINI_API_KEY` | Raw secret pasted into cell code or captured in stdout | Read secrets via `google.colab.userdata.get('GEMINI_API_KEY')` and enable `nbstripout` |
-| Cloud notebooks diverge from Git repo | One-off browser edits never synced back to `.py` files | Enforce "explore in notebook, freeze in `scripts/*.py`"; notebooks import versioned modules only |
+| Cloud notebooks diverge from Git repo | One-off browser edits never synced back to `.py` files | Enforce "explore in notebook, freeze in `scripts/*.py`"; notebooks import versioned modules only | ---
 
 ---
 
----
+# Ch.07 Multi-Agent Collaboration Architecture & Official "Alpine Peak" Full-Stack Case Study
 
-# Ch.07 `/swarm` Architecture & Official "Alpine Peak" Full-Stack Case Study
-
-> 🎯 **Engineering pain solved**: Serializing a four-subsystem feature through one agent is slow and loses context, while opening four terminal tabs by hand produces painful Git merge conflicts.
+> **Engineering pain solved**: Serializing a four-subsystem feature through one agent is slow and loses context, while opening four terminal tabs by hand produces painful Git merge conflicts.
 >
-> 💡 **What you ship**: A clean mental model and copy-paste kickoff template for Antigravity **`/swarm`** (Coordinator + isolated Git worktrees + Adversarial Verifier + `Alt+S` Swarm Board), plus an end-to-end breakdown of Google's **Alpine Peak** 3D simulation showcase.
+> **What you ship**: A clean mental model and copy-paste kickoff template for Antigravity **`/swarm`** (Coordinator + isolated Git worktrees + Adversarial Verifier + `Alt+S` Swarm Board), plus an end-to-end breakdown of Google's **Alpine Peak** 3D simulation showcase.
 >
-> ⚡ **Bottom line**: Parallel agents only speed up shipping when file ownership is physically disjoint and an independent verifier challenges every diff with real test evidence.
+> **Bottom line**: Parallel agents only speed up shipping when file ownership is physically disjoint and an independent verifier challenges every diff with real test evidence.
 
 ---
 
@@ -898,7 +868,7 @@ Google's **Alpine Peak** 3D ski-terrain simulation demonstrates how the full sta
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Start small (2 workers + 1 verifier)**: Split a feature across `src/api/` and `src/ui/` with one read-only verifier to practice conflict-free merging.
 2. **Inspect the live Swarm Board**: Press `Alt + S` (`/swarm board`) to track thinking/tool timings and message handoffs.
@@ -906,25 +876,23 @@ Google's **Alpine Peak** 3D ski-terrain simulation demonstrates how the full sta
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Merge conflicts on `package.json` or `src/types.ts` | Shared files edited simultaneously by two workers | Pause workers, let Coordinator land shared types on base branch, then rebase workers |
 | Entire swarm sits idle waiting on each other | Missing `@mention` wakeup chain between members | Post on the board targeting `@coordinator` to inspect blockers or release finished branches to the verifier |
-| Verifier approves diff that breaks the build | Verifier only skimmed static diff without running commands | Require explicit command output and exit code `0` (`npm run build && npm test`) in the verifier brief |
-
----
+| Verifier approves diff that breaks the build | Verifier only skimmed static diff without running commands | Require explicit command output and exit code `0` (`npm run build && npm test`) in the verifier brief | ---
 
 ---
 
 # Ch.08 Automated Browser Visual QA, Chrome MV3 & Firebase / Cloud Run Delivery
 
-> 🎯 **Engineering pain solved**: Desktop layouts ship with hidden 390px mobile overflows and sub-12px labels, Chrome MV3 extensions break on service-worker sleep or fail Web Store review, and deployments skip real post-deploy health verification.
+> **Engineering pain solved**: Desktop layouts ship with hidden 390px mobile overflows and sub-12px labels, Chrome MV3 extensions break on service-worker sleep or fail Web Store review, and deployments skip real post-deploy health verification.
 >
-> 💡 **What you ship**: A copy-paste 3-viewport browser audit probe, a compliant Chrome MV3 Side Panel extension using local Chrome Built-in AI with Gemini 4 cloud fallback, and a Secret-Manager-backed Firebase + Cloud Run deploy flow.
+> **What you ship**: A copy-paste 3-viewport browser audit probe, a compliant Chrome MV3 Side Panel extension using local Chrome Built-in AI with Gemini 4 cloud fallback, and a Secret-Manager-backed Firebase + Cloud Run deploy flow.
 >
-> ⚡ **Bottom line**: A green build is not visual sign-off—wire computed browser measurements, minimal extension scopes, and live HTTP checks into every release.
+> **Bottom line**: A green build is not visual sign-off—wire computed browser measurements, minimal extension scopes, and live HTTP checks into every release.
 
 ---
 
@@ -1040,7 +1008,7 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run the 3-viewport probe**: Verify `overflow === 0` and `minFont >= 12` at `390/768/1440px` locally before deploying.
 2. **Load unpacked MV3 extension**: Load `manifest.json` in `chrome://extensions` with Developer Mode enabled and confirm zero CSP console warnings.
@@ -1048,25 +1016,23 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Extension drops auth state after 30s idle | MV3 service worker terminated in-memory variables | Persist tokens in `chrome.storage.session` / `local` and replace `setInterval` with `chrome.alarms` |
 | 2-minute video request fails at 60s on Cloud Run | Default request timeout too short for synchronous media work | Raise `--timeout 120`, or upload directly to GCS and process asynchronously via queue |
-| Mobile flex row pushes CTA button off-screen | Missing `min-width: 0` or `overflow-wrap: anywhere` on flex children | Fix shared flex CSS and re-run the `390px` viewport probe |
-
----
+| Mobile flex row pushes CTA button off-screen | Missing `min-width: 0` or `overflow-wrap: anywhere` on flex children | Fix shared flex CSS and re-run the `390px` viewport probe | ---
 
 ---
 
 # Ch.09 Commercial Multimodal SaaS: Credit Metering, Guardrails & Distribution
 
-> 🎯 **Engineering pain solved**: Flat \$19/month "unlimited" multimodal plans get wiped out when one power user uploads 200 HD videos and runs up an \$85 Gemini API bill—while standalone web apps struggle to get noticed after launch day.
+> **Engineering pain solved**: Flat \$19/month "unlimited" multimodal plans get wiped out when one power user uploads 200 HD videos and runs up an \$85 Gemini API bill—while standalone web apps struggle to get noticed after launch day.
 >
-> 💡 **What you ship**: A margin-verified multimodal product matrix, a runnable TypeScript **Reserve → Execute → Settle** credit-metering guard, and a three-channel distribution loop across Chrome Web Store, Workspace Marketplace, and GEO/SEO.
+> **What you ship**: A margin-verified multimodal product matrix, a runnable TypeScript **Reserve → Execute → Settle** credit-metering guard, and a three-channel distribution loop across Chrome Web Store, Workspace Marketplace, and GEO/SEO.
 >
-> ⚡ **Bottom line**: Durable multimodal SaaS turns volatile per-second media costs into predictable unit margins and embeds inside high-intent daily surfaces.
+> **Bottom line**: Durable multimodal SaaS turns volatile per-second media costs into predictable unit margins and embeds inside high-intent daily surfaces.
 
 ---
 
@@ -1078,9 +1044,7 @@ Require at least a **5x safety cushion** between monthly subscription price and 
 | :--- | :--- | :--- | :--- |
 | **Visual UI & Listing Compliance Auditor** | Images + short recordings + JSON Schema | Indie founders, e-commerce ops, frontend teams | \$29–\$79/mo; single image check on `gemini-4-hydrogen` costs < \$0.005 (>85% gross margin) |
 | **Real-Time Audio/Video Coaching & QA** | Gemini Live API (16kHz PCM + 1 FPS frames) | Interview prep, sales teams, field technicians | Metered minute packs (e.g., \$19 for 120 live minutes)—never "unlimited live streaming" |
-| **Vertical Google Workspace Add-ons** | Docs / Sheets / Slides sidebar + Cloud Run | Legal, finance, HR, cross-border catalog teams | \$15–\$49/seat/mo with high retention inside daily office tools |
-
----
+| **Vertical Google Workspace Add-ons** | Docs / Sheets / Slides sidebar + Cloud Run | Legal, finance, HR, cross-border catalog teams | \$15–\$49/seat/mo with high retention inside daily office tools | ---
 
 ## 9.2 Reserve → Execute → Settle Credit Metering (`src/billing/credits.ts`)
 
@@ -1164,7 +1128,7 @@ Pair this with a database constraint `CHECK (balance >= 0)` on `user_wallets` so
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Model unit economics first**: Run typical media workloads through `estimateRequiredCredits` or [check_gemini_quota.mjs](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs) and verify >75% gross margin.
 2. **Ship hard caps on day one**: Gate free tiers to small compressed images with strict daily quotas; expose live remaining credits in the UI.
@@ -1172,25 +1136,23 @@ Pair this with a database constraint `CHECK (balance >= 0)` on `user_wallets` so
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Free endpoint drained overnight by bots | Anonymous access with no rate limit and unrestricted video uploads | Enforce verified OAuth login + edge rate limits; restrict free tier to compressed images |
 | Backgrounded browser tab leaves Live session billing indefinitely | Missing server-side silence and hard session timeouts | Close Live sockets automatically after 180s silence and enforce 15-minute metered renewals |
-| Retried Stripe webhooks double-credit wallets | Webhook handler lacks idempotency key tracking | Insert `event_id` into `billing_webhook_events(event_id PRIMARY KEY)` inside the same DB transaction |
-
----
+| Retried Stripe webhooks double-credit wallets | Webhook handler lacks idempotency key tracking | Insert `event_id` into `billing_webhook_events(event_id PRIMARY KEY)` inside the same DB transaction | ---
 
 ---
 
 # Ch.10 2026 Frontier Watch: Quota Economics, Web 3D & Official Release Tracking
 
-> 🎯 **Engineering pain solved**: Mixing personal Google AI Pro/Ultra subscriptions with production API workloads causes sudden rate limits or policy violations, while chasing noisy social-media hype derails roadmap focus.
+> **Engineering pain solved**: Mixing personal Google AI Pro/Ultra subscriptions with production API workloads causes sudden rate limits or policy violations, while chasing noisy social-media hype derails roadmap focus.
 >
-> 💡 **What you ship**: A clean hybrid billing split (subscriptions for coding, metered API + Context Caching for production), pragmatic performance guardrails for Web 3D spatial features, and a 10-minute weekly official release-tracking routine.
+> **What you ship**: A clean hybrid billing split (subscriptions for coding, metered API + Context Caching for production), pragmatic performance guardrails for Web 3D spatial features, and a 10-minute weekly official release-tracking routine.
 >
-> ⚡ **Bottom line**: Long-term leverage comes from disciplined quota economics and verified upgrades—not blindly flipping production defaults every launch day.
+> **Bottom line**: Long-term leverage comes from disciplined quota economics and verified upgrades—not blindly flipping production defaults every launch day.
 
 ---
 
@@ -1203,9 +1165,7 @@ Keep developer tooling spend and production runtime spend strictly separated:
 | **Daily local coding, debugging, plugins** | **Google AI Pro (\$19.99/mo)** + Orchestrator (Neon + Hydrogen) | Predictable flat fee; offloading ~70% of routine edits to Hydrogen doubles effective quota |
 | **Heavy `/swarm` refactors & high concurrency** | **Google AI Ultra** or enterprise **`AGY_ADC_AUTH`** | Larger concurrency and flagship Carbon/Neon burst budgets |
 | **Production SaaS APIs, CI, batch media** | **Gemini API / Vertex AI pay-as-you-go** (never proxy personal plans) | Clean SLA, project isolation, `gemini-4-hydrogen` (\$1.50/\$7.50) baseline + Context Caching |
-| **2026-12-01 Argon rate transition** | Audit every `gemini-4-argon` endpoint | Intro \$2/\$10 rate ends Nov 30; migrate routine calls to Hydrogen/Neon before standard \$4/\$20 pricing kicks in |
-
-Target a healthy solo-builder ratio: predictable fixed tooling cost plus production API spend capped at **15%–20% of paid SaaS revenue** via your credit guard.
+| **2026-12-01 Argon rate transition** | Audit every `gemini-4-argon` endpoint | Intro \$2/\$10 rate ends Nov 30; migrate routine calls to Hydrogen/Neon before standard \$4/\$20 pricing kicks in | Target a healthy solo-builder ratio: predictable fixed tooling cost plus production API spend capped at **15%–20% of paid SaaS revenue** via your credit guard.
 
 ---
 
@@ -1235,7 +1195,7 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Audit your billing split**: Confirm local dev uses subscriptions/ADC while every live server reads its own `GEMINI_API_KEY`, and check for any `gemini-4-argon` jobs ahead of December 1, 2026.
 2. **Bookmark primary mirrors**: Save `https://antigravity.google/llms.txt` and the Gemini API pricing page for monthly model reviews.
@@ -1243,14 +1203,12 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Switching production straight to a day-one preview model breaks JSON parsing | Preview endpoints shift formatting and rate limits without warning | Keep production pinned to stable/verified IDs and canary new models at 5% traffic first |
 | Adding a 3D product preview tanks Lighthouse score site-wide | `three` statically imported in root layout bundle | Lazy-load 3D bundles per route or on click and enforce initial JS size budgets |
-| CI scripts fail after upgrading global `agy` CLI | Deprecated flags changed without checking `/changelog` | Run `agy --help` and `/changelog`, and pin CI pipelines to tested stable flags |
-
----
+| CI scripts fail after upgrading global `agy` CLI | Deprecated flags changed without checking `/changelog` | Run `agy --help` and `/changelog`, and pin CI pipelines to tested stable flags | ---
 
 ---

@@ -4,40 +4,40 @@ description: "Verified November 26, 2026: GPT-6.2 Astra/Sol and GPT-6.1 Terra pr
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.12) ](./ch12_commercialization.md) | [ 🌐 中文版 ](../chapters/ch13_2026_frontier.md)
+[Index](/en/) | [Prev (Ch.12)](./ch12_commercialization.md) | [中文版](../chapters/ch13_2026_frontier.md)
 
 # Ch.13 Frontier Watch: The 2026 Codex Ecosystem Overhaul
 
-> 🎯 **The Real Problem**: Rapid changes to client entry points, CLI commands, GPT-6.2 / GPT-6.1 Terra rollouts, and upcoming model/endpoint retirements quickly invalidate older guides.
-> 💡 **Tangible Output & Takeaway**: November 2026 migration checklist (CLI 0.172.0 checks, lazy MCP startup, per-tool approvals, and Nov 30 / Dec 23 deprecation scans).
-> ⚡ **Viral Screenshot Quote**: *"Tools retool every quarter, but mental models remain your moat. Zero fluff—only an actionable battle map of what deprecated and what to adopt."*
+> **The Real Problem**: Rapid changes to client entry points, CLI commands, GPT-6.2 / GPT-6.1 Terra rollouts, and upcoming model/endpoint retirements quickly invalidate older guides.
+> **Tangible Output & Takeaway**: November 2026 migration checklist (CLI 0.172.0 checks, lazy MCP startup, per-tool approvals, and Nov 30 / Dec 23 deprecation scans).
+> **Viral Screenshot Quote**: *"Tools retool every quarter, but mental models remain your moat. Zero fluff—only an actionable battle map of what deprecated and what to adopt."*
 
 The first twelve chapters built a version-independent orchestration methodology. To execute it safely, you still need current version facts. This edition is verified through **November 26, 2026**, covering the GPT-6.2 Astra/Sol and GPT-6.1 Terra releases, Codex CLI `0.172.0`, and urgent retirement cutoffs.
 
 ---
 
-## 🎯 Intuitive Metaphor: Avionics Retrofit of a Supersonic Airliner
+## Intuitive Metaphor: Avionics Retrofit of a Supersonic Airliner
 
 Do not panic over frequent tool upgrades. View this transition through the eyes of a pilot:
 
 ```Plaintext
-[Pilot Mindset]   ──> Your flight manual remains identical: goal-driven execution (takeoff & landing targets)
+[Pilot Mindset] ──> Your flight manual remains identical: goal-driven execution (takeoff & landing targets)
                       and strict boundary constraints (flight corridors & safe altitudes).
-[Engines]         ──> Propulsion upgraded to the latest generation:
+[Engines] ──> Propulsion upgraded to the latest generation:
                       - Frontier Flagship Core: "GPT-6.2 Astra" (deep architecture & complex verification);
                       - Daily Primary Thrust Engine: "GPT-6.2 Sol" (complex coding);
                       - Visual Reasoning Engine: "GPT-6.1 Terra" (UI audits & computer use);
                       - Auxiliary Cruise Engine: "GPT-6 Luna" (focused, frequent work).
-[Cockpit Screen]  ──> Thread-link jumps, slash-command Tab completion, lazy MCP startup, and tool-level reviewers.
+[Cockpit Screen] ──> Thread-link jumps, slash-command Tab completion, lazy MCP startup, and tool-level reviewers.
                       Check feature access in your installed client and workspace.
-[Autopilot]       ──> The old --full-auto compatibility path is deprecated; new calls specify sandbox and approval modes.
+[Autopilot] ──> The old --full-auto compatibility path is deprecated; new calls specify sandbox and approval modes.
 ```
 
 With your mental model intact, upgraded avionics help you ship faster and steadier.
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 Complete your November 2026 toolchain health check in 3 steps:
 
@@ -90,9 +90,7 @@ As of **November 26, 2026**, **GPT-6.2 Sol** and **GPT-6.2 Astra** (launched mid
 | `gpt-6.2-sol` | Everyday complex coding and multi-step agent workflows | `low`, `medium`, `high`, `xhigh`, `max` | Current example default; same standard price as `gpt-6.1-sol` |
 | `gpt-6.1-terra` | Visual reasoning, UI screen audits, and Computer Use | `low`, `medium`, `high`, `xhigh`, `max` | Late-October 2026 release; half the standard price of Sol |
 | `gpt-6.1-sol` | Previous Sol baseline (retained for migration comparison) | `low`, `medium`, `high`, `xhigh`, `max` | Use Responses API for tool calling |
-| `gpt-6-luna` | Focused edits, extraction, summaries, and high-volume tasks | `none`, `low`, `medium`, `high`, `xhigh`, `max` | Escalate to Sol or Astra when complexity exceeds scope |
-
-Prefer the **Responses API** for tool calling; the bundled `openai-docs` skill has been updated with GPT-6.2 endpoint migration guidance. In the Codex UI, Max/Ultra efforts depend on account settings—Ultra coordinates subagents and is not an API `reasoning.effort` value. [API model catalog](https://developers.openai.com/api/docs/models) · [GPT-6 migration guidance](https://developers.openai.com/api/docs/guides/latest-model)
+| `gpt-6-luna` | Focused edits, extraction, summaries, and high-volume tasks | `none`, `low`, `medium`, `high`, `xhigh`, `max` | Escalate to Sol or Astra when complexity exceeds scope | Prefer the **Responses API** for tool calling; the bundled `openai-docs` skill has been updated with GPT-6.2 endpoint migration guidance. In the Codex UI, Max/Ultra efforts depend on account settings—Ultra coordinates subagents and is not an API `reasoning.effort` value. [API model catalog](https://developers.openai.com/api/docs/models) · [GPT-6 migration guidance](https://developers.openai.com/api/docs/guides/latest-model)
 
 **Keep API prices separate from Codex subscription usage.** The table below lists standard text-token API prices per million tokens checked on November 26, 2026. Long-context tiers (>272K), Batch (50% off), Fast (2×), and cache writes follow the [official pricing page](https://developers.openai.com/api/docs/pricing).
 
@@ -102,9 +100,7 @@ Prefer the **Responses API** for tool calling; the bundled `openai-docs` skill h
 | `gpt-6.2-sol` | $2.00 | $0.10 | $10.00 | Ultrafast promo 3× through Feb 28, 2027 (6× from Mar 1, 2027) |
 | `gpt-6.1-terra` | $1.00 | $0.05 | $5.00 | Cost-efficient vision and computer-use tier |
 | `gpt-6.1-sol` | $2.00 | $0.10 | $10.00 | Retained for comparison; cache write $2.50/MTok standard |
-| `gpt-6-luna` | $0.10 | $0.01 | $0.50 | Fast routing and structured extraction |
-
-**Speed is a separate control.** Ultrafast mode for Sol is available on eligible Pro/Enterprise/Edu plans with separate subscription vs. pay-as-you-go multipliers and US/EEA+Switzerland residency options. Benchmark on Standard first before turning Ultrafast on. [Speed and billing](https://learn.chatgpt.com/docs/agent-configuration/speed)
+| `gpt-6-luna` | $0.10 | $0.01 | $0.50 | Fast routing and structured extraction | **Speed is a separate control.** Ultrafast mode for Sol is available on eligible Pro/Enterprise/Edu plans with separate subscription vs. pay-as-you-go multipliers and US/EEA+Switzerland residency options. Benchmark on Standard first before turning Ultrafast on. [Speed and billing](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 **Choose a model:**
 
@@ -139,9 +135,7 @@ This sets the local default model only. `--approve-for-me` is an independent per
 | Mid-November 2026 | API / Codex / Work | **GPT-6.2 Astra & GPT-6.2 Sol** released |
 | **November 30, 2026** | **API / Platform** | **`/v1/prompts` and Agent Builder deprecated; Evals Dashboard & API read-only** (move prompts into code, evals to Promptfoo, agents to Agents SDK) |
 | **December 23, 2026** | **ChatGPT Work / Codex** | **GPT-5.6 Sol and GPT-5.6 Terra retired**; migrate to `gpt-6.2-sol` / `gpt-6.1-terra` |
-| April 1, 2027 | API | `gpt-5.3-codex`, `gpt-5.4-nano`, and `gpt-5.1` shut down; migrate to `gpt-6-sol` / `gpt-6-luna` |
-
-Check [API deprecations](https://developers.openai.com/api/docs/deprecations) and the [Codex changelog](https://learn.chatgpt.com/docs/changelog) to separate interface retirements from API shutdowns.
+| April 1, 2027 | API | `gpt-5.3-codex`, `gpt-5.4-nano`, and `gpt-5.1` shut down; migrate to `gpt-6-sol` / `gpt-6-luna` | Check [API deprecations](https://developers.openai.com/api/docs/deprecations) and the [Codex changelog](https://learn.chatgpt.com/docs/changelog) to separate interface retirements from API shutdowns.
 
 ---
 
@@ -211,7 +205,7 @@ If `AGENTS.md` sets project-wide guardrails, **Skills package repeatable task pr
 ```text
 skills/
 └── pr-review/
-    └── SKILL.md      # A procedural manual with YAML frontmatter
+    └── SKILL.md # A procedural manual with YAML frontmatter
 ```
 
 ---
@@ -340,7 +334,7 @@ render_path.parent.mkdir(parents=True, exist_ok=True)
 bpy.context.scene.render.filepath = str(render_path)
 
 bpy.ops.render.render(write_still=True)
-print("✅ Headless Blender validation frame generated: ./public/renders/validation_preview.png")
+print(" Headless Blender validation frame generated: ./public/renders/validation_preview.png")
 ```
 
 Execute in background mode:
@@ -407,9 +401,7 @@ codex plugin list
 | GPT-6.2 Sol or Terra is absent from the picker | Check CLI version (0.172.0+), plan, rollout, and workspace administrator settings |
 | `--full-auto` prints a deprecation warning | Use `--sandbox workspace-write` for new non-interactive calls; the old path remains compatible |
 | A configured model is unavailable | Distinguish Codex sign-in from API access and select an available model with `/model` |
-| Hooks do not run | Check the event-array structure and review hook trust with `/hooks` |
-
----
+| Hooks do not run | Check the event-array structure and review hook trust with `/hooks` | ---
 
 ## 13.9 Principles That Outlast Versions
 
@@ -417,7 +409,7 @@ Keep changing model IDs and CLI options in one place. Check official documentati
 
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.12) ](./ch12_commercialization.md) | [ 🌐 中文版 ](../chapters/ch13_2026_frontier.md)
+[Index](/en/) | [Prev (Ch.12)](./ch12_commercialization.md) | [中文版](../chapters/ch13_2026_frontier.md)
 
 ## Related tool channel
 

@@ -1,20 +1,21 @@
 ---
-title: "Gemini Practical Blue Book (v1.0.0 Live): Antigravity, Gemini 4 & Multimodal Delivery"
-description: "Complete 10-chapter bilingual guide and PDF downloads for Google Antigravity 2.x, agy CLI, Gemini 4 models, AI Studio handoff, Workspace MCP, Colab %%agy, and /swarm."
+title: "Gemini Practical Blue Book: Google Antigravity & Gemini 4 Guide"
+description: "Overview of Google DeepMind, Antigravity 2.x, Gemini 4, AI Studio, Workspace MCP, and Google Colab integration, with all 10 bilingual chapters and PDF downloads."
 lastUpdated: 2026-11-26
 ---
 
 # Gemini Practical Blue Book: Multimodal Orchestration Across the Google Stack
 
-![Gemini Practical Blue Book Cover](/images/gemini_cover.jpg)
+## About Gemini, Antigravity & Google
 
-> **Edition**: v1.0.0 Live · Verified **November 26, 2026**  
-> **Focus**: Build multimodal, cross-platform products using **Google Antigravity 2.x + `agy` CLI + Gemini 4 (Carbon / Argon / Neon / Hydrogen)** wired end-to-end with **AI Studio Build Mode, Google Workspace MCP, Google Colab (`%%agy`), and `/swarm`**.
+**Google** (together with **Google DeepMind**) operates a uniquely connected software ecosystem spanning cloud infrastructure, Chrome, Android, and Workspace. **Gemini 4 (Carbon / Argon / Neon / Hydrogen)** is its natively multimodal model family with a unified 1M-token context window. **Google Antigravity 2.x (and the `agy` CLI)** is Google's agent-first development platform featuring automatic multi-model routing (Orchestrator), parallel multi-agent collaboration, built-in browser visual audits, and direct integration with **AI Studio**, **Google Workspace (Docs / Sheets / Slides)**, and **Google Colab cloud notebooks**.
+
+> **Book Focus**: Build and ship multimodal cross-platform products end-to-end across AI Studio, Antigravity multi-agent workflows, Workspace MCP, and Google Colab (verified **November 26, 2026**, edition `v1.0.0`).
 
 - [Start Reading Ch.01](/en/gemini/ch01_antigravity_gemini4)
 - [Download English PDF](/downloads/gemini_blue_book_en.pdf) · [中文版 PDF](/downloads/gemini_blue_book_zh.pdf)
 - [Companion Antigravity Rules & Quota Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit)
-- [Generate Antigravity Rules Now](/en/generator) · [Compare All 4 Agents](/en/compare)
+- [Generate Antigravity Rules Now](/en/generator) · [Tool Comparison](/en/compare)
 
 ---
 
@@ -30,10 +31,10 @@ lastUpdated: 2026-11-26
 
 ### Part 3: Google Workspace × Colab Leverage
 - [Ch.05 Workspace MCP Automation: Docs, Sheets, Slides & Commercial Add-ons](/en/gemini/ch05_workspace_mcp)
-- [Ch.06 Cloud Compute Offload: Google Colab (`%%agy`) & Notebook Pipelines](/en/gemini/ch06_colab_agy_pipelines)
+- [Ch.06 Cloud Compute Offload: Google Colab Agent Pipelines & Notebooks](/en/gemini/ch06_colab_agy_pipelines)
 
-### Part 4: `/swarm` Orchestration & Visual QA
-- [Ch.07 `/swarm` Architecture & Official "Alpine Peak" Full-Stack Case Study](/en/gemini/ch07_swarm_alpine_peak)
+### Part 4: Multi-Agent Collaboration & Visual QA
+- [Ch.07 Multi-Agent Collaboration & Official "Alpine Peak" Full-Stack Case Study](/en/gemini/ch07_swarm_alpine_peak)
 - [Ch.08 Automated Browser Visual QA, Chrome MV3 & Firebase / Cloud Run Delivery](/en/gemini/ch08_browser_qa_cross_platform)
 
 ### Part 5: Monetization & Frontier Watch

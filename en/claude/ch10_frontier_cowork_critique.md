@@ -4,30 +4,30 @@ description: "An honest product critique of Claude Cowork cloud VMs (async stren
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.09) ](./ch09_enterprise_saas.md) | [ 📘 Back to Claude Hub ](/en/claude/) | [ 🌐 中文版 ](/claude/ch10_frontier_cowork_critique)
+[Home](/en/) | [Prev (Ch.09)](./ch09_enterprise_saas.md) | [Back to Claude Hub](/en/claude/) | [中文版](/claude/ch10_frontier_cowork_critique)
 
 # Ch.10 2026 Frontier & Honest Critique: Claude Cowork, Computer Use & Async Memory
 
-> 🎯 **The Real Problem**: Vendors ship new concepts every month (Cowork, Computer Use, Dreaming); blindly migrating production teams onto half-baked surfaces wastes weeks, while ignoring real shifts leaves leverage behind.  
-> 💡 **Tangible Output & Takeaway**: Unvarnished product evaluation of Claude Cowork, enterprise Computer Use compliance boundaries, and Anthropic's harness-pruning & async memory trajectory.  
-> ⚡ **Viral Screenshot Quote**: *"Great engineering handbooks call half-baked products by their real name. Understand Claude Cowork's ambition—and why local Claude Code still wins production today."*
+> **The Real Problem**: Vendors ship new concepts every month (Cowork, Computer Use, Dreaming); blindly migrating production teams onto half-baked surfaces wastes weeks, while ignoring real shifts leaves leverage behind.  
+> **Tangible Output & Takeaway**: Unvarnished product evaluation of Claude Cowork, enterprise Computer Use compliance boundaries, and Anthropic's harness-pruning & async memory trajectory.  
+> **Viral Screenshot Quote**: *"Great engineering handbooks call half-baked products by their real name. Understand Claude Cowork's ambition—and why local Claude Code still wins production today."*
 
 A useful handbook never reads like a vendor press release. Chapters 1–9 focused on proven, production-ready Claude Code primitives. This closing chapter takes an honest product-builder's look at three emerging surfaces—especially **Claude Cowork**, where the direction is promising but the current product shape remains immature.
 
 ---
 
-## 🎯 Intuitive Metaphor: High-Speed Rail vs. Experimental Maglev Track
+## Intuitive Metaphor: High-Speed Rail vs. Experimental Maglev Track
 
 ```text
-[Production Rail (Bet Today)]   ──> Claude Code 5 primitives (CLAUDE.md / Skills / Subagents / Hooks / MCP),
+[Production Rail (Bet Today)] ──> Claude Code 5 primitives (CLAUDE.md / Skills / Subagents / Hooks / MCP),
                                     `/design` artboard handoff, 1M-context characterization refactors, Prompt Caching.
-[Experimental Track (Sandbox)]  ──> Claude Cowork cloud VMs, enterprise Computer Use, async Dreaming memory.
+[Experimental Track (Sandbox)] ──> Claude Cowork cloud VMs, enterprise Computer Use, async Dreaming memory.
                                     Right direction, but UX cohesion, compliance, and cost controls still lag.
 ```
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 1. **Step 1: Separate your team's production stack from a sandbox track**
    Keep production branches strictly on local Claude Code + Hooks + CI; test beta surfaces in isolated repos for two weeks first.
@@ -47,9 +47,7 @@ Anthropic unified chat and **Claude Cowork** so multi-step jobs run inside cloud
 | **Runtime Environment** | Cloud sandbox survives closing your laptop | Opaque environment; connecting private registries, local Docker DBs, or corporate VPNs adds far more friction than local CLI |
 | **Interaction Loop** | Smooth entry for non-technical office tasks | Lacks the crisp local `/diff`, instant `Ctrl+C` steering, and tight IDE loop of Claude Code—easy to wait 30 minutes for an off-target output |
 | **Cost Predictability** | Autonomous multi-step completion | Weakly bounded cloud runs can spin through quotas out of sight with limited replay visibility |
-| **Compliance** | Unified web/desktop/mobile UI | Hard to clear for teams requiring strict local code residency, deterministic local Hooks, or ZDR |
-
-**Practical verdict**: Keep **local Claude Code + Hooks + `/design` + `/ship`** as your core engineering driver. Use Cowork selectively for low-risk public research or lightweight spreadsheet/document chores until its developer UX and transparency mature.
+| **Compliance** | Unified web/desktop/mobile UI | Hard to clear for teams requiring strict local code residency, deterministic local Hooks, or ZDR | **Practical verdict**: Keep **local Claude Code + Hooks + `/design` + `/ship`** as your core engineering driver. Use Cowork selectively for low-risk public research or lightweight spreadsheet/document chores until its developer UX and transparency mature.
 
 ---
 
@@ -71,14 +69,12 @@ That reinforces the thesis of this entire book: durable engineering leverage liv
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **Migrated a core repo into Cowork and hit private-network failures** | Treating a transitional cloud surface as a full local dev workstation | Return core coding to local Claude Code CLI + local Docker + Hooks |
 | **Enabling Computer Use triggers a ZDR/HIPAA compliance alert** | Screenshot retention conflicts with strict ZDR/HIPAA settings | Disable Computer Use in org settings and use MCP connectors instead |
-| **Legacy mega-prompts perform worse after upgrading to Claude 5.5** | Over-prescriptive old workarounds fight stronger native planning | Prune `CLAUDE.md` down to goals, constraints, and verification commands |
+| **Legacy mega-prompts perform worse after upgrading to Claude 5.5** | Over-prescriptive old workarounds fight stronger native planning | Prune `CLAUDE.md` down to goals, constraints, and verification commands | ---
 
----
-
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.09) ](./ch09_enterprise_saas.md) | [ 📘 Back to Claude Hub ](/en/claude/) | [ 🌐 中文版 ](/claude/ch10_frontier_cowork_critique)
+[Home](/en/) | [Prev (Ch.09)](./ch09_enterprise_saas.md) | [Back to Claude Hub](/en/claude/) | [中文版](/claude/ch10_frontier_cowork_critique)

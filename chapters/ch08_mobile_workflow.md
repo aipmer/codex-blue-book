@@ -4,13 +4,13 @@ description: "结合 Codex Guardian 自动审批（--approve-for-me）、GitHub 
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ 下一章 (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 English ](../en/ch08_mobile_workflow.md)
+[主目录](/) | [上一章 (Ch.07)](./ch07_desktop_computer_use.md) | [下一章 (Ch.09)](./ch09_legacy_code.md) | [English](../en/ch08_mobile_workflow.md)
 
 # Ch.08 移动看护工作流：全天候离线编排实战
 
-> 🎯 **具体工程麻烦**：开发者被困在工位看滚动编译日志；离开工位后 CI 挂了或高危发布卡住，整个团队进度中断。  
-> 💡 **可运行实战代码与落地收益**：Guardian 自动审批 (`--approve-for-me`) 与移动看护网关双层分流；飞书 Webhook 告警卡片；手机远程一键审批部署。  
-> ⚡ **社交传播 / 截图金句**：“下班不盯屏幕，任务照常推进。常规风险 AI 自审，高危发布手机一键批复。”
+> **具体工程麻烦**：开发者被困在工位看滚动编译日志；离开工位后 CI 挂了或高危发布卡住，整个团队进度中断。  
+> **可运行实战代码与落地收益**：Guardian 自动审批 (`--approve-for-me`) 与移动看护网关双层分流；飞书 Webhook 告警卡片；手机远程一键审批部署。  
+> **社交传播 / 截图金句**：“下班不盯屏幕，任务照常推进。常规风险 AI 自审，高危发布手机一键批复。”
 
 把人绑在工位上盯编译日志，并不是用 AI 写代码的意义。
 
@@ -18,7 +18,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：现代无人农场的智能巡视与中央呼机
+## 生活化直觉隐喻：现代无人农场的智能巡视与中央呼机
 
 把离线编排想象成经营一座现代无人农场：
 
@@ -35,7 +35,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 用 3 步搭建你的移动告警通知通道：
 
@@ -45,7 +45,7 @@ lastUpdated: 2026-11-26
    运行 curl 测试手机能否收到推送：
    ```bash
    curl -X POST -H "Content-Type: application/json" \
-     -d '{"msg_type":"text","content":{"text":"🔔 Codex 移动看护上线：终端任务正在安全运行！"}}' \
+     -d '{"msg_type":"text","content":{"text":" Codex 移动看护上线：终端任务正在安全运行！"}}' \
      https://open.feishu.cn/open-apis/bot/v2/hook/YOUR-WEBHOOK-TOKEN
    ```
 3. **步骤三：用 Guardian + 沙盒模式启动你的离线任务**  
@@ -85,7 +85,7 @@ name: Codex Agent Watchdog
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -104,14 +104,12 @@ jobs:
         id: run_agent
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          npm ci
+        run: | npm ci
           npm run test || echo "STATUS=failed" >> $GITHUB_ENV
 
       - name: Push Fail Notice to Mobile
         if: env.STATUS == 'failed'
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
+        run: | curl -X POST -H "Content-Type: application/json" \
             -d '{
               "event": "build_failed",
               "repo": "${{ github.repository }}",
@@ -130,7 +128,7 @@ jobs:
 当 Codex 跑通所有测试，准备将代码发布到 Vercel 时，它会暂停并向飞书群发送审批卡片：
 
 ```Plaintext
-🚨 [Codex Auth Requested]
+ [Codex Auth Requested]
 Project: pmer-cn-saas
 Action: Deploy to production (Vercel)
 Change summary: Implemented Stripe subscription webhook in /api/stripe.
@@ -158,14 +156,14 @@ app.post('/api/mobile-reply', (req, res) => {
   if (userMessage === '1') {
     exec('echo "approved" > /tmp/codex_deploy_signal', (err) => {
       if (err) return res.status(500).send('Error');
-      res.json({ reply: '🚀 部署已批准，生产环境正在上线！' });
+      res.json({ reply: ' 部署已批准，生产环境正在上线！' });
     });
   } else if (userMessage === '0') {
     exec('pkill -f codex && git checkout -- .', (err) => {
-      res.json({ reply: '🛑 部署已中止，代码已安全回滚！' });
+      res.json({ reply: ' 部署已中止，代码已安全回滚！' });
     });
   } else {
-    res.json({ reply: '⚠️ 无效指令，请回复 1 (批准) 或 0 (中止)' });
+    res.json({ reply: ' 无效指令，请回复 1 (批准) 或 0 (中止)' });
   }
 });
 
@@ -189,19 +187,17 @@ app.listen(8080, () => console.log('Mobile gateway listening on port 8080'));
 3. **沉淀与进阶知识库（团队协同）**：
    - 支持将结构化项目报告写回飞书 Docx 云文档、同步至 Bitable 多维表格，实现代码进展向团队业务知识库的无缝沉淀。
 
-> 💡 **3 分钟极速配置**：该工程内置了飞书官方应用清单 `feishu_app_manifest.json`，在飞书开放平台直接点击「导入应用清单」即可自动开通所有必要权限与长连接，免去繁琐的手工勾选。
+> **3 分钟极速配置**：该工程内置了飞书官方应用清单 `feishu_app_manifest.json`，在飞书开放平台直接点击「导入应用清单」即可自动开通所有必要权限与长连接，免去繁琐的手工勾选。
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速排查与自救指南 |
 | :--- | :--- | :--- |
 | **手机接收不到 Webhook 消息** | 机器人安全设置中未配置自定义关键词或 IP 白名单 | 检查飞书机器人设置中的“安全设置”，设置包含关键词（如 `Codex`）或签名校验 |
 | **手机回复了“1”但本地没有任何动静** | 中转网关未能与执行机器建立长连接或文件信号未监听 | 运行 `node scripts/codex-watchdog` 检查隧道穿透连通性与信号文件状态 |
-| **手机每隔 1 分钟被审批卡片轰炸** | 每一个细微改动都未做分流直接请求人工审批 | 开启 `--approve-for-me`，将非破坏性操作委派给 Guardian 自动审批 |
-
----
+| **手机每隔 1 分钟被审批卡片轰炸** | 每一个细微改动都未做分流直接请求人工审批 | 开启 `--approve-for-me`，将非破坏性操作委派给 Guardian 自动审批 | ---
 
 ## 8.5 实战产品说心法：把自由留给自己
 
@@ -213,5 +209,5 @@ app.listen(8080, () => console.log('Mobile gateway listening on port 8080'));
 
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ 下一章 (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 English ](../en/ch08_mobile_workflow.md)
+[主目录](/) | [上一章 (Ch.07)](./ch07_desktop_computer_use.md) | [下一章 (Ch.09)](./ch09_legacy_code.md) | [English](../en/ch08_mobile_workflow.md)
 

@@ -4,15 +4,15 @@ description: "在 Antigravity 中接入 Google Workspace MCP，零复制直读 D
 lastUpdated: 2026-11-26
 ---
 
-[返回 Gemini 专页](/gemini/) | [上一章：音视频理解与 Gemini Live API](/gemini/ch04_video_live_api) | [下一章：Google Colab %%agy 云端算力外挂](/gemini/ch06_colab_agy_pipelines)
+[返回 Gemini 专页](/gemini/) | [上一章：音视频理解与 Gemini Live API](/gemini/ch04_video_live_api) | [下一章：Google Colab 代理扩展 云端算力外挂](/gemini/ch06_colab_agy_pipelines)
 
 # Ch.05 办公流即研发流：Google Workspace MCP 深度自动化实战
 
-> 🎯 **本章解决的工程麻烦**：产品需求写在 Google Docs、多语言文案和排期表躺在 Google Sheets、客户报错邮件堆在 Gmail、周五还要整理 Google Slides 汇报进度——开发者每天花两小时当“复制粘贴搬运工”，还动不动贴错版本。
+> **本章解决的工程麻烦**：产品需求写在 Google Docs、多语言文案和排期表躺在 Google Sheets、客户报错邮件堆在 Gmail、周五还要整理 Google Slides 汇报进度——开发者每天花两小时当“复制粘贴搬运工”，还动不动贴错版本。
 >
-> 💡 **实战落地收益**：在 Antigravity 中通过 **Google Workspace MCP** 一次性打通 Docs / Sheets / Slides / Drive / Gmail，建立“PRD 自动转代码任务 → 改完自动回写排期表 → 一键出周报幻灯片”的闭环，并掌握 Workspace Add-ons 的商业化开发路径。
+> **实战落地收益**：在 Antigravity 中通过 **Google Workspace MCP** 一次性打通 Docs / Sheets / Slides / Drive / Gmail，建立“PRD 自动转代码任务 → 改完自动回写排期表 → 一键出周报幻灯片”的闭环，并掌握 Workspace Add-ons 的商业化开发路径。
 >
-> ⚡ **一句话结论**：代码仓库只是研发的一半，另一半业务真相全在办公套件里；接上 Workspace MCP，代理才算真正看见全局。
+> **一句话结论**：代码仓库只是研发的一半，另一半业务真相全在办公套件里；接上 Workspace MCP，代理才算真正看见全局。
 
 绝大多数团队的研发瓶颈根本不在写代码的速度，而在“文档、表格、邮件、代码”四张皮之间的人工同步损耗。产品经理在 Docs 里改了一行计费规则，研发群里没人看见；开发修完 8 个 Bug，还得挨个打开 Sheets 手动改状态、切到 Gmail 回客户。
 
@@ -134,7 +134,7 @@ function auditSelectedRange() {
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **挂载单点权限**：在 Antigravity 安装 Google Docs 与 Sheets 插件并登录工作账号，暂不开启 Gmail 自动发信权限。
 2. **实测一次 PRD 直读**：选一份你正在做的真实 Google Doc，让 Antigravity 提取接口字段并生成 TypeScript 类型定义文件，核对是否遗漏约束。
@@ -142,14 +142,12 @@ function auditSelectedRange() {
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | MCP 报错 `403 insufficientPermissions` | OAuth 授权时只勾选了只读范围，后续却要求写入 Sheets 或新建 Slides | 重新在插件授权面板补齐对应写权限 Scope，或明确拆分为“只读诊断账号”与“写入发布账号” |
 | 代理回写 Sheets 时把原表公式覆盖成了纯文本 | 直接整表覆写了含公式的列，而不是限定写入数据区 | 规则中规定只允许向指定非公式列（如 `A2:D100`）写值，写入前先用 `valueRenderOption=FORMULA` 检查目标区域 |
-| Workspace 插件提审被 Google 拒绝 | 申请了过宽的全局 Drive 权限（`drive` 全盘读写）却未提供隐私政策与录制视频 | 收缩为 `drive.file`（仅限用户主动打开的当前文件），并补齐清晰的数据留存说明与 OAuth 演示视频 |
+| Workspace 插件提审被 Google 拒绝 | 申请了过宽的全局 Drive 权限（`drive` 全盘读写）却未提供隐私政策与录制视频 | 收缩为 `drive.file`（仅限用户主动打开的当前文件），并补齐清晰的数据留存说明与 OAuth 演示视频 | ---
 
----
-
-[返回 Gemini 专页](/gemini/) | [上一章：音视频理解与 Gemini Live API](/gemini/ch04_video_live_api) | [下一章：Google Colab %%agy 云端算力外挂](/gemini/ch06_colab_agy_pipelines)
+[返回 Gemini 专页](/gemini/) | [上一章：音视频理解与 Gemini Live API](/gemini/ch04_video_live_api) | [下一章：Google Colab 代理扩展 云端算力外挂](/gemini/ch06_colab_agy_pipelines)

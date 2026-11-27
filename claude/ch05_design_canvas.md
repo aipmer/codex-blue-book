@@ -4,13 +4,13 @@ description: "在 Claude Code 终端直接调用 /design 启动 claude.ai/design
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.04) ](./ch04_whiteboards_docs.md) | [ ➡️ 下一章 (Ch.06) ](./ch06_legacy_governance.md) | [ 🌐 English ](/en/claude/ch05_design_canvas)
+[首页](/) | [上一章 (Ch.04)](./ch04_whiteboards_docs.md) | [下一章 (Ch.06)](./ch06_legacy_governance.md) | [English](/en/claude/ch05_design_canvas)
 
 # Ch.05 终端直通画板：`/design`（Claude Design）交互原型与源码回流实战
 
-> 🎯 **具体工程麻烦**：纯靠终端文字描述改前端界面，反复盲猜间距与配色十几个来回，改出来的页面还是充满廉价“AI 紫渐变”模板味。  
-> 💡 **可运行实战代码与落地收益**：掌握 Claude Code `/design` 技能完整闭环；配置团队 Design System 约束文件；复现官方“画板定稿 → 单日落地生产组件”流程。  
-> ⚡ **社交传播 / 截图金句**：“别在命令行里用文字盲猜界面排版。敲一行 `/design`，在实时代码画板上挑好定稿，直接回流仓库写进源码。”
+> **具体工程麻烦**：纯靠终端文字描述改前端界面，反复盲猜间距与配色十几个来回，改出来的页面还是充满廉价“AI 紫渐变”模板味。  
+> **可运行实战代码与落地收益**：掌握 Claude Code `/design` 技能完整闭环；配置团队 Design System 约束文件；复现官方“画板定稿 → 单日落地生产组件”流程。  
+> **社交传播 / 截图金句**：“别在命令行里用文字盲猜界面排版。敲一行 `/design`，在实时代码画板上挑好定稿，直接回流仓库写进源码。”
 
 前端界面开发一直是命令行智能体的天然短板：终端里看不见视觉层次，只靠纯文字形容“卡片再克制一点、留白再透气一点”，往往要来回返工七八次。
 
@@ -18,11 +18,11 @@ Anthropic 推出的 **Claude Design（`claude.ai/design`）** 与 Claude Code �
 
 ---
 
-## 🎯 生活化直觉隐喻：设计师的“带电样板间”
+## 生活化直觉隐喻：设计师的“带电样板间”
 
 ```text
 【传统纯文本改 UI】 ──> 你蒙着眼睛用对讲机指挥装修队“沙发往左挪 10 厘米”，挪完拍照再猜。
-【图片生图再切图】  ──> 给你画一张精美的效果图，但尺寸比例全靠前端手工重新量、重新写 CSS。
+【图片生图再切图】 ──> 给你画一张精美的效果图，但尺寸比例全靠前端手工重新量、重新写 CSS。
 【/design 代码画板】──> 在 Claude Code 敲 `/design`，直接搭出 3 套可点击交互的“带电样板间”：
                         你推开门点按钮、拉滑块调留白、批注删掉多余装饰，
                         拍板“就用 2 号方案”，Claude Code 直接把样板间结构落成你的 React/Vue 组件。
@@ -30,7 +30,7 @@ Anthropic 推出的 **Claude Design（`claude.ai/design`）** 与 Claude Code �
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：在 Claude Code 会话中调用 `/design`**
    直接描述要改造的页面或组件，同时指明现有样式文件供其参考：
@@ -68,11 +68,9 @@ Anthropic 推出的 **Claude Design（`claude.ai/design`）** 与 Claude Code �
   "layout": {
     "radiusCard": "10px",
     "radiusButton": "6px",
-    "banPatterns": [
-      "No neon purple gradients",
+    "banPatterns": ["No neon purple gradients",
       "No bounce/translateY jump on card hover",
-      "No text smaller than 12px"
-    ]
+      "No text smaller than 12px"]
   }
 }
 ```
@@ -117,14 +115,12 @@ Step 4: Claude Code 读取定稿画板结构 → 拆分为项目组件 → 跑�
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **画板很好看，回流代码后硬编码了一堆内联样式** | 回流指令未要求映射到项目现有的 Tailwind / CSS Tokens | 明确要求“将画板色值与间距映射到 `tailwind.config.ts` 中既有 token，禁止写死 hex 色值” |
 | **桌面端精美，手机端 390px 按钮被挤出屏幕** | 画板评审只看了默认宽屏视口 | 在画板批注中显式要求生成移动端断点视图，回流后用浏览器实测 390px 与 768px |
-| **一次改整站导致组件职责混乱** | 单次 `/design` 范围过大 | 按页面区块粒度拆分（如先定导航栏，再定核心业务表格或定价区），逐块落地 |
+| **一次改整站导致组件职责混乱** | 单次 `/design` 范围过大 | 按页面区块粒度拆分（如先定导航栏，再定核心业务表格或定价区），逐块落地 | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.04) ](./ch04_whiteboards_docs.md) | [ ➡️ 下一章 (Ch.06) ](./ch06_legacy_governance.md) | [ 🌐 English ](/en/claude/ch05_design_canvas)
+[首页](/) | [上一章 (Ch.04)](./ch04_whiteboards_docs.md) | [下一章 (Ch.06)](./ch06_legacy_governance.md) | [English](/en/claude/ch05_design_canvas)

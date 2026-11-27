@@ -14,8 +14,7 @@ kimi_zh_dir = os.path.join(workspace, "kimi")
 kimi_en_dir = os.path.join(workspace, "en", "kimi")
 public_dir = os.path.join(workspace, "public")
 
-chapter_files = [
-    "ch01_mindset.md",
+chapter_files = ["ch01_mindset.md",
     "ch02_setup.md",
     "ch03_sandbox.md",
     "ch04_goal_driven.md",
@@ -27,11 +26,10 @@ chapter_files = [
     "ch10_saas_mvp.md",
     "ch11_expo_mobile.md",
     "ch12_commercialization.md",
-    "ch13_2026_frontier.md"
-]
+    "ch13_2026_frontier.md"]
 
 toc_zh = """
-## 🧭 目录 (Table of Contents)
+## 目录 (Table of Contents)
 
 ### 第一部分：AI-Native 时代的产品心智与搭建
 - [Ch.01 告别手写代码：Vibe Coding 时代的产品心智](#ch01-告别手写代码vibe-coding-时代的产品心智)
@@ -58,7 +56,7 @@ toc_zh = """
 """
 
 toc_en = """
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: Product Survival in the AI-Native Era
 - [Ch.01 Saying Goodbye to Handwritten Code: Product Mindset in the Era of Vibe Coding](#ch01-saying-goodbye-to-handwritten-code-product-mindset-in-the-era-of-vibe-coding)
@@ -85,8 +83,7 @@ toc_en = """
 """
 
 
-claude_chapter_files = [
-    "ch01_programmable_platform.md",
+claude_chapter_files = ["ch01_programmable_platform.md",
     "ch02_context_economics.md",
     "ch03_hooks_code_mode.md",
     "ch04_whiteboards_docs.md",
@@ -95,11 +92,10 @@ claude_chapter_files = [
     "ch07_subagents_refactoring.md",
     "ch08_ship_pr_steward.md",
     "ch09_enterprise_saas.md",
-    "ch10_frontier_cowork_critique.md"
-]
+    "ch10_frontier_cowork_critique.md"]
 
 claude_toc_zh = """
-## 🧭 目录 (Table of Contents)
+## 目录 (Table of Contents)
 
 ### 第一部分：心智跃迁与五大工程原语
 - Ch.01 从对话编程到可编程工程平台：Claude 5.5 体系与全景心智
@@ -123,7 +119,7 @@ claude_toc_zh = """
 """
 
 claude_toc_en = """
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: Programmable Engineering Primitives
 - Ch.01 From Chat Coding to Programmable Engineering: Claude 5.5
@@ -147,8 +143,7 @@ claude_toc_en = """
 """
 
 
-gemini_chapter_files = [
-    "ch01_antigravity_gemini4.md",
+gemini_chapter_files = ["ch01_antigravity_gemini4.md",
     "ch02_multimodal_rules_skills.md",
     "ch03_ai_studio_handoff.md",
     "ch04_video_live_api.md",
@@ -157,15 +152,14 @@ gemini_chapter_files = [
     "ch07_swarm_alpine_peak.md",
     "ch08_browser_qa_cross_platform.md",
     "ch09_multimodal_commercial_saas.md",
-    "ch10_frontier_quota_spatial.md"
-]
+    "ch10_frontier_quota_spatial.md"]
 
 gemini_toc_zh = """
-## 🧭 目录 (Table of Contents)
+## 目录 (Table of Contents)
 
 ### 第一部分：Antigravity 指挥舱与 Gemini 4 选型
 - Ch.01 告别单线程 CLI：Google Antigravity 架构与 Gemini 4 模型矩阵
-- Ch.02 多模态开发规约：`AGENTS.md`、`.agents/rules` 与自定义 Skills
+- Ch.02 多模态项目规则：`AGENTS.md`、`.agents/rules` 与自定义 Skills
 
 ### 第二部分：AI Studio × Antigravity 原生多模态流
 - Ch.03 从灵感到工程仓：Google AI Studio Build Mode 无损接力流
@@ -173,10 +167,10 @@ gemini_toc_zh = """
 
 ### 第三部分：Google Workspace × Colab 全家桶联动
 - Ch.05 办公流即研发流：Google Workspace MCP 深度自动化实战
-- Ch.06 云端算力外挂：Google Colab（`%%agy`）数据管线与模型实验闭环
+- Ch.06 云端算力外挂：Google Colab 代理扩展数据管线与模型实验闭环
 
-### 第四部分：`/swarm` 蜂群编排、视觉巡检与跨端交付
-- Ch.07 `/swarm` 多代理蜂群架构与官方《Alpine Peak》全栈案例复盘
+### 第四部分：多智能体协作、视觉巡检与跨端交付
+- Ch.07 多智能体协作架构与官方《Alpine Peak》全栈案例复盘
 - Ch.08 浏览器视觉自动走查与 Web / Chrome MV3 / 移动跨端交付
 
 ### 第五部分：多模态商业闭环与生态瞭望
@@ -185,7 +179,7 @@ gemini_toc_zh = """
 """
 
 gemini_toc_en = """
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: Antigravity Cockpit & Gemini 4 Routing
 - Ch.01 Beyond Single-Loop CLIs: Google Antigravity & Gemini 4 Model Matrix
@@ -197,10 +191,10 @@ gemini_toc_en = """
 
 ### Part 3: Google Workspace × Colab Leverage
 - Ch.05 Workspace MCP Automation: Docs, Sheets, Slides & Commercial Add-ons
-- Ch.06 Cloud Compute Offload: Google Colab (`%%agy`) & Notebook Pipelines
+- Ch.06 Cloud Compute Offload: Google Colab Agent Extension & Notebook Pipelines
 
-### Part 4: `/swarm` Orchestration & Visual QA
-- Ch.07 `/swarm` Architecture & Official "Alpine Peak" Full-Stack Case Study
+### Part 4: Multi-Agent Collaboration & Visual QA
+- Ch.07 Multi-Agent Collaboration Architecture & Official "Alpine Peak" Full-Stack Case Study
 - Ch.08 Automated Browser Visual QA, Chrome MV3 & Firebase / Cloud Run Delivery
 
 ### Part 5: Monetization & Frontier Watch
@@ -209,8 +203,7 @@ gemini_toc_en = """
 """
 
 
-kimi_chapter_files = [
-    "ch01_k31_architecture_cli.md",
+kimi_chapter_files = ["ch01_k31_architecture_cli.md",
     "ch02_acp_config_failover.md",
     "ch03_subagents_swarm.md",
     "ch04_moonvit_video_figma.md",
@@ -219,18 +212,17 @@ kimi_chapter_files = [
     "ch07_kimi_slides_decks.md",
     "ch08_3d_make_blender_freecad.md",
     "ch09_vllm_self_hosting_saas.md",
-    "ch10_four_agent_hybrid_frontier.md"
-]
+    "ch10_four_agent_hybrid_frontier.md"]
 
 kimi_toc_zh = """
-## 🧭 目录 (Table of Contents)
+## 目录 (Table of Contents)
 
 ### 第一部分：K3.1 基座全景与 Kimi Code 三态指挥舱
 - Ch.01 3 万亿参数开源新纪元：Kimi K3 / K3.1 Pro 架构与选型心智
 - Ch.02 全协议互联：`config.toml`、`kimi acp` 跨 IDE 直连与多源容灾矩阵
 
-### 第二部分：蜂群并发研发与视觉录屏排障
-- Ch.03 分层子代理（`explore / plan / coder`）与 `/swarm` 蜂群全栈实战
+### 第二部分：多智能体并行研发与视觉录屏排障
+- Ch.03 分层子代理（`explore / plan / coder`）与 多智能体并行全栈实战
 - Ch.04 MoonViT-V2 视觉工程流：录屏诊断、Figma 还原与前端精修
 
 ### 第三部分：高壁垒垂直行业深水区（金融 · 法律 · 医药）
@@ -247,14 +239,14 @@ kimi_toc_zh = """
 """
 
 kimi_toc_en = """
-## 🧭 Table of Contents
+## Table of Contents
 
 ### Part 1: K3.1 Foundation & Multi-Mode Cockpit
 - Ch.01 The 2.8T Open-Weight Generation: Kimi K3.1 Pro & Kimi Code CLI
 - Ch.02 Protocol-First Connectivity: `config.toml`, `kimi acp` & Multi-Provider Failover
 
 ### Part 2: Swarm Engineering & Video Debugging
-- Ch.03 Tiered Subagents (`explore / plan / coder`) & `/swarm` Parallel Refactors
+- Ch.03 Tiered Subagents (`explore / plan / coder`) & Parallel Multi-Agent Refactors
 - Ch.04 MoonViT-V2 Visual Engineering: Video-to-Fix & Figma MCP Fidelity
 
 ### Part 3: Regulated Vertical Workflows (Finance · Legal · Medical)
@@ -311,9 +303,9 @@ def build_zh() -> str:
     combined.append("**v1.5.0 · 资料核对至 2026 年 11 月 26 日**\n")
     combined.append("![Codex 实战蓝皮书](./images/cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 English PDF Version ](./codex_blue_book_en.pdf) | [ 🌐 English Online Version ](./en/ch01_mindset.md)\n")
+    combined.append("[English PDF Version](./codex_blue_book_en.pdf) | [English Online Version](./en/ch01_mindset.md)\n")
     combined.append(toc_zh.strip() + "\n\n---\n")
-    combined.append("## 🔌 关联开源项目\n")
+    combined.append("##  关联开源项目\n")
     combined.append("*   **[飞书助理 (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**：蓝皮书 Ch.08 官方参考工程。专为 Codex 开发者打造的飞书助理，支持日报自动汇总推送、CI 熔断移动端警报与手机端一键审批。\n")
     combined.append("*   **[Codex Switch (多供应商无缝切换)](https://github.com/aipmer/codex-switch)**：macOS Codex 多供应商一键切换利器。支持 OpenAI 官方 / DeepSeek / Kimi Code 秒级平滑切换，历史会话跨供应商无缝续聊。\n\n---\n")
 
@@ -337,9 +329,9 @@ def build_en() -> str:
     combined.append("**v1.5.0 · Sources checked November 26, 2026**\n")
     combined.append("![Codex Practical Blue Book](./images/cover_en.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 中文 PDF 版 ](./codex_blue_book_zh.pdf) | [ 🌐 中文在线版 ](./chapters/ch01_mindset.md)\n")
+    combined.append("[中文 PDF 版](./codex_blue_book_zh.pdf) | [中文在线版](./chapters/ch01_mindset.md)\n")
     combined.append(toc_en.strip() + "\n\n---\n")
-    combined.append("## 🔌 Related Projects\n")
+    combined.append("##  Related Projects\n")
     combined.append("*   **[Feishu Assistant (Codex Feishu Sentinel)](https://github.com/aipmer/plugins-codex-feishu)**: The official companion repository for Ch.08. An intelligent duty assistant in Feishu for Codex developers, featuring automated daily git digest pushes, CI mobile alarms, and one-tap remote approvals.\n")
     combined.append("*   **[Codex Switch (Multi-Provider Switcher)](https://github.com/aipmer/codex-switch)**: One-click provider switcher for macOS Codex CLI. Seamlessly switch between official OpenAI, DeepSeek, and Kimi Code in seconds with cross-provider chat history continuation.\n\n---\n")
 
@@ -363,11 +355,11 @@ def build_claude_zh() -> str:
     combined.append("**v1.0.0 · 资料核对至 2026 年 11 月 26 日**\n")
     combined.append("![Claude 实战蓝皮书封面](./images/claude_cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 English PDF Version ](./claude_blue_book_en.pdf) | [ 🌐 在线阅读站 ](https://book.pmer.cn/claude/)\n")
+    combined.append("[English PDF Version](./claude_blue_book_en.pdf) | [在线阅读站](https://book.pmer.cn/claude/)\n")
     combined.append(claude_toc_zh.strip() + "\n\n---\n")
-    combined.append("## 🔌 配套开源套件\n")
+    combined.append("##  配套开源套件\n")
     combined.append("*   **[Claude Hooks & Subagents Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)**：包含防危命 `PreToolUse` Bash 拦截脚本、敏感文件写保护与只读架构评审子代理配置。\n")
-    combined.append("*   **[多智能体通用规约生成器](https://book.pmer.cn/generator)**：一键导出 `CLAUDE.md`、`settings.json` Hooks 与 `AGENTS.md` 跨工具规约。\n\n---\n")
+    combined.append("*   **[AI 协作规则生成器](https://book.pmer.cn/generator)**：一键导出 `CLAUDE.md`、`settings.json` Hooks 与 `AGENTS.md` 跨工具项目规则。\n\n---\n")
 
     for filename in claude_chapter_files:
         zh_path = os.path.join(claude_zh_dir, filename)
@@ -389,9 +381,9 @@ def build_claude_en() -> str:
     combined.append("**v1.0.0 · Sources verified November 26, 2026**\n")
     combined.append("![Claude Practical Blue Book Cover](./images/claude_cover.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 中文 PDF 版 ](./claude_blue_book_zh.pdf) | [ 🌐 Online Hub ](https://book.pmer.cn/en/claude/)\n")
+    combined.append("[中文 PDF 版](./claude_blue_book_zh.pdf) | [Online Hub](https://book.pmer.cn/en/claude/)\n")
     combined.append(claude_toc_en.strip() + "\n\n---\n")
-    combined.append("## 🔌 Companion Engineering Kit\n")
+    combined.append("##  Companion Engineering Kit\n")
     combined.append("*   **[Claude Hooks & Subagents Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)**: Runnable `PreToolUse` Bash danger blocker, secret-file write guard, and read-only architecture reviewer subagent.\n")
     combined.append("*   **[Multi-Agent Rules Generator](https://book.pmer.cn/en/generator)**: Export `CLAUDE.md`, `settings.json` Hooks, and shared `AGENTS.md` templates.\n\n---\n")
 
@@ -415,11 +407,11 @@ def build_gemini_zh() -> str:
     combined.append("**v1.0.0 · 资料核对至 2026 年 11 月 26 日**\n")
     combined.append("![Gemini 实战蓝皮书封面](./images/gemini_cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 English PDF Version ](./gemini_blue_book_en.pdf) | [ 🌐 在线阅读站 ](https://book.pmer.cn/gemini/)\n")
+    combined.append("[English PDF Version](./gemini_blue_book_en.pdf) | [在线阅读站](https://book.pmer.cn/gemini/)\n")
     combined.append(gemini_toc_zh.strip() + "\n\n---\n")
-    combined.append("## 🔌 配套开源套件\n")
+    combined.append("##  配套开源套件\n")
     combined.append("*   **[Gemini Antigravity Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit)**：包含 `AGENTS.md`、路径级 `.agents/rules/ui-multimodal.md`、三视口 `visual-audit` Skill 及零依赖 Gemini 4 配额预算门禁脚本 `check_gemini_quota.mjs`。\n")
-    combined.append("*   **[多智能体通用规约生成器](https://book.pmer.cn/generator)**：一键导出 Antigravity `AGENTS.md` + `.agents/rules/`。\n\n---\n")
+    combined.append("*   **[AI 协作规则生成器](https://book.pmer.cn/generator)**：一键导出 Antigravity `AGENTS.md` + `.agents/rules/`。\n\n---\n")
 
     for filename in gemini_chapter_files:
         zh_path = os.path.join(gemini_zh_dir, filename)
@@ -441,9 +433,9 @@ def build_gemini_en() -> str:
     combined.append("**v1.0.0 · Sources verified November 26, 2026**\n")
     combined.append("![Gemini Practical Blue Book Cover](./images/gemini_cover.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 中文 PDF 版 ](./gemini_blue_book_zh.pdf) | [ 🌐 Online Hub ](https://book.pmer.cn/en/gemini/)\n")
+    combined.append("[中文 PDF 版](./gemini_blue_book_zh.pdf) | [Online Hub](https://book.pmer.cn/en/gemini/)\n")
     combined.append(gemini_toc_en.strip() + "\n\n---\n")
-    combined.append("## 🔌 Companion Engineering Kit\n")
+    combined.append("##  Companion Engineering Kit\n")
     combined.append("*   **[Gemini Antigravity Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/gemini-antigravity-kit)**: Runnable `AGENTS.md`, glob-scoped `.agents/rules/ui-multimodal.md`, `visual-audit` Skill, and zero-dependency `check_gemini_quota.mjs` budget guardrail.\n")
     combined.append("*   **[Multi-Agent Rules Generator](https://book.pmer.cn/en/generator)**: Export Antigravity rules and multi-agent templates.\n\n---\n")
 
@@ -463,15 +455,15 @@ def build_gemini_en() -> str:
 
 def build_kimi_zh() -> str:
     combined = []
-    combined.append("# 《Kimi 实战蓝皮书：K3.1 全栈蜂群、垂直行业深水区与 PPT/3D 跃迁指南》\n")
+    combined.append("# 《Kimi 实战蓝皮书：K3.1 全栈多智能体协作、垂直行业深水区与 PPT/3D 跃迁指南》\n")
     combined.append("**v1.0.0 · 资料核对至 2026 年 11 月 26 日**\n")
     combined.append("![Kimi 实战蓝皮书封面](./images/kimi_cover.jpg)\n\n")
     combined.append("主理人: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 English PDF Version ](./kimi_blue_book_en.pdf) | [ 🌐 在线阅读站 ](https://book.pmer.cn/kimi/)\n")
+    combined.append("[English PDF Version](./kimi_blue_book_en.pdf) | [在线阅读站](https://book.pmer.cn/kimi/)\n")
     combined.append(kimi_toc_zh.strip() + "\n\n---\n")
-    combined.append("## 🔌 配套开源套件\n")
+    combined.append("##  配套开源套件\n")
     combined.append("*   **[Kimi K3.1 Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit)**：包含 `~/.kimi-code/config.toml` 基线配置、零幻觉原文引用核验器 `verify_citations.py` 及 FreeCAD 参数化叶轮脚本 `freecad_turbine_blade.py`。\n")
-    combined.append("*   **[多智能体通用规约生成器](https://book.pmer.cn/generator)**：一键导出 Kimi `AGENTS.md` + `config.toml`。\n\n---\n")
+    combined.append("*   **[AI 协作规则生成器](https://book.pmer.cn/generator)**：一键导出 Kimi `AGENTS.md` + `config.toml`。\n\n---\n")
 
     for filename in kimi_chapter_files:
         zh_path = os.path.join(kimi_zh_dir, filename)
@@ -493,9 +485,9 @@ def build_kimi_en() -> str:
     combined.append("**v1.0.0 · Sources verified November 26, 2026**\n")
     combined.append("![Kimi Practical Blue Book Cover](./images/kimi_cover.jpg)\n\n")
     combined.append("Author: [Hunk Wu](https://pmer.cn) (X: [@ai_pmer](https://x.com/ai_pmer))\n")
-    combined.append("[ 🌐 中文 PDF 版 ](./kimi_blue_book_zh.pdf) | [ 🌐 Online Hub ](https://book.pmer.cn/en/kimi/)\n")
+    combined.append("[中文 PDF 版](./kimi_blue_book_zh.pdf) | [Online Hub](https://book.pmer.cn/en/kimi/)\n")
     combined.append(kimi_toc_en.strip() + "\n\n---\n")
-    combined.append("## 🔌 Companion Engineering Kit\n")
+    combined.append("##  Companion Engineering Kit\n")
     combined.append("*   **[Kimi K3.1 Starter Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/kimi-k3-kit)**: Production `config.toml`, zero-hallucination `verify_citations.py` gate, and parametric `freecad_turbine_blade.py` CAD generator.\n")
     combined.append("*   **[Multi-Agent Rules Generator](https://book.pmer.cn/en/generator)**: Export Kimi `AGENTS.md` + `config.toml`.\n\n---\n")
 

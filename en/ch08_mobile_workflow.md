@@ -4,13 +4,13 @@ description: "Combine Codex Guardian auto-approval (--approve-for-me), GitHub Ac
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ Next (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 中文版 ](../chapters/ch08_mobile_workflow.md)
+[Index](/en/) | [Prev (Ch.07)](./ch07_desktop_computer_use.md) | [Next (Ch.09)](./ch09_legacy_code.md) | [中文版](../chapters/ch08_mobile_workflow.md)
 
 # Ch.08 Mobile Sentinel Workflows: 24/7 Remote Development and Orchestration
 
-> 🎯 **The Real Problem**: Engineers tied to desks watching terminal build logs; unattended CI failures or blocked deployments halting team momentum.  
-> 💡 **Tangible Output & Takeaway**: Guardian auto-approval (`--approve-for-me`) & mobile gateway two-tier dispatch; Feishu webhook alert cards; one-tap mobile remote approval pipelines.  
-> ⚡ **Viral Screenshot Quote**: *"Step away from your desk while tasks run. AI resolves routine risks automatically, while high-risk releases wait for a one-tap phone approval."*
+> **The Real Problem**: Engineers tied to desks watching terminal build logs; unattended CI failures or blocked deployments halting team momentum.  
+> **Tangible Output & Takeaway**: Guardian auto-approval (`--approve-for-me`) & mobile gateway two-tier dispatch; Feishu webhook alert cards; one-tap mobile remote approval pipelines.  
+> **Viral Screenshot Quote**: *"Step away from your desk while tasks run. AI resolves routine risks automatically, while high-risk releases wait for a one-tap phone approval."*
 
 Being chained to a terminal watching rolling build logs defeats the point of agentic development.
 
@@ -18,14 +18,14 @@ This chapter builds a **mobile sentinel workflow**: **Guardian automatic approva
 
 ---
 
-## 🎯 Intuitive Metaphor: Smart Patrol and Central Pager in a Modern Autonomous Farm
+## Intuitive Metaphor: Smart Patrol and Central Pager in a Modern Autonomous Farm
 
 Think of offline orchestration as running a modern unmanned farm:
 
 ```Plaintext
-[Manual Guarding]      ──> Sitting on a stool inside the greenhouse 24 hours a day,
+[Manual Guarding] ──> Sitting on a stool inside the greenhouse 24 hours a day,
                            staring at irrigation pipes wondering if one might leak (tedious and confining).
-[Guardian + Gateway]   ──> The farm deploys an autonomous robotic watchdog (automatic approval review):
+[Guardian + Gateway] ──> The farm deploys an autonomous robotic watchdog (automatic approval review):
                            - Minor pipe leak? The robot tightens the valve and moves on (Guardian policy auto-pass);
                            - Main water gate switch or high-voltage grid changes? The robot halts,
                              instantly sending a high-res photo and confirmation card to the owner's phone;
@@ -36,7 +36,7 @@ This dual mechanism—"digesting routine risks automatically while holding human
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 Set up your mobile alert notification channel in 3 simple steps:
 
@@ -46,7 +46,7 @@ Set up your mobile alert notification channel in 3 simple steps:
    Run curl to verify your phone receives notifications:
    ```bash
    curl -X POST -H "Content-Type: application/json" \
-     -d '{"msg_type":"text","content":{"text":"🔔 Codex Mobile Sentinel Online: Terminal task running safely!"}}' \
+     -d '{"msg_type":"text","content":{"text":" Codex Mobile Sentinel Online: Terminal task running safely!"}}' \
      https://open.feishu.cn/open-apis/bot/v2/hook/YOUR-WEBHOOK-TOKEN
    ```
 3. **Step 3: Launch Your Offline Task with Guardian + Sandbox**  
@@ -86,7 +86,7 @@ name: Codex Agent Watchdog
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -105,14 +105,12 @@ jobs:
         id: run_agent
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: |
-          npm ci
+        run: | npm ci
           npm run test || echo "STATUS=failed" >> $GITHUB_ENV
 
       - name: Push Fail Notice to Mobile
         if: env.STATUS == 'failed'
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
+        run: | curl -X POST -H "Content-Type: application/json" \
             -d '{
               "event": "build_failed",
               "repo": "${{ github.repository }}",
@@ -131,7 +129,7 @@ jobs:
 When Codex passes all tests and is ready to deploy code to Vercel, it pauses and sends an approval card to Feishu:
 
 ```Plaintext
-🚨 [Codex Auth Requested]
+ [Codex Auth Requested]
 Project: pmer-cn-saas
 Action: Deploy to production (Vercel)
 Change summary: Implemented Stripe subscription webhook in /api/stripe.
@@ -159,14 +157,14 @@ app.post('/api/mobile-reply', (req, res) => {
   if (userMessage === '1') {
     exec('echo "approved" > /tmp/codex_deploy_signal', (err) => {
       if (err) return res.status(500).send('Error');
-      res.json({ reply: '🚀 Deployment approved, production environment is going live!' });
+      res.json({ reply: ' Deployment approved, production environment is going live!' });
     });
   } else if (userMessage === '0') {
     exec('pkill -f codex && git checkout -- .', (err) => {
-      res.json({ reply: '🛑 Deployment aborted, code safely rolled back to HEAD!' });
+      res.json({ reply: ' Deployment aborted, code safely rolled back to HEAD!' });
     });
   } else {
-    res.json({ reply: '⚠️ Invalid instruction. Reply 1 (approve) or 0 (abort).' });
+    res.json({ reply: ' Invalid instruction. Reply 1 (approve) or 0 (abort).' });
   }
 });
 
@@ -190,19 +188,17 @@ It productizes this entire workflow into three primary capabilities:
 3. **Knowledge Base Persistence (Team Collaboration)**:
    - Write project status into Feishu Docx documents and sync project metadata with Bitable multidimensional tables.
 
-> 💡 **3-Minute Quick Setup**: The project provides `feishu_app_manifest.json`, allowing you to create the complete Feishu app with pre-configured scopes and websocket events via a single JSON import in the Feishu Open Platform.
+> **3-Minute Quick Setup**: The project provides `feishu_app_manifest.json`, allowing you to create the complete Feishu app with pre-configured scopes and websocket events via a single JSON import in the Feishu Open Platform.
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | **Phone does not receive Webhook messages** | Bot security settings require keyword or IP whitelist | In bot settings under "Security", add matching keyword (e.g., `Codex`) or configure request signature |
 | **Replied "1" on phone but nothing happened locally** | Relay gateway lost tunnel connectivity or signal file is unmonitored | Run `node scripts/codex-watchdog` to verify tunnel connectivity and inspect signal file status |
-| **Phone flooded with approval cards every minute** | Minor edits routed directly to mobile without filtering | Enable `--approve-for-me` to delegate non-destructive routine actions to Guardian |
-
----
+| **Phone flooded with approval cards every minute** | Minor edits routed directly to mobile without filtering | Enable `--approve-for-me` to delegate non-destructive routine actions to Guardian | ---
 
 ## 8.5 Founder's Mantra: Reclaiming Your Freedom
 
@@ -212,5 +208,5 @@ By delegating validation assertions to GitHub Actions, forwarding exceptions via
 
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.07) ](./ch07_desktop_computer_use.md) | [ ➡️ Next (Ch.09) ](./ch09_legacy_code.md) | [ 🌐 中文版 ](../chapters/ch08_mobile_workflow.md)
+[Index](/en/) | [Prev (Ch.07)](./ch07_desktop_computer_use.md) | [Next (Ch.09)](./ch09_legacy_code.md) | [中文版](../chapters/ch08_mobile_workflow.md)
 

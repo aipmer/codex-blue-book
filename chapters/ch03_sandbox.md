@@ -4,13 +4,13 @@ description: "解决 Codex 沙盒跑测试报 Connection refused 连不上本地
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.02) ](./ch02_setup.md) | [ ➡️ 下一章 (Ch.04) ](./ch04_goal_driven.md) | [ 🌐 English ](../en/ch03_sandbox.md)
+[主目录](/) | [上一章 (Ch.02)](./ch02_setup.md) | [下一章 (Ch.04)](./ch04_goal_driven.md) | [English](../en/ch03_sandbox.md)
 
 # Ch.03 破局云端孤岛：沙盒调试与本地环境深度穿透
 
-> 🎯 **具体工程麻烦**：AI 在隔离沙盒跑测试时连不上本地 Docker 的 PostgreSQL/Redis，报错 `Connection refused`，智能体抓瞎。  
-> 💡 **可运行实战代码与落地收益**：提供当前 CLI 沙盒级别解析、SSH / Ngrok 端口反向映射脚本与 3 步网络排错流程。
-> ⚡ **社交传播 / 截图金句**：“AI 报错连不上 localhost？不是代码写错了，是你没给隔离沙盒开网络通道。”
+> **具体工程麻烦**：AI 在隔离沙盒跑测试时连不上本地 Docker 的 PostgreSQL/Redis，报错 `Connection refused`，智能体抓瞎。  
+> **可运行实战代码与落地收益**：提供当前 CLI 沙盒级别解析、SSH / Ngrok 端口反向映射脚本与 3 步网络排错流程。
+> **社交传播 / 截图金句**：“AI 报错连不上 localhost？不是代码写错了，是你没给隔离沙盒开网络通道。”
 
 用 Codex 跑数据库测试时，新手常遇到一个错觉：本地 Docker 里的 PostgreSQL 明明正常运行，AI 却在终端一直报 `Connection refused to localhost:5432`。
 
@@ -18,13 +18,13 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：防爆隔离仓与专用生命导管
+## 生活化直觉隐喻：防爆隔离仓与专用生命导管
 
 把 Codex 的执行环境想象成医院里的「高等级无菌防爆隔离仓」：
 
 ```Plaintext
 【你的宿主机 Mac/PC】 ──> 外部大世界：装着你真实的本地数据库、私钥配置、个人微信和文件系统。
-【Codex 运行沙盒】    ──> 无菌隔离仓：AI 所有的代码编译、文件生成都在这个密闭盒子里运行，就算把代码写崩了，也绝不会删掉你的系统文件。
+【Codex 运行沙盒】 ──> 无菌隔离仓：AI 所有的代码编译、文件生成都在这个密闭盒子里运行，就算把代码写崩了，也绝不会删掉你的系统文件。
 【端口穿透与反向隧道】──> 密封手套与气体导管：当隔离仓里的 AI 需要连外界的本地数据库时，你必须主动在舱壁接一根“专用导管”（把端口转接到仓内）。
 ```
 
@@ -32,14 +32,14 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 如果你需要让沙盒连上本地数据库，按以下 3 步建立通道：
 
 1. **步骤一：确认本地服务端口正处于监听状态**  
    在终端确认 Docker 或本地服务正常运行（如 Postgres 在 5432 端口）：
    ```bash
-   lsof -i :5432  # 查看端口是否有进程正在监听
+   lsof -i :5432 # 查看端口是否有进程正在监听
    ```
 2. **步骤二：启动极简端口穿透（使用 ngrok 或 SSH）**  
    运行一条命令为 5432 端口打通公网安全临时通道：
@@ -61,11 +61,11 @@ lastUpdated: 2026-11-26
 默认状态下，沙盒与本地宿主机处于安全网络阻断状态：
 
 ```Plain Text
-+───────────────────────────+                  +───────────────────────────+
-|     云端沙盒 (Sandbox)     |                  |    宿主机 (Local Mac)     |
-| - App Code                |    (隔离屏障)    | - Docker container        |
-| - localhost:5432 (空无一人) ───[ X ]─────────> | - PostgreSQL (port: 5432) |
-+───────────────────────────+                  +───────────────────────────+
++───────────────────────────+ +───────────────────────────+
+| 云端沙盒 (Sandbox) | | 宿主机 (Local Mac) |
+| - App Code | (隔离屏障) | - Docker container |
+| - localhost:5432 (空无一人) ───[X]─────────> | - PostgreSQL (port: 5432) |
++───────────────────────────+ +───────────────────────────+
 ```
 
 在当前 Codex CLI 中，沙盒边界由权限配置决定：
@@ -114,7 +114,7 @@ ngrok tcp 5432
 严禁让 AI 自动把包含真实生产密钥的 `.env` 提交到仓库或云端。在 `.gitignore` 与项目 [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md) 中添加硬约束：
 
 ```markdown
-## 🛑 Hard Constraints
+## Hard Constraints
 - Never sync, copy, or commit files matching *.env.
 - Always use `src/config.ts` or environment variables for secret injection.
 ```
@@ -124,20 +124,18 @@ ngrok tcp 5432
 为防止 node_modules 缓存或 build 缓存导致的幽灵构建故障，在 [AGENTS.md](https://github.com/aipmer/codex-blue-book/blob/main/AGENTS.md) 中写入标准化清理脚本：
 
 ```markdown
-## 💻 Developer Commands
+## Developer Commands
 - **Clean Run**: `rm -rf node_modules/.cache .next/cache && npm run test`
 ```
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见报错 / 翻车现象 | 致命原因 | 极速排查与自救指南 |
 | :--- | :--- | :--- |
 | `Connection refused to 127.0.0.1:5432` | 沙盒以为本地有数据库，实际隔离舱内空无一物 | 检查反向穿透隧道是否开启，严禁用 `localhost`，必须使用穿透地址 |
 | `ngrok session expired / reconnecting` | 免费版 ngrok 隧道中断或地址重置 | 重启 ngrok 复制新地址，或改用项目自带的 `scripts/codex-watchdog` 反向穿透工具 |
-| `EACCES: permission denied` | 沙盒权限受限，试图写入项目外的受保护系统目录 | 检查命令是否使用了正确的 `--sandbox workspace-write`，并约束操作在项目根目录内 |
+| `EACCES: permission denied` | 沙盒权限受限，试图写入项目外的受保护系统目录 | 检查命令是否使用了正确的 `--sandbox workspace-write`，并约束操作在项目根目录内 | ---
 
----
-
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.02) ](./ch02_setup.md) | [ ➡️ 下一章 (Ch.04) ](./ch04_goal_driven.md) | [ 🌐 English ](../en/ch03_sandbox.md)
+[主目录](/) | [上一章 (Ch.02)](./ch02_setup.md) | [下一章 (Ch.04)](./ch04_goal_driven.md) | [English](../en/ch03_sandbox.md)

@@ -4,13 +4,13 @@ description: "跳出聊天框线性陷阱，用 Claude Whiteboards 无限画布�
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.03) ](./ch03_hooks_code_mode.md) | [ ➡️ 下一章 (Ch.05) ](./ch05_design_canvas.md) | [ 🌐 English ](/en/claude/ch04_whiteboards_docs)
+[首页](/) | [上一章 (Ch.03)](./ch03_hooks_code_mode.md) | [下一章 (Ch.05)](./ch05_design_canvas.md) | [English](/en/claude/ch04_whiteboards_docs)
 
 # Ch.04 从混沌脑暴到架构定稿：Claude Whiteboards 与结构化文档矩阵
 
-> 🎯 **具体工程麻烦**：复杂需求还没想清楚就直接进终端写代码，聊天记录滚了上百屏，架构决策、字段口径和排期散落在不同角落，最后写出一堆返工代码。  
-> 💡 **可运行实战代码与落地收益**：Whiteboards → Claude Docs / Sheets → 仓库 `docs/adr/` 双向锚定工作流；可直接落盘的 ADR 架构决策模板。  
-> ⚡ **社交传播 / 截图金句**：“聊天框是线性的，真实业务是网状的。先把混沌想法摊在白板上收敛，再让 Claude Code 动第一行代码。”
+> **具体工程麻烦**：复杂需求还没想清楚就直接进终端写代码，聊天记录滚了上百屏，架构决策、字段口径和排期散落在不同角落，最后写出一堆返工代码。  
+> **可运行实战代码与落地收益**：Whiteboards → Claude Docs / Sheets → 仓库 `docs/adr/` 双向锚定工作流；可直接落盘的 ADR 架构决策模板。  
+> **社交传播 / 截图金句**：“聊天框是线性的，真实业务是网状的。先把混沌想法摊在白板上收敛，再让 Claude Code 动第一行代码。”
 
 很多软件返工不是因为模型代码写得烂，而是需求本身在动工前就是一团浆糊。把未成型的业务流程、权限矩阵和异常分支塞进一维聊天框里来回讨论，翻十几屏之后，连人自己都忘了最终拍板的是第几版方案。
 
@@ -18,7 +18,7 @@ Anthropic 在 2026 年补齐了一套非线性的持久工作区矩阵——**Cl
 
 ---
 
-## 🎯 生活化直觉隐喻：先在白板墙上拉红线，再进施工现场
+## 生活化直觉隐喻：先在白板墙上拉红线，再进施工现场
 
 ```text
 【线性聊天直出代码】──> 边画图纸边砌墙，聊到第 30 句改了承重墙位置，前面砌的全得砸。
@@ -29,7 +29,7 @@ Anthropic 在 2026 年补齐了一套非线性的持久工作区矩阵——**Cl
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：把碎片想法直接倒进 Claude Whiteboards**
    打开 Claude Whiteboards，不用整理格式，直接用口语或粘贴会议纪要输入核心业务目标、角色与顾虑，让 Claude 自动按泳道分组、生成用户主流程与异常分支。
@@ -59,9 +59,7 @@ Whiteboards 最有价值的阶段不是画精美的汇报图，而是**早期混
 | **Claude Whiteboards** | 早期脑暴、业务泳道、跨模块依赖与复盘行动项 | 选中模块收敛后转 Docs，或导出至 Miro / Lucid |
 | **Claude Docs** | 正式 PRD、API 契约与技术设计说明书 | 导出 Markdown 存入仓库 `docs/specs/`，供 Claude Code 读取 |
 | **Claude Sheets** | 多标签页容量估算、API Token 成本测算与权限矩阵（含公式与下拉项） | 导出 CSV/JSON 作为测试用例输入与计费配置依据 |
-| **Claude Data** | 连接 Snowflake / Salesforce / Mixpanel / Amplitude 查线上真实指标 | 用真实线上漏斗与报错分布反推重构优先级 |
-
----
+| **Claude Data** | 连接 Snowflake / Salesforce / Mixpanel / Amplitude 查线上真实指标 | 用真实线上漏斗与报错分布反推重构优先级 | ---
 
 ## 4.3 文档与代码双向锚定：仓库级 ADR 落盘规范
 
@@ -92,14 +90,12 @@ Whiteboards 最有价值的阶段不是画精美的汇报图，而是**早期混
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **白板越画越大，最后没人能看懂全貌** | 把所有细节字段都堆在同一张画布上 | 白板只放模块边界、主链路与状态机；接口字段细节转入 Claude Docs 与 Sheets |
 | **文档写了，但 Claude Code 写代码时完全没遵守** | 文档留在云端未同步进 Git，且 `CLAUDE.md` 未建立路径索引 | 将定稿导出为 `docs/adr/*.md` 入库，并在 `CLAUDE.md` 加 1 行明确路径指引 |
-| **代码后来改了逻辑，ADR 文档却过期误导 AI** | 缺少代码变更同步文档的收尾检查 | 在 PR 检查 Skill 中加入断言：“修改核心域接口时必须同步更新对应 `docs/adr/`” |
+| **代码后来改了逻辑，ADR 文档却过期误导 AI** | 缺少代码变更同步文档的收尾检查 | 在 PR 检查 Skill 中加入断言：“修改核心域接口时必须同步更新对应 `docs/adr/`” | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.03) ](./ch03_hooks_code_mode.md) | [ ➡️ 下一章 (Ch.05) ](./ch05_design_canvas.md) | [ 🌐 English ](/en/claude/ch04_whiteboards_docs)
+[首页](/) | [上一章 (Ch.03)](./ch03_hooks_code_mode.md) | [下一章 (Ch.05)](./ch05_design_canvas.md) | [English](/en/claude/ch04_whiteboards_docs)

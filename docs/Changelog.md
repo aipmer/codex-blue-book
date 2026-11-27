@@ -6,6 +6,18 @@
 
 ---
 
+## 2026年11月27日（线上走查体验精修：首页重设计、全站去 Emoji 与术语通俗化）
+
+- **首页门户重设计（[index.md](file:///Users/hunkwu/Desktop/ai/book/index.md) / [en/index.md](file:///Users/hunkwu/Desktop/ai/book/en/index.md)）**：优化主副标题为「AI 编程实战蓝皮书 / 从入门到上线的实战指南」；行动按钮精简为 3 个并调整主次顺序为「规则生成器（主按钮）」「工具对比」「GitHub 开源仓库」；生成并启用涵盖 Codex / Claude / Gemini / Kimi 四书的全新 16:9 通用封面 `series_cover_{zh,en}.jpg`；4 张书籍卡片移除版本号与易误解的“xxx 出品”表述，提炼回归各工具核心优势，并替换为 OpenAI / Anthropic Claude / Google Gemini / Kimi 品牌矢量 Logo；移除底部与卡片重复的选型总表与冗余摘要；顶部导航将「Codex 频道」改为「更多AI发现（`https://pmer.cn/ai/`）」并暂隐顶部「飞书助理」入口；页脚版权改为可点击跳转主站的 `Copyright © 2026 pmer.cn`。
+- **桌面端左侧目录栏一键折叠/展开（[.vitepress/theme/Layout.vue](file:///Users/hunkwu/Desktop/ai/book/.vitepress/theme/Layout.vue)、[.vitepress/theme/custom.css](file:///Users/hunkwu/Desktop/ai/book/.vitepress/theme/custom.css)）**：参考主流文档站交互，在带侧边栏的桌面阅读页（`>= 960px`）左侧目录顶栏最右侧提供简洁图标按钮（展开态 `‹≡` / 收起态 `≡›`，带中英 tooltip），点击原地切换整条左侧目录收起/展开并自动通过 `localStorage` 记忆状态，收起后正文居中舒展且不遮挡页面内容、不影响移动端抽屉菜单。
+- **术语通俗化与规则生成器升级（[generator.md](file:///Users/hunkwu/Desktop/ai/book/generator.md) / [en/generator.md](file:///Users/hunkwu/Desktop/ai/book/en/generator.md)）**：将全站导航、首页、对比页、专页与合订本中的「项目规约 / 规约生成器」统一改为更直白的「项目规则 / AI 协作规则生成器」；同步升级中英双语生成器——主规则文件（`AGENTS.md` / `CLAUDE.md`）与工具专属配套配置（`~/.codex/config.toml` / `.claude/settings.json` / `.agents/rules/project.md` / `~/.kimi-code/config.toml`）拆分独立预览，新增**一键下载文件**按钮，将 Claude Code `PreToolUse` Hook 升级为可实际拦截 `rm -rf /` / `.env` / `git push --force` 的退出码 `2` 守卫命令，补充 Python 数据科学与科研及通用项目两个技术栈，并清理跨工具串台文案。
+- **四书专页结构统一**：[codex/index.md](file:///Users/hunkwu/Desktop/ai/book/codex/index.md)、[claude/index.md](file:///Users/hunkwu/Desktop/ai/book/claude/index.md)、[gemini/index.md](file:///Users/hunkwu/Desktop/ai/book/gemini/index.md)、[kimi/index.md](file:///Users/hunkwu/Desktop/ai/book/kimi/index.md) 及英文对应专页统一移除顶部封面图、开头新增“关于工具与出品公司”介绍段，全站“四书横向对比 / 横向选型”统一更名为“工具对比”。
+- **全站正文零 Emoji 与术语可读性修复**：剔除全站 101 篇 Markdown 正文、合订本与 8 份 PDF 中的全部 Emoji 图标（正文残留 0 个）；全局修复 `Colab（%%agy）` 在正文/标题中易显乱码的问题（改为「Google Colab 代理扩展」），并将用户可见标题/正文中的 `/swarm` 蜂群黑话替换为「多智能体协作」；同步更新 `stress_m2_chapters.js` 与 `e2e` 断言以守护“零 Emoji + 品牌 Logo + 精简首页”新契约。
+- **验证证据（本地）**：重编全部 8 份双语 PDF 与 5 份 `llms*.txt`；`npm run docs:build`（100 页零错）、`seo-locale-links`（1/1）、`verify_seo_geo`（500/500）、`stress_m2_chapters`（312/312）、`stress_m3_terminology`（16/16）、`stress_m3_dead_links`（99/99）、`e2e`（96/96）全绿；Ego Lite 本地预览实测 5 路由 × `390/768/1440px` 三视口零横向溢出、最小字号 `12px`、4 品牌 Logo 与新通用封面渲染正常。本次修订仅完成本地构建与预览，待确认后推送并重新部署生产域名 `book.pmer.cn`。
+- **交接**：分支 `main`（本轮体验精修已全部在本地构建测试通过，尚未提交/推送/部署）；下一步：获确认后提交推送并部署至 Vercel 正式项目 `codex-blue-book` 更新 `book.pmer.cn`。
+
+---
+
 ## 2026年11月26日（Phase 4 收官：《Kimi 实战蓝皮书》v1.0.0 完工，四大蓝皮书全系列本地集齐）
 
 - **《Kimi 实战蓝皮书》v1.0.0 全量中英双语完工（本地）**：新增 `kimi/ch01`–`ch10` 与 `en/kimi/ch01`–`ch10` 共 20 篇双语实战章节，覆盖 Kimi K3.1 Pro（~2.8T MoE / 104B 激活 / 1M Gated DSA / MoonViT-V2 / 开源权重与 `\$2/\$0.20/\$10` 成本账本）、TypeScript 版 Kimi Code CLI（`kimi` / `kimi web` / `kimi acp` 跨 Zed & JetBrains）、`explore/plan/coder` 分层子代理与 `/swarm` 限流调度、MoonViT-V2 录屏排障与 Figma MCP、百万 Token 金融三表勾稽建模、法律/生物医药零幻觉引用核验、Kimi Slides 原生 `.pptx`、3D Make（Three.js / 无头 Blender `bpy` / FreeCAD 参数化叶轮）、vLLM/SGLang 开源私有化集群及四模型混合军团收官策略；同步升级 `kimi/index.md` 与 `en/kimi/index.md`。

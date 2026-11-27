@@ -4,22 +4,22 @@ description: "Slice 1M-token context vertically across legacy monoliths, classif
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.05) ](./ch05_design_canvas.md) | [ ➡️ Next (Ch.07) ](./ch07_subagents_refactoring.md) | [ 🌐 中文版 ](/claude/ch06_legacy_governance)
+[Home](/en/) | [Prev (Ch.05)](./ch05_design_canvas.md) | [Next (Ch.07)](./ch07_subagents_refactoring.md) | [中文版](/claude/ch06_legacy_governance)
 
 # Ch.06 Legacy Monolith Reverse Engineering & Minimally Invasive Debt Cleanup
 
-> 🎯 **The Real Problem**: Inheriting a five-year-old undocumented monolith where one innocent field rename triggers a production outage, or staring at a breaking major framework upgrade with no safe starting point.  
-> 💡 **Tangible Output & Takeaway**: Vertical 1M-context slicing strategy, L1–L4 refactor risk matrix, and automated characterization-test generation specs.  
-> ⚡ **Viral Screenshot Quote**: *"Legacy code isn't scary because it's ugly—it's scary because nobody remembers which hidden contracts it protects. Lock existing behavior in snapshot tests before deleting a single line."*
+> **The Real Problem**: Inheriting a five-year-old undocumented monolith where one innocent field rename triggers a production outage, or staring at a breaking major framework upgrade with no safe starting point.  
+> **Tangible Output & Takeaway**: Vertical 1M-context slicing strategy, L1–L4 refactor risk matrix, and automated characterization-test generation specs.  
+> **Viral Screenshot Quote**: *"Legacy code isn't scary because it's ugly—it's scary because nobody remembers which hidden contracts it protects. Lock existing behavior in snapshot tests before deleting a single line."*
 
 Almost any coding agent can scaffold a greenfield app quickly. Real engineering leverage shows up in **hundred-thousand-line revenue-generating monoliths** touched by five generations of engineers. Claude Opus 5.5 and Sonnet 5.5 pair a **1M-token context window** with low cache-read costs—ideal for tracing hidden cross-module side effects when fed cleanly.
 
 ---
 
-## 🎯 Intuitive Metaphor: Reinforcing a Century-Old Bridge Without Closing Traffic
+## Intuitive Metaphor: Reinforcing a Century-Old Bridge Without Closing Traffic
 
 ```text
-[Full Rewrite]       ──> Close the bridge for six months, starve the business, and miss 30 historic edge cases.
+[Full Rewrite] ──> Close the bridge for six months, starve the business, and miss 30 historic edge cases.
 [Minimally Invasive] ──> 1. Ultrasonic scan (plan mode): rank structural beams by risk tier (L1–L4);
                          2. Temporary steel bracing (characterization tests): lock current load behavior as baseline;
                          3. Swap one beam at a time (anti-corruption layer): run tests green after every piece.
@@ -27,7 +27,7 @@ Almost any coding agent can scaffold a greenfield app quickly. Real engineering 
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 1. **Step 1: Slice vertically along one live business path**
    ```bash
@@ -47,9 +47,7 @@ Almost any coding agent can scaffold a greenfield app quickly. Real engineering 
 | **L1 Zero Risk** | Dead code, unused exports, duplicate helpers, missing types | Batch cleanup via Sonnet 5.5 + typecheck | Automated green tests |
 | **L2 Low Risk** | Fat functions, duplicate validation, N+1 queries | Add unit tests first, split via Opus 5.5 | `/diff` spot review |
 | **L3 Medium Risk** | Major framework or ORM upgrades, shared middleware swaps | Dedicated branch + smoke suite + phased rollout | Explicit rollback plan |
-| **L4 High Risk** | Billing math, auth core, primary schema migrations | Never big-bang rewrite; shadow traffic + characterization locks | Line-by-line human sign-off |
-
----
+| **L4 High Risk** | Billing math, auth core, primary schema migrations | Never big-bang rewrite; shadow traffic + characterization locks | Line-by-line human sign-off | ---
 
 ## 6.2 Characterization Tests: Capturing Reality Before Touching Logic
 
@@ -78,14 +76,12 @@ Never prompt "upgrade React 17 to 19 across the repo." Generate a risk-tagged fi
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **Refactoring quietly "fixed" a quirk and broke an upstream consumer** | Upstream callers depended on the old edge-case payload | Lock `LEGACY_BEHAVIOR` first; split refactors and behavior changes into separate PRs |
 | **Upgrading 60 files at once causes 200+ TypeScript errors** | Batch scope exceeded safe blast radius | `git reset --hard HEAD` and migrate one directory (5–8 files) per green commit |
-| **Long-context session loses precision mid-audit** | Lockfiles and build artifacts polluted context | Exclude `dist/`, `coverage/`, and `*.lock` in `.claudeignore` |
+| **Long-context session loses precision mid-audit** | Lockfiles and build artifacts polluted context | Exclude `dist/`, `coverage/`, and `*.lock` in `.claudeignore` | ---
 
----
-
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.05) ](./ch05_design_canvas.md) | [ ➡️ Next (Ch.07) ](./ch07_subagents_refactoring.md) | [ 🌐 中文版 ](/claude/ch06_legacy_governance)
+[Home](/en/) | [Prev (Ch.05)](./ch05_design_canvas.md) | [Next (Ch.07)](./ch07_subagents_refactoring.md) | [中文版](/claude/ch06_legacy_governance)

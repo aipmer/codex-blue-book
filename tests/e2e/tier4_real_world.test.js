@@ -8,10 +8,12 @@ const fs = require('fs');
 const path = require('path');
 
 describe('Tier 4 - Real-World Scenarios', () => {
-  test('T4-01', 'Reader Journey: Homepage -> Ch.01 Mindset -> Ch.08 Feishu Assistant navigation flow', { tier: 4, feature: 'F3,F4,F6,F7', milestone: 'M2,M3' }, ({ readFile, fileExists }) => {
-    // 1. Visit homepage
+  test('T4-01', 'Reader Journey: Homepage -> Codex Hub -> Ch.01 Mindset -> Ch.08 Feishu Assistant navigation flow', { tier: 4, feature: 'F3,F4,F6,F7', milestone: 'M2,M3' }, ({ readFile, fileExists }) => {
+    // 1. Visit homepage and Codex hub
     const indexMd = readFile('index.md');
-    expect(indexMd).toContain('/chapters/ch01_mindset');
+    expect(indexMd).toContain('/codex/');
+    const codexHub = readFile('codex/index.md');
+    expect(codexHub).toContain('/chapters/ch01_mindset');
 
     // 2. Open Ch.01
     expect(fileExists('chapters/ch01_mindset.md')).toBe(true);
@@ -71,8 +73,10 @@ describe('Tier 4 - Real-World Scenarios', () => {
 
   test('T4-05', 'International Reader Journey: en/ homepage to en/ chapters with Feishu Assistant terminology', { tier: 4, feature: 'F3,F4,F6', milestone: 'M2,M3' }, ({ readFile, fileExists }) => {
     const enIndex = readFile('en/index.md');
-    expect(enIndex).toContain('/en/ch01_mindset');
-    expect(enIndex).toContain('Feishu Assistant');
+    expect(enIndex).toContain('/en/codex/');
+    const enCodexHub = readFile('en/codex/index.md');
+    expect(enCodexHub).toContain('/en/ch01_mindset');
+    expect(enCodexHub).toContain('Feishu Assistant');
     expect(fileExists('en/ch01_mindset.md')).toBe(true);
     expect(fileExists('en/ch08_mobile_workflow.md')).toBe(true);
     const enCh08 = readFile('en/ch08_mobile_workflow.md');

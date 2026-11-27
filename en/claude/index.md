@@ -1,20 +1,21 @@
 ---
-title: "Claude Practical Blue Book (v1.0.0 Live): Primitives, /design & Legacy Governance"
-description: "Complete 10-chapter bilingual guide and PDF downloads for Claude 5.5, CLAUDE.md, Skills, Hooks, Subagents, MCP, /design artboards, /ship PR Steward, and Cowork critique."
+title: "Claude Practical Blue Book: Anthropic Claude Code Engineering Guide"
+description: "Overview of Anthropic and Claude Code (Claude 5.5 / Fable 5.2, Hooks, /design canvases, /ship), with all 10 bilingual chapters, PDF downloads, and runnable Hooks kit."
 lastUpdated: 2026-11-26
 ---
 
 # Claude Practical Blue Book: Programmable Primitives, Canvases & Legacy Governance
 
-![Claude Practical Blue Book Cover](/images/claude_cover.jpg)
+## About Claude Code & Anthropic
 
-> **Edition**: v1.0.0 Live · Verified **November 26, 2026**  
-> **Focus**: Master **Claude 5.5 (Opus / Sonnet / Haiku 5.5) + Fable 5.2** and **Claude Code v2.1.323+** primitives across **Whiteboards → `/design` artboards → 1M-context legacy refactoring → `/ship` PR automation**.
+**Anthropic**, founded in 2021 in San Francisco, is an AI safety and research company known for deep long-context reasoning and code comprehension. **Claude Code** (`v2.1.323+`) is its programmable coding agent platform powered by **Claude 5.5 (Opus / Sonnet / Haiku 5.5)** and **Fable 5.2** (1M context), combining `CLAUDE.md`, Skills, deterministic Hooks, isolated Subagents, MCP, **Whiteboards**, **`/design` artboards**, and **`/ship` PR automation** for large-repository refactoring and team governance.
+
+> **Book Focus**: Master Claude Code's programmable primitives across Whiteboards, `/design` artboards, 1M-context legacy refactoring, and `/ship` delivery (verified **November 26, 2026**, edition `v1.0.0`).
 
 - [Start Reading Ch.01](/en/claude/ch01_programmable_platform)
 - [Download English PDF](/downloads/claude_blue_book_en.pdf) · [中文版 PDF](/downloads/claude_blue_book_zh.pdf)
 - [Companion Runnable Hooks & Subagents Kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)
-- [Generate `CLAUDE.md` + `Hooks` Config](/en/generator) · [Compare All 4 Agents](/en/compare)
+- [Generate `CLAUDE.md` + `Hooks` Config](/en/generator) · [Tool Comparison](/en/compare)
 
 ---
 

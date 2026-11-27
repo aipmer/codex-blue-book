@@ -4,23 +4,23 @@ description: "Ship a subscription SaaS MVP with runnable companion code (example
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.09) ](./ch09_legacy_code.md) | [ ➡️ Next (Ch.11) ](./ch11_expo_mobile.md) | [ 🌐 中文版 ](../chapters/ch10_saas_mvp.md)
+[Index](/en/) | [Prev (Ch.09)](./ch09_legacy_code.md) | [Next (Ch.11)](./ch11_expo_mobile.md) | [中文版](../chapters/ch10_saas_mvp.md)
 
 # Ch.10 Monetization in Practice: Shipping a Commercial Next.js + Stripe SaaS MVP in 2 Hours
 
-> 🎯 **The Real Problem**: Spending two weeks wrestling with authentication, database schemas, Stripe Webhook signature verification, and cloud hosting before shipping anything.  
-> 💡 **Tangible Output & Takeaway**: Fully runnable production repo `examples/ch10-saas-mvp` (Next.js 15 + Supabase + Stripe subscriptions); Stripe CLI local payment test loops.  
-> ⚡ **Viral Screenshot Quote**: *"The ultimate milestone for indie developers isn't architectural perfection—it's receiving the first customer payment. Ship monetization in 2 hours."*
+> **The Real Problem**: Spending two weeks wrestling with authentication, database schemas, Stripe Webhook signature verification, and cloud hosting before shipping anything.  
+> **Tangible Output & Takeaway**: Fully runnable production repo `examples/ch10-saas-mvp` (Next.js 15 + Supabase + Stripe subscriptions); Stripe CLI local payment test loops.  
+> **Viral Screenshot Quote**: *"The ultimate milestone for indie developers isn't architectural perfection—it's receiving the first customer payment. Ship monetization in 2 hours."*
 
 For an indie developer, the first real milestone is collecting the first customer payment, not polishing boilerplate architecture for two weeks.
 
 This chapter directs Codex through a runnable `Next.js 15 (App Router) + Supabase (PostgreSQL) + Stripe` build with working checkout, webhook verification, and subscription gating.
 
-> 📦 **Companion Source Code**: [examples/ch10-saas-mvp](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp) — a fully runnable subscription-based AI translator (TransFlow) with its own CAP `AGENTS.md`. Verified with `npm install && npm run build`.
+> **Companion Source Code**: [examples/ch10-saas-mvp](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch10-saas-mvp) — a fully runnable subscription-based AI translator (TransFlow) with its own CAP `AGENTS.md`. Verified with `npm install && npm run build`.
 
 ---
 
-## 🎯 Intuitive Metaphor: Launching a Cash-Generating Street Food Cart
+## Intuitive Metaphor: Launching a Cash-Generating Street Food Cart
 
 Too many founders try to build a 5-star luxury hotel on Day 1:
 
@@ -28,7 +28,7 @@ Too many founders try to build a 5-star luxury hotel on Day 1:
 [Daydreaming 5-Star Hotel] ──> Spending 6 months designing an opulent lobby, importing plush carpets,
                                hiring dozens of waiters (over-engineering),
                                only to open doors and discover nobody wants to eat there. Bankruptcy.
-[Mobile Street Food Cart]  ──> ✅ You only need 3 essential tools:
+[Mobile Street Food Cart] ──> You only need 3 essential tools:
                                1. The Griddle (Next.js core product page: delivers immediate customer value);
                                2. The Storage Box (Supabase / PostgreSQL: stores user accounts and orders);
                                3. The QR Payment Code (Stripe subscription: collects real money into your bank).
@@ -38,7 +38,7 @@ Once a customer scans the code, pays \$10, and receives a hot meal in their hand
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 Set up and verify your local Stripe payment loop in 3 simple steps:
 
@@ -68,14 +68,14 @@ Our goal is to build a subscription-based AI translation service. First, initial
 Dispatch the following goal-driven specs to Codex:
 
 ```markdown
-# 🎯 Goal
+# Goal
 Write Prisma database models supporting User, Subscription, and TranslationRecord entities.
 
-# 🛑 Constraints
+# Constraints
 - Use PostgreSQL (connected via Supabase) as the database provider.
 - Subscription status must be an Enum type containing ACTIVE, CANCELED, and EXPIRED.
 
-# 🧪 Validation Specs
+# Validation Specs
 - Running `npx prisma validate` must return no syntax or definition errors.
 ```
 
@@ -84,7 +84,7 @@ Codex will automatically output a standard `prisma/schema.prisma` file containin
 ```prisma
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 generator client {
@@ -98,30 +98,30 @@ enum SubscriptionStatus {
 }
 
 model User {
-  id             String               @id @default(uuid())
-  email          String               @unique
-  createdAt      DateTime             @default(now())
-  subscription   Subscription?
-  records        TranslationRecord[]
+  id String @id @default(uuid())
+  email String @unique
+  createdAt DateTime @default(now())
+  subscription Subscription?
+  records TranslationRecord[]
 }
 
 model Subscription {
-  id             String               @id @default(uuid())
-  userId         String               @unique
-  stripeSubId    String               @unique
-  status         SubscriptionStatus
-  priceId        String
+  id String @id @default(uuid())
+  userId String @unique
+  stripeSubId String @unique
+  status SubscriptionStatus
+  priceId String
   currentPeriodEnd DateTime
-  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model TranslationRecord {
-  id             String               @id @default(uuid())
-  userId         String
-  sourceText     String
+  id String @id @default(uuid())
+  userId String
+  sourceText String
   translatedText String
-  createdAt      DateTime             @default(now())
-  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 ```
 
@@ -134,15 +134,15 @@ The core of a payment system is **callback security**. When a user successfully 
 ### Practice: Dispatching Webhook Route Specifications to Codex
 
 ```markdown
-# 🎯 Goal
+# Goal
 Implement a Next.js 15 App Router style Stripe Webhook route handler `/api/webhooks/stripe`.
 
-# 🛑 Constraints
+# Constraints
 - Verify the signature of incoming webhook requests using `stripe.webhooks.constructEvent` to prevent forgery attacks.
 - Update user subscription status in the database on receiving `checkout.session.completed` or `invoice.payment_succeeded` events.
 - Strictly avoid JSON parsing on the request body; Stripe verification requires the raw `req.text()` string.
 
-# 🧪 Validation Specs
+# Validation Specs
 - Write unit tests verifying that invalid signatures return 400, while valid signatures return 200.
 - The actual subscription billing period must be retrieved from the Stripe response, never hardcoded.
 ```
@@ -223,14 +223,12 @@ The value of a commercial MVP lies in delivery speed. Enforce strict boundary sp
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | `Webhook Error: No signatures found matching the expected signature` | Used `await req.json()` to parse body, corrupting raw payload bytes | Use `await req.text()` to get the raw string before passing to `constructEvent` |
 | **Credit card payment succeeds but database has zero new records** | Webhook URL misconfigured or `stripe listen` forwarder not running locally | Run `stripe listen`, confirming listener terminal prints `200 OK [POST /api/webhooks/stripe]` |
-| `DATABASE_URL` cannot connect to Supabase | Forgotten connection pooler (confusing Session vs. Transaction ports) | Verify DB connection string; ensure port 6543 (Transaction mode) is used in Serverless environments |
+| `DATABASE_URL` cannot connect to Supabase | Forgotten connection pooler (confusing Session vs. Transaction ports) | Verify DB connection string; ensure port 6543 (Transaction mode) is used in Serverless environments | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.09) ](./ch09_legacy_code.md) | [ ➡️ Next (Ch.11) ](./ch11_expo_mobile.md) | [ 🌐 中文版 ](../chapters/ch10_saas_mvp.md)
+[Index](/en/) | [Prev (Ch.09)](./ch09_legacy_code.md) | [Next (Ch.11)](./ch11_expo_mobile.md) | [中文版](../chapters/ch10_saas_mvp.md)

@@ -8,13 +8,13 @@ lastUpdated: 2026-11-26
 
 # Ch.10 2026 前沿瞭望：Gemini 4 演进路线、配额精算与跨界空间智能
 
-> 🎯 **本章解决的工程麻烦**：面对 Google AI Pro（\$19.99/月）、Google AI Ultra 与 Gemini API 按量计费三套体系，不清楚日常写代码、跑 `/swarm` 和上线生产服务各自该挂在哪张账单上；同时面对频繁更新的 Gemini 4 模型、Antigravity 新版和 Web 3D 空间能力，不知道怎么低成本跟进而不被噪音带偏。
+> **本章解决的工程麻烦**：面对 Google AI Pro（\$19.99/月）、Google AI Ultra 与 Gemini API 按量计费三套体系，不清楚日常写代码、跑 `/swarm` 和上线生产服务各自该挂在哪张账单上；同时面对频繁更新的 Gemini 4 模型、Antigravity 新版和 Web 3D 空间能力，不知道怎么低成本跟进而不被噪音带偏。
 >
-> 💡 **实战落地收益**：建立“**编码用订阅配额 + 生产走 API 分层路由**”的混合省钱账本，掌握从 AI Studio Three.js / Web 3D 空间演示到工程落地的边界，并拿走一套可长期复用的官方一手情报核对清单。
+> **实战落地收益**：建立“**编码用订阅配额 + 生产走 API 分层路由**”的混合省钱账本，掌握从 AI Studio Three.js / Web 3D 空间演示到工程落地的边界，并拿走一套可长期复用的官方一手情报核对清单。
 >
-> ⚡ **一句话结论**：真正拉开个人与团队差距的，不是追逐每一个新发布的概念视频，而是把订阅配额、API 缓存和稳定升级节奏管成一门长期算术。
+> **一句话结论**：真正拉开个人与团队差距的，不是追逐每一个新发布的概念视频，而是把订阅配额、API 缓存和稳定升级节奏管成一门长期算术。
 
-写到这里，《Gemini 实战蓝皮书》已经把 Antigravity 2.x、Gemini 4、AI Studio、Workspace MCP、Colab `%%agy`、`/swarm` 蜂群与跨端商业化全部串成闭环。最后一章不堆口号，只讲三件决定了你未来半年“省多少钱、少踩多少坑、往哪儿延伸”的务实问题。
+写到这里，《Gemini 实战蓝皮书》已经把 Antigravity 2.x、Gemini 4、AI Studio、Workspace MCP、Colab Colab 代理扩展、多智能体协作与跨端商业化全部串成闭环。最后一章不堆口号，只讲三件决定了你未来半年“省多少钱、少踩多少坑、往哪儿延伸”的务实问题。
 
 ---
 
@@ -27,11 +27,9 @@ lastUpdated: 2026-11-26
 | 使用场景 | 推荐计费通道 | 原因与省钱实操 |
 | :--- | :--- | :--- |
 | **本地日常写代码、单会话调试、轻量插件开发** | **Google AI Pro（\$19.99/月）** + Orchestrator（Neon + Hydrogen） | 月费固定可预期；开启 Orchestrator 把 70% 文件读写下沉给 Hydrogen，Pro 额度够大多数独立开发者全天高强度编码 |
-| **高并发 `/swarm` 蜂群、重度长程重构** | **Google AI Ultra** 或 **Antigravity + 企业 `AGY_ADC_AUTH`** | 更高并发窗口与更充裕的 Carbon / Neon 速率配额，减少高峰期排队冷却 |
+| **高并发 多智能体协作、重度长程重构** | **Google AI Ultra** 或 **Antigravity + 企业 `AGY_ADC_AUTH`** | 更高并发窗口与更充裕的 Carbon / Neon 速率配额，减少高峰期排队冷却 |
 | **对外 SaaS 线上接口、CI 自动化、大批量音视频处理** | **Gemini API / Vertex AI 按量计费**（严禁拿个人订阅做服务中转） | 合法合规且具备独立 SLA、项目级配额隔离；默认 `gemini-4-hydrogen`（\$1.50/\$7.50）兜底，长系统提示词与共享文档全部挂 Context Caching |
-| **2026-12-01 价格切换专项复核** | 检查所有 `gemini-4-argon` 调用点 | 2026-11-30 后 Argon 恢复 \$4/\$20 标准价；无需极限推理的线上接口提前切至 `gemini-4-hydrogen` 或 `gemini-4-neon` |
-
-一套典型的“一人公司健康账单”结构应该是：**研发工具固定月费可控 + 线上每个付费用户的多模态 API 成本被 Credits 网关死死锁在营收的 15%–20% 以内。**
+| **2026-12-01 价格切换专项复核** | 检查所有 `gemini-4-argon` 调用点 | 2026-11-30 后 Argon 恢复 \$4/\$20 标准价；无需极限推理的线上接口提前切至 `gemini-4-hydrogen` 或 `gemini-4-neon` | 一套典型的“一人公司健康账单”结构应该是：**研发工具固定月费可控 + 线上每个付费用户的多模态 API 成本被 Credits 网关死死锁在营收的 15%–20% 以内。**
 
 ---
 
@@ -70,7 +68,7 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **做一次账单分流体检**：检查你手头所有项目，确认开发机编码走订阅/企业网关、线上服务全部走独立服务端 `GEMINI_API_KEY`，且无任何 `gemini-4-argon` 遗留未评估 12 月 1 日调价。
 2. **收藏官方一手校验入口**：把 `https://antigravity.google/llms.txt` 与 Gemini API 定价页加入团队书签，每月固定做一次模型 ID 与配额复盘。
@@ -78,14 +76,12 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 盲目把线上默认模型切换为当天新发布的 preview 版导致线上 JSON 解析大面积报错 | Preview 模型输出格式或限流档位尚未稳定，且未经回归测试直接切全量 | 生产环境只绑定稳定版或经过灰度评测的模型 ID，通过环境变量灰度切流 5% 观察 24 小时再放量 |
 | 引入 Three.js 3D 预览后整站 Lighthouse 性能分暴跌 | 把 Three.js 静态 `import` 进了全局布局，导致不需要 3D 的页面首屏也下载大包 | 改为路由级动态 `import("three")` 或点击预览按钮后再加载，并监控首屏 JS 体积预算 |
-| 升级工具后老脚本里的 CLI 参数报未知选项错误 | 未核对 `/changelog` 中的弃用说明就直接升级了全局 CLI | 运行 `agy --help` 与 `/changelog` 核对新参数签名，将自动化脚本锁在经过 CI 验证的稳定参数子集上 |
-
----
+| 升级工具后老脚本里的 CLI 参数报未知选项错误 | 未核对 `/changelog` 中的弃用说明就直接升级了全局 CLI | 运行 `agy --help` 与 `/changelog` 核对新参数签名，将自动化脚本锁在经过 CI 验证的稳定参数子集上 | ---
 
 [返回 Gemini 专页](/gemini/) | [上一章：多模态商业化闭环实战](/gemini/ch09_multimodal_commercial_saas)

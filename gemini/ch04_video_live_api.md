@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.04 音视频理解与 Gemini Live API 实时交互应用落地
 
-> 🎯 **本章解决的工程麻烦**：用户只发来一段 25 秒的手机录屏说“点两次筛选按钮列表就闪一下变白”，写文字复现步骤根本讲不清时序；或者想做实时语音+摄像头指导助手，结果走传统“ASR → 文本模型 → TTS”三段拼接，延迟高达 3 秒、用户一插话系统还在自说自话。
+> **本章解决的工程麻烦**：用户只发来一段 25 秒的手机录屏说“点两次筛选按钮列表就闪一下变白”，写文字复现步骤根本讲不清时序；或者想做实时语音+摄像头指导助手，结果走传统“ASR → 文本模型 → TTS”三段拼接，延迟高达 3 秒、用户一插话系统还在自说自话。
 >
-> 💡 **实战落地收益**：掌握 Gemini 4 原生视频理解的“录屏直出修复补丁”工作流，用 `@google/genai` 搭通 **Gemini Live API** 双向 PCM 音频 + 1 FPS 视频帧实时管线，并用时间戳锚定与结构化 Schema 压制多模态幻觉。
+> **实战落地收益**：掌握 Gemini 4 原生视频理解的“录屏直出修复补丁”工作流，用 `@google/genai` 搭通 **Gemini Live API** 双向 PCM 音频 + 1 FPS 视频帧实时管线，并用时间戳锚定与结构化 Schema 压制多模态幻觉。
 >
-> ⚡ **一句话结论**：文字讲不清的交互时序直接喂视频，对延迟敏感的音视频对话直接走原生 Live WebSocket，不再拼三段胶水服务。
+> **一句话结论**：文字讲不清的交互时序直接喂视频，对延迟敏感的音视频对话直接走原生 Live WebSocket，不再拼三段胶水服务。
 
 文本模型看 UI 故障，好比让医生只听电话描述来判断皮疹。很多前端和移动端最难复现的 Bug——竞态闪烁、动画卡帧、键盘弹出把提交按钮顶出视口——全发生在时间轴上，单张静态截图根本抓不住。
 
@@ -49,17 +49,13 @@ async function diagnoseBugVideo(videoPath: string) {
 
   const res = await ai.models.generateContent({
     model: "gemini-4-neon",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          { fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
+        parts: [{ fileData: { fileUri: fileState.uri!, mimeType: "video/mp4" } },
           {
             text: "List every user interaction and visual anomaly with exact MM:SS timestamps, then infer the most likely frontend state or race condition root cause."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: {
@@ -109,9 +105,7 @@ diagnoseBugVideo("./bug-repro.mp4").catch(console.error);
 | **上行音频** | Raw 16-bit PCM, `16kHz`, Little-Endian, 单声道 | 前端用 `AudioWorklet` 按 100ms 切片推送，勿用主线程 `ScriptProcessorNode` |
 | **上行视频** | JPEG 抽帧，`<= 1 FPS`，长边 `768px` | 绝大多数陪练/质检场景 1 FPS 足够清晰，盲目推 15 FPS 只会爆账单与带宽 |
 | **下行音频** | Raw 16-bit PCM, `24kHz`, Little-Endian | 客户端维护抖动缓冲队列；收到 `interrupted: true` 时立即清空播放队列 |
-| **鉴权安全** | 后端签发 **Ephemeral Token（短效令牌）** | 浏览器绝不直连暴露长效 `GEMINI_API_KEY`，由服务端签发分钟级会话 Token |
-
-下面是一段标准 Live Session 连接与打断处理核心逻辑（`@google/genai`）：
+| **鉴权安全** | 后端签发 **Ephemeral Token（短效令牌）** | 浏览器绝不直连暴露长效 `GEMINI_API_KEY`，由服务端签发分钟级会话 Token | 下面是一段标准 Live Session 连接与打断处理核心逻辑（`@google/genai`）：
 
 ```typescript
 import { GoogleGenAI, Modality } from "@google/genai";
@@ -174,7 +168,7 @@ export async function startLiveAssistant(ephemeralToken: string, onAudioChunk: (
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑通离线视频排障**：用系统自带录屏录一段 15 秒网页操作视频保存为 `bug-repro.mp4`，设置 `GEMINI_API_KEY` 后运行上文 `diagnoseBugVideo` 脚本，查看 JSON 时间轴输出。
 2. **测算音视频成本**：执行 `node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs --model gemini-4-hydrogen --video-seconds 300 --output-tokens 8000 --budget 1`，提前摸清 5 分钟视频理解的准确成本。
@@ -182,14 +176,12 @@ export async function startLiveAssistant(ephemeralToken: string, onAudioChunk: (
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | Live API 播报像机器人慢放或尖声加速 | 把服务端返回的 `24kHz` PCM 按 `16kHz` 或 `48kHz` 喂给了 Web Audio `AudioContext` | 创建播放上下文时显式指定 `sampleRate: 24000`，上行采集单独做重采样到 `16000` |
 | 用户打断说话后，旧回答还在继续念完 | 未监听 `serverContent.interrupted` 事件，本地已排队的 `AudioBufferSourceNode` 没有立刻停止 | 收到 `interrupted` 标志时，遍历调用队列中所有待播节点的 `.stop()` 并重置播放时间戳 |
-| 长视频分析直接报错超时或账单暴涨 | 未压缩原始 4K 60fps 录屏，或对 1 小时视频全量高帧率扫描 | 先用 `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` 降采样再上传 |
-
----
+| 长视频分析直接报错超时或账单暴涨 | 未压缩原始 4K 60fps 录屏，或对 1 小时视频全量高帧率扫描 | 先用 `ffmpeg -i raw.mp4 -vf "fps=1,scale=960:-2" -c:v libx264 -crf 28 trim.mp4` 降采样再上传 | ---
 
 [返回 Gemini 专页](/gemini/) | [上一章：AI Studio 无损导出 Antigravity](/gemini/ch03_ai_studio_handoff) | [下一章：Google Workspace MCP 自动化](/gemini/ch05_workspace_mcp)

@@ -4,13 +4,13 @@ description: "覆盖 2026 年 11 月 Codex CLI 0.172.0 安装、GPT-6.2 Sol 配�
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.01) ](./ch01_mindset.md) | [ ➡️ 下一章 (Ch.03) ](./ch03_sandbox.md) | [ 🌐 English ](../en/ch02_setup.md)
+[主目录](/) | [上一章 (Ch.01)](./ch01_mindset.md) | [下一章 (Ch.03)](./ch03_sandbox.md) | [English](../en/ch02_setup.md)
 
 # Ch.02 跨端掌控：Codex 多端生产力矩阵搭建
 
-> 🎯 **具体工程麻烦**：新手急着和 AI 对话写代码，本地 Node 依赖错乱、权限没开对、客户端版本过旧，导致终端疯狂报错、白白烧掉几万 Token。  
-> 💡 **可运行实战代码与落地收益**：提供基于 2026 年 11 月 CLI 0.172.0 的安装与版本核对方案，ChatGPT 桌面端代码模式（Code Mode）与 Computer Use 权限核验命令，多端联调清单。
-> ⚡ **社交传播 / 截图金句**：“AI 编程第一步，先配稳你的指挥舱。别让本地依赖报错吃光你的宝贵 Token。”
+> **具体工程麻烦**：新手急着和 AI 对话写代码，本地 Node 依赖错乱、权限没开对、客户端版本过旧，导致终端疯狂报错、白白烧掉几万 Token。  
+> **可运行实战代码与落地收益**：提供基于 2026 年 11 月 CLI 0.172.0 的安装与版本核对方案，ChatGPT 桌面端代码模式（Code Mode）与 Computer Use 权限核验命令，多端联调清单。
+> **社交传播 / 截图金句**：“AI 编程第一步，先配稳你的指挥舱。别让本地依赖报错吃光你的宝贵 Token。”
 
 很多新手第一天用 Codex，急着直接让 AI 写完整项目，结果 Node 版本不匹配、沙盒权限没开对，终端反复报错，几分钟烧掉几万 Token。做 AI 原生开发，第一步是先把本地“指挥舱”配稳。
 
@@ -18,21 +18,21 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：打造你的“三端作战指挥舱”
+## 生活化直觉隐喻：打造你的“三端作战指挥舱”
 
 不要把各个端当成孤立的软件。想象你正在指挥一支太空探险队：
 
 ```Plaintext
-【Codex CLI】           ──> 主机舱的「动力引擎」：挂载在终端底层，负责高并发、纯代码批处理、跑测试与 CI 构建。
+【Codex CLI】 ──> 主机舱的「动力引擎」：挂载在终端底层，负责高并发、纯代码批处理、跑测试与 CI 构建。
 【ChatGPT 桌面端代码模式】──> 舰桥的「全景战术大屏」：多仓库 Diff 审查、Sites 页面原位预览、Computer Use 视觉走查。
-【手机 ChatGPT App】    ──> 舰长的「随身呼机」：离开工位时监控构建状态，高危操作手机一键批准（Guardian 自动分流）。
+【手机 ChatGPT App】 ──> 舰长的「随身呼机」：离开工位时监控构建状态，高危操作手机一键批准（Guardian 自动分流）。
 ```
 
 三端各司其职，你就不必死守在工位前按键盘，实现全天候随时随地编排交付。
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 如果你是第一天上手，不需要做复杂的网络穿透或高级脚本配置，按以下 3 步即可 5 分钟跑通首个任务：
 
@@ -116,9 +116,9 @@ Codex CLI 提供两种认证方式，**官方默认推荐 ChatGPT 账号登录**
 
 针对这一高频刚需，推荐使用配套开源利器 **[Codex Switch](https://github.com/aipmer/codex-switch)**（由本书主理人打造）：
 
-*   **秒级多供应商一键切换**：在 macOS 上一键平滑切换 OpenAI 官方、DeepSeek、Kimi Code 等主流模型供应商，突破单一平台的速率瓶颈。
-*   **跨供应商无缝续聊**：攻克了第三方模型推理字段差异、本地加密校验与 `thread_history.sqlite` 数据库字节偏移等复杂校验机制，切换模型供应商后仍能**无缝继承当前历史会话上下文**，无需从零重新交代项目背景。
-*   **开箱即用快速上手**：
+* **秒级多供应商一键切换**：在 macOS 上一键平滑切换 OpenAI 官方、DeepSeek、Kimi Code 等主流模型供应商，突破单一平台的速率瓶颈。
+* **跨供应商无缝续聊**：攻克了第三方模型推理字段差异、本地加密校验与 `thread_history.sqlite` 数据库字节偏移等复杂校验机制，切换模型供应商后仍能**无缝继承当前历史会话上下文**，无需从零重新交代项目背景。
+* **开箱即用快速上手**：
     ```bash
     # 克隆并安装 Codex Switch
     git clone https://github.com/aipmer/codex-switch.git
@@ -135,7 +135,7 @@ Codex CLI 提供两种认证方式，**官方默认推荐 ChatGPT 账号登录**
 
 ## 2.2 桌面端：ChatGPT 桌面客户端「Codex 代码模式」
 
-> ⚠️ **重要生态演进**：2026 年下半年，原独立的 Codex 桌面应用正式退役，所有桌面端能力已完全并入 **ChatGPT 桌面客户端**。
+> **重要生态演进**：2026 年下半年，原独立的 Codex 桌面应用正式退役，所有桌面端能力已完全并入 **ChatGPT 桌面客户端**。
 
 ### 1. 安装与进入代码模式
 
@@ -158,7 +158,7 @@ winget install OpenAI.ChatGPT
 
 ```Plaintext
 [macOS 系统设置] -> [隐私与安全性]
-  ├─ 辅助功能 (Accessibility)  ──> 勾选 [ChatGPT] (允许模拟鼠标点击/按键)
+  ├─ 辅助功能 (Accessibility) ──> 勾选 [ChatGPT] (允许模拟鼠标点击/按键)
   └─ 屏幕录制 (Screen Recording) ──> 勾选 [ChatGPT] (允许截屏并由 Vision 模型分析)
 ```
 
@@ -177,17 +177,15 @@ winget install OpenAI.ChatGPT
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见报错 / 翻车现象 | 核心原因 | 极速自救指南 |
 | :--- | :--- | :--- |
 | `--full-auto` 显示弃用警告 | 旧调用仍走兼容入口 | 新的非交互调用使用 `--sandbox workspace-write` |
 | `SyntaxError: Unexpected token ...` (Node 报错) | 本地 Node.js 版本低于 20 | 运行 `node -v` 检查，使用 `nvm use 20` 或 `nvm install 20` 升级 Node |
 | `Permission denied: Screen Recording` | macOS 未开启屏幕录制权限 | 打开「系统设置 → 隐私与安全性 → 屏幕录制」，将 ChatGPT / Terminal 勾选开启并重启客户端 |
-| `gpt-5.4` 或 `gpt-5.6` 在 Codex 登录态不可用 | `gpt-5.4` 已于 2026-08-31 退役，`gpt-5.6` 将于 2026-12-23 退役 | 检查 `~/.codex/config.toml`，改用 `gpt-6.2-sol` 或 `gpt-6.1-terra` |
+| `gpt-5.4` 或 `gpt-5.6` 在 Codex 登录态不可用 | `gpt-5.4` 已于 2026-08-31 退役，`gpt-5.6` 将于 2026-12-23 退役 | 检查 `~/.codex/config.toml`，改用 `gpt-6.2-sol` 或 `gpt-6.1-terra` | ---
 
----
-
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.01) ](./ch01_mindset.md) | [ ➡️ 下一章 (Ch.03) ](./ch03_sandbox.md) | [ 🌐 English ](../en/ch02_setup.md)
+[主目录](/) | [上一章 (Ch.01)](./ch01_mindset.md) | [下一章 (Ch.03)](./ch03_sandbox.md) | [English](../en/ch02_setup.md)
 
 [当前模型与迁移详解](./ch13_2026_frontier.md) · [Codex 工具频道上手指南](https://pmer.cn/ai-tools/codex/#guide)

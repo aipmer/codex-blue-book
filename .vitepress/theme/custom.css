@@ -143,10 +143,13 @@
 }
 
 .VPFeature .icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--vp-c-brand-1);
-  stroke-width: 2;
+  width: 24px;
+  height: 24px;
+  color: var(--vp-c-text-1);
+}
+
+.VPFeature .icon svg.brand-logo {
+  stroke: none;
 }
 
 .VPFeature.link {
@@ -262,4 +265,105 @@
   .VPNavBar .VPNavBarMenu.menu { display: none; }
   .VPNavBar .VPNavBarHamburger.hamburger { display: flex; }
   .VPNav .VPNavScreen { display: block; }
+}
+
+/* Desktop Collapsible Sidebar Controls (Compact Nav Fold Icon) */
+.sidebar-fold-btn {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .VPSidebar {
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .VPContent.has-sidebar {
+    transition: padding-left 0.25s ease;
+  }
+
+  .VPNavBar.has-sidebar .title {
+    padding-right: 44px;
+    z-index: 2;
+  }
+
+  html[lang^="en"] .VPNavBarTitle.has-sidebar .title {
+    font-size: 15px;
+  }
+
+  .VPNavBar.has-sidebar .content {
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .VPNavBar.has-sidebar .content-body {
+    pointer-events: auto;
+  }
+
+  .sidebar-fold-btn {
+    position: relative;
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-left: -38px;
+    margin-right: 4px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--vp-c-text-2);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .sidebar-fold-btn:hover {
+    background-color: var(--vp-c-default-soft);
+    color: var(--vp-c-text-1);
+  }
+
+  .sidebar-fold-btn:focus-visible {
+    outline: 2px solid var(--vp-c-brand-1);
+    outline-offset: 2px;
+  }
+
+  .sidebar-fold-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  html.sidebar-collapsed .VPSidebar {
+    transform: translateX(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  html.sidebar-collapsed .VPContent.has-sidebar,
+  html.sidebar-collapsed .VPFooter.has-sidebar,
+  html.sidebar-collapsed .VPNavBar.has-sidebar .divider {
+    padding-left: 0 !important;
+  }
+
+  html.sidebar-collapsed .VPNavBar.has-sidebar .wrapper {
+    background-color: var(--vp-nav-bg-color);
+  }
+
+  html.sidebar-collapsed .VPNavBarTitle.has-sidebar .title {
+    border-bottom-color: transparent !important;
+  }
+
+  html.sidebar-collapsed .VPNavBar.has-sidebar .curtain {
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .VPSidebar,
+  .VPContent.has-sidebar,
+  .sidebar-fold-btn {
+    transition: none;
+  }
 }

@@ -4,13 +4,13 @@ description: "Build automated sitemap and GEO distribution scripts plus daily St
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.11) ](./ch11_expo_mobile.md) | [ ➡️ Next (Ch.13) ](./ch13_2026_frontier.md) | [ 🌐 中文版 ](../chapters/ch12_commercialization.md)
+[Index](/en/) | [Prev (Ch.11)](./ch11_expo_mobile.md) | [Next (Ch.13)](./ch13_2026_frontier.md) | [中文版](../chapters/ch12_commercialization.md)
 
 # Ch.12 The Final Frontier: Building an Automated Growth Flywheel for a One-Person SaaS
 
-> 🎯 **The Real Problem**: Spending 99% of effort writing code and 1% acquiring users, launching to crickets because a solo creator cannot balance engineering and growth.  
-> 💡 **Tangible Output & Takeaway**: Automated marketing scripts (event-triggered telemetry digests, social distribution); core analytics dashboards; one-person SaaS growth pipelines.  
-> ⚡ **Viral Screenshot Quote**: *"Flawless code with zero users is useless. Let AI not only build your product, but also drive your automated distribution flywheel."*
+> **The Real Problem**: Spending 99% of effort writing code and 1% acquiring users, launching to crickets because a solo creator cannot balance engineering and growth.  
+> **Tangible Output & Takeaway**: Automated marketing scripts (event-triggered telemetry digests, social distribution); core analytics dashboards; one-person SaaS growth pipelines.  
+> **Viral Screenshot Quote**: *"Flawless code with zero users is useless. Let AI not only build your product, but also drive your automated distribution flywheel."*
 
 Across "Real-World Product Talk" and [pmer.cn](https://pmer.cn), the same bottleneck repeats: indie developers spend **99% of their time tuning code and only 1% finding paying users**.
 
@@ -18,14 +18,14 @@ Clean code with zero users does not pay the bills. This chapter wires SEO/GEO di
 
 ---
 
-## 🎯 Intuitive Metaphor: Building a Day-and-Night Self-Spinning "Hydraulic Irrigation Waterwheel"
+## Intuitive Metaphor: Building a Day-and-Night Self-Spinning "Hydraulic Irrigation Waterwheel"
 
 A commercial flywheel shouldn't depend on hauling water buckets by hand every day:
 
 ```Plaintext
 [Manual Bucket Hauling] ──> Writing code until midnight, then handing out flyers manually the next morning.
                             If you get sick for a single day, product updates stall and traffic drops to zero (fragile).
-[Hydraulic Waterwheel]  ──> ✅ You assemble this self-spinning waterwheel by the river:
+[Hydraulic Waterwheel] ──> You assemble this self-spinning waterwheel by the river:
                             1. The Flume (SEO & automated sitemaps: continuously absorbing long-tail search traffic);
                             2. The Milling Blades (Core SaaS features: solving real problems for real users);
                             3. The Grain Funnel (Stripe checkout & subscriptions: continuously generating cash flow);
@@ -36,7 +36,7 @@ Once this pipeline is assembled, whether you are sleeping, eating, or traveling,
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 Take your first step toward commercialization in 3 simple steps:
 
@@ -86,7 +86,7 @@ function generate() {
 </urlset>`;
 
   fs.writeFileSync(path.join(__dirname, '../public/sitemap.xml'), xml);
-  console.log('✅ Sitemap.xml generated successfully!');
+  console.log(' Sitemap.xml generated successfully!');
 }
 
 generate();
@@ -114,7 +114,7 @@ async function sendReport() {
     where: { status: 'ACTIVE' }
   });
 
-  const reportText = `📊 [Real-World Product Briefing]\nNew registered users yesterday: ${userCount}\nTotal active subscriptions: ${activeSubs}\n—— Keep going!`;
+  const reportText = ` [Real-World Product Briefing]\nNew registered users yesterday: ${userCount}\nTotal active subscriptions: ${activeSubs}\n—— Keep going!`;
 
   await axios.post(process.env.MOBILE_WEBHOOK_URL, {
     msg_type: 'text',
@@ -137,14 +137,12 @@ When anyone can generate thousands of lines of code in two hours, build a native
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | **Product launched with zero traffic for a month** | Siloed development without early SEO or social seeding | Share your building journey on X/Twitter/Indie Hackers immediately; use scripts to output multilingual long-tail blog posts |
 | **Obsessing over refactoring and afraid to ship or tweet** | Perfectionist trap and fear of public criticism | Remember: as long as core checkout works, ship minor flaws and iterate based on real feedback |
-| **Wasting half a day on minor layout tweaks** | Failing to delegate visual micro-adjustments to Codex | Use Computer Use (from Ch.07) for automated visual verification, freeing your time to talk to paying customers |
+| **Wasting half a day on minor layout tweaks** | Failing to delegate visual micro-adjustments to Codex | Use Computer Use (from Ch.07) for automated visual verification, freeing your time to talk to paying customers | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.11) ](./ch11_expo_mobile.md) | [ ➡️ Next (Ch.13) ](./ch13_2026_frontier.md) | [ 🌐 中文版 ](../chapters/ch12_commercialization.md)
+[Index](/en/) | [Prev (Ch.11)](./ch11_expo_mobile.md) | [Next (Ch.13)](./ch13_2026_frontier.md) | [中文版](../chapters/ch12_commercialization.md)

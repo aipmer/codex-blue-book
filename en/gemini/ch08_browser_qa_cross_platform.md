@@ -4,15 +4,15 @@ description: "Automate 3-viewport computed-CSS visual audits, ship compliant Chr
 lastUpdated: 2026-11-26
 ---
 
-[Back to Gemini Hub](/en/gemini/) | [Prev: /swarm & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak) | [Next: Commercial Multimodal SaaS](/en/gemini/ch09_multimodal_commercial_saas)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Multi-Agent Collaboration & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak) | [Next: Commercial Multimodal SaaS](/en/gemini/ch09_multimodal_commercial_saas)
 
 # Ch.08 Automated Browser Visual QA, Chrome MV3 & Firebase / Cloud Run Delivery
 
-> 🎯 **Engineering pain solved**: Desktop layouts ship with hidden 390px mobile overflows and sub-12px labels, Chrome MV3 extensions break on service-worker sleep or fail Web Store review, and deployments skip real post-deploy health verification.
+> **Engineering pain solved**: Desktop layouts ship with hidden 390px mobile overflows and sub-12px labels, Chrome MV3 extensions break on service-worker sleep or fail Web Store review, and deployments skip real post-deploy health verification.
 >
-> 💡 **What you ship**: A copy-paste 3-viewport browser audit probe, a compliant Chrome MV3 Side Panel extension using local Chrome Built-in AI with Gemini 4 cloud fallback, and a Secret-Manager-backed Firebase + Cloud Run deploy flow.
+> **What you ship**: A copy-paste 3-viewport browser audit probe, a compliant Chrome MV3 Side Panel extension using local Chrome Built-in AI with Gemini 4 cloud fallback, and a Secret-Manager-backed Firebase + Cloud Run deploy flow.
 >
-> ⚡ **Bottom line**: A green build is not visual sign-off—wire computed browser measurements, minimal extension scopes, and live HTTP checks into every release.
+> **Bottom line**: A green build is not visual sign-off—wire computed browser measurements, minimal extension scopes, and live HTTP checks into every release.
 
 ---
 
@@ -128,7 +128,7 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run the 3-viewport probe**: Verify `overflow === 0` and `minFont >= 12` at `390/768/1440px` locally before deploying.
 2. **Load unpacked MV3 extension**: Load `manifest.json` in `chrome://extensions` with Developer Mode enabled and confirm zero CSP console warnings.
@@ -136,14 +136,12 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Extension drops auth state after 30s idle | MV3 service worker terminated in-memory variables | Persist tokens in `chrome.storage.session` / `local` and replace `setInterval` with `chrome.alarms` |
 | 2-minute video request fails at 60s on Cloud Run | Default request timeout too short for synchronous media work | Raise `--timeout 120`, or upload directly to GCS and process asynchronously via queue |
-| Mobile flex row pushes CTA button off-screen | Missing `min-width: 0` or `overflow-wrap: anywhere` on flex children | Fix shared flex CSS and re-run the `390px` viewport probe |
+| Mobile flex row pushes CTA button off-screen | Missing `min-width: 0` or `overflow-wrap: anywhere` on flex children | Fix shared flex CSS and re-run the `390px` viewport probe | ---
 
----
-
-[Back to Gemini Hub](/en/gemini/) | [Prev: /swarm & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak) | [Next: Commercial Multimodal SaaS](/en/gemini/ch09_multimodal_commercial_saas)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Multi-Agent Collaboration & Alpine Peak Case Study](/en/gemini/ch07_swarm_alpine_peak) | [Next: Commercial Multimodal SaaS](/en/gemini/ch09_multimodal_commercial_saas)

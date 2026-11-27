@@ -4,13 +4,13 @@ description: "编写 .claude/agents/*.md 隔离上下文并行分治，拆解官
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.06) ](./ch06_legacy_governance.md) | [ ➡️ 下一章 (Ch.08) ](./ch08_ship_pr_steward.md) | [ 🌐 English ](/en/claude/ch07_subagents_refactoring)
+[首页](/) | [上一章 (Ch.06)](./ch06_legacy_governance.md) | [下一章 (Ch.08)](./ch08_ship_pr_steward.md) | [English](/en/claude/ch07_subagents_refactoring)
 
 # Ch.07 多子代理分治（Subagents）与长时自主重构实战
 
-> 🎯 **具体工程麻烦**：主会话一边搜代码、一边改实现、一边跑测试、一边做安全评审，上下文很快变成一锅粥，既互相干扰又让“自己审自己”形同虚设。  
-> 💡 **可运行实战代码与落地收益**：三套可直接落盘的 `.claude/agents/*.md` 配置（只读探索 / 领域重构 / 独立评审）；拆解官方 Rakuten 7 小时重构与 Anthropic Python→Rust 差分测试闭环。  
-> ⚡ **社交传播 / 截图金句**：“别让写代码的同一个上下文去审自己的代码。把探索、执行与审查拆进隔离 Subagents，长时自主重构才稳得住。”
+> **具体工程麻烦**：主会话一边搜代码、一边改实现、一边跑测试、一边做安全评审，上下文很快变成一锅粥，既互相干扰又让“自己审自己”形同虚设。  
+> **可运行实战代码与落地收益**：三套可直接落盘的 `.claude/agents/*.md` 配置（只读探索 / 领域重构 / 独立评审）；拆解官方 Rakuten 7 小时重构与 Anthropic Python→Rust 差分测试闭环。  
+> **社交传播 / 截图金句**：“别让写代码的同一个上下文去审自己的代码。把探索、执行与审查拆进隔离 Subagents，长时自主重构才稳得住。”
 
 当单次重构涉及几十个文件、持续运行数小时，单线程对话必然撞上两个天花板：第一，中间搜索过程和海量测试日志迅速污染主窗口；第二，负责改代码的模型会天然偏袒自己刚写的假设，自我审查几乎抓不出盲区。
 
@@ -18,7 +18,7 @@ Claude Code 的 **Subagents（`.claude/agents/*.md`）** 正是为此而生—�
 
 ---
 
-## 🎯 生活化直觉隐喻：把“全能一人岗”拆成“侦察兵 + 施工队 + 独立监理”
+## 生活化直觉隐喻：把“全能一人岗”拆成“侦察兵 + 施工队 + 独立监理”
 
 ```text
 【单会话大包大揽】──> 同一个人既画图、又施工、又自己签验收单，桌子堆满废纸，越干越糊涂。
@@ -30,7 +30,7 @@ Claude Code 的 **Subagents（`.claude/agents/*.md`）** 正是为此而生—�
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：在项目创建 `.claude/agents/` 目录**
    ```bash
@@ -114,7 +114,7 @@ Anthropic 公开的企业客户案例中，**Rakuten（乐天）**在横跨电�
 ```text
 同一批真实/合成请求流量
     ├──► 旧线上基线（Python 服务） ──► 响应 A（状态码 + Header + JSON 结构）
-    └──► 新迁移实现（Rust 服务）   ──► 响应 B（状态码 + Header + JSON 结构）
+    └──► 新迁移实现（Rust 服务） ──► 响应 B（状态码 + Header + JSON 结构）
                                             │
                                             ▼
                          差分比对器自动抓出任何字段偏差 ──► 派发 Claude 子代理定向修复
@@ -124,14 +124,12 @@ Anthropic 公开的企业客户案例中，**Rakuten（乐天）**在横跨电�
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **并行开 5 个可写子代理同时改同一个模块，互相覆盖代码** | 多写者共享同一工作目录 | 写操作按互斥目录切分，或为每个写子代理分配独立 `git worktree` |
 | **子代理回传了几千行原始日志，瞬间撑爆主会话** | 子代理提示词未限制输出格式与长度 | 在 `.claude/agents/*.md` 硬性规定“仅返回不超过 40 行的结构化摘要与文件路径” |
-| **主代理从不自动调用你写好的自定义子代理** | `description` 缺少清晰分派条件 | 在 `description` 显式写明触发时机，或在主 Prompt 直接点名调用 `@arch-reviewer` |
+| **主代理从不自动调用你写好的自定义子代理** | `description` 缺少清晰分派条件 | 在 `description` 显式写明触发时机，或在主 Prompt 直接点名调用 `@arch-reviewer` | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.06) ](./ch06_legacy_governance.md) | [ ➡️ 下一章 (Ch.08) ](./ch08_ship_pr_steward.md) | [ 🌐 English ](/en/claude/ch07_subagents_refactoring)
+[首页](/) | [上一章 (Ch.06)](./ch06_legacy_governance.md) | [下一章 (Ch.08)](./ch08_ship_pr_steward.md) | [English](/en/claude/ch07_subagents_refactoring)

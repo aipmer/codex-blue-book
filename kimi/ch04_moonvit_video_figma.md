@@ -4,15 +4,15 @@ description: "发挥 Kimi K3.1 Pro 内置 MoonViT-V2 原生分辨率视觉与视
 lastUpdated: 2026-11-26
 ---
 
-[返回 Kimi 专页](/kimi/) | [上一章：分层子代理与 /swarm 蜂群实战](/kimi/ch03_subagents_swarm) | [下一章：金融投研与百万 Token 财报建模](/kimi/ch05_finance_audit_modeling)
+[返回 Kimi 专页](/kimi/) | [上一章：分层子代理与 多智能体协作实战](/kimi/ch03_subagents_swarm) | [下一章：金融投研与百万 Token 财报建模](/kimi/ch05_finance_audit_modeling)
 
 # Ch.04 MoonViT-V2 视觉工程流：录屏诊断、Figma 还原与前端精修
 
-> 🎯 **本章解决的工程麻烦**：前端遇到“快速切换 Tab 时弹窗闪一下错位”“滚动吸顶把正文遮掉 12 像素”这类动态 Bug，写 500 字工单开发半天复现不出来；还原设计师给的复杂 Figma 稿时，光靠截图量间距、抄字号和补无障碍标签耗时一整天。
+> **本章解决的工程麻烦**：前端遇到“快速切换 Tab 时弹窗闪一下错位”“滚动吸顶把正文遮掉 12 像素”这类动态 Bug，写 500 字工单开发半天复现不出来；还原设计师给的复杂 Figma 稿时，光靠截图量间距、抄字号和补无障碍标签耗时一整天。
 >
-> 💡 **实战落地收益**：用 **Kimi K3.1 Pro（MoonViT-V2）** 跑通 **操作录屏直出修复补丁（Video-to-Fix）**，并把 **Figma MCP** 接进 Kimi Code，一次性输出高保真响应式组件与可访问性（a11y）检查清单。
+> **实战落地收益**：用 **Kimi K3.1 Pro（MoonViT-V2）** 跑通 **操作录屏直出修复补丁（Video-to-Fix）**，并把 **Figma MCP** 接进 Kimi Code，一次性输出高保真响应式组件与可访问性（a11y）检查清单。
 >
-> ⚡ **一句话结论**：原生分辨率视觉编码器配合设计稿结构化 MCP，让前端交付从“肉眼对照像素猜样式”变成“看录屏定根因、读节点树生成代码”。
+> **一句话结论**：原生分辨率视觉编码器配合设计稿结构化 MCP，让前端交付从“肉眼对照像素猜样式”变成“看录屏定根因、读节点树生成代码”。
 
 传统多模态模型把高清界面截图强行切成固定小图块缩放，经常把 `12px` 小字、细边框和 1 像素对齐偏差糊掉。**MoonViT-V2** 采用原生分辨率编码策略，保留高密度 UI 细节与连续视频帧时序——这在前端排障与高审美还原上优势非常直接。
 
@@ -65,11 +65,9 @@ ffmpeg -i raw-repro.mov -vf "scale='min(1280,iw)':-2,fps=4" \
 import { chromium } from "playwright";
 
 const URL = process.argv[2] || "http://127.0.0.1:4173/";
-const VIEWPORTS = [
-  { name: "mobile", width: 390, height: 844 },
+const VIEWPORTS = [{ name: "mobile", width: 390, height: 844 },
   { name: "tablet", width: 768, height: 1024 },
-  { name: "desktop", width: 1440, height: 900 }
-];
+  { name: "desktop", width: 1440, height: 900 }];
 
 const browser = await chromium.launch();
 const page = await browser.newPage();
@@ -98,7 +96,7 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑一次 Video-to-Fix**：把你项目里一个偶发样式跳动录 15 秒压缩成 MP4，喂给 Kimi Code 定位根因并验证修复补丁。
 2. **用 Figma MCP 还原一个复杂卡片**：先要求映射现有 CSS Token，再生成组件代码，核对是否消灭了多余的魔法数字。
@@ -106,14 +104,12 @@ process.exit(failed ? 1 : 0);
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 投喂 4K Retina 录屏后响应极慢或超出单请求体积 | 原始 `.mov` 码率高达 50MB+ 且帧率 60fps | 先用 `ffmpeg` 降到 `1280px` 宽 + `4 fps` + `-an` 去音轨，文件瞬间缩小 20 倍且文字清晰 |
 | Figma 还原出来桌面端一模一样，手机端全挤在一起 | 只按桌面端固定像素 `width: 480px` 写死，未把 Figma Auto Layout 转成弹性 Grid/Flex | 规则中要求所有容器使用 `max-width` + `width: 100%` + `minmax(0, 1fr)`，并在 `390px` 视口强制验收 |
-| 生成的纯图标按钮被无障碍审计报严重错误 | 用了 `<div onClick>` 代替 `<button>`，且未加 `aria-label` | 强制使用原生 `<button type="button" aria-label="...">`，保留键盘 `Tab` 与 `Enter` 聚焦可用性 |
+| 生成的纯图标按钮被无障碍审计报严重错误 | 用了 `<div onClick>` 代替 `<button>`，且未加 `aria-label` | 强制使用原生 `<button type="button" aria-label="...">`，保留键盘 `Tab` 与 `Enter` 聚焦可用性 | ---
 
----
-
-[返回 Kimi 专页](/kimi/) | [上一章：分层子代理与 /swarm 蜂群实战](/kimi/ch03_subagents_swarm) | [下一章：金融投研与百万 Token 财报建模](/kimi/ch05_finance_audit_modeling)
+[返回 Kimi 专页](/kimi/) | [上一章：分层子代理与 多智能体协作实战](/kimi/ch03_subagents_swarm) | [下一章：金融投研与百万 Token 财报建模](/kimi/ch05_finance_audit_modeling)

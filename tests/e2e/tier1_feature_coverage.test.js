@@ -105,9 +105,10 @@ describe('Tier 1 - Feature Coverage', () => {
     expect(md).toMatch(/tagline\s*:\s*".*"/);
   });
 
-  test('F3-T1-02', 'index.md hero action 3 uses unified terminology 飞书助理', { tier: 1, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
+  test('F3-T1-02', 'index.md hero actions stay focused and eliminate legacy terminology', { tier: 1, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
     const md = readFile('index.md');
-    expect(md).toContain('text: 飞书助理');
+    expect(md).toContain('text: 工具对比');
+    expect(md).toContain('text: 规则生成器');
     expect(md).not.toContain('text: 离线看护助理');
   });
 
@@ -122,19 +123,22 @@ describe('Tier 1 - Feature Coverage', () => {
     expect(featuresSection).not.toContain('鸿沟');
   });
 
-  test('F3-T1-04', 'index.md 4 feature cards structure follows pain points + benefits', { tier: 1, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
+  test('F3-T1-04', 'index.md 4 feature cards cover all 4 tools with brand logos and plain copy', { tier: 1, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
     const md = readFile('index.md');
     const featuresSection = md.split('features:')[1] || '';
-    // Checks that cards address loops, terminal/testing, feishu, and fullstack MVP
-    expect(featuresSection).toMatch(/死循环|听话/);
-    expect(featuresSection).toMatch(/终端|测试/);
-    expect(featuresSection).toMatch(/飞书|值班/);
-    expect(featuresSection).toMatch(/商业化|MVP/);
+    expect(featuresSection).toContain('Codex 蓝皮书');
+    expect(featuresSection).toContain('Claude 蓝皮书');
+    expect(featuresSection).toContain('Gemini 蓝皮书');
+    expect(featuresSection).toContain('Kimi 蓝皮书');
+    expect(featuresSection).toContain('brand-logo');
   });
 
   test('F3-T1-05', 'en/index.md provides synchronized English hero and feature cards without raw jargon', { tier: 1, feature: 'F3', milestone: 'M2' }, ({ readFile }) => {
     const md = readFile('en/index.md');
-    expect(md).toContain('Feishu Assistant');
+    expect(md).toContain('Codex Blue Book');
+    expect(md).toContain('Claude Blue Book');
+    expect(md).toContain('Gemini Blue Book');
+    expect(md).toContain('Kimi Blue Book');
     expect(md).not.toContain('CAP & Anti-Loop safeguards');
     expect(md).not.toContain('Sandbox Penetration');
     expect(md).not.toContain('bridge the gap between AI generation and actual execution');
@@ -259,10 +263,10 @@ describe('Tier 1 - Feature Coverage', () => {
     expect(matches.length).toBe(0);
   });
 
-  test('F6-T1-03', 'index.md and config.mts consistently use 飞书助理', { tier: 1, feature: 'F6', milestone: 'M3' }, ({ readFile }) => {
-    const indexMd = readFile('index.md');
+  test('F6-T1-03', 'codex hub and config.mts consistently use 飞书助理', { tier: 1, feature: 'F6', milestone: 'M3' }, ({ readFile }) => {
+    const codexHub = readFile('codex/index.md');
     const configMts = readFile('.vitepress/config.mts');
-    expect(indexMd).toContain('飞书助理');
+    expect(codexHub).toContain('飞书助理');
     expect(configMts).toContain('飞书助理');
   });
 
@@ -274,8 +278,9 @@ describe('Tier 1 - Feature Coverage', () => {
 
   test('F6-T1-05', 'English files consistently use Feishu Assistant or Feishu Sentinel', { tier: 1, feature: 'F6', milestone: 'M3' }, ({ readFile }) => {
     const enIndex = readFile('en/index.md');
+    const enCodexHub = readFile('en/codex/index.md');
     const enCh8 = readFile('en/ch08_mobile_workflow.md');
-    expect(enIndex).toMatch(/Feishu Assistant|Feishu Sentinel/);
+    expect(enCodexHub).toMatch(/Feishu Assistant|Feishu Sentinel/);
     expect(enCh8).toMatch(/Feishu Assistant|Feishu Sentinel|Sentinel/);
     expect(enIndex).not.toContain('Offline Watchdog Assistant');
   });

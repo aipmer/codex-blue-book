@@ -4,30 +4,30 @@ description: "附完整可运行样例 examples/ch11-expo-mobile，用 Codex + E
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.10) ](./ch10_saas_mvp.md) | [ ➡️ 下一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch11_expo_mobile.md)
+[主目录](/) | [上一章 (Ch.10)](./ch10_saas_mvp.md) | [下一章 (Ch.12)](./ch12_commercialization.md) | [English](../en/ch11_expo_mobile.md)
 
 # Ch.11 触角延伸：Expo 跨端原生 App 开发与云端打包
 
-> 🎯 **具体工程麻烦**：做完 Web 想做 App，但 Xcode 证书、Android Gradle、Cocoapods 依赖地狱让人崩溃，环境配三天打不出包。  
-> 💡 **可运行实战代码与落地收益**：完整可运行代码库 `examples/ch11-expo-mobile`（Expo SDK 57 + Expo Router + NativeWind）；零本地配置云端打包 `eas build`。  
-> ⚡ **社交传播 / 截图金句**：“不用配本地 Xcode 和 Android Studio，借助云端打包与 AI 报错自愈，一个人也能轻松交付双端原生应用。”
+> **具体工程麻烦**：做完 Web 想做 App，但 Xcode 证书、Android Gradle、Cocoapods 依赖地狱让人崩溃，环境配三天打不出包。  
+> **可运行实战代码与落地收益**：完整可运行代码库 `examples/ch11-expo-mobile`（Expo SDK 57 + Expo Router + NativeWind）；零本地配置云端打包 `eas build`。  
+> **社交传播 / 截图金句**：“不用配本地 Xcode 和 Android Studio，借助云端打包与 AI 报错自愈，一个人也能轻松交付双端原生应用。”
 
 Web 版 SaaS 跑通后，很多独立开发者想顺手出移动端 App，却常在本地环境配置阶段就劝退：iOS 证书、Android Gradle、CocoaPods 冲突，折腾三天打不出一个包。
 
 对独立开发者而言，**Expo + EAS 云端打包**是最省事的解法。配合 Codex 自动解析云端构建日志，可以绕开本地 Xcode 和 Android Studio 配置，直接产出可测试和可上架的双端安装包。
 
-> 📦 **配套实战源码**：[examples/ch11-expo-mobile](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch11-expo-mobile) —— 完整可运行的 Expo SDK 57 工程（Expo Router `src/app` 路由 + NativeWind + EAS 三档打包配置），自带 CAP 协议 `AGENTS.md`，已通过 `npx expo lint`（零错误）与 `npx expo-doctor`（20/20）验证。
+> **配套实战源码**：[examples/ch11-expo-mobile](https://github.com/aipmer/codex-blue-book/tree/main/examples/ch11-expo-mobile) —— 完整可运行的 Expo SDK 57 工程（Expo Router `src/app` 路由 + NativeWind + EAS 三档打包配置），自带 CAP 协议 `AGENTS.md`，已通过 `npx expo lint`（零错误）与 `npx expo-doctor`（20/20）验证。
 
 ---
 
-## 🎯 生活化直觉隐喻：写好剧本，让“云端工坊”为你定制戏服
+## 生活化直觉隐喻：写好剧本，让“云端工坊”为你定制戏服
 
 跨端开发不需要把你的电脑变成重型加工厂：
 
 ```Plaintext
 【传统原生开发】 ──> 你在家里自己买炼钢炉（装几十 G 的 Xcode 和 Android Studio）、
                      买织布机（配各种 Gradle/Cocoapods 运行环境），动不动断电报错，三天造不出一只鞋。
-【Expo + EAS 模式】──> ✅ 你只负责写剧本（写 React Native / TypeScript 核心代码）：
+【Expo + EAS 模式】──> 你只负责写剧本（写 React Native / TypeScript 核心代码）：
                      - 剧本写好后，一键发给「云端特种裁缝工坊」（EAS Build）；
                      - 云端自动为你剪裁出 iOS 的 IPA 和 Android 的 APK 安装包；
                      - 手机直接扫码就能把做好的衣服套在身上跑！
@@ -37,7 +37,7 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 用 3 步在手机真机上看到你的第一个跨端 App：
 
@@ -63,15 +63,15 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
 给 Codex 下达 Specs 指令：
 
 ```markdown
-# 🎯 Goal
+# Goal
 初始化一个使用 TypeScript 的 React Native Expo 项目。
 
-# 🛑 Constraints
+# Constraints
 - 使用最新稳定的 Expo SDK 57，搭配 Expo Router 实现基于文件系统的路由。
 - 引入 NativeWind 作为 Tailwind 风格的样式方案。
 - 目录约定使用 src/ 前缀（即 src/app/ 作为路由根）。
 
-# 🧪 Validation Specs
+# Validation Specs
 - 运行 `npx expo lint` 无错误。
 - 运行 `npx expo-doctor` 检查依赖版本对齐（必须 20/20 通过）。
 ```
@@ -81,11 +81,11 @@ Codex 就是你在工坊里的剧本精修助理，负责在你写漏了依赖�
 ```Plaintext
 src/
 ├── app/
-│   ├── index.tsx         # APP 首页
-│   └── _layout.tsx       # 全局路由导航布局
+│ ├── index.tsx # APP 首页
+│ └── _layout.tsx # 全局路由导航布局
 ├── components/
 └── hooks/
-app.json                  # Expo 核心配置文件
+app.json # Expo 核心配置文件
 package.json
 ```
 
@@ -103,7 +103,7 @@ React Native 开发最忌讳使用普通 `npm install` 安装带底层原生代�
 请改用 `npx expo install react-native-reanimated` 重新安装该依赖，它会自动适配当前的 Expo SDK 版本。在本项目中，严禁使用普通的 `npm install` 安装任何原生依赖包。请将该铁律写入 AGENTS.md。
 ```
 
-> 💡 **主理人心法**：`npx expo install` 是官方认证的版本锁。任何时候只要原生模块报错，强制使用该命令覆盖安装，90% 的依赖地狱都会被自动抹平。
+> **主理人心法**：`npx expo install` 是官方认证的版本锁。任何时候只要原生模块报错，强制使用该命令覆盖安装，90% 的依赖地狱都会被自动抹平。
 
 ---
 
@@ -152,14 +152,12 @@ codex exec --sandbox read-only "分析 eas-build.log，定位失败原因并给�
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速排查与自救指南 |
 | :--- | :--- | :--- |
 | **手机扫码显示“Could not connect to development server”** | 手机与电脑不在同一个 Wi-Fi 局域网，或电脑开启了路由器防火墙 | 运行 `npx expo start --tunnel`，强制使用公网穿透隧道模式，零网络门槛 |
 | `Invariant Violation: "main" has not been registered` | 入口路由文件丢失或 `app.json` 中配置的 entry 路径错误 | 检查 `package.json` 中的 `"main": "expo-router/entry"` 是否被意外篡改 |
-| **安装新组件后终端直接报红红屏** | 误用了 `npm install` 安装了不兼容当前 SDK 版本的包 | 运行 `npx expo install <package-name>`，或运行 `npx expo-doctor` 诊断修复 |
+| **安装新组件后终端直接报红红屏** | 误用了 `npm install` 安装了不兼容当前 SDK 版本的包 | 运行 `npx expo install <package-name>`，或运行 `npx expo-doctor` 诊断修复 | ---
 
----
-
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.10) ](./ch10_saas_mvp.md) | [ ➡️ 下一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch11_expo_mobile.md)
+[主目录](/) | [上一章 (Ch.10)](./ch10_saas_mvp.md) | [下一章 (Ch.12)](./ch12_commercialization.md) | [English](../en/ch11_expo_mobile.md)

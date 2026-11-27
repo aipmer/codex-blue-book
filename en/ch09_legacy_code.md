@@ -4,13 +4,13 @@ description: "Map undocumented spaghetti codebases with GPT-6.2 Sol 1M context, 
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.08) ](./ch08_mobile_workflow.md) | [ ➡️ Next (Ch.10) ](./ch10_saas_mvp.md) | [ 🌐 中文版 ](../chapters/ch09_legacy_code.md)
+[Index](/en/) | [Prev (Ch.08)](./ch08_mobile_workflow.md) | [Next (Ch.10)](./ch10_saas_mvp.md) | [中文版](../chapters/ch09_legacy_code.md)
 
 # Ch.09 Architecture Revitalization: Panoramic Analysis and Progressive Decoupling of Legacy Systems
 
-> 🎯 **The Real Problem**: Inheriting tens of thousands of lines of undocumented legacy spaghetti code with zero tests, where editing one line breaks three unexpected modules.  
-> 💡 **Tangible Output & Takeaway**: GPT-6.2 Sol 1M-context panoramic topology prompts; interface behavioral snapshot baseline tests; and 3-step minimally invasive decoupling.  
-> ⚡ **Viral Screenshot Quote**: *"Facing hundreds of thousands of lines of undocumented legacy code? Don't impulsively rewrite from scratch. Let AI map the topology, lock down regression tests, then perform microsurgery."*
+> **The Real Problem**: Inheriting tens of thousands of lines of undocumented legacy spaghetti code with zero tests, where editing one line breaks three unexpected modules.  
+> **Tangible Output & Takeaway**: GPT-6.2 Sol 1M-context panoramic topology prompts; interface behavioral snapshot baseline tests; and 3-step minimally invasive decoupling.  
+> **Viral Screenshot Quote**: *"Facing hundreds of thousands of lines of undocumented legacy code? Don't impulsively rewrite from scratch. Let AI map the topology, lock down regression tests, then perform microsurgery."*
 
 Inheriting an undocumented, test-free codebase is high-risk work: one small change can break three unrelated endpoints.
 
@@ -18,14 +18,14 @@ Resist the urge to rewrite from scratch. With **GPT-6.2 Sol / Astra's 1.05M cont
 
 ---
 
-## 🎯 Intuitive Metaphor: Changing Tires on a Speeding Truck on the Highway
+## Intuitive Metaphor: Changing Tires on a Speeding Truck on the Highway
 
 Refactoring an active legacy system is like this high-wire operation:
 
 ```Plaintext
-[Reckless Full Rewrite] ──> ❌ "This old truck is too beat-up; I'll build a brand-new truck on the shoulder!"
+[Reckless Full Rewrite] ──> "This old truck is too beat-up; I'll build a brand-new truck on the shoulder!"
                              (The new build stalls for 6 months, while the business starves to death.)
-[Progressive Decoupling] ──> ✅ The old truck continues hauling freight on the highway (zero business interruption):
+[Progressive Decoupling] ──> The old truck continues hauling freight on the highway (zero business interruption):
                              1. Fly a drone under the chassis (AI scans full repository to generate a topology map);
                              2. Mount anti-rollover safety brackets (write behavioral snapshot tests for critical APIs);
                              3. Unscrew one rusty bolt at a time, test-drive it, and only proceed once verified green.
@@ -35,7 +35,7 @@ Codex acts as a millimeter-precision robotic surgical arm: as long as you wrap i
 
 ---
 
-## 🚀 Beginner Quickstart (3 Easy Steps)
+## Beginner Quickstart (3 Easy Steps)
 
 When taking over an unfamiliar, messy repository on Day 1, take these 3 safe steps:
 
@@ -56,14 +56,14 @@ When taking over an unfamiliar, messy repository on Day 1, take these 3 safe ste
 The primary duty when taking over a chaotic project is **drawing the map**. Leverage GPT-6.2 Sol's 1M-context scanning to directly reverse-engineer Mermaid Entity-Relationship Diagrams (ERD) and route topologies:
 
 ```markdown
-# 🎯 Goal
+# Goal
 Analyze the database configuration and routing layer of the current project, generating a Mermaid ERD illustrating core table structures and foreign key relationships.
 
-# 🛑 Constraints
+# Constraints
 - Only analyze prisma/schema.prisma or src/db/models/.
 - Exclude temporary cache tables and third-party integration logs.
 
-# 🧪 Validation Specs
+# Validation Specs
 - Output a syntactically valid Mermaid diagram in docs/database_topology.md.
 ```
 
@@ -76,14 +76,14 @@ Within seconds, Codex unpacks complex many-to-many relationships and foreign key
 The absolute golden rule of legacy code refactoring is: **Before performing surgery, hook up the vital-signs monitor (baseline tests).**
 
 ```markdown
-# 🎯 Goal
+# Goal
 Write baseline unit tests for src/pages/api/checkout.ts, capturing real request inputs and response snapshots.
 
-# 🛑 Constraints
+# Constraints
 - Strictly forbid altering any logic inside src/pages/api/checkout.ts itself.
 - Use local Jest / Vitest to execute the test suite.
 
-# 🧪 Validation Specs
+# Validation Specs
 - Cover three core branches: successful checkout, out-of-stock error, and unauthenticated access rejection.
 - Ensure baseline tests pass 100% against the current legacy code.
 ```
@@ -97,14 +97,14 @@ Write baseline unit tests for src/pages/api/checkout.ts, capturing real request 
 Gradually extract discount calculations, authentication, and inventory updates out of multi-hundred-line controller files into pure functions:
 
 ```markdown
-# 🎯 Goal
+# Goal
 Extract "discount calculation logic" from src/pages/api/checkout.ts into a standalone service src/services/discountService.ts.
 
-# 🛑 Constraints
+# Constraints
 - External API Request / Response JSON schemas must maintain strict backward compatibility.
 - Strictly avoid impacting other core logic branches inside checkout.ts.
 
-# 🧪 Validation Specs
+# Validation Specs
 - Run npm run test to ensure the previously written checkout snapshot tests pass 100% green.
 - Run npm run lint with zero type or syntax errors.
 ```
@@ -120,14 +120,12 @@ git checkout -- src/pages/api/checkout.ts
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Common Pitfall | Root Cause | Rapid Diagnosis & Fix Guide |
 | :--- | :--- | :--- |
 | **Commanding AI to "refactor the entire project" causing total system collapse** | Scope is too broad; AI suffers hallucinations and broken typings across large edits | Strictly constrain refactoring granularity; each prompt must touch only 1 specific service or function |
 | **Legacy functionality mysteriously lost or broken after refactoring** | Missing pre-refactoring behavioral baseline snapshot tests | Enforce "test-first": require AI to write 100% passing baseline tests against old code before modifying logic |
-| **AI arbitrarily upgrades underlying framework packages in package.json** | package.json was not locked down in constraints | Add hard rule to AGENTS.md & Constraints: *"Strictly forbid modifying any dependency versions in package.json"* |
+| **AI arbitrarily upgrades underlying framework packages in package.json** | package.json was not locked down in constraints | Add hard rule to AGENTS.md & Constraints: *"Strictly forbid modifying any dependency versions in package.json"* | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.08) ](./ch08_mobile_workflow.md) | [ ➡️ Next (Ch.10) ](./ch10_saas_mvp.md) | [ 🌐 中文版 ](../chapters/ch09_legacy_code.md)
+[Index](/en/) | [Prev (Ch.08)](./ch08_mobile_workflow.md) | [Next (Ch.10)](./ch10_saas_mvp.md) | [中文版](../chapters/ch09_legacy_code.md)

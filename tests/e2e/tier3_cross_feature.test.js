@@ -23,12 +23,12 @@ describe('Tier 3 - Cross-Feature Interactions', () => {
     expect(hoverMatch[1]).not.toMatch(/transform\s*:/);
   });
 
-  test('T3-02', '[F5 + F6] Spec generator output aligns with 飞书助理 terminology and anti-loop defense rules', { tier: 3, feature: 'F5,F6', milestone: 'M2,M3' }, ({ readFile }) => {
+  test('T3-02', '[F5 + F6] Rules generator supports all 4 agents, separate downloads, and anti-loop defense rules', { tier: 3, feature: 'F5,F6', milestone: 'M2,M3' }, ({ readFile }) => {
     const gen = readFile('generator.md');
-    // Verify generator UI incorporates 飞书助理
-    expect(gen).toMatch(/飞书助理/);
+    expect(gen).toContain('downloadFile');
+    expect(gen).toContain('PreToolUse');
+    expect(gen).toContain('process.exit(2)');
     expect(gen).not.toContain('离线看护助理');
-    // Verify generator output template incorporates anti-loop rules
     expect(gen).toMatch(/防自旋|Anti-Loop/);
   });
 
@@ -56,11 +56,14 @@ describe('Tier 3 - Cross-Feature Interactions', () => {
     }
   });
 
-  test('T3-05', '[F3 + F7 + F8] Homepage action buttons route to valid pages and downloadable PDF assets', { tier: 3, feature: 'F3,F7,F8', milestone: 'M2,M3,M4' }, ({ readFile, fileExists }) => {
+  test('T3-05', '[F3 + F7 + F8] Homepage and hubs route to valid pages and downloadable PDF assets', { tier: 3, feature: 'F3,F7,F8', milestone: 'M2,M3,M4' }, ({ readFile, fileExists }) => {
     const zhIndex = readFile('index.md');
-    expect(zhIndex).toContain('/chapters/ch01_mindset');
+    const codexHub = readFile('codex/index.md');
+    expect(zhIndex).toContain('/compare');
     expect(zhIndex).toContain('/generator');
-    expect(zhIndex).toContain('/downloads/codex_blue_book_zh.pdf');
+    expect(zhIndex).toContain('/codex/');
+    expect(codexHub).toContain('/chapters/ch01_mindset');
+    expect(codexHub).toContain('/downloads/codex_blue_book_zh.pdf');
     expect(fileExists('chapters/ch01_mindset.md')).toBe(true);
     expect(fileExists('generator.md')).toBe(true);
     expect(fileExists('public/downloads/codex_blue_book_zh.pdf')).toBe(true);
@@ -89,16 +92,17 @@ describe('Tier 3 - Cross-Feature Interactions', () => {
 
   test('T3-08', '[F4 + F8] Chapter reading guide callouts are preserved cleanly during markdown collection compilation', { tier: 3, feature: 'F4,F8', milestone: 'M2,M4' }, ({ readFile }) => {
     const zhCollection = readFile('codex_blue_book_zh.md');
-    // Ensure collection preserves structured emoji guides
-    expect(zhCollection).toMatch(/🎯|💡|⚡/);
+    expect(zhCollection).toMatch(/^>\s+\*\*/m);
     expect(zhCollection).toMatch(/痛点|收益/);
   });
 
   test('T3-09', '[F1 + F2 + F7] Cover image assets are properly located and accessible to VitePress theme', { tier: 3, feature: 'F1,F2,F7', milestone: 'M1,M3' }, ({ readFile, fileExists }) => {
     const zhIndex = readFile('index.md');
     const enIndex = readFile('en/index.md');
-    expect(zhIndex).toContain('/images/cover.jpg');
-    expect(enIndex).toContain('/images/cover_en.jpg');
+    expect(zhIndex).toContain('/images/series_cover_zh.jpg');
+    expect(enIndex).toContain('/images/series_cover_en.jpg');
+    expect(fileExists('.vitepress/public/images/series_cover_zh.jpg')).toBe(true);
+    expect(fileExists('.vitepress/public/images/series_cover_en.jpg')).toBe(true);
     expect(fileExists('.vitepress/public/images/cover.jpg')).toBe(true);
     expect(fileExists('.vitepress/public/images/cover_en.jpg')).toBe(true);
   });

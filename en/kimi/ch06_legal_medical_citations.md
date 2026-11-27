@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.06 Legal Compliance & Biomedical Evidence: Zero-Hallucination Citation Gates
 
-> 🎯 **Engineering pain solved**: In 120-page M&A agreements or multi-trial clinical reviews, clause exceptions hide across separate appendices—and a single fabricated citation destroys legal or medical credibility.
+> **Engineering pain solved**: In 120-page M&A agreements or multi-trial clinical reviews, clause exceptions hide across separate appendices—and a single fabricated citation destroys legal or medical credibility.
 >
-> 💡 **What you ship**: A hybrid **K3 / K3.1 Pro** long-document audit pattern backed by the runnable zero-dependency script `verify_citations.py`, blocking any output whose quotes do not appear verbatim in source filings.
+> **What you ship**: A hybrid **K3 / K3.1 Pro** long-document audit pattern backed by the runnable zero-dependency script `verify_citations.py`, blocking any output whose quotes do not appear verbatim in source filings.
 >
-> ⚡ **Bottom line**: In regulated law and biomedicine, unverified AI claims are worth zero; use K3.1 Pro to surface cross-document conflicts and deterministic code to enforce verbatim source grounding.
+> **Bottom line**: In regulated law and biomedicine, unverified AI claims are worth zero; use K3.1 Pro to surface cross-document conflicts and deterministic code to enforce verbatim source grounding.
 
 ---
 
@@ -51,7 +51,7 @@ When exit code `2` triggers, feed only the failed items back to the cached K3.1 
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Run the self-test**: Execute `python3 examples/kimi-k3-kit/scripts/verify_citations.py --self-test` and verify valid quotes pass while fabricated quotes fail.
 2. **Audit one public Terms of Service**: Ask `kimi-k3.1-pro` for `[{"claim", "quote"}]` covering termination, liability caps, and data ownership, then run `verify_citations.py` to confirm 100% verbatim match.
@@ -59,14 +59,12 @@ When exit code `2` triggers, feed only the failed items back to the cached K3.1 
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Valid finding rejected by `verify_citations.py` | Model spliced non-contiguous phrases with `...` or curved quotes | Forbid ellipses inside `quote` in your prompt and normalize punctuation before matching |
 | Scanned contract PDFs produce garbled clauses | Low-grade OCR dropped columns or stamped regions | Re-run with layout-aware OCR or verify signature/table pages visually via MoonViT-V2 |
-| Law firm or hospital forbids public cloud APIs | Strict NDA, data residency, or HIPAA rules | Deploy K3.1 Pro / K2.5 open weights on-prem inside the client's air-gapped VPC (Ch.09) |
-
----
+| Law firm or hospital forbids public cloud APIs | Strict NDA, data residency, or HIPAA rules | Deploy K3.1 Pro / K2.5 open weights on-prem inside the client's air-gapped VPC (Ch.09) | ---
 
 [Back to Kimi Hub](/en/kimi/) | [Prev: Financial Research & Modeling](/en/kimi/ch05_finance_audit_modeling) | [Next: Kimi Slides Executive Decks](/en/kimi/ch07_kimi_slides_decks)

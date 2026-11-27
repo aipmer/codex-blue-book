@@ -4,13 +4,13 @@ description: "Apply the 150-line CLAUDE.md rule with @AGENTS.md reuse, author pr
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_programmable_platform.md) | [ ➡️ Next (Ch.03) ](./ch03_hooks_code_mode.md) | [ 🌐 中文版 ](/claude/ch02_context_economics)
+[Home](/en/) | [Prev (Ch.01)](./ch01_programmable_platform.md) | [Next (Ch.03)](./ch03_hooks_code_mode.md) | [中文版](/claude/ch02_context_economics)
 
 # Ch.02 Context Economics: Lean `CLAUDE.md` & On-Demand `Skills`
 
-> 🎯 **The Real Problem**: Dumping every team handbook, migration note, and style guide into `CLAUDE.md` inflates every prompt's token bill while drowning out critical red lines.  
-> 💡 **Tangible Output & Takeaway**: 150-line `CLAUDE.md` + `@AGENTS.md` shared-rule pattern, open-standard `SKILL.md` template, and `claude plugin eval` benchmarking.  
-> ⚡ **Viral Screenshot Quote**: *"Stuffing 1,000 lines into `CLAUDE.md` is like plastering a wall with warning signs—the one rule that prevents an outage disappears in the noise."*
+> **The Real Problem**: Dumping every team handbook, migration note, and style guide into `CLAUDE.md` inflates every prompt's token bill while drowning out critical red lines.  
+> **Tangible Output & Takeaway**: 150-line `CLAUDE.md` + `@AGENTS.md` shared-rule pattern, open-standard `SKILL.md` template, and `claude plugin eval` benchmarking.  
+> **Viral Screenshot Quote**: *"Stuffing 1,000 lines into `CLAUDE.md` is like plastering a wall with warning signs—the one rule that prevents an outage disappears in the noise."*
 
 After a week with Claude Code, most teams append every new edge case straight into `CLAUDE.md`. Within a month it balloons past a thousand lines covering CSS conventions, database migrations, and release notes. Now even a two-line UI fix pays to load the entire manual—and attention drifts away from actual guardrails.
 
@@ -18,18 +18,18 @@ The cure is **progressive disclosure**: keep standing rules razor-thin and move 
 
 ---
 
-## 🎯 Intuitive Metaphor: Lanyard Card vs. Toolbox Manuals
+## Intuitive Metaphor: Lanyard Card vs. Toolbox Manuals
 
 ```text
-[Bloated CLAUDE.md]  ──> Forcing every technician to carry a 10kg encyclopedia just to tighten one bolt.
-[Layered Context]    ──> 1. Back of badge (CLAUDE.md / @AGENTS.md): 10 universal red lines and exact commands;
+[Bloated CLAUDE.md] ──> Forcing every technician to carry a 10kg encyclopedia just to tighten one bolt.
+[Layered Context] ──> 1. Back of badge (CLAUDE.md / @AGENTS.md): 10 universal red lines and exact commands;
                          2. Toolbox drawers (.claude/skills/*/SKILL.md): pull out the migration guide only
                             when touching schema files; otherwise only the drawer label sits in context.
 ```
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 1. **Step 1: Reuse one shared `AGENTS.md` across all four coding agents**
    If your repo already maintains `AGENTS.md` for Codex, Antigravity, or Kimi, keep `CLAUDE.md` minimal:
@@ -116,14 +116,12 @@ If a skill adds 30% token overhead without improving pass rate, trim its prose i
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **`SKILL.md` never triggers automatically** | Vague `description` missing concrete file names or verbs | Include explicit triggers such as `schema.prisma` or `database migration` in `description` |
 | **`CLAUDE.md` and `AGENTS.md` drift out of sync** | Maintaining duplicate rule files by hand | Keep `AGENTS.md` as single source of truth and start `CLAUDE.md` with `@AGENTS.md` |
-| **Third-party skill injects unexpected shell commands** | Missing `PreSkillShellCommand` guardrail | Audit every external `SKILL.md` and enforce the Chapter 3 Hooks kit |
+| **Third-party skill injects unexpected shell commands** | Missing `PreSkillShellCommand` guardrail | Audit every external `SKILL.md` and enforce the Chapter 3 Hooks kit | ---
 
----
-
-[ 🏠 Home ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_programmable_platform.md) | [ ➡️ Next (Ch.03) ](./ch03_hooks_code_mode.md) | [ 🌐 中文版 ](/claude/ch02_context_economics)
+[Home](/en/) | [Prev (Ch.01)](./ch01_programmable_platform.md) | [Next (Ch.03)](./ch03_hooks_code_mode.md) | [中文版](/claude/ch02_context_economics)

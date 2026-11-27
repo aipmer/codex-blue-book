@@ -4,13 +4,13 @@ description: "实战 2026 年 11 月新发布的 Claude Ship（/ship）、PR Ste
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.07) ](./ch07_subagents_refactoring.md) | [ ➡️ 下一章 (Ch.09) ](./ch09_enterprise_saas.md) | [ 🌐 English ](/en/claude/ch08_ship_pr_steward)
+[首页](/) | [上一章 (Ch.07)](./ch07_subagents_refactoring.md) | [下一章 (Ch.09)](./ch09_enterprise_saas.md) | [English](/en/claude/ch08_ship_pr_steward)
 
 # Ch.08 最后一公里自动化：`/ship`、PR Steward 与团队治理防线
 
-> 🎯 **具体工程麻烦**：AI 十分钟写完代码，却因为 CI 偶发 lint 报错、测试漏跑、PR 没人审卡在合并队列三天，工程效率全耗死在“写完到上线”的最后一公里。  
-> 💡 **可运行实战代码与落地收益**：掌握 2026 年 11 月发布的 **Claude Ship（`/ship`）+ PR Steward + Claude Approvals** 完整上线链路；配置 GitHub Actions 守卫与团队预算上限。  
-> ⚡ **社交传播 / 截图金句**：“代码生成只是上半场，安全合并进主干才算交付。把 CI 报错自愈和策略审批交给 `/ship`，工程师只审真正高风险的变更。”
+> **具体工程麻烦**：AI 十分钟写完代码，却因为 CI 偶发 lint 报错、测试漏跑、PR 没人审卡在合并队列三天，工程效率全耗死在“写完到上线”的最后一公里。  
+> **可运行实战代码与落地收益**：掌握 2026 年 11 月发布的 **Claude Ship（`/ship`）+ PR Steward + Claude Approvals** 完整上线链路；配置 GitHub Actions 守卫与团队预算上限。  
+> **社交传播 / 截图金句**：“代码生成只是上半场，安全合并进主干才算交付。把 CI 报错自愈和策略审批交给 `/ship`，工程师只审真正高风险的变更。”
 
 过去一年里，很多团队的真实瓶颈已经从“写代码慢”转移到了“**PR 审查与 CI 返工积压**”。智能体每天能提 20 个 PR，但只要 CI 挂一个格式化报错或漏一条边界测试，就得打回给开发者手动修、重推、再排队等人工 Review。
 
@@ -18,7 +18,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🎯 生活化直觉隐喻：机场的“全自动安检与值机通道”
+## 生活化直觉隐喻：机场的“全自动安检与值机通道”
 
 ```text
 【传统手工合 PR】 ──> 开发者自己提 PR → 等 CI 挂了手动翻日志 → 改一行再推 → 等同事有空点 Approve。
@@ -30,7 +30,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：本地先跑完 Hooks 与测试，确保工作树干净**
    ```bash
@@ -93,14 +93,12 @@ mandatory_human_review:
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **PR Steward 为了让 CI 变绿，擅自删掉了一条失败的单测** | 未在仓库策略与 Hooks 中禁止弱化断言 | 在审批策略与 `arch-reviewer` 中强制拦截任何删除/跳过测试用例的 Diff |
 | **高并发提 PR 导致单日 API 账单暴涨** | 未开启 Efficient Mode 与项目级 Spending Caps | 立刻在组织后台设置硬上限，CI 常规修复默认路由至 Sonnet 5.5 |
-| **自动化流程误合了包含数据库锁表迁移的 PR** | `migrations/` 未列入强制人工审查目录 | 立即开启 GitHub CODEOWNERS + 强制人工审批规则保护所有 Schema 变更 |
+| **自动化流程误合了包含数据库锁表迁移的 PR** | `migrations/` 未列入强制人工审查目录 | 立即开启 GitHub CODEOWNERS + 强制人工审批规则保护所有 Schema 变更 | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.07) ](./ch07_subagents_refactoring.md) | [ ➡️ 下一章 (Ch.09) ](./ch09_enterprise_saas.md) | [ 🌐 English ](/en/claude/ch08_ship_pr_steward)
+[首页](/) | [上一章 (Ch.07)](./ch07_subagents_refactoring.md) | [下一章 (Ch.09)](./ch09_enterprise_saas.md) | [English](/en/claude/ch08_ship_pr_steward)

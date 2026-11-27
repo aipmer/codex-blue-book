@@ -1,20 +1,21 @@
 ---
-title: "Claude 实战蓝皮书（v1.0.0 已上线）：Claude Code 五大原语、/design 画板与大型重构"
-description: "《Claude 实战蓝皮书》v1.0.0 完整 10 章双语与 PDF 下载：涵盖 Claude 5.5/Fable 5.2、CLAUDE.md/Skills/Hooks/Subagents/MCP、/design 画板、/ship 与 Cowork 锐评。"
+title: "Claude 实战蓝皮书：Anthropic Claude Code 工程原语与重构指南"
+description: "介绍 Anthropic 与 Claude Code（Claude 5.5 / Fable 5.2、Hooks、/design 画板、/ship 自动合并），提供完整 10 章双语目录、PDF 下载与配套 Hooks 套件。"
 lastUpdated: 2026-11-26
 ---
 
 # 《Claude 实战蓝皮书：可编程工程原语、画布协同与复杂系统重构指南》
 
-![Claude 实战蓝皮书封面](/images/claude_cover.jpg)
+## 关于 Claude Code 与 Anthropic
 
-> **版本**：v1.0.0 已上线 · 资料核对至 **2026 年 11 月 26 日**  
-> **核心定位**：吃透 **Claude 5.5（Opus / Sonnet / Haiku 5.5）+ Fable 5.2** 与 **Claude Code v2.1.323+** 五大可编程原语，打通 **Whiteboards → `/design` 画板 → 百万上下文存量重构 → `/ship` 自动合并** 全链路。
+**Anthropic** 成立于 2021 年，总部位于旧金山，是一家以模型安全、长上下文推理与高质量代码理解见长的 AI 研究与产品公司。**Claude Code** 是 Anthropic 推出的终端与桌面一体化编程智能体平台（当前版本 `v2.1.323+`），依托 **Claude 5.5（Opus / Sonnet / Haiku 5.5）** 与 **Fable 5.2** 的 1M 上下文能力，通过 `CLAUDE.md`、Skills、Hooks、子代理（Subagents）、MCP 以及 **Whiteboards / `/design` 画板 / `/ship` 自动合并**，成为中大型项目重构与严格工程治理的主力工具。
+
+> **本书定位**：吃透 Claude Code 五大可编程原语，打通从白板梳理、交互画板到大型存量系统重构与自动合并的完整研发流（资料核对至 **2026 年 11 月 26 日**，当前版本 `v1.0.0`）。
 
 - [立即从第一章开始阅读](/claude/ch01_programmable_platform)
 - [下载中文版 PDF](/downloads/claude_blue_book_zh.pdf) · [Download English PDF](/downloads/claude_blue_book_en.pdf)
 - [配套 Hooks 与子代理可运行套件](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)
-- [生成 Claude `CLAUDE.md` + `Hooks` 规约](/generator) · [四书横向对比](/compare)
+- [生成 Claude `CLAUDE.md` + `Hooks` 项目规则](/generator) · [工具对比](/compare)
 
 ---
 

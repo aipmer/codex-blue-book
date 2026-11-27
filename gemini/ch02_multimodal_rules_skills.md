@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.02 多模态开发规约：AGENTS.md、.agents/rules 与自定义 Skills
 
-> 🎯 **本章解决的工程麻烦**：把所有前端样式规范、生图流程、部署命令一股脑塞进全局提示词，导致每轮对话白烧几万输入 Token；更糟的是，AI 嘴上说“页面已响应式适配”，打开手机一看表格横着撑破屏幕、标签小到 9px 根本看不清。
+> **本章解决的工程麻烦**：把所有前端样式规范、生图流程、部署命令一股脑塞进全局提示词，导致每轮对话白烧几万输入 Token；更糟的是，AI 嘴上说“页面已响应式适配”，打开手机一看表格横着撑破屏幕、标签小到 9px 根本看不清。
 >
-> 💡 **实战落地收益**：掌握 Antigravity 四层定制优先级（全局 → `AGENTS.md` → 路径级 `.agents/rules/` → 按需 `SKILL.md`），落盘一套可复用的多模态视觉与生图验收红线，并学会安全调度轻量子代理处理只读附件审查。
+> **实战落地收益**：掌握 Antigravity 四层定制优先级（全局 → `AGENTS.md` → 路径级 `.agents/rules/` → 按需 `SKILL.md`），落盘一套可复用的多模态视觉与生图验收红线，并学会安全调度轻量子代理处理只读附件审查。
 >
-> ⚡ **一句话结论**：好规约靠分层按需加载省上下文，靠浏览器计算值和脚本退出码卡死质量，而不是靠形容词祈祷。
+> **一句话结论**：好规约靠分层按需加载省上下文，靠浏览器计算值和脚本退出码卡死质量，而不是靠形容词祈祷。
 
 多模态项目比纯后端更容易“失控”。纯后端只要编译通过、单测全绿，基本八九不离十；多模态前端项目即使 `npm run build` 零报错，依然可能出现图片路径 404、移动端溢出、小字号糊成一片、或者原图直接塞进 `public/` 把首屏拖到 12MB。
 
@@ -104,22 +104,20 @@ sips -c 630 1200 -s format jpeg -s formatOptions 88 \
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
-1. **导出标准骨架**：访问本站 [多智能体通用规约生成器](/generator)，切换到 **Gemini Antigravity** 标签页，勾选你的技术栈并下载 `AGENTS.md` + `.agents/rules/`。
+1. **导出标准骨架**：访问本站 [AI 协作规则生成器](/generator)，切换到 **Gemini Antigravity** 标签页，勾选你的技术栈并下载 `AGENTS.md` + `.agents/rules/`。
 2. **拷贝配套视觉 Skill**：将 [examples/gemini-antigravity-kit/.agents](https://github.com/aipmer/codex-blue-book/blob/main/examples/gemini-antigravity-kit/.agents/skills/visual-audit/SKILL.md) 复制到你的项目根目录。
 3. **验证规则生效**：在终端运行 `agy -p "列出你当前加载的项目规则与可用 Skills，并用一句话说明 frontend 目录的字号红线"`，确认模型精准复述 `>= 12px` 与三视口零溢出规则。
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | `.agents/rules/ui-multimodal.md` 写了却从未生效 | YAML frontmatter 中的 `globs` 路径拼错，或缩进不合法导致解析静默跳过 | 用 `node -e` 或 `python3 -c "import yaml"` 校验 frontmatter 语法，并确保 `globs` 与实际目录名（如 `app/` vs `src/app/`）完全一致 |
 | 明明设置了全局 `13px`，代码块文字仍被查出 `11.375px` | 样式表里嵌套了 `code { font-size: 0.875em; }`，相对父容器二次缩放跌破 12px | 为目标代码块显式写死绝对字号（如 `font-size: 13px;`），再用浏览器 `getComputedStyle` 复测 |
-| 构建完 `public/` 暴涨到几十 MB | 把 AI 原生生成的 4K PNG 原图直接放进 `public/images/`，未走压缩裁切管线 | 将原图移出至 `assets-src/`（加入 `.gitignore` 或 LFS），脚本统一压成 WebP/JPEG 后再写入 `public/` |
-
----
+| 构建完 `public/` 暴涨到几十 MB | 把 AI 原生生成的 4K PNG 原图直接放进 `public/images/`，未走压缩裁切管线 | 将原图移出至 `assets-src/`（加入 `.gitignore` 或 LFS），脚本统一压成 WebP/JPEG 后再写入 `public/` | ---
 
 [返回 Gemini 专页](/gemini/) | [上一章：Antigravity 与 Gemini 4 选型](/gemini/ch01_antigravity_gemini4) | [下一章：AI Studio 无损导出 Antigravity](/gemini/ch03_ai_studio_handoff)

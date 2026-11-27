@@ -6,7 +6,7 @@ lastUpdated: 2026-11-26
 
 # 2026 AI Coding Agents Comparison: Codex vs Claude Code vs Gemini Antigravity vs Kimi Code
 
-> **Bottom line (verified November 26, 2026)**: No single coding agent dominates every workflow. Choose **OpenAI Codex** for solo 0-to-1 full-stack MVPs and mobile approvals; **Claude Code** for large legacy refactors, `/design` canvases, and deterministic Hooks/`/ship` pipelines; **Google Antigravity (Gemini 4)** for multimodal products wired into AI Studio, Workspace, and Colab; and **Kimi Code (K3.1 Pro)** for open-weight self-hosting, ACP IDE integration, regulated verticals (finance/legal/medical), Slides, and 3D spatial coding.
+> **Bottom line (verified November 26, 2026)**: No single coding agent dominates every workflow. Choose **OpenAI Codex** for deep reasoning, research computing, complex backend/DevOps debugging, and automated 0-to-1 delivery; **Claude Code** for requirements alignment, architecture planning, high-craft frontend, long-horizon agents, and safe legacy refactors; **Google Antigravity (Gemini 4)** for multimodal UI debugging, dual-review planning, data insights, and Google Workspace/Colab workflows; and **Kimi Code (K3.1 Pro)** for 1M-token deep document audits, cost-effective open-weight self-hosting, ACP IDE integration, and parallel agent collaboration.
 
 ---
 
@@ -18,10 +18,10 @@ lastUpdated: 2026-11-26
 | **Context Window** | 1.05M (922K input / 128K output) | 1M (128K output) | 1M unified | 1M native (Gated DSA sparse attention) |
 | **Primary Surfaces** | CLI `0.172.0` · ChatGPT Desktop Code Mode | Claude Code v2.1.323+ · Whiteboards · `/design` | Antigravity 2.x IDE · `agy` CLI · AI Studio | `kimi` TUI · `kimi web` · `kimi acp` |
 | **Project Rules Spec** | `AGENTS.md` + `~/.codex/config.toml` | `CLAUDE.md` + `.claude/settings.json` | `AGENTS.md` + `.agents/rules/` | `AGENTS.md` + `~/.kimi-code/config.toml` |
-| **Multi-Agent Support** | Ultra UI subagents · Thread links | Isolated Subagents · Code Mode JS orchestration | `/swarm` (Git worktrees + adversarial verifiers) | `explore/plan/coder` subagents · `/swarm` |
+| **Multi-Agent Support** | Ultra UI subagents · Thread links | Isolated Subagents · Code Mode JS orchestration | Multi-agent collaboration (Git worktrees + adversarial verifiers) | `explore/plan/coder` subagents · parallel multi-agent collaboration |
 | **Visual & Design Stack** | Desktop Computer Use + GPT-6.1 Terra | `/design` live HTML/JS artboards + Whiteboards | Built-in browser QA + native image gen + Live API | MoonViT-V2 video debugging + Figma MCP + 3D Make |
-| **Signature Ecosystem Edge** | Feishu Assistant approvals · Sites preview · Bedrock | Deterministic Hooks · `/ship` PR Steward · MCP Skills | AI Studio context-preserving export · Workspace MCP · Colab `%%agy` | ACP for Zed/JetBrains · Open weights · Kimi Slides |
-| **Blue Book Guide** | [Codex Blue Book v1.5.0 (Live)](/en/codex/) | [Claude Blue Book v1.0.0 (Live)](/en/claude/) | [Gemini Blue Book v1.0.0 (Live)](/en/gemini/) | [Kimi Blue Book v1.0.0 (Live)](/en/kimi/) |
+| **Signature Ecosystem Edge** | Feishu Assistant approvals · Sites preview · Bedrock | Deterministic Hooks · `/ship` PR Steward · MCP Skills | AI Studio context-preserving export · Workspace MCP · Google Colab agent extension | ACP for Zed/JetBrains · Open weights · Kimi Slides |
+| **Blue Book Guide** | [Codex Blue Book](/en/codex/) | [Claude Blue Book](/en/claude/) | [Gemini Blue Book](/en/gemini/) | [Kimi Blue Book](/en/kimi/) |
 
 ---
 
@@ -42,20 +42,20 @@ lastUpdated: 2026-11-26
 | Moonshot `Kimi K3.1 Pro` | \$2.00 | \$0.20 (90% off) | \$10.00 | Full-stack / 3D / finance + 2.8T MoE open weights |
 | Google `gemini-4-argon` / `carbon` | \$2.00 (Argon \$4.00 Dec 1) | \$0.10 (\$0.20) | \$10.00 (\$20.00) | Frontier reasoning & deep debugging |
 | Google `gemini-4-neon` | \$3.00 | \$0.15 | \$15.00 | Default Orchestrator & complex coding |
-| Google `gemini-4-hydrogen` | \$1.50 | Discounted | \$7.50 | Flat 1M rapid execution & swarm workers |
+| Google `gemini-4-hydrogen` | \$1.50 | Discounted | \$7.50 | Flat 1M rapid execution & parallel agent workers |
 
 ---
 
 ## 3. Decision Shortcuts by Workflow
 
-1. **Solo builder shipping web/mobile MVPs with mobile remote approvals**  
+1. **Deep reasoning, research computing, backend/DevOps debugging, and 0-to-1 builds**  
    → Start with **[Codex Blue Book](/en/codex/)**, paired with [Codex Switch](https://github.com/aipmer/codex-switch) to fail over to Kimi Code or DeepSeek without losing thread history.
-2. **Large legacy codebase governance, strict Hooks, and canvas-to-code delivery**  
+2. **Requirements alignment, system architecture, high-craft frontend, and safe legacy refactors**  
    → Follow **[Claude Blue Book](/en/claude/)** (`CLAUDE.md` + `Hooks` + `/design` + `/ship`).
-3. **Multimodal apps (vision/audio/video), Chrome extensions, and Workspace/Colab pipelines**  
-   → Follow **[Gemini Blue Book](/en/gemini/)** (AI Studio → Antigravity `/swarm` → Workspace MCP).
-4. **Finance/legal/medical 1M-token analysis, native `.pptx` decks, Blender/FreeCAD 3D, or offline open weights**  
-   → Follow **[Kimi Blue Book](/en/kimi/)** (`K3.1 Pro` + `kimi acp`).
+3. **Multimodal UI debugging, dual-review planning, data insights, and Google Workspace/Colab pipelines**  
+   → Follow **[Gemini Blue Book](/en/gemini/)** (AI Studio → Antigravity multi-agent collaboration → Workspace MCP).
+4. **1M-token finance/legal/medical document audits, cost-effective open-weight self-hosting, and ACP IDE workflows**  
+   → Follow **[Kimi Blue Book](/en/kimi/)** (`K3.1 Pro` + `kimi acp`, plus Slides and 3D Make).
 
 ---
 

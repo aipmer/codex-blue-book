@@ -4,13 +4,13 @@ description: "Set up Codex CLI 0.172.0 with GPT-6.2 Sol, spending guardrails, Co
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_mindset.md) | [ ➡️ Next (Ch.03) ](./ch03_sandbox.md) | [ 🌐 中文版 ](../chapters/ch02_setup.md)
+[Index](/en/) | [Prev (Ch.01)](./ch01_mindset.md) | [Next (Ch.03)](./ch03_sandbox.md) | [中文版](../chapters/ch02_setup.md)
 
 # Ch.02 Cross-Device Control: Building Your Codex Multi-Surface Productivity Matrix
 
-> 🎯 **The Real Problem**: Beginners rush to prompt AI while local Node dependencies, outdated clients, and OS permissions fail, causing endless terminal errors and burning tokens.  
-> 💡 **Tangible Output & Takeaway**: November 2026 CLI 0.172.0 setup and version check, ChatGPT Desktop Code Mode & Computer Use permissions setup, and cross-device checklist.
-> ⚡ **Viral Screenshot Quote**: *"First stabilize your cockpit before asking AI to code. Don't let local setup errors burn your precious token budget."*
+> **The Real Problem**: Beginners rush to prompt AI while local Node dependencies, outdated clients, and OS permissions fail, causing endless terminal errors and burning tokens.  
+> **Tangible Output & Takeaway**: November 2026 CLI 0.172.0 setup and version check, ChatGPT Desktop Code Mode & Computer Use permissions setup, and cross-device checklist.
+> **Viral Screenshot Quote**: *"First stabilize your cockpit before asking AI to code. Don't let local setup errors burn your precious token budget."*
 
 Many newcomers prompt Codex to build a full feature on day one, only to burn tens of thousands of tokens on broken Node versions or missing OS permissions. Stabilizing your local cockpit comes first.
 
@@ -18,21 +18,21 @@ This chapter walks through setting up Codex CLI, ChatGPT Desktop Code Mode, and 
 
 ---
 
-## 🎯 Intuitive Metaphor: Your Three-Surface Mission Cockpit
+## Intuitive Metaphor: Your Three-Surface Mission Cockpit
 
 Do not think of these surfaces as disconnected programs. Imagine commanding a space exploration ship:
 
 ```Plaintext
-【Codex CLI】                ──> Main Engine Room: Mounted in your terminal, handling high-throughput batching, tests, and CI builds.
+【Codex CLI】 ──> Main Engine Room: Mounted in your terminal, handling high-throughput batching, tests, and CI builds.
 【ChatGPT Desktop Code Mode】──> Bridge Tactical Screen: Multi-repo diff reviews, Sites in-place preview, and visual audits.
-【ChatGPT Mobile App】       ──> Commander's Pager: Monitoring build statuses away from your desk, approving actions via Guardian.
+【ChatGPT Mobile App】 ──> Commander's Pager: Monitoring build statuses away from your desk, approving actions via Guardian.
 ```
 
 Each surface handles its specialized duty, freeing you from being chained to a keyboard.
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 You do not need complex network tunneling on day one. Follow these 3 steps to run your first task in 5 minutes:
 
@@ -114,9 +114,9 @@ During intensive coding sessions, solo developers frequently encounter OpenAI 3-
 
 To solve this dilemma, we recommend the companion open-source utility **[Codex Switch](https://github.com/aipmer/codex-switch)** (created by the author of this book):
 
-*   **One-Click Multi-Provider Switching**: Effortlessly toggle between official OpenAI, DeepSeek, and Kimi Code within seconds on macOS, bypassing single-provider rate limits.
-*   **Seamless Cross-Provider Session Resume**: Solves provider message schema discrepancies, local cryptographic validation, and `thread_history.sqlite` byte-offset alignments. You can **continue existing conversations across different providers** without explaining your context from scratch.
-*   **Quickstart**:
+* **One-Click Multi-Provider Switching**: Effortlessly toggle between official OpenAI, DeepSeek, and Kimi Code within seconds on macOS, bypassing single-provider rate limits.
+* **Seamless Cross-Provider Session Resume**: Solves provider message schema discrepancies, local cryptographic validation, and `thread_history.sqlite` byte-offset alignments. You can **continue existing conversations across different providers** without explaining your context from scratch.
+* **Quickstart**:
     ```bash
     # Clone and install Codex Switch
     git clone https://github.com/aipmer/codex-switch.git
@@ -133,7 +133,7 @@ To solve this dilemma, we recommend the companion open-source utility **[Codex S
 
 ## 2.2 Desktop Surface: ChatGPT Desktop App (Codex Code Mode)
 
-> ⚠️ **Major Ecosystem Milestone**: In late 2026, the standalone Codex Desktop App was officially retired and merged directly into the **ChatGPT Desktop App**.
+> **Major Ecosystem Milestone**: In late 2026, the standalone Codex Desktop App was officially retired and merged directly into the **ChatGPT Desktop App**.
 
 ### 1. Installation & Accessing Code Mode
 
@@ -156,7 +156,7 @@ To allow the agent to visually inspect your screen, grant two permissions under 
 
 ```Plaintext
 [macOS System Settings] -> [Privacy & Security]
-  ├─ Accessibility  ────> Check [ChatGPT] (Allows simulating clicks/keystrokes)
+  ├─ Accessibility ────> Check [ChatGPT] (Allows simulating clicks/keystrokes)
   └─ Screen Recording ──> Check [ChatGPT] (Allows screenshot capture & Vision analysis)
 ```
 
@@ -173,17 +173,15 @@ To allow the agent to visually inspect your screen, grant two permissions under 
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | `--full-auto` prints a deprecation warning | The old call remains a compatibility path | Use `--sandbox workspace-write` for new non-interactive runs |
 | `SyntaxError: Unexpected token ...` (Node error) | Node.js version is older than 20 | Run `node -v`; upgrade using `nvm use 20` or `nvm install 20` |
 | `Permission denied: Screen Recording` | Missing macOS screen permissions | Toggle ChatGPT under "System Settings -> Privacy & Security -> Screen Recording" and restart |
-| `gpt-5.4` or `gpt-5.6` is unavailable with Codex sign-in | `gpt-5.4` retired Aug 31, 2026; `gpt-5.6` retires Dec 23, 2026 | Select `gpt-6.2-sol` or `gpt-6.1-terra` when your account has access |
+| `gpt-5.4` or `gpt-5.6` is unavailable with Codex sign-in | `gpt-5.4` retired Aug 31, 2026; `gpt-5.6` retires Dec 23, 2026 | Select `gpt-6.2-sol` or `gpt-6.1-terra` when your account has access | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.01) ](./ch01_mindset.md) | [ ➡️ Next (Ch.03) ](./ch03_sandbox.md) | [ 🌐 中文版 ](../chapters/ch02_setup.md)
+[Index](/en/) | [Prev (Ch.01)](./ch01_mindset.md) | [Next (Ch.03)](./ch03_sandbox.md) | [中文版](../chapters/ch02_setup.md)
 
 [Current model and migration details](./ch13_2026_frontier.md) · [Codex tool channel (Chinese)](https://pmer.cn/ai-tools/codex/#guide)

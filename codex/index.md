@@ -1,18 +1,21 @@
 ---
-title: "Codex 蓝皮书（v1.5.0）：AI 原生全栈编排与商业交付实战指南"
-description: "OpenAI Codex 蓝皮书 v1.5.0 完整目录与下载入口：覆盖 GPT-6.2、GPT-6.1 Terra、CLI 0.172.0、AGENTS.md 规约、飞书助理值班与 Next.js/Expo 商业实战。"
+title: "Codex 蓝皮书：OpenAI AI 编程全栈实战指南"
+description: "介绍 OpenAI 与 Codex（CLI 0.172.0、ChatGPT 桌面端代码模式与 GPT-6.2 / GPT-6.1 Terra），提供 13 章双语实战目录、PDF 下载与配套开源工具。"
 lastUpdated: 2026-11-26
 ---
 
 # 《Codex 蓝皮书：从入门到架构大师》
 
-> **版本**：v1.5.0 · 资料核对至 **2026 年 11 月 26 日**  
-> **核心定位**：面向独立开发者、技术产品经理与全栈工程师，用最新的 **OpenAI Codex（CLI 0.172.0 + ChatGPT 桌面端代码模式）** 与 **GPT-6.2 / GPT-6.1 Terra** 跑通从 0 到 1 的可上线商业产品。
+## 关于 Codex 与 OpenAI
+
+**OpenAI** 成立于 2015 年，总部位于旧金山，是 ChatGPT 与 GPT 系列前沿大模型的研发机构。**OpenAI Codex** 是 OpenAI 面向软件工程推出的自主编程智能体产品线，当前涵盖终端工具 **Codex CLI（`0.172.0`）**、**ChatGPT 桌面端代码模式** 以及云端并行任务环境，底层由 **GPT-6.2 Astra / Sol**（复杂推理与日常主力编码）、**GPT-6.1 Terra**（屏幕视觉识别与桌面操作）与 **GPT-6 Luna**（轻量高速路由）驱动。
+
+> **本书定位**：面向独立开发者、技术产品经理与全栈工程师，带你把 Codex 从零配通到可上线收费的 Web 与 App 产品（资料核对至 **2026 年 11 月 26 日**，当前版本 `v1.5.0`）。
 
 - [立即从第一章开始阅读](/chapters/ch01_mindset)
 - [查看 2026 年 11 月前沿迁移地图（Ch.13）](/chapters/ch13_2026_frontier)
 - [下载中文版 PDF](/downloads/codex_blue_book_zh.pdf) · [Download English PDF](/downloads/codex_blue_book_en.pdf)
-- [生成 Codex AGENTS.md 规约](/generator) · [四书横向对比](/compare)
+- [生成 Codex `AGENTS.md` 项目规则](/generator) · [工具对比](/compare)
 
 ---
 

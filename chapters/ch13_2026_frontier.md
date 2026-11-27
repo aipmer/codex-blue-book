@@ -4,19 +4,19 @@ description: "核对至 2026 年 11 月 26 日：详述 GPT-6.2 Astra/Sol 与 GP
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch13_2026_frontier.md)
+[主目录](/) | [上一章 (Ch.12)](./ch12_commercialization.md) | [English](../en/ch13_2026_frontier.md)
 
 # Ch.13 前沿瞭望：2026 Codex 生态全景升级
 
-> 🎯 **具体工程麻烦**：工具迭代极快，客户端入口、CLI 命令、模型换代（GPT-6.2 Astra / Sol / GPT-6.1 Terra / Luna）与旧接口退役密集到来，旧指南极易误导。
-> 💡 **可运行实战代码与落地收益**：2026 年 11 月迁移命令作战清单（CLI 0.172.0 核对、MCP 懒启动与细粒度审批配置、11.30 与 12.23 退役排查脚本）。
-> ⚡ **社交传播 / 截图金句**：“工具每三个月换一轮血，心智才是护城河。这里没有空洞新闻，只有告诉你哪条命令和模型即将作废的作战地图。”
+> **具体工程麻烦**：工具迭代极快，客户端入口、CLI 命令、模型换代（GPT-6.2 Astra / Sol / GPT-6.1 Terra / Luna）与旧接口退役密集到来，旧指南极易误导。
+> **可运行实战代码与落地收益**：2026 年 11 月迁移命令作战清单（CLI 0.172.0 核对、MCP 懒启动与细粒度审批配置、11.30 与 12.23 退役排查脚本）。
+> **社交传播 / 截图金句**：“工具每三个月换一轮血，心智才是护城河。这里没有空洞新闻，只有告诉你哪条命令和模型即将作废的作战地图。”
 
 前面十二章建立的是一套不依赖具体版本的编排方法论。方法论要落地，必须踩在真实工具版本上。本版资料核对至 **2026 年 11 月 26 日**，覆盖 10 月 21 日之后的 GPT-6.2 与 GPT-6.1 Terra 模型升级、Codex CLI `0.172.0` 变更以及近期退役硬节点。
 
 ---
 
-## 🎯 生活化直觉隐喻：超音速客机的新一代航电换装
+## 生活化直觉隐喻：超音速客机的新一代航电换装
 
 不必对频繁的版本更新焦虑，用飞行员的视角看这次升级：
 
@@ -34,7 +34,7 @@ lastUpdated: 2026-11-26
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 用 3 步完成你的 2026 年 11 月工具链体检与迁移：
 
@@ -87,9 +87,7 @@ codex --version
 | `gpt-6.2-sol` | 日常复杂编码、多步智能体与跨应用工作流 | `low`、`medium`、`high`、`xhigh`、`max` | 本版示例默认值；与 `gpt-6.1-sol` 同价但新一代编码推理增强 |
 | `gpt-6.1-terra` | 视觉推理、UI 像素还原与高阶 Computer Use | `low`、`medium`、`high`、`xhigh`、`max` | 2026 年 10 月下旬推出；视觉与桌面自动化性价比档 |
 | `gpt-6.1-sol` | 上一代日常主力（保留用于配置迁移对照） | `low`、`medium`、`high`、`xhigh`、`max` | 工具调用需使用 Responses API |
-| `gpt-6-luna` | 范围明确的修订、提取、摘要和高频小任务 | `none`、`low`、`medium`、`high`、`xhigh`、`max` | 复杂度超限时切回 Sol 或 Astra |
-
-工具调用优先使用 **Responses API**，内置 `openai-docs` 技能也已更新 GPT-6.2 迁移指引。Codex 界面中的 Max/Ultra 依账号开放，其中 Ultra 通过子智能体并行协同，不是 API 的 `reasoning.effort` 枚举值。[API 模型目录](https://developers.openai.com/api/docs/models) · [GPT-6 迁移指南](https://developers.openai.com/api/docs/guides/latest-model)
+| `gpt-6-luna` | 范围明确的修订、提取、摘要和高频小任务 | `none`、`low`、`medium`、`high`、`xhigh`、`max` | 复杂度超限时切回 Sol 或 Astra | 工具调用优先使用 **Responses API**，内置 `openai-docs` 技能也已更新 GPT-6.2 迁移指引。Codex 界面中的 Max/Ultra 依账号开放，其中 Ultra 通过子智能体并行协同，不是 API 的 `reasoning.effort` 枚举值。[API 模型目录](https://developers.openai.com/api/docs/models) · [GPT-6 迁移指南](https://developers.openai.com/api/docs/guides/latest-model)
 
 **API 计费与 Codex 订阅用量分开看。** 下表为截至 2026 年 11 月 26 日的标准档每百万文本 token API 标价（不是 ChatGPT 订阅价，也不等同 Codex 额度换算）；超长上下文（>272K）、Batch 5 折、Fast（2×）与缓存写入另按[官方定价页](https://developers.openai.com/api/docs/pricing)核算。
 
@@ -99,9 +97,7 @@ codex --version
 | `gpt-6.2-sol` | $2.00 | $0.10 | $10.00 | Ultrafast 优惠期 3× 至 2027-02-28（3 月起 6×） |
 | `gpt-6.1-terra` | $1.00 | $0.05 | $5.00 | 视觉推理与高频 Computer Use 成本利器 |
 | `gpt-6.1-sol` | $2.00 | $0.10 | $10.00 | 保留对照；缓存写入标准档 $2.50/MTok |
-| `gpt-6-luna` | $0.10 | $0.01 | $0.50 | 轻量化路由与结构化提取首选 |
-
-**速度档位独立控制。** `gpt-6.2-sol` / `gpt-6.1-sol` 的 Ultrafast 面向高阶套餐与符合条件的企业工作区开放；订阅内与按量计费倍率不同，且支持美区及 EEA+瑞士推理数据驻留。建议先用 Standard 跑熟基准任务，再按延迟收益决定是否开启。[速度与计费说明](https://learn.chatgpt.com/docs/agent-configuration/speed)
+| `gpt-6-luna` | $0.10 | $0.01 | $0.50 | 轻量化路由与结构化提取首选 | **速度档位独立控制。** `gpt-6.2-sol` / `gpt-6.1-sol` 的 Ultrafast 面向高阶套餐与符合条件的企业工作区开放；订阅内与按量计费倍率不同，且支持美区及 EEA+瑞士推理数据驻留。建议先用 Standard 跑熟基准任务，再按延迟收益决定是否开启。[速度与计费说明](https://learn.chatgpt.com/docs/agent-configuration/speed)
 
 **选择模型：**
 
@@ -136,9 +132,7 @@ model = "gpt-6.2-sol"
 | 2026-11 中旬 | API / Codex / Work | **GPT-6.2 Astra & GPT-6.2 Sol** 发布 |
 | **2026-11-30** | **API / 平台工具** | **`/v1/prompts`、Agent Builder 停用；Evals Dashboard & API 转只读**（Prompt 迁入代码库，评测迁往 Promptfoo，编排迁往 Agents SDK） |
 | **2026-12-23** | **ChatGPT Work / Codex** | **GPT-5.6 Sol 与 GPT-5.6 Terra 退役**，请提前切至 `gpt-6.2-sol` / `gpt-6.1-terra` |
-| 2027-04-01 | API | `gpt-5.3-codex`、`gpt-5.4-nano`、`gpt-5.1` 停服，官方建议迁往 `gpt-6-sol` / `gpt-6-luna` 系列 |
-
-随时核对 [API 退役公告](https://developers.openai.com/api/docs/deprecations) 与 [Codex 更新日志](https://learn.chatgpt.com/docs/changelog)，区分登录态退役与 API 下线的边界。
+| 2027-04-01 | API | `gpt-5.3-codex`、`gpt-5.4-nano`、`gpt-5.1` 停服，官方建议迁往 `gpt-6-sol` / `gpt-6-luna` 系列 | 随时核对 [API 退役公告](https://developers.openai.com/api/docs/deprecations) 与 [Codex 更新日志](https://learn.chatgpt.com/docs/changelog)，区分登录态退役与 API 下线的边界。
 
 ---
 
@@ -208,7 +202,7 @@ codex --approve-for-me "Review the current changes and suggest fixes"
 ```text
 skills/
 └── pr-review/
-    └── SKILL.md      # 带 YAML frontmatter 的流程说明书
+    └── SKILL.md # 带 YAML frontmatter 的流程说明书
 ```
 
 ---
@@ -338,7 +332,7 @@ render_path.parent.mkdir(parents=True, exist_ok=True)
 bpy.context.scene.render.filepath = str(render_path)
 
 bpy.ops.render.render(write_still=True)
-print("✅ Blender 自动化巡检渲染完成：./public/renders/validation_preview.png")
+print(" Blender 自动化巡检渲染完成：./public/renders/validation_preview.png")
 ```
 
 在终端以无头后台方式运行：
@@ -405,9 +399,7 @@ codex plugin list
 | 模型选择器没有 GPT-6.2 Sol 或 Terra | 核对 CLI 版本（0.172.0+）、账号套餐、推出进度和工作区管理员设置 |
 | `--full-auto` 显示弃用警告 | 新的非交互调用改用 `--sandbox workspace-write`；旧入口仍保留兼容 |
 | 配置的模型无法使用 | 区分 Codex 登录态与 API 权限，在 `/model` 选择当前可用模型 |
-| Hooks 未执行 | 检查事件数组结构，并在 `/hooks` 查看是否需要信任 |
-
----
+| Hooks 未执行 | 检查事件数组结构，并在 `/hooks` 查看是否需要信任 | ---
 
 ## 13.9 不随版本变化的原则
 
@@ -415,7 +407,7 @@ codex plugin list
 
 ---
 
-[ 🏠 主目录 ](/) | [ ⬅️ 上一章 (Ch.12) ](./ch12_commercialization.md) | [ 🌐 English ](../en/ch13_2026_frontier.md)
+[主目录](/) | [上一章 (Ch.12)](./ch12_commercialization.md) | [English](../en/ch13_2026_frontier.md)
 
 ## 关联工具频道
 

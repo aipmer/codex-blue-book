@@ -4,13 +4,13 @@ description: "Build a production AGENTS.md rule layer with hierarchical loading,
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.04) ](./ch04_goal_driven.md) | [ ➡️ Next (Ch.06) ](./ch06_reasoning_steer.md) | [ 🌐 中文版 ](../chapters/ch05_agents_protocol.md)
+[Index](/en/) | [Prev (Ch.04)](./ch04_goal_driven.md) | [Next (Ch.06)](./ch06_reasoning_steer.md) | [中文版](../chapters/ch05_agents_protocol.md)
 
 # Ch.05 Defining the CAP Protocol: Building Your Project's AGENTS.md Rule Compliance Layer
 
-> 🎯 **The Real Problem**: Fixing 1 bug creates 3 new bugs, infinite 10-retry loop spins that drain budgets, unwanted heavy npm packages, and lazy fake `TODO` stubs.  
-> 💡 **Tangible Output & Takeaway**: Production-grade `AGENTS.md` project rules template, 2-retry hard circuit breaker, and zero-placeholder engineering boundaries.  
-> ⚡ **Viral Screenshot Quote**: *"An unconstrained AI is a runaway horse. An AGENTS.md rulebook forces models to respect architecture like a principal engineer."*
+> **The Real Problem**: Fixing 1 bug creates 3 new bugs, infinite 10-retry loop spins that drain budgets, unwanted heavy npm packages, and lazy fake `TODO` stubs.  
+> **Tangible Output & Takeaway**: Production-grade `AGENTS.md` project rules template, 2-retry hard circuit breaker, and zero-placeholder engineering boundaries.  
+> **Viral Screenshot Quote**: *"An unconstrained AI is a runaway horse. An AGENTS.md rulebook forces models to respect architecture like a principal engineer."*
 
 Few things waste more time than fixing one bug only to break three working paths, or shipping a feature that tramples existing conventions. Without explicit boundaries, Codex can be just as destructive as it is fast.
 
@@ -18,7 +18,7 @@ The fix is a project-root **`AGENTS.md`** file—our **Codex Collaboration Proto
 
 ---
 
-## 🎯 Intuitive Metaphor: The New Employee Onboarding Handbook & Safety Code
+## Intuitive Metaphor: The New Employee Onboarding Handbook & Safety Code
 
 Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
@@ -26,7 +26,7 @@ Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 【Without AGENTS.md】 ──> The intern arrives with no rulebook. To fix a minor frontend alignment bug,
                           they casually rewrite your 3-year-old core authentication module into an esoteric syntax,
                           crashing production upon release.
-【With AGENTS.md】    ──> The intern sits at their desk and reads the team's printed handbook:
+【With AGENTS.md】 ──> The intern sits at their desk and reads the team's printed handbook:
                           - "This is Next.js 15 with Tailwind" (Explicit stack)
                           - "Build with `npm run build`, never alter standard scripts" (Normalized operations)
                           - "DO NOT touch the auth/ directory under any circumstance" (Absolute red lines)
@@ -37,7 +37,7 @@ Think of Codex as a brilliant, hyper-energetic new intern on their first day:
 
 ---
 
-## 🚀 Beginner Quickstart: 3 Steps to Launch
+## Beginner Quickstart: 3 Steps to Launch
 
 Create your project's first compliance rulebook in 3 minutes:
 
@@ -49,16 +49,16 @@ Create your project's first compliance rulebook in 3 minutes:
 2. **Step 2: Paste the 4-Section Minimal Scaffold**  
    Save the following into `AGENTS.md`:
    ```markdown
-   # 🤖 Codex Collaboration Protocol
+   # Codex Collaboration Protocol
 
-   ## 📌 Project Fingerprint
+   ## Project Fingerprint
    - Stack: Next.js 15, TypeScript, Tailwind CSS
 
-   ## 💻 Developer Commands
+   ## Developer Commands
    - Build: `npm run build`
    - Test: `npm run test`
 
-   ## 🛑 Hard Constraints
+   ## Hard Constraints
    - Never update package.json dependencies without human confirmation.
    - Never touch files inside `src/legacy/`.
    - Always run `npm run build` before completing the task.
@@ -105,21 +105,21 @@ Its core value lies in:
 ## 5.3 Practice: A Production-Grade `AGENTS.md` Template
 
 ```markdown
-# 🤖 Project: Aurora SaaS Core (AGENTS.md)
+# Project: Aurora SaaS Core (AGENTS.md)
 
-## 🧬 Project Fingerprint
+## Project Fingerprint
 - **Stack**: Next.js 15 (App Router), TypeScript, Prisma ORM, TailwindCSS.
 - **Database**: PostgreSQL on Supabase.
 - **Auth**: Next-Auth v5.
 
-## 💻 Developer Commands
+## Developer Commands
 - **Install**: `npm install` (Only run if package.json has changed)
 - **Dev Server**: `npm run dev`
 - **Lint Code**: `npm run lint`
 - **Run Tests**: `npm run test`
 - **DB Migration**: `npx prisma migrate dev` (Never run in production branch)
 
-## 🎨 Styles & Architecture Patterns
+## Styles & Architecture Patterns
 - **Directory Structure**:
   - Components: Keep UI components inside `@/components/ui/` (Shadcn styled).
   - Business Logic: Custom React hooks must go to `@/hooks/`.
@@ -129,7 +129,7 @@ Its core value lies in:
   - All API routes must implement Zod schema validation for request body.
   - Return HTTP 400 for validation errors, 500 for internal uncaught errors.
 
-## 🛑 Agent Boundary & Hard Rules
+## Agent Boundary & Hard Rules
 - **READ-ONLY Directories**: 
   - Never modify files inside `src/app/api/auth/[...nextauth]` (OAuth Core).
   - Never alter `prisma/schema.prisma` without explicit human confirmation.
@@ -167,14 +167,12 @@ Model selection, sandbox permissions, and Hook checks are independent settings. 
 
 ---
 
-## 🛡️ Troubleshooting & Pitfall Cheat Sheet
+## Troubleshooting & Pitfall Cheat Sheet
 
 | Symptom | Root Cause | Instant Fix |
 | :--- | :--- | :--- |
 | **Agent occasionally breaks rules despite being written** | Rules too long, contradictory, or buried in verbose prose | Keep rules concise and prefer negative constraints ("Never do X"); elevate to Hooks/Sandbox |
 | **AI falls into a 5-attempt self-correction death loop** | Missing Anti-Loop circuit breaker in instructions | Add to AGENTS.md: "Stop immediately after 2 consecutive failed attempts and report root causes" |
-| **Agent installs arbitrary unfamiliar npm packages** | Package managers allowed without gating | Mandate in Hard Rules: "Never run `npm install` for new dependencies without human consent" |
+| **Agent installs arbitrary unfamiliar npm packages** | Package managers allowed without gating | Mandate in Hard Rules: "Never run `npm install` for new dependencies without human consent" | ---
 
----
-
-[ 🏠 Index ](/en/) | [ ⬅️ Prev (Ch.04) ](./ch04_goal_driven.md) | [ ➡️ Next (Ch.06) ](./ch06_reasoning_steer.md) | [ 🌐 中文版 ](../chapters/ch05_agents_protocol.md)
+[Index](/en/) | [Prev (Ch.04)](./ch04_goal_driven.md) | [Next (Ch.06)](./ch06_reasoning_steer.md) | [中文版](../chapters/ch05_agents_protocol.md)

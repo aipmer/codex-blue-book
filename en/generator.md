@@ -1,20 +1,20 @@
 ---
-title: "Multi-Agent Rules Generator: Codex, Claude Code, Gemini Antigravity & Kimi Code"
-description: "Generate production-ready project rules in 30 seconds for OpenAI Codex (AGENTS.md), Claude Code (CLAUDE.md + Hooks), Gemini Antigravity (.agents/rules), and Kimi Code (config.toml)."
-lastUpdated: 2026-11-26
+title: "AI Collaboration Rules Generator: Codex, Claude Code, Gemini Antigravity & Kimi Code"
+description: "Generate ready-to-drop project rules and tool-specific configs in 30 seconds for OpenAI Codex (AGENTS.md), Claude Code (CLAUDE.md + Hooks), Gemini Antigravity (.agents/rules), and Kimi Code (config.toml)."
+lastUpdated: 2026-11-27
 ---
 
-# Multi-Agent Rules Generator (AGENTS.md / CLAUDE.md)
+# AI Collaboration Rules Generator (AGENTS.md / CLAUDE.md)
 
-> Prevent AI from breaking established architectures, installing unvetted packages, hallucinating fake code, or spinning in infinite error loops. Switch across **Codex, Claude Code, Gemini Antigravity, and Kimi Code** and export tailored project guardrails in 30 seconds.
+> Set clear engineering guardrails before an agent touches your repository—prevent architecture drift, unvetted packages, fake stubs, or infinite retry loops. Switch across **Codex, Claude Code, Gemini Antigravity, and Kimi Code**, then copy or download both the primary rules file and its companion tool config separately.
 
 <ClientOnly>
 <div class="generator-app">
 <div class="form-grid">
   <div class="form-group">
-    <label class="label">0. Select Target AI Coding Agent:</label>
+    <label class="label">0. Select Target AI Coding Agent (matches rules format & companion config):</label>
     <div class="agent-tabs">
-      <button type="button" :class="['agent-tab', { active: selectedAgent === 'codex' }]" @click="selectedAgent = 'codex'">Codex (AGENTS.md)</button>
+      <button type="button" :class="['agent-tab', { active: selectedAgent === 'codex' }]" @click="selectedAgent = 'codex'">Codex (AGENTS.md + config.toml)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'claude' }]" @click="selectedAgent = 'claude'">Claude Code (CLAUDE.md + Hooks)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'gemini' }]" @click="selectedAgent = 'gemini'">Gemini Antigravity (.agents/rules)</button>
       <button type="button" :class="['agent-tab', { active: selectedAgent === 'kimi' }]" @click="selectedAgent = 'kimi'">Kimi Code (AGENTS.md + config.toml)</button>
@@ -25,14 +25,16 @@ lastUpdated: 2026-11-26
     <select v-model="selectedStack" class="select-input">
       <option value="nextjs">Next.js 14/15 (Full-stack React)</option>
       <option value="vue3">Vue 3 + Vite + TypeScript</option>
-      <option value="fastapi">FastAPI (Python Microservices)</option>
+      <option value="fastapi">FastAPI (Python Backend)</option>
       <option value="django">Django (Python Backend)</option>
+      <option value="datascience">Python Data Science & Research (Jupyter / PyTorch)</option>
       <option value="spring">Spring Boot (Java 3.x)</option>
       <option value="expo">React Native (Expo Mobile)</option>
       <option value="go">Go (Gin / Fiber)</option>
       <option value="rust">Rust (Axum / Tokio)</option>
       <option value="svelte">SvelteKit (Svelte 5)</option>
       <option value="chrome">Chrome Extension (Manifest V3)</option>
+      <option value="general">General Repository / Docs & Automation Scripts</option>
     </select>
   </div>
   <div class="form-group">
@@ -40,43 +42,65 @@ lastUpdated: 2026-11-26
     <input type="text" v-model="projectName" class="text-input" placeholder="e.g.: my-awesome-saas" />
   </div>
   <div class="form-group">
-    <label class="label">3. Execution Environment & Permissions (Defense Boundaries):</label>
+    <label class="label">3. Execution Environment & Permissions:</label>
     <select v-model="sandboxLevel" class="select-input">
-      <option value="standard">Standard Development Defense (Install, test, build allowed; no credential leakage)</option>
-      <option value="strict">Strict Read-Only Protection (AI only proposes diffs, terminal execution banned, changes via PR)</option>
-      <option value="tunnel">Local Debugging Mode (Bridge local Docker DB and APIs, with Feishu Assistant remote approvals)</option>
+      <option value="standard">Standard Development Mode (Install, test, build allowed; no production writes or secret leakage)</option>
+      <option value="strict">Strict Read-Only Protection (AI only proposes plans/diffs; terminal execution banned; human PR review required)</option>
+      <option value="local">Local Integration Mode (Allow local ports, Docker DBs, and staging APIs; destructive or prod actions require confirmation)</option>
     </select>
   </div>
   <div class="form-group">
-    <label class="label">4. Core Safety Guardrails (Defense Scenarios):</label>
+    <label class="label">4. Core Safety Guardrails:</label>
     <div class="checkbox-group">
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.antiLoop" />
-        <span>🛑 Stop Infinite Loops (Prevent Loop): Abort on 2 consecutive test/build failures and emit CoT logs, preventing endless spinning</span>
+        <span>Stop Infinite Loops (Prevent Loop): Abort on 2 consecutive test/build failures and emit diagnostic notes instead of blindly retrying</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.noPlaceholder" />
-        <span>🚫 Ban Fake Stubs (No Placeholders): Strictly forbid TODOs, mock stubs, or empty functions; all delivered code must be runnable</span>
+        <span>Ban Fake Stubs (No Placeholders): Strictly forbid TODOs, mock stubs, or empty functions; all delivered code must be runnable</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.noExternalDeps" />
-        <span>📦 Dependency Guard: Prefer standard libraries and built-in APIs; forbid unapproved heavy third-party packages</span>
+        <span>Dependency Guard: Prefer standard libraries and built-in APIs; forbid unapproved heavy third-party packages</span>
       </label>
       <label class="checkbox-item">
         <input type="checkbox" v-model="rules.enforceValidation" />
-        <span>✅ Deliver with Tests (Verification Specs): Must run automated test suites and production build checks with exit code 0 before delivery</span>
+        <span>Deliver with Tests (Verification Specs): Must run automated tests and production build checks with exit code 0 before delivery</span>
       </label>
     </div>
   </div>
 </div>
+
 <div class="output-section">
   <div class="output-header">
-    <span class="output-title">📄 Real-time Preview ({{ targetFileHint }}):</span>
-    <button class="btn-copy" @click="copyContent">
-      {{ copied ? '✅ Copied to Clipboard' : '📋 Copy Protocol' }}
-    </button>
+    <span class="output-title">Primary Project Rules: <code>{{ primaryFile.path }}</code></span>
+    <div class="output-actions">
+      <button type="button" class="btn-secondary" @click="downloadFile(primaryFile.downloadName, primaryContent)">
+        Download {{ primaryFile.downloadName }}
+      </button>
+      <button type="button" class="btn-copy" @click="copyText(primaryContent, 'primary')">
+        {{ copiedKey === 'primary' ? 'Copied to Clipboard' : 'Copy Rules' }}
+      </button>
+    </div>
   </div>
-  <pre class="code-preview"><code>{{ generatedContent }}</code></pre>
+  <pre class="code-preview"><code>{{ primaryContent }}</code></pre>
+</div>
+
+<div class="output-section">
+  <div class="output-header">
+    <span class="output-title">Companion Tool Config: <code>{{ companionFile.path }}</code></span>
+    <div class="output-actions">
+      <button type="button" class="btn-secondary" @click="downloadFile(companionFile.downloadName, companionContent)">
+        Download {{ companionFile.downloadName }}
+      </button>
+      <button type="button" class="btn-copy" @click="copyText(companionContent, 'companion')">
+        {{ copiedKey === 'companion' ? 'Copied to Clipboard' : 'Copy Config' }}
+      </button>
+    </div>
+  </div>
+  <p class="companion-hint">{{ companionFile.hint }}</p>
+  <pre class="code-preview"><code>{{ companionContent }}</code></pre>
 </div>
 </div>
 </ClientOnly>
@@ -84,11 +108,13 @@ lastUpdated: 2026-11-26
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 
-const selectedAgent = ref<'codex' | 'claude' | 'gemini' | 'kimi'>('codex')
+type AgentKey = 'codex' | 'claude' | 'gemini' | 'kimi'
+
+const selectedAgent = ref<AgentKey>('codex')
 const selectedStack = ref('nextjs')
 const projectName = ref('my-saas-mvp')
 const sandboxLevel = ref('standard')
-const copied = ref(false)
+const copiedKey = ref<'' | 'primary' | 'companion'>('')
 
 const rules = ref({
   antiLoop: true,
@@ -97,7 +123,7 @@ const rules = ref({
   enforceValidation: true
 })
 
-const stackConfigs: Record<string, any> = {
+const stackConfigs: Record<string, { name: string; buildCmd: string; testCmd: string; specificRules: string[] }> = {
   nextjs: {
     name: 'Next.js (App Router) + TypeScript',
     buildCmd: 'npm run build',
@@ -123,7 +149,7 @@ const stackConfigs: Record<string, any> = {
     buildCmd: 'python -m compileall .',
     testCmd: 'pytest -v && ruff check .',
     specificRules: [
-      'Use Pydantic v2 for payload validations and serialization',
+      'Use Pydantic v2 for payload validation and serialization',
       'Explicitly declare async def endpoints with AsyncSession dependency injection',
       'All endpoints must specify an explicit response_model'
     ]
@@ -135,6 +161,16 @@ const stackConfigs: Record<string, any> = {
     specificRules: [
       'Schema changes must run via makemigrations; raw SQL migrations are banned',
       'Avoid N+1 queries by using select_related / prefetch_related'
+    ]
+  },
+  datascience: {
+    name: 'Python Data Science & Research (Jupyter / PyTorch)',
+    buildCmd: 'python -m compileall src/',
+    testCmd: 'pytest -v && ruff check src/',
+    specificRules: [
+      'Pin random seeds (random / numpy / torch) and log hyperparameters plus dataset versions for reproducibility',
+      'Mount raw datasets read-only; write derived features and checkpoints to dedicated output folders',
+      'Keep reusable modeling code in src/ modules and reserve notebooks for experiments, charts, and findings'
     ]
   },
   spring: {
@@ -162,7 +198,7 @@ const stackConfigs: Record<string, any> = {
     testCmd: 'go test -v ./... && golangci-lint run',
     specificRules: [
       'Wrap errors with context (if err != nil); never swallow errors silently',
-      'Context must be passed as the first parameter; avoid un-synchronized Goroutines'
+      'Context must be passed as the first parameter; avoid unsynchronized Goroutines'
     ]
   },
   rust: {
@@ -170,8 +206,8 @@ const stackConfigs: Record<string, any> = {
     buildCmd: 'cargo check',
     testCmd: 'cargo test && cargo clippy -- -D warnings',
     specificRules: [
-      'Banned usage of unwrap() or expect() in production; bubble errors via Result and thiserror',
-      'Strictly honor ownership and lifetimes without superfluous clone() calls'
+      'Ban unwrap() or expect() in production paths; propagate errors via Result and thiserror',
+      'Honor ownership and lifetimes without superfluous clone() calls'
     ]
   },
   svelte: {
@@ -192,83 +228,160 @@ const stackConfigs: Record<string, any> = {
       'Service Workers are ephemeral; state must persist in chrome.storage.local',
       'Adhere to least privilege; prefer activeTab over broad host permissions'
     ]
+  },
+  general: {
+    name: 'General Repository / Docs & Automation Scripts',
+    buildCmd: 'npm run build',
+    testCmd: 'npm test',
+    specificRules: [
+      'Audit references, links, and CI entrypoints before moving or renaming files',
+      'Never commit API keys, cookies, tokens, or local private paths into repository files'
+    ]
   }
 }
 
 const sandboxText: Record<string, string> = {
-  standard: '- Standard Development Defense: Package installation, testing, and building are allowed. Production writes and credential leakage are strictly forbidden.',
+  standard: '- Standard Development Mode: Package installation, testing, and building are allowed. Production writes and credential leakage are strictly forbidden.',
   strict: '- Strict Read-Only Protection: Agent operates read-only. Terminal commands are forbidden and all changes require human review via Pull Requests.',
-  tunnel: '- Local Debugging Mode: Allow port bridging to local Docker databases and APIs, paired with Feishu Assistant for mobile alerts and remote approvals.'
+  local: '- Local Integration Mode: Allow local ports, Docker databases, and staging APIs. Destructive actions, force pushes, or production deploys require explicit human confirmation.'
 }
 
-const targetFileHint = computed(() => {
-  const map = {
-    codex: 'AGENTS.md (OpenAI Codex)',
-    claude: 'CLAUDE.md + .claude/settings.json (Claude Code)',
-    gemini: 'AGENTS.md + .agents/rules/project.md (Gemini Antigravity)',
-    kimi: 'AGENTS.md + ~/.kimi-code/config.toml (Kimi Code)'
+const primaryFile = computed(() => {
+  if (selectedAgent.value === 'claude') {
+    return { path: 'CLAUDE.md', downloadName: 'CLAUDE.md' }
+  }
+  return { path: 'AGENTS.md', downloadName: 'AGENTS.md' }
+})
+
+const companionFile = computed(() => {
+  const map: Record<AgentKey, { path: string; downloadName: string; hint: string }> = {
+    codex: {
+      path: '~/.codex/config.toml',
+      downloadName: 'config.toml',
+      hint: 'Controls OpenAI Codex CLI default model, approval policy, and sandbox boundary.'
+    },
+    claude: {
+      path: '.claude/settings.json',
+      downloadName: 'settings.json',
+      hint: 'Deterministic PreToolUse hook that inspects every Bash command and exits with code 2 to block rm -rf /, .env reads, or git push --force.'
+    },
+    gemini: {
+      path: '.agents/rules/project.md',
+      downloadName: 'project.md',
+      hint: 'Save under .agents/rules/ so Google Antigravity automatically enforces responsive QA, dual-review planning, and model routing.'
+    },
+    kimi: {
+      path: '~/.kimi-code/config.toml',
+      downloadName: 'config.toml',
+      hint: 'Configures Kimi Code with kimi-k3.1-pro, 1M context budget, permission mode, and explore/plan/coder subagents.'
+    }
   }
   return map[selectedAgent.value]
 })
 
-const generatedContent = computed(() => {
+const primaryContent = computed(() => {
   const stack = stackConfigs[selectedStack.value]
   const pName = projectName.value || 'my-project'
 
-  let core = `## 📌 Project Signature\n`
+  let core = `## Project Signature\n`
   core += `- **Project Name**: ${pName}\n`
-  core += `- **Target Architecture**: ${stack.name}\n`
-  core += `- **Collaboration Framework**: AI Coding Blue Books Guardrail Spec\n\n`
+  core += `- **Target Stack**: ${stack.name}\n`
+  core += `- **Collaboration Principle**: Prefer small, verifiable edits; inspect existing code first and never fabricate unverified configs or test passes\n\n`
 
-  core += `## 🛑 Defense Scenarios & Sandbox Boundaries\n`
+  core += `## Execution Boundaries\n`
   core += `${sandboxText[sandboxLevel.value]}\n\n`
 
-  core += `## 🛡️ Core Engineering Guardrails (Anti-Loop)\n`
+  core += `## Core Engineering Guardrails\n`
+  let idx = 1
   if (rules.value.antiLoop) {
-    core += `1. **🛑 Stop Infinite Loops (Prevent Loop)**: If compilation or test fails twice in a row, halt immediately, log the full error context, and switch to single-module diagnostic mode. Continuous guessing loops are strictly forbidden.\n`
+    core += `${idx++}. **Stop Infinite Loops (Prevent Loop)**: If compilation or tests fail twice in a row, halt immediately, summarize the root cause, and wait for direction instead of guessing.\n`
   }
   if (rules.value.noPlaceholder) {
-    core += `2. **🚫 Ban Fake Stubs (No Placeholders)**: No stubs like \`// TODO: implement\`, \`pass\`, or fabricated mock data. All code must be runnable.\n`
+    core += `${idx++}. **Ban Fake Stubs (No Placeholders)**: No \`// TODO\`, \`pass\`, or fabricated mock stubs. All delivered code must be runnable.\n`
   }
   if (rules.value.noExternalDeps) {
-    core += `3. **📦 Dependency Guard**: Never introduce heavyweight dependencies or third-party wrappers without explicit review. Prefer standard library solutions.\n`
+    core += `${idx++}. **Dependency Guard**: Prefer standard libraries and existing packages; never add heavyweight third-party dependencies without approval.\n`
   }
-  stack.specificRules.forEach((rule: string, idx: number) => {
-    core += `${idx + 4}. **Stack-Specific**: ${rule}\n`
+  stack.specificRules.forEach((rule: string) => {
+    core += `${idx++}. **Stack-Specific**: ${rule}\n`
   })
   core += `\n`
 
   if (rules.value.enforceValidation) {
-    core += `## 🧪 Deliver with Tests (Verification Specs)\n`
-    core += `Before marking any task as complete, execute the following commands to ensure a zero exit code:\n\n`
-    core += `\`\`\`bash\n# 1. Lint & Unit Tests\n${stack.testCmd}\n\n# 2. Production Build Verification\n${stack.buildCmd}\n\`\`\`\n`
-  }
-
-  if (selectedAgent.value === 'codex') {
-    return `# 🤖 Codex Collaboration Protocol (CAP)\n\n${core}`
+    core += `## Deliver with Tests (Verification Specs)\n`
+    core += `Before marking any task complete, run the following commands and verify exit code 0:\n\n`
+    core += `\`\`\`bash\n# 1. Lint & Unit Tests\n${stack.testCmd}\n\n# 2. Build Verification\n${stack.buildCmd}\n\`\`\`\n`
   }
 
   if (selectedAgent.value === 'claude') {
-    return `# CLAUDE.md (Lean Standing Rules · Pair with @AGENTS.md)\n\n${core}\n## 🔒 Claude Code Deterministic Hook (.claude/settings.json)\n\`\`\`json\n{\n  "hooks": {\n    "PreToolUse": [\n      {\n        "matcher": "Bash",\n        "hooks": [{ "type": "command", "command": "echo '[Hook] Verify no destructive shell command before execution'" }]\n      }\n    ]\n  }\n}\n\`\`\`\n`
+    return `# CLAUDE.md (Claude Code Standing Project Rules)\n\n> If your team shares rules across multiple agents, keep common rules in root \`AGENTS.md\` and include \`@AGENTS.md\` at the top of this file.\n\n${core}`
+  }
+
+  return `# Project Collaboration Rules (AGENTS.md)\n\n${core}`
+})
+
+const companionContent = computed(() => {
+  const isStrict = sandboxLevel.value === 'strict'
+  const isLocal = sandboxLevel.value === 'local'
+
+  if (selectedAgent.value === 'codex') {
+    const approval = isStrict ? 'untrusted' : 'on-request'
+    const sandbox = isStrict ? 'read-only' : isLocal ? 'danger-full-access' : 'workspace-write'
+    return `# ~/.codex/config.toml (OpenAI Codex CLI)\nmodel = "gpt-6.2-sol"\nmodel_reasoning_effort = "medium"\napproval_policy = "${approval}"\nsandbox_mode = "${sandbox}"\n\n[profiles.deep-debug]\nmodel = "gpt-6.2-astra"\nmodel_reasoning_effort = "high"\n`
+  }
+
+  if (selectedAgent.value === 'claude') {
+    const guardCmd = `node -e "const d=JSON.parse(require('fs').readFileSync(0,'utf8'));const cmd=(d.tool_input&&d.tool_input.command)||'';const blocked=[/rm\\s+-rf\\s+(\\/|~|\\.)/,/git\\s+push\\s+.*--force/,/\\.env\\b/];if(blocked.some(r=>r.test(cmd))){console.error('[Hook Blocked] Dangerous command rejected: '+cmd);process.exit(2);}"`
+    return JSON.stringify(
+      {
+        hooks: {
+          PreToolUse: [
+            {
+              matcher: 'Bash',
+              hooks: [
+                {
+                  type: 'command',
+                  command: guardCmd
+                }
+              ]
+            }
+          ]
+        }
+      },
+      null,
+      2
+    )
   }
 
   if (selectedAgent.value === 'gemini') {
-    return `# Gemini Antigravity Project Rules (AGENTS.md / .agents/rules/project.md)\n\n${core}\n## 🎨 Multimodal & Visual Verification Guardrails\n- Verify frontend changes across 390px, 768px, and 1440px viewports with >= 12px visible text and zero horizontal overflow.\n- Pair Gemini 4 Carbon / Argon for architecture with Hydrogen via Antigravity Orchestrator for fast execution loops.\n`
+    return `---\ntrigger: always_on\ndescription: "${projectName.value || 'my-project'} visual QA and dual-review guardrails"\n---\n\n# Antigravity Project Rules\n\n## Visual & Cross-Device QA\n- Verify UI changes across 390px, 768px, and 1440px viewports with >= 12px visible text and zero horizontal overflow.\n- Validate real user flows in the browser; a passing build does not replace visual verification.\n\n## Dual-Review Planning & Model Routing\n- Draft major architecture or data plans with Gemini 4 Carbon / Argon and run an adversarial review pass before bulk edits.\n- Let Antigravity Orchestrator route routine edits and test loops to Gemini 4 Hydrogen for lower latency and quota cost.\n`
   }
 
-  return `# Kimi Code Project Rules (AGENTS.md)\n\n${core}\n## ⚙️ Recommended ~/.kimi-code/config.toml Snippet\n\`\`\`toml\n[runtime]\nmodel = "kimi-k3.1-pro"\npermission_mode = "${sandboxLevel.value === 'strict' ? 'always_ask' : 'auto'}"\n\n[subagents]\nexplore = true\nplan = true\ncoder = true\n\`\`\`\n`
+  return `# ~/.kimi-code/config.toml (Kimi Code)\n[runtime]\nmodel = "kimi-k3.1-pro"\npermission_mode = "${isStrict ? 'always_ask' : 'auto'}"\nmax_context_tokens = 1000000\n\n[subagents]\nexplore = true\nplan = true\ncoder = true\n`
 })
 
-async function copyContent() {
+async function copyText(text: string, key: 'primary' | 'companion') {
   try {
-    await navigator.clipboard.writeText(generatedContent.value)
-    copied.value = true
+    await navigator.clipboard.writeText(text)
+    copiedKey.value = key
     setTimeout(() => {
-      copied.value = false
+      if (copiedKey.value === key) copiedKey.value = ''
     }, 2500)
   } catch (err) {
     alert('Failed to copy. Please manually select and copy.')
   }
+}
+
+function downloadFile(filename: string, content: string) {
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  URL.revokeObjectURL(url)
 }
 </script>
 
@@ -285,7 +398,7 @@ async function copyContent() {
   gap: 8px;
 }
 .agent-tab {
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 6px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
@@ -342,11 +455,15 @@ async function copyContent() {
 }
 .checkbox-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
   font-size: 13px;
+  line-height: 1.5;
   cursor: pointer;
   color: var(--vp-c-text-2);
+}
+.checkbox-item input {
+  margin-top: 3px;
 }
 .checkbox-item:hover {
   color: var(--vp-c-text-1);
@@ -368,19 +485,41 @@ async function copyContent() {
   font-weight: 600;
   font-size: 14px;
 }
-.btn-copy {
-  background: var(--vp-c-brand-1);
-  color: white;
-  padding: 6px 14px;
+.output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.companion-hint {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+.btn-copy,
+.btn-secondary {
+  padding: 7px 14px;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 500;
-  border: none;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, border-color 0.2s;
+}
+.btn-copy {
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+  border: 1px solid var(--vp-c-brand-1);
+}
+.btn-secondary {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-divider);
 }
 .btn-copy:hover {
   opacity: 0.9;
+}
+.btn-secondary:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 .code-preview {
   max-width: 100%;

@@ -4,15 +4,15 @@ description: "实战 Antigravity 浏览器子代理三视口视觉巡检闭环�
 lastUpdated: 2026-11-26
 ---
 
-[返回 Gemini 专页](/gemini/) | [上一章：/swarm 蜂群架构与 Alpine Peak 复盘](/gemini/ch07_swarm_alpine_peak) | [下一章：多模态商业化闭环实战](/gemini/ch09_multimodal_commercial_saas)
+[返回 Gemini 专页](/gemini/) | [上一章：多智能体协作架构与 Alpine Peak 复盘](/gemini/ch07_swarm_alpine_peak) | [下一章：多模态商业化闭环实战](/gemini/ch09_multimodal_commercial_saas)
 
 # Ch.08 浏览器视觉自动走查与 Web / Chrome MV3 / 移动跨端交付
 
-> 🎯 **本章解决的工程麻烦**：代码在桌面 1440px 看着挺好，一发线上就被用户截图反馈“iPhone 竖屏右侧切掉一半”“平板导航换行把按钮挡住”；做 Chrome 扩展时被 Manifest V3 的 CSP 报错和 Service Worker 休眠折磨到怀疑人生；上线还要自己手配 HTTPS、鉴权和边缘缓存。
+> **本章解决的工程麻烦**：代码在桌面 1440px 看着挺好，一发线上就被用户截图反馈“iPhone 竖屏右侧切掉一半”“平板导航换行把按钮挡住”；做 Chrome 扩展时被 Manifest V3 的 CSP 报错和 Service Worker 休眠折磨到怀疑人生；上线还要自己手配 HTTPS、鉴权和边缘缓存。
 >
-> 💡 **实战落地收益**：搭建“本地预览 → 浏览器子代理三视口计算值巡检 → 定位 CSS 根因并复测”的零盲区视觉闭环；按 MV3 最新规范开发可提审的 Chrome 侧边栏智能扩展；跑通 **Firebase Hosting + Cloud Run** 全球部署与线上验活。
+> **实战落地收益**：搭建“本地预览 → 浏览器子代理三视口计算值巡检 → 定位 CSS 根因并复测”的零盲区视觉闭环；按 MV3 最新规范开发可提审的 Chrome 侧边栏智能扩展；跑通 **Firebase Hosting + Cloud Run** 全球部署与线上验活。
 >
-> ⚡ **一句话结论**：构建通过不等于视觉验收通过；只有把浏览器真实计算值、扩展权限最小化和云端健康检查接进交付流水线，跨端才不会靠运气。
+> **一句话结论**：构建通过不等于视觉验收通过；只有把浏览器真实计算值、扩展权限最小化和云端健康检查接进交付流水线，跨端才不会靠运气。
 
 前几章解决了“写得快”，这一章解决“发出去不翻车”。Google 生态在终端交付侧有一个常被低估的组合拳：**内置浏览器自动化巡检 + Chrome Manifest V3 扩展生态 + Firebase / Cloud Run 托管底座**。
 
@@ -156,7 +156,7 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **跑一次三视口探针**：在本地项目启动预览服务，让 Antigravity 浏览器子代理依次在 `390px / 768px / 1440px` 执行 8.1 节探针，先清零所有溢出与 `<12px` 字号。
 2. **加载本地 MV3 骨架**：将 `manifest.json` + `sidepanel.html` + `sidepanel.js` 放入目录，在 `chrome://extensions` 打开开发者模式点击“加载已解压的扩展程序”，验证侧边栏正常打开且零控制台 CSP 报错。
@@ -164,14 +164,12 @@ curl -fsS https://your-app.web.app/api/health
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | Chrome 扩展放后台 30 秒后登录态或定时器全丢 | MV3 `service_worker` 空闲自动销毁，状态错存在内存变量或 `setInterval` 里 | 所有状态改存 `chrome.storage.session` / `local`，定时任务改用 `chrome.alarms` API |
 | Cloud Run 处理 2 分钟视频上传时在 60 秒被直接掐断 | Cloud Run 默认请求超时或前端反向代理超时偏短，且直接同步阻塞处理长视频 | 将 `--timeout` 调至 `120–300`，更长视频改为直传 GCS 后通过异步队列处理并轮询状态 |
-| 移动端实测文字换行把按钮挤出屏幕，桌面端却一切正常 | Flex 容器子元素未设 `min-width: 0` 或长 URL 缺少 `overflow-wrap: anywhere` | 在共享布局样式补充 `min-width: 0; overflow-wrap: anywhere;`，再重跑 `390px` 视口探针复验 |
+| 移动端实测文字换行把按钮挤出屏幕，桌面端却一切正常 | Flex 容器子元素未设 `min-width: 0` 或长 URL 缺少 `overflow-wrap: anywhere` | 在共享布局样式补充 `min-width: 0; overflow-wrap: anywhere;`，再重跑 `390px` 视口探针复验 | ---
 
----
-
-[返回 Gemini 专页](/gemini/) | [上一章：/swarm 蜂群架构与 Alpine Peak 复盘](/gemini/ch07_swarm_alpine_peak) | [下一章：多模态商业化闭环实战](/gemini/ch09_multimodal_commercial_saas)
+[返回 Gemini 专页](/gemini/) | [上一章：多智能体协作架构与 Alpine Peak 复盘](/gemini/ch07_swarm_alpine_peak) | [下一章：多模态商业化闭环实战](/gemini/ch09_multimodal_commercial_saas)

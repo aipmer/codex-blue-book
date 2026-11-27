@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.03 Idea to Production Repo: AI Studio Build Mode Context-Preserving Handoff
 
-> 🎯 **Engineering pain solved**: Browser playgrounds produce slick demos that turn into amnesiac ZIP archives the moment you export them—your local IDE loses all prompt tuning rationale, and client components leak `GEMINI_API_KEY` straight into browser bundles.
+> **Engineering pain solved**: Browser playgrounds produce slick demos that turn into amnesiac ZIP archives the moment you export them—your local IDE loses all prompt tuning rationale, and client components leak `GEMINI_API_KEY` straight into browser bundles.
 >
-> 💡 **What you ship**: A clean **AI Studio Build Mode → Export to Antigravity** relay workflow, a production Next.js server-side `@google/genai` route with strict JSON Schema output, and an inline media asset workflow.
+> **What you ship**: A clean **AI Studio Build Mode → Export to Antigravity** relay workflow, a production Next.js server-side `@google/genai` route with strict JSON Schema output, and an inline media asset workflow.
 >
-> ⚡ **Bottom line**: Use AI Studio to prove multimodal feasibility at zero setup cost; use Antigravity to turn that prototype into a hardened, billable repository.
+> **Bottom line**: Use AI Studio to prove multimodal feasibility at zero setup cost; use Antigravity to turn that prototype into a hardened, billable repository.
 
 The biggest time sink in multimodal engineering used to be the handoff gap between browser prototyping and production code. Google closed that gap by connecting **AI Studio Build Mode** directly to **Antigravity**.
 
@@ -80,17 +80,13 @@ export async function POST(req: Request) {
 
   const response = await ai.models.generateContent({
     model: "gemini-4-hydrogen",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          { inlineData: { mimeType, data: imageBase64 } },
+        parts: [{ inlineData: { mimeType, data: imageBase64 } },
           {
             text: "Inspect this mobile UI screenshot for text clipping, low contrast, tiny labels (<12px), and overflow. Return concrete CSS fixes."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: auditSchema,
@@ -115,7 +111,7 @@ Avoid shipping gray placeholder boxes while waiting days for design assets. Insi
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Validate schema in AI Studio**: Upload one real mobile screenshot to Build Mode, run `auditSchema` with `gemini-4-neon`, and inspect the returned JSON.
 2. **Export locally**: Click **Export to Antigravity**, add `GEMINI_API_KEY` to `.env.local` (verified git-ignored), and move model calls to `/api/analyze-ui`.
@@ -123,14 +119,12 @@ Avoid shipping gray placeholder boxes while waiting days for design assets. Insi
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | API key appears in compiled frontend JS | Prototype `VITE_GEMINI_API_KEY` left in `.env` and client bundle | Rotate the leaked key immediately and route requests through a server-only API handler |
 | Base64 image POST fails with `413 Payload Too Large` | Uncompressed 8MB PNG exceeds 4.5MB serverless body limits | Downscale client-side via `<canvas>` (`<= 1600px`, JPEG 0.82) or upload to GCS/R2 first |
-| Local output quality degrades vs. AI Studio | Export dropped `systemInstruction` or defaulted `temperature` to `1.0` | Pin `systemInstruction`, `temperature: 0.2`, and `responseSchema` explicitly in server code |
-
----
+| Local output quality degrades vs. AI Studio | Export dropped `systemInstruction` or defaulted `temperature` to `1.0` | Pin `systemInstruction`, `temperature: 0.2`, and `responseSchema` explicitly in server code | ---
 
 [Back to Gemini Hub](/en/gemini/) | [Prev: Multimodal Rules & Skills](/en/gemini/ch02_multimodal_rules_skills) | [Next: Video & Gemini Live API](/en/gemini/ch04_video_live_api)

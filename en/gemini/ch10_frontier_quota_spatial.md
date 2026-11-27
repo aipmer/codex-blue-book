@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.10 2026 Frontier Watch: Quota Economics, Web 3D & Official Release Tracking
 
-> 🎯 **Engineering pain solved**: Mixing personal Google AI Pro/Ultra subscriptions with production API workloads causes sudden rate limits or policy violations, while chasing noisy social-media hype derails roadmap focus.
+> **Engineering pain solved**: Mixing personal Google AI Pro/Ultra subscriptions with production API workloads causes sudden rate limits or policy violations, while chasing noisy social-media hype derails roadmap focus.
 >
-> 💡 **What you ship**: A clean hybrid billing split (subscriptions for coding, metered API + Context Caching for production), pragmatic performance guardrails for Web 3D spatial features, and a 10-minute weekly official release-tracking routine.
+> **What you ship**: A clean hybrid billing split (subscriptions for coding, metered API + Context Caching for production), pragmatic performance guardrails for Web 3D spatial features, and a 10-minute weekly official release-tracking routine.
 >
-> ⚡ **Bottom line**: Long-term leverage comes from disciplined quota economics and verified upgrades—not blindly flipping production defaults every launch day.
+> **Bottom line**: Long-term leverage comes from disciplined quota economics and verified upgrades—not blindly flipping production defaults every launch day.
 
 ---
 
@@ -25,9 +25,7 @@ Keep developer tooling spend and production runtime spend strictly separated:
 | **Daily local coding, debugging, plugins** | **Google AI Pro (\$19.99/mo)** + Orchestrator (Neon + Hydrogen) | Predictable flat fee; offloading ~70% of routine edits to Hydrogen doubles effective quota |
 | **Heavy `/swarm` refactors & high concurrency** | **Google AI Ultra** or enterprise **`AGY_ADC_AUTH`** | Larger concurrency and flagship Carbon/Neon burst budgets |
 | **Production SaaS APIs, CI, batch media** | **Gemini API / Vertex AI pay-as-you-go** (never proxy personal plans) | Clean SLA, project isolation, `gemini-4-hydrogen` (\$1.50/\$7.50) baseline + Context Caching |
-| **2026-12-01 Argon rate transition** | Audit every `gemini-4-argon` endpoint | Intro \$2/\$10 rate ends Nov 30; migrate routine calls to Hydrogen/Neon before standard \$4/\$20 pricing kicks in |
-
-Target a healthy solo-builder ratio: predictable fixed tooling cost plus production API spend capped at **15%–20% of paid SaaS revenue** via your credit guard.
+| **2026-12-01 Argon rate transition** | Audit every `gemini-4-argon` endpoint | Intro \$2/\$10 rate ends Nov 30; migrate routine calls to Hydrogen/Neon before standard \$4/\$20 pricing kicks in | Target a healthy solo-builder ratio: predictable fixed tooling cost plus production API spend capped at **15%–20% of paid SaaS revenue** via your credit guard.
 
 ---
 
@@ -57,7 +55,7 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Audit your billing split**: Confirm local dev uses subscriptions/ADC while every live server reads its own `GEMINI_API_KEY`, and check for any `gemini-4-argon` jobs ahead of December 1, 2026.
 2. **Bookmark primary mirrors**: Save `https://antigravity.google/llms.txt` and the Gemini API pricing page for monthly model reviews.
@@ -65,14 +63,12 @@ node examples/gemini-antigravity-kit/scripts/check_gemini_quota.mjs \
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | Switching production straight to a day-one preview model breaks JSON parsing | Preview endpoints shift formatting and rate limits without warning | Keep production pinned to stable/verified IDs and canary new models at 5% traffic first |
 | Adding a 3D product preview tanks Lighthouse score site-wide | `three` statically imported in root layout bundle | Lazy-load 3D bundles per route or on click and enforce initial JS size budgets |
-| CI scripts fail after upgrading global `agy` CLI | Deprecated flags changed without checking `/changelog` | Run `agy --help` and `/changelog`, and pin CI pipelines to tested stable flags |
-
----
+| CI scripts fail after upgrading global `agy` CLI | Deprecated flags changed without checking `/changelog` | Run `agy --help` and `/changelog`, and pin CI pipelines to tested stable flags | ---
 
 [Back to Gemini Hub](/en/gemini/) | [Prev: Commercial Multimodal SaaS](/en/gemini/ch09_multimodal_commercial_saas)

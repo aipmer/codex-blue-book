@@ -4,15 +4,15 @@ description: "Connect Antigravity to Google Docs, Sheets, Slides, and Gmail via 
 lastUpdated: 2026-11-26
 ---
 
-[Back to Gemini Hub](/en/gemini/) | [Prev: Video & Gemini Live API](/en/gemini/ch04_video_live_api) | [Next: Colab %%agy Pipelines](/en/gemini/ch06_colab_agy_pipelines)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Video & Gemini Live API](/en/gemini/ch04_video_live_api) | [Next: Colab Agent Extension Pipelines](/en/gemini/ch06_colab_agy_pipelines)
 
 # Ch.05 Workspace MCP Automation: Docs, Sheets, Slides & Commercial Add-ons
 
-> 🎯 **Engineering pain solved**: PRDs sit in Google Docs, localization tables live in Sheets, bug reports pile up in Gmail, and weekly updates live in Slides—burning two hours a day on manual copy-paste and stale specs.
+> **Engineering pain solved**: PRDs sit in Google Docs, localization tables live in Sheets, bug reports pile up in Gmail, and weekly updates live in Slides—burning two hours a day on manual copy-paste and stale specs.
 >
-> 💡 **What you ship**: Least-privilege **Google Workspace MCP** integration inside Antigravity, three high-leverage bidirectional workflows (Docs→code, Sheets↔i18n JSON, Git→Slides), and a Cloud Run-backed Workspace Add-on skeleton.
+> **What you ship**: Least-privilege **Google Workspace MCP** integration inside Antigravity, three high-leverage bidirectional workflows (Docs→code, Sheetsi18n JSON, Git→Slides), and a Cloud Run-backed Workspace Add-on skeleton.
 >
-> ⚡ **Bottom line**: Half of your product truth lives outside Git; connecting Workspace MCP gives your coding agent the business context without copy-paste drift.
+> **Bottom line**: Half of your product truth lives outside Git; connecting Workspace MCP gives your coding agent the business context without copy-paste drift.
 
 ---
 
@@ -53,7 +53,7 @@ flowchart LR
 agy -p "Read Google Doc https://docs.google.com/document/d/EXAMPLE_DOC_ID/edit via Workspace MCP. Extract Section 3 billing states into src/billing/state-machine.ts with Vitest tests, and list 3 ambiguities in the PRD."
 ```
 
-2. **Sheets ↔ Repo Localization Diff (`scripts/sync_i18n_diff.mjs`)**:
+2. **Sheets Repo Localization Diff (`scripts/sync_i18n_diff.mjs`)**:
 ```typescript
 import fs from "node:fs";
 
@@ -116,7 +116,7 @@ function auditSelectedRange() {
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Grant minimal scopes**: Enable Google Docs and Sheets plugins in Antigravity first without outbound email send permissions.
 2. **Test live PRD ingestion**: Point `agy` at one active Google Doc to generate TypeScript interfaces and verify edge cases match the spec.
@@ -124,14 +124,12 @@ function auditSelectedRange() {
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `403 insufficientPermissions` on Sheets write | OAuth authorized with `readonly` scope only | Re-authorize the specific `sheets.readwrite` scope in Plugins Manager |
 | Sheet formulas overwritten with raw text | Agent overwrote calculated columns instead of raw data ranges | Restrict write rules to non-formula columns (e.g., `A2:D100`) and inspect with `valueRenderOption=FORMULA` first |
-| Marketplace OAuth review rejected | Requested broad `drive` scope without justification | Narrow scope to `drive.file` (user-opened files only) and submit a short OAuth demo video |
+| Marketplace OAuth review rejected | Requested broad `drive` scope without justification | Narrow scope to `drive.file` (user-opened files only) and submit a short OAuth demo video | ---
 
----
-
-[Back to Gemini Hub](/en/gemini/) | [Prev: Video & Gemini Live API](/en/gemini/ch04_video_live_api) | [Next: Colab %%agy Pipelines](/en/gemini/ch06_colab_agy_pipelines)
+[Back to Gemini Hub](/en/gemini/) | [Prev: Video & Gemini Live API](/en/gemini/ch04_video_live_api) | [Next: Colab Agent Extension Pipelines](/en/gemini/ch06_colab_agy_pipelines)

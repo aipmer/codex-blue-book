@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.03 从灵感到工程仓：Google AI Studio Build Mode 无损接力流
 
-> 🎯 **本章解决的工程麻烦**：在网页 Playground 里调出惊艳的多模态 Demo 后，一导出代码就变成“失忆压缩包”——本地 IDE 不知道你之前为什么选这个 Prompt、试错踩过哪些坑，只能从头解释一遍；而且前端把 `GEMINI_API_KEY` 直接暴露在浏览器源码里，根本不敢上线。
+> **本章解决的工程麻烦**：在网页 Playground 里调出惊艳的多模态 Demo 后，一导出代码就变成“失忆压缩包”——本地 IDE 不知道你之前为什么选这个 Prompt、试错踩过哪些坑，只能从头解释一遍；而且前端把 `GEMINI_API_KEY` 直接暴露在浏览器源码里，根本不敢上线。
 >
-> 💡 **实战落地收益**：跑通 **AI Studio Build Mode → Export to Antigravity** 全上下文无损接力流，20 分钟完成多模态原型验证，再用 15 分钟在本地完成服务端代理加固、原生生图资产落地与结构化输出封装。
+> **实战落地收益**：跑通 **AI Studio Build Mode → Export to Antigravity** 全上下文无损接力流，20 分钟完成多模态原型验证，再用 15 分钟在本地完成服务端代理加固、原生生图资产落地与结构化输出封装。
 >
-> ⚡ **一句话结论**：AI Studio 负责以最低摩擦把脑子里的画面跑出来，Antigravity 负责把玩具原型锻造成能收费的生产仓库。
+> **一句话结论**：AI Studio 负责以最低摩擦把脑子里的画面跑出来，Antigravity 负责把玩具原型锻造成能收费的生产仓库。
 
 过去做多模态产品，最浪费时间的一步叫“从 Demo 搬家到工程仓”。你在浏览器里花两小时把系统提示词、图片输入格式和 JSON Schema 调通了，结果下载 ZIP 解压进本地仓库后，所有迭代上下文瞬间清零。
 
@@ -89,11 +89,9 @@ export async function POST(req: Request) {
 
   const response = await ai.models.generateContent({
     model: "gemini-4-hydrogen",
-    contents: [
-      {
+    contents: [{
         role: "user",
-        parts: [
-          {
+        parts: [{
             inlineData: {
               mimeType,
               data: imageBase64
@@ -101,10 +99,8 @@ export async function POST(req: Request) {
           },
           {
             text: "Inspect this mobile UI screenshot for text clipping, low contrast, tiny labels (<12px), and overflow. Return concrete CSS fixes."
-          }
-        ]
-      }
-    ],
+          }]
+      }],
     config: {
       responseMimeType: "application/json",
       responseSchema: auditSchema,
@@ -133,7 +129,7 @@ export async function POST(req: Request) {
 
 ---
 
-## 🚀 新手极速上手 3 步走
+## 新手极速上手 3 步走
 
 1. **在 AI Studio 跑通最小多模态原型**：打开 Google AI Studio Build Mode，上传一张你的产品首页截图，用 `gemini-4-neon` 调试上面的 `auditSchema`，确认返回 JSON 字段准确。
 2. **一键导入本地**：点击 **Export to Antigravity** 打开本地工程，创建 `.env.local` 填入 `GEMINI_API_KEY=...`（确认 `.env.local` 已在 `.gitignore` 中）。
@@ -141,14 +137,12 @@ export async function POST(req: Request) {
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 故障现象 | 致命根因 | 即刻自救方案 |
 | :--- | :--- | :--- |
 | 导出后构建报错，前端 bundle 把 `GEMINI_API_KEY` 打进了静态 JS | 沿用了原型阶段的客户端环境变量（如 `VITE_GEMINI_API_KEY`） | 立刻删除前端环境变量并吊销轮换旧 Key；改为服务端 API Route 读取 `process.env.GEMINI_API_KEY` |
 | 大图片直接 Base64 POST 触发 `413 Payload Too Large` | 原图动辄 6–10MB，超出 Next.js / Vercel 默认请求体上限（4.5MB） | 前端上传前用 `<canvas>` 缩放长边至 `<= 1600px` 并压缩为 JPEG（0.82），或先直传对象存储再由服务端拉取 |
-| 同一套 Prompt 在本地比 AI Studio 效果差 | 导出后漏搬了 `systemInstruction` 或默认 `temperature` 从 `0.2` 变回了 `1.0` | 在本地代码显式写死 `systemInstruction`、`temperature` 与 `responseSchema`，不依赖 SDK 默认值 |
-
----
+| 同一套 Prompt 在本地比 AI Studio 效果差 | 导出后漏搬了 `systemInstruction` 或默认 `temperature` 从 `0.2` 变回了 `1.0` | 在本地代码显式写死 `systemInstruction`、`temperature` 与 `responseSchema`，不依赖 SDK 默认值 | ---
 
 [返回 Gemini 专页](/gemini/) | [上一章：多模态规约与自定义 Skills](/gemini/ch02_multimodal_rules_skills) | [下一章：音视频理解与 Gemini Live API](/gemini/ch04_video_live_api)

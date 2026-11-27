@@ -8,11 +8,11 @@ lastUpdated: 2026-11-26
 
 # Ch.01 The 2.8T Open-Weight Generation: Kimi K3.1 Pro & Kimi Code CLI
 
-> 🎯 **Engineering pain solved**: Treating Kimi as a consumer web chat tool misses its real engineering leverage—an open-weight ~2.8T MoE model priced at \$2/\$10 (\$0.20 cached) paired with a fast TypeScript **Kimi Code CLI** (`kimi` / `kimi web` / `kimi acp`).
+> **Engineering pain solved**: Treating Kimi as a consumer web chat tool misses its real engineering leverage—an open-weight ~2.8T MoE model priced at \$2/\$10 (\$0.20 cached) paired with a fast TypeScript **Kimi Code CLI** (`kimi` / `kimi web` / `kimi acp`).
 >
-> 💡 **What you ship**: A verified November 26, 2026 architecture and pricing ledger comparing `kimi-k3.1-pro`, `kimi-k3`, and `kimi-k2.5`, plus a working local `kimi` TUI and `kimi web` setup.
+> **What you ship**: A verified November 26, 2026 architecture and pricing ledger comparing `kimi-k3.1-pro`, `kimi-k3`, and `kimi-k2.5`, plus a working local `kimi` TUI and `kimi web` setup.
 >
-> ⚡ **Bottom line**: Kimi pairs flagship open weights, 90%-discounted 1M-token caching, cross-IDE ACP, and native Slides/3D pipelines inside one cost-efficient stack.
+> **Bottom line**: Kimi pairs flagship open weights, 90%-discounted 1M-token caching, cross-IDE ACP, and native Slides/3D pipelines inside one cost-efficient stack.
 
 ---
 
@@ -31,9 +31,7 @@ lastUpdated: 2026-11-26
 | **`kimi-k3.1-pro`** | ~2.8T MoE (104B active), 1M context, **Open Weights** | **\$2.00** | **\$0.20** (90% off) | **\$10.00** | Default for coding, `/swarm`, finance/legal audits, and 3D spatial coding |
 | `kimi-k3.1-pro-highspeed` | Low-latency tier | ~\$4.00 | Discounted | ~\$20.00 | Latency-critical interactive coding and live demos |
 | `kimi-k3` (predecessor) | 1M context, Open Weights | \$3.00 | \$0.30 | \$15.00 | Legacy benchmark comparisons and narrow exact-recall pipelines |
-| `kimi-k2.5` | Lighter open weights | Lower GPU floor | Supported | Self-hosted | Department-scale offline clusters and domain LoRA fine-tuning |
-
-> **Immediate savings**: Any pipeline still pinned to `kimi-k3` (\$3/\$15) should evaluate upgrading to `kimi-k3.1-pro` (\$2/\$10, \$0.20 cached)—cutting cost by a third while upgrading sparse attention and coding/spatial capability.
+| `kimi-k2.5` | Lighter open weights | Lower GPU floor | Supported | Self-hosted | Department-scale offline clusters and domain LoRA fine-tuning | > **Immediate savings**: Any pipeline still pinned to `kimi-k3` (\$3/\$15) should evaluate upgrading to `kimi-k3.1-pro` (\$2/\$10, \$0.20 cached)—cutting cost by a third while upgrading sparse attention and coding/spatial capability.
 
 ---
 
@@ -59,7 +57,7 @@ kimi web --port 4310
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Verify CLI & caching**: Run `kimi --version` and execute one read-only architecture summary in a test repo.
 2. **Try `kimi web`**: Launch `kimi web` to inspect side-by-side diffs and tool timelines in your browser.
@@ -67,14 +65,12 @@ kimi web --port 4310
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `kimi` throws Python traceback or lacks `acp` subcommand | Legacy Python `kimi-cli` precedes TypeScript CLI in `PATH` | Run `which -a kimi`, uninstall the legacy pip binary, and keep the npm/official TS binary |
 | Multi-turn bill misses the \$0.20 cached read tier | Dynamic timestamps or random IDs injected at the top of system prompts bust prefix cache | Keep static `AGENTS.md` and reference docs at the prompt prefix; append dynamic queries at the end |
-| `kimi web` unreachable from another device | Binds to `127.0.0.1` by default for safety | Never expose `0.0.0.0` directly; tunnel securely via `ssh -L 4310:127.0.0.1:4310` |
-
----
+| `kimi web` unreachable from another device | Binds to `127.0.0.1` by default for safety | Never expose `0.0.0.0` directly; tunnel securely via `ssh -L 4310:127.0.0.1:4310` | ---
 
 [Back to Kimi Hub](/en/kimi/) | [Next: config.toml, kimi acp & Failover](/en/kimi/ch02_acp_config_failover)

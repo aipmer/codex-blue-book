@@ -4,15 +4,15 @@ description: "Configure ~/.kimi-code/config.toml and shared AGENTS.md rules, att
 lastUpdated: 2026-11-26
 ---
 
-[Back to Kimi Hub](/en/kimi/) | [Prev: K3.1 Pro & CLI](/en/kimi/ch01_k31_architecture_cli) | [Next: Subagents & /swarm](/en/kimi/ch03_subagents_swarm)
+[Back to Kimi Hub](/en/kimi/) | [Prev: K3.1 Pro & CLI](/en/kimi/ch01_k31_architecture_cli) | [Next: Subagents & Multi-Agent Collaboration](/en/kimi/ch03_subagents_swarm)
 
 # Ch.02 Protocol-First Connectivity: `config.toml`, `kimi acp` & Multi-Provider Failover
 
-> 🎯 **Engineering pain solved**: Teams split across Zed, JetBrains, and terminal CLIs waste days maintaining incompatible editor plugins—and stall completely whenever a single model provider hits a late-night rate limit.
+> **Engineering pain solved**: Teams split across Zed, JetBrains, and terminal CLIs waste days maintaining incompatible editor plugins—and stall completely whenever a single model provider hits a late-night rate limit.
 >
-> 💡 **What you ship**: A clean `~/.kimi-code/config.toml` paired with root `AGENTS.md`, one-line **`kimi acp`** integration for Zed/JetBrains, and instant multi-provider failover using **Codex Switch** or OpenAI-compatible endpoints.
+> **What you ship**: A clean `~/.kimi-code/config.toml` paired with root `AGENTS.md`, one-line **`kimi acp`** integration for Zed/JetBrains, and instant multi-provider failover using **Codex Switch** or OpenAI-compatible endpoints.
 >
-> ⚡ **Bottom line**: Lock project rules in `AGENTS.md`, connect any IDE over open `ACP`, and keep a warm backup provider ready so quotas never block a release.
+> **Bottom line**: Lock project rules in `AGENTS.md`, connect any IDE over open `ACP`, and keep a warm backup provider ready so quotas never block a release.
 
 ---
 
@@ -94,7 +94,7 @@ In **JetBrains IDEs**, add a Custom ACP Agent pointing to `kimi` with argument `
 
 ---
 
-## 🚀 3-Step Quickstart
+## 3-Step Quickstart
 
 1. **Generate configs**: Open the [Multi-Agent Rules Generator](/en/generator), select **Kimi Code**, and export `AGENTS.md` + `config.toml`.
 2. **Connect one IDE over ACP**: Wire `kimi acp` into Zed or JetBrains and run a read-only route audit.
@@ -102,14 +102,12 @@ In **JetBrains IDEs**, add a Custom ACP Agent pointing to `kimi` with argument `
 
 ---
 
-## 🛡️ Pitfall Recovery Table
+## Pitfall Recovery Table
 
 | Failure Mode | Root Cause | Immediate Fix |
 | :--- | :--- | :--- |
 | `kimi acp` exits immediately inside Zed/JetBrains | GUI app did not inherit `.zshrc` `PATH` or `MOONSHOT_API_KEY` | Set the absolute path from `which kimi` in editor ACP settings and pass env vars explicitly |
 | Figma MCP hangs on startup | `FIGMA_API_KEY` missing or first `npx` fetch blocked by proxy | Pre-warm with `npx -y figma-developer-mcp --help` in terminal, then re-test via `/mcp-config` |
-| Cross-provider session resume fails schema validation | Reasoning-field formatting differs slightly across providers | Use [Codex Switch](https://github.com/aipmer/codex-switch) normalization or run `/compact` to carry a clean summary |
+| Cross-provider session resume fails schema validation | Reasoning-field formatting differs slightly across providers | Use [Codex Switch](https://github.com/aipmer/codex-switch) normalization or run `/compact` to carry a clean summary | ---
 
----
-
-[Back to Kimi Hub](/en/kimi/) | [Prev: K3.1 Pro & CLI](/en/kimi/ch01_k31_architecture_cli) | [Next: Subagents & /swarm](/en/kimi/ch03_subagents_swarm)
+[Back to Kimi Hub](/en/kimi/) | [Prev: K3.1 Pro & CLI](/en/kimi/ch01_k31_architecture_cli) | [Next: Subagents & Multi-Agent Collaboration](/en/kimi/ch03_subagents_swarm)

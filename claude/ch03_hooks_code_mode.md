@@ -4,13 +4,13 @@ description: "详解 .claude/settings.json 的 PreToolUse、PostToolUse 与 PreS
 lastUpdated: 2026-11-26
 ---
 
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.02) ](./ch02_context_economics.md) | [ ➡️ 下一章 (Ch.04) ](./ch04_whiteboards_docs.md) | [ 🌐 English ](/en/claude/ch03_hooks_code_mode)
+[首页](/) | [上一章 (Ch.02)](./ch02_context_economics.md) | [下一章 (Ch.04)](./ch04_whiteboards_docs.md) | [English](/en/claude/ch03_hooks_code_mode)
 
 # Ch.03 确定性防线：`Hooks` 生命周期门禁与实验性 Code Mode 批处理
 
-> 🎯 **具体工程麻烦**：在 Prompt 里写十遍“严禁执行 `rm -rf` 或强推 `main`”，模型在复杂排障时仍可能误触发高危命令；逐个文件串行调工具改 30 个文件又慢到让人崩溃。  
-> 💡 **可运行实战代码与落地收益**：配套可运行样例 [examples/claude-hooks-kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)（含 `.claude/settings.json` 与危险命令拦截脚本）；掌握 v2.1.323+ Code Mode 并行编排。  
-> ⚡ **社交传播 / 截图金句**：“靠 Prompt 劝 AI 别删库，是把生产安全押在概率上；用 Hooks 拦在工具执行前，才是确定性工程。”
+> **具体工程麻烦**：在 Prompt 里写十遍“严禁执行 `rm -rf` 或强推 `main`”，模型在复杂排障时仍可能误触发高危命令；逐个文件串行调工具改 30 个文件又慢到让人崩溃。  
+> **可运行实战代码与落地收益**：配套可运行样例 [examples/claude-hooks-kit](https://github.com/aipmer/codex-blue-book/tree/main/examples/claude-hooks-kit)（含 `.claude/settings.json` 与危险命令拦截脚本）；掌握 v2.1.323+ Code Mode 并行编排。  
+> **社交传播 / 截图金句**：“靠 Prompt 劝 AI 别删库，是把生产安全押在概率上；用 Hooks 拦在工具执行前，才是确定性工程。”
 
 任何大模型的指令遵循本质上都是概率性的。即使 99.5% 的时候它都乖乖听话，只要在高并发调试的第 200 次误删了目录或把 `.env` 打印进了日志，一次事故就足以抵消一个月的效率红利。
 
@@ -18,11 +18,11 @@ Claude Code 给出的工程解法是 **Hooks（确定性生命周期门禁）**�
 
 ---
 
-## 🎯 生活化直觉隐喻：工地安全员的“物理门禁闸机”
+## 生活化直觉隐喻：工地安全员的“物理门禁闸机”
 
 ```text
 【只靠 Prompt 叮嘱】 ──> 在门口贴标语“请勿带火种进仓库”，工人忙昏头时仍可能顺手带进去。
-【配置 Hooks 门禁】  ──> 门口装上金属探测闸机（PreToolUse）：
+【配置 Hooks 门禁】 ──> 门口装上金属探测闸机（PreToolUse）：
                          - 只要工具入参命中 `rm -rf`、`git push --force` 或 `.env` 读取，
                            闸机直接亮红灯拦截（exit 2），把拒绝理由原样退回给模型；
                          - 每次改完 `.ts` 文件出门自动刷一遍格式化（PostToolUse）。
@@ -30,7 +30,7 @@ Claude Code 给出的工程解法是 **Hooks（确定性生命周期门禁）**�
 
 ---
 
-## 🚀 新手极速上手 3 步走（无痛起步）
+## 新手极速上手 3 步走（无痛起步）
 
 1. **步骤一：在项目创建 `.claude/hooks/` 目录并放入拦截脚本**
    参考本仓库配套可运行工具包 `examples/claude-hooks-kit/`，将拦截脚本设为可执行：
@@ -53,49 +53,35 @@ Claude Code 给出的工程解法是 **Hooks（确定性生命周期门禁）**�
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
-    "PreToolUse": [
-      {
+    "PreToolUse": [{
         "matcher": "Bash",
-        "hooks": [
-          {
+        "hooks": [{
             "type": "command",
             "if": "Bash(*)",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-dangerous-bash.sh"
-          }
-        ]
+          }]
       },
       {
         "matcher": "Read|Edit|Write",
-        "hooks": [
-          {
+        "hooks": [{
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/protect-secrets.sh"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
+          }]
+      }],
+    "PostToolUse": [{
         "matcher": "Edit|Write",
-        "hooks": [
-          {
+        "hooks": [{
             "type": "command",
             "if": "Edit(*.ts)",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-on-edit.sh"
-          }
-        ]
-      }
-    ],
-    "PreSkillShellCommand": [
-      {
-        "hooks": [
-          {
+          }]
+      }],
+    "PreSkillShellCommand": [{
+        "hooks": [{
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/block-dangerous-bash.sh"
-          }
-        ]
-      }
-    ]
+          }]
+      }]
   }
 }
 ```
@@ -113,13 +99,11 @@ PAYLOAD="$(cat)"
 node -e '
 const input = JSON.parse(process.argv[1] || "{}");
 const cmd = String(input?.tool_input?.command || input?.command || "");
-const blocked = [
-  { re: /\brm\s+-[a-zA-Z]*r[a-zA-Z]*f\b|\brm\s+-[a-zA-Z]*f[a-zA-Z]*r\b/, reason: "Blocked recursive force delete (rm -rf)" },
+const blocked = [{ re: /\brm\s+-[a-zA-Z]*r[a-zA-Z]*f\b|\brm\s+-[a-zA-Z]*f[a-zA-Z]*r\b/, reason: "Blocked recursive force delete (rm -rf)" },
   { re: /\bgit\s+push\b.*(--force|-f)\b/, reason: "Blocked force push to remote repository" },
   { re: /\bgit\s+reset\s+--hard\b/, reason: "Blocked destructive git reset --hard" },
   { re: /\b(DROP\s+TABLE|TRUNCATE\s+TABLE)\b/i, reason: "Blocked destructive SQL DDL statement" },
-  { re: /curl\b.*\|\s*(sh|bash)\b/, reason: "Blocked piping remote script directly to shell" }
-];
+  { re: /curl\b.*\|\s*(sh|bash)\b/, reason: "Blocked piping remote script directly to shell" }];
 for (const rule of blocked) {
   if (rule.re.test(cmd)) {
     console.error(`[Claude Hook Blocked] ${rule.reason}: ${cmd}`);
@@ -167,14 +151,12 @@ Claude Code `v2.1.323+` 推出的实验性 **Code Mode** 改变了执行路径�
 
 ---
 
-## 🛡️ 翻车自救与避坑速查表
+## 翻车自救与避坑速查表
 
 | 常见踩坑现象 | 致命原因 | 极速自救方案 |
 | :--- | :--- | :--- |
 | **写好了 Hook 脚本却提示权限不足或直接跳过** | 脚本缺少可执行位或路径未用 `"$CLAUDE_PROJECT_DIR"` | 执行 `chmod +x .claude/hooks/*.sh`，并在终端用 `echo '{"tool_input":{"command":"rm -rf /"}}' \| .claude/hooks/block-dangerous-bash.sh` 单测 |
 | **`PostToolUse` 格式化脚本拖慢每次微小编辑** | 未加 `if` 条件过滤，连修改 Markdown 也触发 Prettier | 用 `"if": "Edit(*.ts)"` 或 `"if": "Edit(*.tsx)"` 精准限定后缀 |
-| **读取外部工具托管的 `.env` 命名管道导致会话卡死** | 命名管道阻塞文件读取 | 升级至 Claude Code v2.1.308+，并通过 `protect-secrets.sh` 直接拦截 `.env` 读取 |
+| **读取外部工具托管的 `.env` 命名管道导致会话卡死** | 命名管道阻塞文件读取 | 升级至 Claude Code v2.1.308+，并通过 `protect-secrets.sh` 直接拦截 `.env` 读取 | ---
 
----
-
-[ 🏠 首页 ](/) | [ ⬅️ 上一章 (Ch.02) ](./ch02_context_economics.md) | [ ➡️ 下一章 (Ch.04) ](./ch04_whiteboards_docs.md) | [ 🌐 English ](/en/claude/ch03_hooks_code_mode)
+[首页](/) | [上一章 (Ch.02)](./ch02_context_economics.md) | [下一章 (Ch.04)](./ch04_whiteboards_docs.md) | [English](/en/claude/ch03_hooks_code_mode)
